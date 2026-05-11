@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mates Divertidas - 5 Primaria</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap');
+        
+        body {
+            font-family: 'Fredoka', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-attachment: fixed;
+        }
+
+        .fraction-input {
+            width: 70px;
+            text-align: center;
+            border-bottom: 4px solid #ff6b9d;
+            background: linear-gradient(135deg, #ffeef8 0%, #fff5f9 100%);
+            outline: none;
+            border-radius: 8px 8px 0 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #c026d3;
+            transition: all 0.3s ease;
+        }
+
+        .fraction-input:focus {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 107, 157, 0.5);
+        }
+
+        .fraction-line {
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b9d, #c026d3);
+            margin: 4px 0;
+            border-radius: 2px;
+        }
+
+        .multi-input {
+            width: 120px;
+            padding: 12px;
+            border: 3px solid #fbbf24;
+            border-radius: 16px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #fef3c7 0%, #fff 100%);
+            color: #ea580c;
+            transition: all 0.3s ease;
+        }
+
+        .multi-input:focus {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(251, 191, 36, 0.6);
+            outline: none;
+        }
+
+        .opt-btn {
+            transition: all 0.3s ease;
+            transform: scale(1);
+        }
+
+        .opt-btn:hover {
+            transform: scale(1.1) rotate(-2deg);
+        }
+
+        .btn-correct {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+            color: white !important;
+            border-color: #059669 !important;
+            animation: bounce 0.5s ease;
+        }
+        
+        .btn-wrong {
+            background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%) !important;
+            color: white !important;
+            border-color: #e11d48 !important;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-8px) rotate(2deg);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <nav class="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600 text-white shadow-2xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col lg:flex-row justify-between items-center py-4 gap-3">
+                <div class="text-3xl font-bold flex items-center gap-3">
+                    <i class="fas fa-star text-yellow-300 float-animation"></i>
+                    <span class="hidden lg:inline">Mates Super Divertidas</span>
+                    <span class="lg:hidden">Mates 5</span>
+                    <i class="fas fa-heart text-red-300 float-animation" style="animation-delay: 0.5s;"></i>
+                </div>
+                <div class="flex gap-2 overflow-x-auto no-scrollbar py-1 w-full lg:w-auto">
+                    <button onclick="showSection('equiv')" class="px-3 py-2 rounded-2xl hover:scale-110 transition font-bold whitespace-nowrap bg-yellow-400 text-purple-900 shadow-lg text-sm">Equivalentes</button>
+                    <button onclick="showSection('sumas')" class="px-3 py-2 rounded-2xl hover:scale-110 transition font-bold whitespace-nowrap bg-orange-400 text-white shadow-lg text-sm">Sumas</button>
+                    <button onclick="showSection('frac-num')" class="px-3 py-2 rounded-2xl hover:scale-110 transition font-bold whitespace-nowrap bg-purple-400 text-white shadow-lg text-sm">Fraccion</button>
+                    <button onclick="showSection('decimales')" class="px-3 py-2 rounded-2xl hover:scale-110 transition font-bold whitespace-nowrap bg-pink-400 text-white shadow-lg text-sm">x10 /100</button>
+                    <button onclick="showSection('primos')" class="px-3 py-2 rounded-2xl hover:scale-110 transition font-bold whitespace-nowrap bg-blue-400 text-white shadow-lg text-sm">Primos</button>
+                    <button onclick="showSection('divisores')" class="px-3 py-2 rounded-2xl hover:scale-110 transition font-bold whitespace-nowrap bg-green-400 text-white shadow-lg text-sm">Divisores</button>
+                    <button onclick="showSection('multiplos')" class="px-3 py-2 rounded-2xl hover:scale-110 transition font-bold whitespace-nowrap bg-red-400 text-white shadow-lg text-sm">Multiplos</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-4xl mx-auto p-6">
+        
+        <div id="welcome" class="text-center py-6">
+            <h1 class="text-5xl font-bold text-white mb-4">Repaso para el Examen!</h1>
+            <p class="text-2xl text-yellow-200 mb-8 font-bold">Elige un tema y diviertete aprendiendo!</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div onclick="showSection('equiv')" class="card-hover bg-gradient-to-br from-yellow-300 to-yellow-500 p-8 rounded-3xl shadow-2xl border-4 border-yellow-600 cursor-pointer text-left">
+                    <div class="text-5xl mb-3"><i class="fas fa-bullseye"></i></div>
+                    <h3 class="font-bold text-2xl mb-3 text-purple-900">Fracciones Equivalentes</h3>
+                    <p class="text-lg text-purple-800">Completa el numero que falta: 1/2 = ?/4</p>
+                </div>
+                
+                <div onclick="showSection('divisores')" class="card-hover bg-gradient-to-br from-green-300 to-green-500 p-8 rounded-3xl shadow-2xl border-4 border-green-600 cursor-pointer text-left">
+                    <div class="text-5xl mb-3"><i class="fas fa-dice"></i></div>
+                    <h3 class="font-bold text-2xl mb-3 text-white">Divisores de un numero</h3>
+                    <p class="text-lg text-green-900">Ejemplo: D(21) = {1, 3, 7, 21}</p>
+                </div>
+                
+                <div onclick="showSection('frac-num')" class="card-hover bg-gradient-to-br from-purple-300 to-purple-500 p-8 rounded-3xl shadow-2xl border-4 border-purple-600 cursor-pointer text-left">
+                    <div class="text-5xl mb-3"><i class="fas fa-pizza-slice"></i></div>
+                    <h3 class="font-bold text-2xl mb-3 text-white">Fraccion de un numero</h3>
+                    <p class="text-lg text-purple-900">Calcula 2/3 de 60</p>
+                </div>
+                
+                <div onclick="showSection('sumas')" class="card-hover bg-gradient-to-br from-orange-300 to-orange-500 p-8 rounded-3xl shadow-2xl border-4 border-orange-600 cursor-pointer text-left">
+                    <div class="text-5xl mb-3"><i class="fas fa-plus-circle"></i></div>
+                    <h3 class="font-bold text-2xl mb-3 text-white">Sumar Fracciones</h3>
+                    <p class="text-lg text-orange-900">Distinto denominador (multiplos)</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="game-container" class="hidden">
+            <div id="theory-box" class="bg-gradient-to-r from-yellow-100 to-yellow-200 border-l-8 border-yellow-500 p-6 mb-8 rounded-2xl shadow-xl">
+                <h4 class="font-bold text-yellow-900 flex items-center gap-3 text-xl mb-2">
+                    <i class="fas fa-lightbulb text-3xl text-yellow-600"></i> 
+                    <span id="theory-title">Repaso Rapido</span>
+                </h4>
+                <p id="theory-text" class="text-yellow-900 text-lg"></p>
+            </div>
+
+            <div class="bg-gradient-to-br from-white to-purple-50 p-8 md:p-12 rounded-3xl shadow-2xl min-h-[400px] flex flex-col justify-between border-4 border-purple-300">
+                <div id="question-area"></div>
+
+                <div id="feedback-area" class="mt-6 hidden">
+                    <div id="feedback-message" class="p-6 rounded-2xl font-semibold flex items-start gap-4 shadow-lg"></div>
+                </div>
+
+                <div class="mt-8 flex justify-center gap-4">
+                    <button id="check-btn" onclick="checkAnswer()" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-12 py-5 rounded-full font-bold text-xl hover:scale-110 shadow-2xl transition">
+                        <i class="fas fa-check-circle mr-2"></i>Comprobar
+                    </button>
+                    <button id="next-btn" onclick="generateExercise()" class="hidden bg-gradient-to-r from-green-400 to-emerald-500 text-white px-12 py-5 rounded-full font-bold text-xl hover:scale-110 shadow-2xl transition">
+                        <i class="fas fa-arrow-right mr-2"></i>Otro ejercicio
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let currentSection = '';
+        let currentExercise = {};
+        let isAnswered = false;
+
+        const theories = {
+            'equiv': 'Fracciones Equivalentes: Representan lo mismo. Multiplica o divide arriba y abajo por el mismo numero.',
+            'multiplos': 'Multiplos: Multiplicar el numero por 1, 2, 3...',
+            'divisores': 'Divisores: Numeros que dividen exactamente (resto 0).',
+            'primos': 'Primo: Solo divisible por 1 y por si mismo.',
+            'sumas': 'Denominadores distintos: Busca fraccion equivalente multiplicando.',
+            'decimales': 'X10: Coma derecha. /10: Coma izquierda.',
+            'frac-num': '1 Divide abajo. 2 Multiplica arriba.'
+        };
+
+        function showSection(section) {
+            currentSection = section;
+            document.getElementById('welcome').classList.add('hidden');
+            document.getElementById('game-container').classList.remove('hidden');
+            document.getElementById('theory-text').innerText = theories[section];
+            generateExercise();
+        }
+
+        function generateExercise() {
+            const area = document.getElementById('question-area');
+            const feedback = document.getElementById('feedback-area');
+            const checkBtn = document.getElementById('check-btn');
+            const nextBtn = document.getElementById('next-btn');
+
+            isAnswered = false;
+            feedback.classList.add('hidden');
+            checkBtn.classList.remove('hidden');
+            nextBtn.classList.add('hidden');
+            area.innerHTML = '';
+
+            if (currentSection === 'equiv') {
+                const n1 = Math.floor(Math.random() * 5) + 1;
+                const d1 = Math.floor(Math.random() * 5) + n1 + 1;
+                const mult = Math.floor(Math.random() * 4) + 2;
+                const n2 = n1 * mult;
+                const d2 = d1 * mult;
+                
+                const missingPos = Math.random() > 0.5 ? 'n2' : 'd2';
+                currentExercise = {
+                    type: 'equiv',
+                    answer: missingPos === 'n2' ? n2 : d2,
+                    explanation: `Para pasar de ${d1} a ${d2} hemos multiplicado por ${mult}. Entonces, hacemos lo mismo arriba: ${n1} x ${mult} = ${n2}.`
+                };
+
+                area.innerHTML = `
+                    <h2 class="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Completa para que sean equivalentes:</h2>
+                    <div class="flex items-center justify-center gap-10 text-6xl font-bold" style="color: #c026d3;">
+                        <div class="flex flex-col items-center">
+                            <span>${n1}</span><div class="fraction-line w-16"></div><span>${d1}</span>
+                        </div>
+                        <span class="text-7xl text-yellow-400">=</span>
+                        <div class="flex flex-col items-center">
+                            ${missingPos === 'n2' ? '<input type="number" id="ans" class="fraction-input" placeholder="?">' : `<span>${n2}</span>`}
+                            <div class="fraction-line w-16"></div>
+                            ${missingPos === 'd2' ? '<input type="number" id="ans" class="fraction-input" placeholder="?">' : `<span>${d2}</span>`}
+                        </div>
+                    </div>
+                `;
+            }
+
+            else if (currentSection === 'divisores') {
+                const targets = [21, 28, 45, 100, 12, 18, 30, 50];
+                const num = targets[Math.floor(Math.random() * targets.length)];
+                const divs = [];
+                for(let i=1; i<=num; i++) if(num%i===0) divs.push(i);
+                
+                currentExercise = {
+                    type: 'divisors_list',
+                    answer: divs,
+                    explanation: `Los divisores de ${num} son: {${divs.join(', ')}}.`
+                };
+
+                area.innerHTML = `
+                    <h2 class="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">D(${num}) = { ... }</h2>
+                    <div class="flex flex-col items-center gap-6">
+                        <p class="text-xl text-purple-700 font-semibold">Separa los divisores con comas:</p>
+                        <input type="text" id="ans" class="w-full max-w-md p-5 border-4 border-green-300 rounded-3xl text-2xl text-center focus:border-green-500 outline-none bg-gradient-to-r from-green-50 to-blue-50 font-bold text-green-700" placeholder="1, 2, ...">
+                    </div>
+                `;
+            }
+
+            else if (currentSection === 'primos') {
+                checkBtn.classList.add('hidden');
+                const list = [2, 3, 5, 7, 11, 13, 17, 19, 23, 4, 6, 8, 9, 10, 12, 14, 15, 20, 21];
+                const num = list[Math.floor(Math.random() * list.length)];
+                const isPrime = [2, 3, 5, 7, 11, 13, 17, 19, 23].includes(num);
+                currentExercise = { type: 'binary', answer: isPrime, explanation: isPrime ? `${num} solo tiene dos divisores.` : `${num} tiene mas de dos divisores.` };
+                area.innerHTML = `
+                    <h2 class="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Es ${num} primo o compuesto?</h2>
+                    <div class="flex justify-center gap-8">
+                        <button onclick="instantCheck(true, this)" class="opt-btn px-12 py-6 border-4 border-blue-400 rounded-3xl font-bold text-2xl bg-gradient-to-br from-blue-100 to-blue-200 text-blue-800 shadow-xl">
+                            <i class="fas fa-star mr-2"></i>PRIMO
+                        </button>
+                        <button onclick="instantCheck(false, this)" class="opt-btn px-12 py-6 border-4 border-purple-400 rounded-3xl font-bold text-2xl bg-gradient-to-br from-purple-100 to-purple-200 text-purple-800 shadow-xl">
+                            <i class="fas fa-cubes mr-2"></i>COMPUESTO
+                        </button>
+                    </div>
+                `;
+            }
+
+            else if (currentSection === 'frac-num') {
+                const denominators = [2, 3, 4, 5, 6, 10];
+                const d = denominators[Math.floor(Math.random() * denominators.length)];
+                const total = (Math.floor(Math.random() * 8) + 2) * d;
+                const n = Math.floor(Math.random() * (d - 1)) + 1;
+                currentExercise = { type: 'input', answer: (total/d)*n, explanation: `1 ${total} / ${d} = ${total/d}. 2 ${total/d} x ${n} = ${(total/d)*n}.` };
+                area.innerHTML = `
+                    <h2 class="text-4xl font-bold text-center mb-10 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Calcula:</h2>
+                    <div class="flex items-center justify-center gap-8 text-5xl font-bold text-purple-700">
+                        <div class="flex flex-col items-center">
+                            <span>${n}</span><div class="fraction-line"></div><span>${d}</span>
+                        </div>
+                        <span class="text-3xl italic text-pink-500">de</span>
+                        <span class="text-6xl text-orange-500">${total}</span>
+                        <span class="text-yellow-500">=</span>
+                        <input type="number" id="ans" class="multi-input" placeholder="?">
+                    </div>
+                `;
+            }
+
+            else if (currentSection === 'decimales') {
+                const isMult = Math.random() > 0.5;
+                const factor = [10, 100, 1000][Math.floor(Math.random() * 3)];
+                let num = parseFloat((Math.random() * 50 + 0.1).toFixed(2));
+                let result = isMult ? num * factor : num / factor;
+                currentExercise = { type: 'input', answer: parseFloat(result.toPrecision(12)), explanation: isMult ? "Mueve la coma a la derecha." : "Mueve la coma a la izquierda." };
+                area.innerHTML = `
+                    <h2 class="text-4xl font-bold text-center mb-10 bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">Opera:</h2>
+                    <div class="flex items-center justify-center gap-6 text-5xl font-bold text-pink-700 bg-gradient-to-br from-pink-50 to-purple-50 p-10 rounded-3xl border-4 border-pink-300">
+                        <span>${num.toString().replace('.',',')}</span>
+                        <span class="text-purple-500">${isMult ? 'x' : '/'}</span>
+                        <span class="text-orange-500">${factor}</span>
+                        <span class="text-yellow-500">=</span>
+                        <input type="text" id="ans" class="multi-input w-48" placeholder="?">
+                    </div>
+                `;
+            }
+
+            else if (currentSection === 'sumas') {
+                const sameDen = Math.random() > 0.8;
+                if (sameDen) {
+                    const d = Math.floor(Math.random() * 7) + 3;
+                    const n1 = Math.floor(Math.random() * 3) + 1; const n2 = Math.floor(Math.random() * 3) + 1;
+                    currentExercise = { type: 'fraction', ansN: n1+n2, ansD: d, explanation: "Mismo denominador: solo sumamos arriba." };
+                    renderSum(n1, d, n2, d);
+                } else {
+                    const dSmall = [2, 3, 4, 5][Math.floor(Math.random() * 4)];
+                    const mult = [2, 3][Math.floor(Math.random() * 2)];
+                    const dBig = dSmall * mult;
+                    const n1 = Math.floor(Math.random() * 2) + 1; const n2 = Math.floor(Math.random() * 2) + 1;
+                    currentExercise = { type: 'fraction', ansN: (n1 * mult) + n2, ansD: dBig, explanation: `Pasamos ${n1}/${dSmall} a denominador ${dBig} multiplicando por ${mult}.` };
+                    renderSum(n1, dSmall, n2, dBig);
+                }
+            }
+
+            else if (currentSection === 'multiplos') {
+                const base = Math.floor(Math.random() * 7) + 3;
+                currentExercise = { type: 'list', answer: [base, base*2, base*3], explanation: `${base}x1, ${base}x2 y ${base}x3.` };
+                area.innerHTML = `
+                    <h2 class="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">3 primeros multiplos de ${base}:</h2>
+                    <div class="flex justify-center gap-6">
+                        <input type="number" id="m1" class="multi-input w-28">
+                        <input type="number" id="m2" class="multi-input w-28">
+                        <input type="number" id="m3" class="multi-input w-28">
+                    </div>
+                `;
+            }
+        }
+
+        function renderSum(n1, d1, n2, d2) {
+            document.getElementById('question-area').innerHTML = `
+                <h2 class="text-4xl font-bold text-center mb-10 bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent">Suma:</h2>
+                <div class="flex items-center justify-center gap-6 text-5xl font-bold text-orange-700">
+                    <div class="flex flex-col items-center"><span>${n1}</span><div class="fraction-line"></div><span>${d1}</span></div>
+                    <span class="text-pink-500">+</span>
+                    <div class="flex flex-col items-center"><span>${n2}</span><div class="fraction-line"></div><span>${d2}</span></div>
+                    <span class="text-yellow-500">=</span>
+                    <div class="flex flex-col items-center"><input type="number" id="ans-n" class="fraction-input"><div class="fraction-line"></div><input type="number" id="ans-d" class="fraction-input"></div>
+                </div>`;
+        }
+
+        function instantCheck(val, btnElement) {
+            if (isAnswered) return;
+            isAnswered = true;
+            const isCorrect = val === currentExercise.answer;
+            btnElement.classList.add(isCorrect ? 'btn-correct' : 'btn-wrong');
+            showFeedback(isCorrect);
+        }
+
+        function checkAnswer() {
+            let isCorrect = false;
+            if (currentExercise.type === 'divisors_list') {
+                const userDivs = document.getElementById('ans').value.split(/[ ,./]+/).map(v => parseInt(v.trim())).filter(v => !isNaN(v)).sort((a,b) => a-b);
+                isCorrect = JSON.stringify([...new Set(userDivs)]) === JSON.stringify(currentExercise.answer);
+            } else if (currentExercise.type === 'equiv' || currentSection === 'decimales' || currentSection === 'frac-num') {
+                const userVal = document.getElementById('ans').value.replace(',', '.').trim();
+                isCorrect = Math.abs(parseFloat(userVal) - currentExercise.answer) < 0.0001;
+            } else if (currentExercise.type === 'list') {
+                const v = [parseInt(document.getElementById('m1').value), parseInt(document.getElementById('m2').value), parseInt(document.getElementById('m3').value)];
+                isCorrect = v.every((val, i) => val === currentExercise.answer[i]);
+            } else if (currentExercise.type === 'fraction') {
+                isCorrect = (parseInt(document.getElementById('ans-n').value) === currentExercise.ansN && parseInt(document.getElementById('ans-d').value) === currentExercise.ansD);
+            }
+            showFeedback(isCorrect);
+        }
+
+        function showFeedback(isCorrect) {
+            const f = document.getElementById('feedback-area');
+            const m = document.getElementById('feedback-message');
+            f.classList.remove('hidden');
+            if (isCorrect) {
+                m.className = "p-6 rounded-3xl bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 border-l-8 border-green-500 flex items-center gap-5 shadow-2xl";
+                m.innerHTML = `<i class="fas fa-trophy text-5xl text-yellow-500"></i> <div><p class="font-bold text-2xl">Muy bien!</p><p class="text-lg">${currentExercise.explanation}</p></div>`;
+                document.getElementById('check-btn').classList.add('hidden');
+                document.getElementById('next-btn').classList.remove('hidden');
+            } else {
+                m.className = "p-6 rounded-3xl bg-gradient-to-r from-rose-100 to-pink-100 text-rose-800 border-l-8 border-rose-500 flex items-center gap-5 shadow-2xl";
+                m.innerHTML = `<i class="fas fa-lightbulb text-5xl text-yellow-400"></i> <div><p class="font-bold text-2xl">Pista:</p><p class="text-lg">${currentExercise.explanation}</p></div>`;
+                if (currentExercise.type === 'binary') document.getElementById('next-btn').classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>

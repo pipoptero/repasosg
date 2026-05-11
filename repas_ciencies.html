@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Repàs Ciències Naturals 🌍</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sky: #e8f4fd;
+    --deep: #1a1a3e;
+    --star: #ffd700;
+    --correct: #2ecc71;
+    --wrong: #e74c3c;
+    --card: #ffffff;
+    --shadow: rgba(0,0,0,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    min-height: 100vh;
+    background: var(--deep);
+    color: #fff;
+    overflow-x: hidden;
+  }
+
+  /* Stars background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(1px 1px at 10% 20%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 30% 60%, #fff 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 50% 10%, #ffd700 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 40%, #fff 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 85% 70%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 20% 80%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 85%, #ffd700 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 15%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 45% 55%, #fff 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 75% 25%, #ffd700 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 45%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 30%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 70%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 92% 50%, #fff 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 5% 65%, #ffd700 0%, transparent 100%),
+      radial-gradient(1px 1px at 80% 90%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 95%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 65% 5%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 75%, #fff 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 95% 35%, #ffd700 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* TOP NAV */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,40,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid rgba(255,215,0,0.3);
+    padding: 0 20px;
+  }
+
+  .header-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 12px 0;
+  }
+
+  .logo {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.4rem;
+    color: var(--star);
+    white-space: nowrap;
+    margin-right: 8px;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    flex: 1;
+  }
+
+  .nav-btn {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 8px 14px;
+    border-radius: 30px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+    background: rgba(255,255,255,0.08);
+    color: #ccd;
+  }
+
+  .nav-btn:hover { transform: translateY(-2px); }
+
+  .nav-btn.active {
+    color: #fff;
+    border-color: currentColor;
+    transform: translateY(-2px);
+  }
+
+  .nav-btn[data-topic="astres"].active { background: #6c3483; border-color: #a569bd; color: #e8daef; }
+  .nav-btn[data-topic="agua"].active   { background: #1a5276; border-color: #5dade2; color: #d6eaf8; }
+  .nav-btn[data-topic="relleu"].active { background: #784212; border-color: #e59866; color: #fdebd0; }
+  .nav-btn[data-topic="biosfera"].active { background: #1e5631; border-color: #58d68d; color: #d5f5e3; }
+  .nav-btn[data-topic="terra"].active    { background: #7b2d00; border-color: #e07b39; color: #fde8d8; }
+
+  .nav-btn[data-topic="astres"]:hover   { background: rgba(108,52,131,0.4); }
+  .nav-btn[data-topic="agua"]:hover     { background: rgba(26,82,118,0.4); }
+  .nav-btn[data-topic="relleu"]:hover   { background: rgba(120,66,18,0.4); }
+  .nav-btn[data-topic="biosfera"]:hover { background: rgba(30,86,49,0.4); }
+  .nav-btn[data-topic="terra"]:hover    { background: rgba(123,45,0,0.4); }
+
+  /* MAIN */
+  main {
+    position: relative;
+    z-index: 1;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 30px 20px 60px;
+  }
+
+  /* WELCOME */
+  .welcome {
+    text-align: center;
+    padding: 40px 20px 60px;
+    animation: fadeInUp 0.6s ease;
+  }
+
+  .welcome-hero {
+    position: relative;
+    margin-bottom: 28px;
+  }
+
+  .welcome .planet {
+    font-size: 5.5rem;
+    animation: float 4s ease-in-out infinite;
+    display: block;
+    filter: drop-shadow(0 0 30px rgba(255,215,0,0.5));
+  }
+
+  .sparkles {
+    font-size: 1.8rem;
+    position: absolute;
+    animation: float 3s ease-in-out infinite;
+  }
+  .sparkles.s1 { top: 5px; left: 20%; animation-delay: 0s; }
+  .sparkles.s2 { top: 0px; right: 20%; animation-delay: 0.8s; }
+  .sparkles.s3 { bottom: 0px; left: 30%; animation-delay: 1.4s; }
+
+  .welcome h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 3rem;
+    background: linear-gradient(135deg, #ffd700, #ff8c00, #ff6b6b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .welcome-subtitle {
+    font-size: 1.1rem;
+    color: #aab;
+    max-width: 500px;
+    margin: 0 auto 12px;
+    line-height: 1.6;
+  }
+
+  .welcome-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,215,0,0.12);
+    border: 2px solid rgba(255,215,0,0.3);
+    border-radius: 30px;
+    padding: 8px 20px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.95rem;
+    color: var(--star);
+    margin-bottom: 36px;
+  }
+
+  .section-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    color: #889;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+
+  .topic-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+    gap: 14px;
+    margin-top: 8px;
+  }
+
+  .topic-card {
+    background: rgba(255,255,255,0.05);
+    border: 2px solid rgba(255,255,255,0.1);
+    border-radius: 22px;
+    padding: 24px 16px 20px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .topic-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.3s;
+    border-radius: 20px;
+  }
+
+  .topic-card[data-t="astres"]::before  { background: radial-gradient(circle at 50% 0%, rgba(165,105,189,0.3), transparent 70%); }
+  .topic-card[data-t="agua"]::before    { background: radial-gradient(circle at 50% 0%, rgba(93,173,226,0.3), transparent 70%); }
+  .topic-card[data-t="relleu"]::before  { background: radial-gradient(circle at 50% 0%, rgba(229,152,102,0.3), transparent 70%); }
+  .topic-card[data-t="biosfera"]::before{ background: radial-gradient(circle at 50% 0%, rgba(88,214,141,0.3), transparent 70%); }
+  .topic-card[data-t="terra"]::before   { background: radial-gradient(circle at 50% 0%, rgba(224,123,57,0.3), transparent 70%); }
+
+  .topic-card:hover::before { opacity: 1; }
+
+  .topic-card:hover { transform: translateY(-8px) scale(1.02); border-color: rgba(255,255,255,0.25); }
+  .topic-card[data-t="astres"]:hover  { border-color: #a569bd; box-shadow: 0 12px 30px rgba(165,105,189,0.3); }
+  .topic-card[data-t="agua"]:hover    { border-color: #5dade2; box-shadow: 0 12px 30px rgba(93,173,226,0.3); }
+  .topic-card[data-t="relleu"]:hover  { border-color: #e59866; box-shadow: 0 12px 30px rgba(229,152,102,0.3); }
+  .topic-card[data-t="biosfera"]:hover{ border-color: #58d68d; box-shadow: 0 12px 30px rgba(88,214,141,0.3); }
+  .topic-card[data-t="terra"]:hover   { border-color: #e07b39; box-shadow: 0 12px 30px rgba(224,123,57,0.3); }
+
+  .topic-card .icon { font-size: 3rem; display: block; margin-bottom: 10px; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3)); }
+  .topic-card .name { font-family: 'Fredoka One', cursive; font-size: 1rem; color: #eee; margin-bottom: 6px; }
+  .topic-card .q-count { font-size: 0.75rem; color: #778; font-weight: 700; }
+
+  /* QUIZ SECTION */
+  .quiz-section { animation: fadeInUp 0.5s ease; }
+
+  .quiz-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .topic-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.1rem;
+  }
+
+  .badge-astres   { background: rgba(108,52,131,0.4); border: 2px solid #a569bd; }
+  .badge-agua     { background: rgba(26,82,118,0.4);  border: 2px solid #5dade2; }
+  .badge-relleu   { background: rgba(120,66,18,0.4);  border: 2px solid #e59866; }
+  .badge-biosfera { background: rgba(30,86,49,0.4);   border: 2px solid #58d68d; }
+  .badge-terra    { background: rgba(123,45,0,0.4);   border: 2px solid #e07b39; }
+
+  .score-display {
+    margin-left: auto;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    color: var(--star);
+    background: rgba(255,215,0,0.1);
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 2px solid rgba(255,215,0,0.3);
+  }
+
+  .progress-bar-wrap {
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    height: 8px;
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.5s ease;
+    background: linear-gradient(90deg, var(--star), #ff8c00);
+  }
+
+  /* QUESTION CARD */
+  .question-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 24px;
+    padding: 32px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(8px);
+  }
+
+  .question-num {
+    font-size: 0.8rem;
+    color: #889;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+
+  .question-text {
+    font-size: 1.25rem;
+    font-weight: 800;
+    line-height: 1.5;
+    color: #fff;
+    margin-bottom: 28px;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .option-btn {
+    background: rgba(255,255,255,0.06);
+    border: 2px solid rgba(255,255,255,0.15);
+    border-radius: 14px;
+    padding: 14px 20px;
+    text-align: left;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #dde;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .option-btn:hover:not(:disabled) {
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.35);
+    transform: translateX(4px);
+    color: #fff;
+  }
+
+  .option-letter {
+    min-width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 900;
+    transition: all 0.2s;
+  }
+
+  .option-btn.correct {
+    background: rgba(46,204,113,0.2);
+    border-color: var(--correct);
+    color: #a9f7c7;
+  }
+
+  .option-btn.correct .option-letter {
+    background: var(--correct);
+    color: #fff;
+  }
+
+  .option-btn.wrong {
+    background: rgba(231,76,60,0.2);
+    border-color: var(--wrong);
+    color: #f5b7b1;
+  }
+
+  .option-btn.wrong .option-letter {
+    background: var(--wrong);
+    color: #fff;
+  }
+
+  .option-btn:disabled { cursor: default; }
+
+  /* FEEDBACK */
+  .feedback {
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin-top: 16px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    display: none;
+    animation: fadeInUp 0.4s ease;
+  }
+
+  .feedback.show { display: block; }
+
+  .feedback.correct-fb {
+    background: rgba(46,204,113,0.15);
+    border: 2px solid rgba(46,204,113,0.4);
+  }
+
+  .feedback.wrong-fb {
+    background: rgba(231,76,60,0.12);
+    border: 2px solid rgba(231,76,60,0.35);
+  }
+
+  .feedback .fb-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+
+  .feedback.correct-fb .fb-title { color: #58d68d; }
+  .feedback.wrong-fb .fb-title   { color: #f1948a; }
+
+  .feedback .explanation {
+    color: #ccc;
+    background: rgba(0,0,0,0.2);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-top: 10px;
+    font-weight: 600;
+    font-style: italic;
+    border-left: 3px solid rgba(255,255,255,0.2);
+  }
+
+  /* NEXT BUTTON */
+  .next-btn {
+    display: none;
+    margin-top: 20px;
+    width: 100%;
+    padding: 16px;
+    border-radius: 14px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border: none;
+    transition: all 0.25s ease;
+    background: linear-gradient(135deg, #f39c12, #e74c3c);
+    color: #fff;
+    letter-spacing: 0.5px;
+  }
+
+  .next-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(231,76,60,0.4); }
+  .next-btn.show { display: block; animation: fadeInUp 0.3s ease; }
+
+  /* RESULTS */
+  .results {
+    text-align: center;
+    padding: 40px 20px;
+    animation: fadeInUp 0.6s ease;
+  }
+
+  .result-emoji { font-size: 4rem; display: block; margin-bottom: 16px; animation: float 3s ease-in-out infinite; }
+
+  .result-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    color: var(--star);
+  }
+
+  .result-score {
+    font-size: 1.2rem;
+    color: #aab;
+    margin-bottom: 30px;
+  }
+
+  .result-score strong { color: #fff; font-size: 2rem; }
+
+  .result-actions {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .result-btn {
+    padding: 14px 28px;
+    border-radius: 30px;
+    border: none;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    letter-spacing: 0.5px;
+  }
+
+  .result-btn:hover { transform: translateY(-3px); }
+
+  .btn-retry {
+    background: linear-gradient(135deg, #9b59b6, #6c3483);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(155,89,182,0.4);
+  }
+
+  .btn-home {
+    background: rgba(255,255,255,0.1);
+    color: #ddd;
+    border: 2px solid rgba(255,255,255,0.2);
+  }
+
+  /* Stars earned display */
+  .stars-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 20px 0;
+    font-size: 2rem;
+  }
+
+  /* STREAK */
+  .streak-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,165,0,0.1);
+    border: 2px solid rgba(255,165,0,0.25);
+    border-radius: 14px;
+    padding: 10px 18px;
+    margin-bottom: 16px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    color: #ffaa00;
+  }
+  .streak-dots { display: flex; gap: 6px; }
+  .streak-dot {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    border: 2px solid rgba(255,255,255,0.15);
+    transition: all 0.3s ease;
+    font-size: 0.7rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .streak-dot.lit { background: #ffaa00; border-color: #ffd700; animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1); }
+
+  /* CONFETTI particles */
+  .confetti-container {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 999; overflow: hidden;
+  }
+  .conf-particle {
+    position: absolute;
+    width: 10px; height: 10px;
+    border-radius: 2px;
+    animation: confettiFall 1.5s ease-in forwards;
+  }
+  @keyframes confettiFall {
+    0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-12px); }
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60%  { transform: translateX(-6px); }
+    40%, 80%  { transform: translateX(6px); }
+  }
+
+  @keyframes popIn {
+    0%   { transform: scale(0); }
+    60%  { transform: scale(1.3); }
+    100% { transform: scale(1); }
+  }
+
+  @keyframes pulse-correct {
+    0%   { box-shadow: 0 0 0 0 rgba(46,204,113,0.6); }
+    70%  { box-shadow: 0 0 0 14px rgba(46,204,113,0); }
+    100% { box-shadow: 0 0 0 0 rgba(46,204,113,0); }
+  }
+
+  @keyframes bounceIn {
+    0%   { transform: scale(0.3); opacity: 0; }
+    50%  { transform: scale(1.1); }
+    70%  { transform: scale(0.95); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .shake { animation: shake 0.4s ease; }
+  .bounce-in { animation: bounceIn 0.5s ease forwards; }
+  .option-btn.correct { animation: pulse-correct 0.6s ease; }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .welcome h1 { font-size: 2rem; }
+    .question-text { font-size: 1.1rem; }
+    .question-card { padding: 22px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">🌍 Ciències 5è</div>
+    <nav id="mainNav">
+      <button class="nav-btn" data-topic="astres" onclick="startTopic('astres')">🪐 Astres i Univers</button>
+      <button class="nav-btn" data-topic="agua" onclick="startTopic('agua')">💧 L'Aigua</button>
+      <button class="nav-btn" data-topic="relleu" onclick="startTopic('relleu')">⛰️ El Relleu</button>
+      <button class="nav-btn" data-topic="biosfera" onclick="startTopic('biosfera')">🌿 La Biosfera</button>
+      <button class="nav-btn" data-topic="terra" onclick="startTopic('terra')">🌋 La Terra per dins</button>
+    </nav>
+  </div>
+</header>
+
+<main id="mainContent">
+  <!-- Welcome screen -->
+  <div class="welcome" id="welcomeScreen">
+    <div class="welcome-hero">
+      <span class="sparkles s1">✨</span>
+      <span class="sparkles s2">⭐</span>
+      <span class="sparkles s3">💫</span>
+      <span class="planet">🚀</span>
+    </div>
+    <h1>Hola, exploradora!</h1>
+    <p class="welcome-subtitle">Tria un tema per repassar el teu examen de Ciències Naturals. Endavant, que tu pots! 💪</p>
+    <div class="welcome-badge">🎯 10 preguntes per tema · Respostes explicades</div>
+    <p class="section-title">Tria el teu tema</p>
+    <div class="topic-cards">
+      <div class="topic-card" data-t="astres" onclick="startTopic('astres')">
+        <span class="icon">🪐</span>
+        <span class="name">Astres i Univers</span>
+        <span class="q-count">10 preguntes</span>
+      </div>
+      <div class="topic-card" data-t="agua" onclick="startTopic('agua')">
+        <span class="icon">💧</span>
+        <span class="name">L'Aigua</span>
+        <span class="q-count">10 preguntes</span>
+      </div>
+      <div class="topic-card" data-t="relleu" onclick="startTopic('relleu')">
+        <span class="icon">⛰️</span>
+        <span class="name">El Relleu</span>
+        <span class="q-count">10 preguntes</span>
+      </div>
+      <div class="topic-card" data-t="biosfera" onclick="startTopic('biosfera')">
+        <span class="icon">🌿</span>
+        <span class="name">La Biosfera</span>
+        <span class="q-count">10 preguntes</span>
+      </div>
+      <div class="topic-card" data-t="terra" onclick="startTopic('terra')">
+        <span class="icon">🌋</span>
+        <span class="name">La Terra per dins</span>
+        <span class="q-count">10 preguntes</span>
+      </div>
+    </div>
+  </div>
+  <div id="quizContainer" style="display:none;"></div>
+</main>
+
+<script>
+// ============================================================
+// QUIZ DATA — strictly based on the PDFs provided
+// ============================================================
+const topics = {
+  astres: {
+    name: "Astres i Univers",
+    icon: "🪐",
+    color: "astres",
+    questions: [
+      { q: "Quin dels següents astres brilla amb llum pròpia?", opts: ["Els planetes","Les estrelles","Els satèl·lits","Els asteroides"], answer: 1, explanation: "Les estrelles són astres que brillen amb llum pròpia. Són formades per gasos a temperatures molt altes que emeten llum." },
+      { q: "Quin és el planeta més gran del sistema solar i el que té més satèl·lits?", opts: ["Saturn","Neptú","Júpiter","Mart"], answer: 2, explanation: "Júpiter és el planeta més gran del sistema solar i el que té més satèl·lits (63)." },
+      { q: "Com s'anomena la força que fa que un astre atregui els cossos que hi ha a la seva superfície?", opts: ["La translació","La gravetat","La rotació","L'òrbita"], answer: 1, explanation: "La força de la gravetat és la força que fa que un astre atregui els cossos que hi ha a la seva superfície." },
+      { q: "Quants planetes té el sistema solar?", opts: ["Set","Nou","Vuit","Deu"], answer: 2, explanation: "El sistema solar és format pel Sol i per un conjunt de vuit planetes i els seus satèl·lits, que hi giren al voltant." },
+      { q: "Com s'anomena la galàxia on es troben el Sol i la Terra?", opts: ["Andròmeda","La Via Làctia","Camí de la Lluna","El Braç Espiral"], answer: 1, explanation: "La galàxia on hi ha el Sol i la Terra és la Via Làctia, que conté al voltant de 200.000 milions d'estrelles." },
+      { q: "Quina forma té la Via Làctia?", opts: ["Rodona","El·líptica","Espiral","Triangular"], answer: 2, explanation: "La Via Làctia té forma d'espiral, amb diversos braços, i gira sobre un eix central. La Terra està situada a l'extrem d'un d'aquests braços." },
+      { q: "Quan un petit meteorit xoca amb l'atmosfera de la Terra, s'encén i forma...", opts: ["Un cometa","Un asteroide","Un estel fugisser","Una glacera"], answer: 2, explanation: "Quan un petit meteorit xoca amb l'atmosfera de la Terra, s'encén i forma el que es coneix com un estel fugisser." },
+      { q: "Com s'anomena el recorregut que fa un planeta al voltant d'una estrella?", opts: ["Rotació","Translació","Òrbita","Gravetat"], answer: 2, explanation: "El recorregut que fa un planeta al voltant d'una estrella s'anomena òrbita." },
+      { q: "El Sol es va formar fa uns...", opts: ["500 milions d'anys","1.000 milions d'anys","5.000 milions d'anys","10.000 milions d'anys"], answer: 2, explanation: "El Sol es va formar fa uns 5.000 milions d'anys i té un diàmetre d'1,4 milions de quilòmetres, aproximadament." },
+      { q: "Quina característica especial té la Terra que permet l'existència de vida?", opts: ["És el planeta més gran","Té les temperatures adequades, existència d'aigua i atmosfera amb oxigen","Té molt de ferro","Queda molt a prop del Sol"], answer: 1, explanation: "Entre les característiques especials de la Terra hi ha les temperatures que s'hi enregistren, l'existència d'aigua i una atmosfera rica en oxigen." },
+      { q: "On es troben la majoria dels asteroides del sistema solar?", opts: ["Entre el Sol i Mercuri","Entre Venus i la Terra","Entre Mart i Júpiter","Entre Saturn i Urà"], answer: 2, explanation: "Es considera que hi ha mig milió d'asteroides i la majoria estan situats entre les òrbites dels planetes Mart i Júpiter." },
+      { q: "Quin és el nom popular de la Via Làctia?", opts: ["Camí de les Estrelles","Camí de Sant Jaume","Camí de la Lluna","Via de la Nit"], answer: 1, explanation: "La Via Làctia també es coneix popularment amb el nom de Camí de Sant Jaume." },
+      { q: "A quina distància aproximada es troba el Sol de la Terra?", opts: ["15 milions de km","150 milions de km","1.500 milions de km","1,4 milions de km"], answer: 1, explanation: "El Sol està situat a uns 150 milions de quilòmetres de la Terra." },
+      { q: "Com es diu la capa més externa de la Terra?", opts: ["La geosfera","La hidrosfera","La biosfera","L'atmosfera"], answer: 3, explanation: "L'atmosfera és la capa més externa de la Terra, d'uns 1.000 quilòmetres de gruix, formada principalment per una mescla de gasos." },
+      { q: "Com s'anomenen els cossos que giren al voltant d'un planeta?", opts: ["Estrelles","Asteroides","Satèl·lits","Cometes"], answer: 2, explanation: "Els satèl·lits no tenen llum pròpia i giren al voltant d'un planeta descrivint també una òrbita." },
+      { q: "Com s'anomena una agrupació d'estrelles, planetes, satèl·lits i altres astres?", opts: ["Un sistema solar","Un univers","Una galàxia","Una nebulosa"], answer: 2, explanation: "Una galàxia és una agrupació d'estrelles, planetes i els seus satèl·lits, juntament amb altres astres." },
+      { q: "Quants milions d'estrelles conté aproximadament la Via Làctia?", opts: ["2.000 milions","20.000 milions","200.000 milions","2 milions"], answer: 2, explanation: "La galàxia Via Làctia conté al voltant de 200.000 milions d'estrelles." },
+      { q: "On es troba situada la Terra dins la Via Làctia?", opts: ["Al centre de la galàxia","A l'extrem d'un dels braços espirals","Molt prop del nucli central","Entre dues galàxies"], answer: 1, explanation: "La Via Làctia té forma d'espiral, amb diversos braços, i gira sobre un eix central. La Terra està situada a l'extrem d'un d'aquests braços." },
+      { q: "Quin és el diàmetre aproximat del Sol?", opts: ["140.000 km","1,4 milions de km","14 milions de km","140 milions de km"], answer: 1, explanation: "El Sol té un diàmetre d'1,4 milions de quilòmetres, aproximadament, més de 100 vegades el de la Terra." },
+      { q: "Quin és el paper del Sol per a la Terra?", opts: ["Ens envia meteorits","La llum i l'escalfor que emet permeten la vida al nostre planeta","Ens protegeix dels cometes","Genera la força de gravetat de la Terra"], answer: 1, explanation: "El Sol és l'estrella que hi ha més a prop de la Terra. La llum i l'escalfor que emet permeten la vida al nostre planeta." },
+      { q: "Quin fenomen caracteritza els cometes quan s'acosten al Sol?", opts: ["Exploten","Es converteixen en asteroides","Se'ls forma una llarga cua pel desglaç de l'escalfor","Es trenquen en meteorits"], answer: 2, explanation: "Els cometes són cossos formats per un petit nucli de gasos i gel. Quan els cometes s'acosten al Sol, se'ls forma una llarga cua a causa del desglaç produït per l'escalfor." },
+      { q: "Com s'anomena el conjunt format per una estrella i els planetes que giren al seu voltant?", opts: ["Una galàxia","Un univers","Un sistema planetari","Una constel·lació"], answer: 2, explanation: "Una estrella i els planetes que giren al seu voltant formen un sistema planetari. El sistema solar és el sistema planetari al qual pertany la Terra." },
+      { q: "Com s'anomena la part de la Terra formada per roques?", opts: ["La hidrosfera","L'atmosfera","La biosfera","La geosfera"], answer: 3, explanation: "La geosfera és la part de la Terra formada per roques. Les roques de la superfície terrestre són sòlides, però les de l'interior, on les temperatures són molt altes, es troben foses, és a dir, en estat líquid." },
+      { q: "Per què a l'espai els cossos floten i no cauen?", opts: ["Perquè no hi ha aire","Perquè fa molt de fred","Perquè estan lluny de la força d'atracció dels astres","Perquè giren molt ràpid"], answer: 2, explanation: "A l'espai, lluny de la força d'atracció dels astres, els cossos no cauen a terra. Per això els cossos que hi ha a la Terra cauen i no es mantenen flotant a l'aire com passa a l'espai." },
+      { q: "Gràcies a quina força els planetes del sistema solar giren al voltant del Sol?", opts: ["La força del vent solar","La força magnètica","La força de la gravetat","La força centrífuga"], answer: 2, explanation: "Gràcies a la força de la gravetat, els planetes del sistema solar giren al voltant del Sol." },
+      { q: "Des d'on es pot distingir a ull nu la Via Làctia com una franja d'estels al cel?", opts: ["Des de qualsevol lloc, a qualsevol hora","Des d'una gran ciutat de dia","Des d'un indret sense gaire il·luminació artificial, en una nit serena","Només amb telescopi"], answer: 2, explanation: "Des de la Terra, en una nit serena i en un indret sense gaire il·luminació artificial, es pot distingir clarament la Via Làctia com una franja amb una gran concentració d'estels que travessa el cel de banda a banda." },
+      { q: "Quants asteroides s'estima que hi ha al sistema solar?", opts: ["Uns 5.000","Uns 50.000","Uns mig milió","Uns 5 milions"], answer: 2, explanation: "Els asteroides giren al voltant del Sol, però són més petits que els planetes. Es considera que n'hi ha mig milió i la majoria estan situats entre les òrbites dels planetes Mart i Júpiter." },
+      { q: "Quin d'aquests planetes és el primer a partir del Sol?", opts: ["Venus","La Terra","Mart","Mercuri"], answer: 3, explanation: "En el sistema solar, l'ordre dels planetes des del Sol és: Mercuri, Venus, Terra, Mart, Júpiter, Saturn, Urà i Neptú." },
+      { q: "Com s'anomenen els fragments de matèria que es mouen per l'espai i que poden tenir mides molt diverses?", opts: ["Cometes","Asteroides","Meteorits","Satèl·lits"], answer: 2, explanation: "Els meteorits són fragments de matèria que es mouen per l'espai. Tenen mides molt diferents. Quan un petit meteorit xoca amb l'atmosfera de la Terra, s'encén i forma el que es coneix com un estel fugisser." },
+      { q: "Tots els astres que podem veure a ull nu des del nostre planeta, a quina galàxia pertanyen?", opts: ["A Andròmeda","A la Via Làctia","A diverses galàxies","Al sistema solar únicament"], answer: 1, explanation: "Tots els astres que podem veure a ull nu des del nostre planeta pertanyen a la Via Làctia." },
+      { q: "Quina és la definició de l'Univers?", opts: ["Un conjunt de planetes i llunes","El sistema solar i les galàxies properes","Tot allò que existeix: un espai immens amb un nombre incalculable d'astres","El conjunt de galàxies conegudes"], answer: 2, explanation: "L'Univers és tot allò que existeix: és un espai immens en el qual hi ha un nombre incalculable d'astres." },
+      { q: "Quina és la característica principal d'un astre o cos celeste?", opts: ["Brillar amb llum pròpia","Tenir una forma definida i moure's d'una manera determinada per l'Univers","Girar al voltant d'un planeta","Estar format per gasos"],  answer: 1, explanation: "Un astre o cos celeste té una forma definida i es mou d'una manera determinada per l'Univers." },
+      { q: "Els planetes, tenen llum pròpia?", opts: ["Sí, tots els planetes emeten llum","No, els planetes no tenen llum pròpia","Sí, però molt dèbil","Només els planetes gegants"], answer: 1, explanation: "Els planetes són cossos sòlids de forma esfèrica que no tenen llum pròpia i giren al voltant d'una estrella." },
+      { q: "Quin és el gruix aproximat de l'atmosfera terrestre?", opts: ["100 quilòmetres","1.000 quilòmetres","10.000 quilòmetres","100.000 quilòmetres"], answer: 1, explanation: "L'atmosfera és la capa més externa de la Terra, d'uns 1.000 quilòmetres de gruix, formada principalment per una mescla de gasos." },
+      { q: "En quin estat es troben les roques de l'interior de la Terra?", opts: ["En estat sòlid","En estat gasós","En estat líquid (foses) per les altes temperatures","En estat de plasma"], answer: 2, explanation: "La geosfera és la part de la Terra formada per roques. Les roques de la superfície terrestre són sòlides, però les de l'interior, on les temperatures són molt altes, es troben foses, és a dir, en estat líquid." },
+      { q: "Les roques de la superfície terrestre, en quin estat es troben?", opts: ["En estat líquid","En estat gasós","En estat sòlid","En estat de fusió"], answer: 2, explanation: "A la geosfera, les roques de la superfície terrestre són sòlides, però les de l'interior, on les temperatures són molt altes, es troben foses, és a dir, en estat líquid." },
+      { q: "Com es mouen les galàxies a l'Univers?", opts: ["Estan totalment immòbils","Només giren sobre si mateixes","Els astres de les galàxies es mouen i cada galàxia sencera també es desplaça","Només es mouen quan col·lisionen"], answer: 2, explanation: "Els astres de les diferents galàxies es mouen, i cada galàxia sencera també es desplaça." },
+      { q: "Quants satèl·lits té Júpiter exactament?", opts: ["16","32","63","100"], answer: 2, explanation: "Júpiter és el planeta més gran del sistema solar i el que té més satèl·lits (63)." },
+      { q: "Quin planeta del sistema solar és el darrer (més llunyà del Sol)?", opts: ["Saturn","Urà","Neptú","Plutó"], answer: 2, explanation: "En el sistema solar, l'ordre dels planetes des del Sol és: Mercuri, Venus, Terra, Mart, Júpiter, Saturn, Urà i Neptú. Neptú és el darrer." },
+      { q: "Quin és el segon planeta a partir del Sol?", opts: ["Mercuri","Venus","La Terra","Mart"], answer: 1, explanation: "En el sistema solar, l'ordre dels planetes des del Sol és: Mercuri, Venus, Terra, Mart, Júpiter, Saturn, Urà i Neptú. Venus és el segon." },
+      { q: "El diàmetre del Sol és més de quantes vegades el diàmetre de la Terra?", opts: ["10 vegades","50 vegades","100 vegades","1.000 vegades"], answer: 2, explanation: "El Sol té un diàmetre d'1,4 milions de quilòmetres, aproximadament, més de 100 vegades el de la Terra." },
+      { q: "Quina diferència hi ha entre un planeta i un satèl·lit?", opts: ["Els planetes giren al voltant d'un satèl·lit; els satèl·lits giren al voltant d'una estrella","Els planetes giren al voltant d'una estrella; els satèl·lits giren al voltant d'un planeta","Tots dos giren al voltant del Sol","No hi ha cap diferència"], answer: 1, explanation: "Els planetes giren al voltant d'una estrella. Els satèl·lits no tenen llum pròpia i giren al voltant d'un planeta descrivint també una òrbita." },
+      { q: "Hi ha planetes que no tenen cap satèl·lit?", opts: ["No, tots els planetes en tenen almenys un","Sí, hi ha planetes que no en tenen cap i d'altres que en tenen uns quants","Tots els planetes en tenen exactament un","Sí, tots els planetes no en tenen cap"], answer: 1, explanation: "Hi ha planetes que no tenen cap satèl·lit i n'hi ha que en tenen uns quants." },
+      { q: "De quin material estan fets principalment els cometes?", opts: ["De roques sòlides","De metalls","D'un petit nucli de gasos i gel","De pols i sorra"], answer: 2, explanation: "Els cometes són cossos formats per un petit nucli de gasos i gel. Quan els cometes s'acosten al Sol, se'ls forma una llarga cua a causa del desglaç produït per l'escalfor." },
+      { q: "Quin és el cinquè planeta a partir del Sol?", opts: ["Mart","Saturn","Urà","Júpiter"], answer: 3, explanation: "En el sistema solar, l'ordre dels planetes des del Sol és: Mercuri, Venus, Terra, Mart, Júpiter, Saturn, Urà i Neptú. Júpiter és el cinquè." },
+      { q: "Quantes galàxies hi ha aproximadament a l'Univers?", opts: ["Uns centenars","Uns milers","Milers de milions","Un nombre exacte i conegut"], answer: 2, explanation: "A l'Univers hi ha milers de milions de galàxies." },
+      { q: "Quin planeta del sistema solar és el quart a partir del Sol?", opts: ["La Terra","Júpiter","Mart","Venus"], answer: 2, explanation: "En el sistema solar, l'ordre dels planetes des del Sol és: Mercuri, Venus, Terra, Mart, Júpiter, Saturn, Urà i Neptú. Mart és el quart." },
+      { q: "Quines tres parts es diferencien a la Terra?", opts: ["La geosfera, l'atmosfera i la biosfera","La geosfera, la hidrosfera i l'atmosfera","La litosfera, la hidrosfera i la biosfera","El nucli, el mantell i l'escorça"], answer: 1, explanation: "A la Terra hi podem diferenciar tres parts: la geosfera (roques), la hidrosfera (tota l'aigua) i l'atmosfera (capa de gasos exterior)." },
+      { q: "Quin tipus d'astre és el Sol?", opts: ["Un planeta","Un satèl·lit","Una estrella","Un asteroide"], answer: 2, explanation: "El Sol és l'estrella que hi ha més a prop de la Terra. La llum i l'escalfor que emet permeten la vida al nostre planeta." },
+      { q: "Com s'atreuen els astres entre si?", opts: ["Amb força magnètica","Amb la força de la gravetat","Amb forces elèctriques","No s'atreuen, es repel·leixen"], answer: 1, explanation: "Els astres s'atreuen entre si, de manera que es mantenen en les seves òrbites respectives. Aquesta força d'atracció s'anomena gravetat." }
+    ]
+  },
+
+  agua: {
+    name: "L'Aigua",
+    icon: "💧",
+    color: "agua",
+    questions: [
+      { q: "Com s'anomena el conjunt de tota l'aigua que hi ha al nostre planeta?", opts: ["La biosfera","L'atmosfera","La hidrosfera","La litosfera"], answer: 2, explanation: "La hidrosfera és el conjunt de tota l'aigua que hi ha al nostre planeta." },
+      { q: "En quins estats pot estar l'aigua a la Terra?", opts: ["Líquid i sòlid","Líquid, sòlid i gasós","Gasós i sòlid","Només en estat líquid"], answer: 1, explanation: "L'aigua que hi ha a la Terra pot estar en estat líquid, sòlid o gasós." },
+      { q: "Quin percentatge de l'aigua de la Terra és salada?", opts: ["50%","75%","97%","30%"], answer: 2, explanation: "L'aigua salada és als mars i als oceans i suposa un 97% del total de l'aigua del planeta, mentre que la resta és aigua dolça." },
+      { q: "En el cicle de l'aigua, com s'anomena l'etapa en que l'aigua líquida es converteix en vapor a causa de l'escalfor del sol?", opts: ["La condensació","La solidificació","La fusió","L'evaporació"], answer: 3, explanation: "L'evaporació: l'aigua líquida es converteix en vapor d'aigua a causa de l'escalfor del sol. El vapor d'aigua queda dispers en l'aire, barrejat amb altres gasos." },
+      { q: "Quan el vapor d'aigua puja a l'atmosfera i es refreda, tornant a estat líquid i formant núvols, com s'anomena aquest procés?", opts: ["L'evaporació","La condensació","La fusió","La precipitació"], answer: 1, explanation: "La condensació: quan el vapor d'aigua s'eleva a l'atmosfera, es refreda i es condensa, és a dir, torna a l'estat líquid i es converteix en petites gotes d'aigua, que formen els núvols." },
+      { q: "En quin curs d'un riu és l'aigua més cabalosa però corre amb menys velocitat?", opts: ["Curs alt","Curs mitjà","Curs baix","Desembocadura"], answer: 2, explanation: "El curs baix és on el riu és més cabalós, però les seves aigües discorren a poca velocitat perquè sovint travessen zones força planes." },
+      { q: "Com s'anomena la quantitat d'aigua que porta un riu?", opts: ["El curs","El cabal","El llit","El meandre"], answer: 1, explanation: "El cabal d'un riu és la quantitat d'aigua que porta." },
+      { q: "Quin és el final d'un riu on pot desembocar al mar, un llac o un altre riu?", opts: ["El naixement","El curs alt","La desembocadura","El meandre"], answer: 2, explanation: "La desembocadura és el final d'un riu, que pot ser el mar, un llac o un altre riu. Es poden formar deltes." },
+      { q: "Com s'anomena un revolt molt marcat que fa un riu, generalment en el curs mitjà?", opts: ["Una cascada","Un afluent","Un estany","Un meandre"], answer: 3, explanation: "Un meandre és un revolt molt marcat que fa un riu, generalment en el curs mitjà." },
+      { q: "Com s'anomena un corrent d'aigua que només es forma quan plou?", opts: ["Un rierol","Una riera","Un torrent","Un afluent"], answer: 1, explanation: "Una riera és un corrent d'aigua que només es forma quan plou." },
+      { q: "Al curs alt d'un riu, quin procés és predominant?", opts: ["Depositar sediments","Transportar materials lentament","Erosionar el terreny per la força del corrent","Formar meandres"], answer: 2, explanation: "Al curs alt, el riu porta poca aigua, però com que el pendent és molt fort, té molta força, arrenca materials i erosiona el terreny." },
+      { q: "Com s'anomena una gran massa de gel situada a zones fredes que es desplaça?", opts: ["Un estany","Una glacera","Un llac","Una riera"], answer: 1, explanation: "Una glacera és una gran massa de gel situada a zones fredes que es desplaça." },
+      { q: "Com s'anomena un riu que desemboca en un altre riu?", opts: ["Un torrent","Un rierol","Un afluent","Una cascada"], answer: 2, explanation: "Un afluent és un riu que desemboca en un altre riu." },
+      { q: "On trobem normalment l'aigua en estat sòlid (gel o neu)?", opts: ["Als rius i llacs","Als cims de les muntanyes i als pols","A l'atmosfera","Als mars i oceans"], answer: 1, explanation: "Normalment trobem l'aigua en estat sòlid (gel o neu) als cims de les muntanyes i als pols." },
+      { q: "On trobem l'aigua en estat gasós?", opts: ["Als rius","Als oceans","A l'atmosfera, com a vapor d'aigua","Als corrents subterranis"], answer: 2, explanation: "L'aigua en estat gasós (vapor d'aigua) la trobem a l'atmosfera." },
+      { q: "Quina és la característica que diferencia la Terra de qualsevol altre planeta conegut?", opts: ["Tenir atmosfera","L'existència d'aigua","Tenir satèl·lits","Tenir volcans"], answer: 1, explanation: "L'existència d'aigua és una de les característiques que diferencia la Terra de qualsevol altre planeta conegut." },
+      { q: "En el cicle de l'aigua, com s'anomena el procés en que la neu i el glaç es fonen gràcies a l'escalfor del sol?", opts: ["La condensació","L'evaporació","La solidificació","La fusió"], answer: 3, explanation: "La fusió: la neu i el glaç que s'acumulen a la superfície es fonen amb l'escalfor del sol." },
+      { q: "En el cicle de l'aigua, en quin cas la precipitació cau en forma de neu o calamarsa?", opts: ["Quan hi ha molt sol","Quan la temperatura és molt alta","Quan la temperatura és baixa i l'aigua dels núvols se solidifica","Quan hi ha molta humitat"], answer: 2, explanation: "La solidificació: si la temperatura és baixa, l'aigua dels núvols se solidifica, és a dir, passa a l'estat sòlid, i la precipitació cau en forma de neu o calamarsa." },
+      { q: "On es troben els corrents d'aigua subterranis?", opts: ["Als núvols","A sota la superfície de la terra","Als cims de les muntanyes","A l'atmosfera"], answer: 1, explanation: "En estat líquid trobem l'aigua als rius, als llacs, als corrents subterranis i als mars i els oceans." },
+      { q: "Com s'anomena l'espai per on corren les aigües d'un riu?", opts: ["El curs","El cabal","El llit","L'afluent"], answer: 2, explanation: "El llit és l'espai per on corren les aigües d'un riu." },
+      { q: "Com s'anomena un corrent d'aigua que es forma quan plou i baixa amb molta força?", opts: ["Un rierol","Un afluent","Una riera","Un torrent"], answer: 3, explanation: "Un torrent és un corrent d'aigua que es forma quan plou i que baixa amb molta força." },
+      { q: "Com s'anomena l'origen d'un riu?", opts: ["La desembocadura","El delta","El naixement","El llit"], answer: 2, explanation: "El naixement és l'origen d'un riu." },
+      { q: "Com s'anomena un llac de petites dimensions?", opts: ["Un rierol","Un estany","Una bassa","Un afluent"], answer: 1, explanation: "Un estany és un llac de petites dimensions." },
+      { q: "Al curs mitjà d'un riu, quina és l'activitat principal?", opts: ["Erosionar el fons del riu","Transportar els materials arrencats al curs alt","Depositar tots els sediments","Formar cascades"], answer: 1, explanation: "Al curs mitjà, el cabal del riu augmenta, però el pendent ja no és tan acusat. El riu transporta els materials que ha arrencat en el curs alt." },
+      { q: "Com canvia d'estat l'aigua?", opts: ["Quan canvia de lloc","Quan s'escalfa o es refreda a causa dels canvis de temperatura","Quan és salada","Quan arriba al mar"], answer: 1, explanation: "L'aigua canvia d'estat quan s'escalfa o es refreda a causa dels canvis de temperatura." },
+      { q: "Quin d'aquests elements confirma que l'aigua és necessària per a la vida?", opts: ["L'aire respira els éssers vius","Els éssers vius tenen gran quantitat d'aigua dins el seu cos","L'aigua forma l'atmosfera","Les roques contenen sempre aigua"], answer: 1, explanation: "Els éssers vius tenen gran quantitat d'aigua dins el seu cos. L'aigua és necessària per a la vida." },
+      { q: "Quin és el procés de circulació de l'aigua en la natura?", opts: ["El cicle atmosfèric","El cicle de l'aigua","El cicle del nitrogen","El cicle de l'evaporació"], answer: 1, explanation: "El cicle de l'aigua és el procés de circulació de l'aigua en la natura." },
+      { q: "Quin tipus d'aigua és la de menor quantitat a la Terra?", opts: ["L'aigua salada dels oceans","L'aigua dolça","L'aigua de l'atmosfera","L'aigua del mar Mediterrani"], answer: 1, explanation: "L'aigua salada suposa un 97% del total de l'aigua del planeta, mentre que la resta és aigua dolça. Per tant, l'aigua dolça és la que hi ha en menor quantitat." },
+      { q: "Com s'anomena un salt d'aigua?", opts: ["Un meandre","Un afluent","Una cascada","Un torrent"], answer: 2, explanation: "Una cascada és un salt d'aigua." },
+      { q: "Com s'anomena una extensió d'aigua envoltada de terra que ocupa una depressió del terreny?", opts: ["Un estany","Un mar","Un llac","Una riera"], answer: 2, explanation: "Un llac és una extensió d'aigua envoltada de terra que ocupa una depressió del terreny." },
+      { q: "Com es defineix un riu?", opts: ["Una massa d'aigua estancada envoltada de terra","Un corrent natural d'aigua que circula per la superfície i va a parar a un altre riu, llac o mar","Un corrent d'aigua subterrani","Una acumulació de neu i gel que es desplaça"], answer: 1, explanation: "Un riu és un corrent natural d'aigua que generalment circula per la superfície de la terra i que va a parar a un altre riu, a un llac o al mar." },
+      { q: "En quantes parts s'acostuma a dividir el recorregut d'un riu?", opts: ["Dues: alta i baixa","Tres: alta, mitjana i baixa","Quatre: alta, mitjana, baixa i delta","Cinc parts"], answer: 1, explanation: "En el recorregut d'un riu generalment s'hi poden diferenciar tres parts: curs alt, curs mitjà i curs baix." },
+      { q: "Quins processos importants porten a terme els rius sobre la superfície terrestre?", opts: ["Només transporten minerals al mar","L'erosió, el transport de materials, l'excavació de valls i la formació de deltes","Únicament omplen els mars i oceans","Creen muntanyes i elevacions del terreny"], answer: 1, explanation: "Els rius són responsables de processos importants de modificació de la superfície del planeta: l'erosió i el transport de materials dels territoris que travessen, l'excavació de valls, la formació de deltes…" },
+      { q: "Quines formacions poden aparèixer a la desembocadura d'un riu?", opts: ["Glaceres","Cascades","Deltes","Estanys de muntanya"], answer: 2, explanation: "La desembocadura és el final d'un riu, que pot ser el mar, un llac o un altre riu. Es poden formar deltes." },
+      { q: "Com s'anomena un corrent d'aigua de petites dimensions?", opts: ["Una riera","Un afluent","Un rierol","Un torrent"], answer: 2, explanation: "Un rierol és un corrent d'aigua de petites dimensions." },
+      { q: "Al curs baix, per qué el riu diposita els materials que transportava?", opts: ["Perquè l'aigua és massa calenta","Perquè ja no té força per arrossegar-los en zones planes","Perquè arriba al mar i l'aigua salada els precipita","Perquè el llit és massa ample"], answer: 1, explanation: "Al curs baix, el riu ja no té força per arrossegar els materials que transportava i els diposita al seu llit, on s'acumulen els sediments." },
+      { q: "La quantitat d'aigua que forma la hidrosfera, com és al llarg del temps?", opts: ["Va augmentant progressivament","Va disminuint cada any","Sempre és la mateixa, però canvia d'estat i es mou","Va variant segons les estacions"], answer: 2, explanation: "La quantitat d'aigua que forma la hidrosfera és sempre la mateixa, però canvia d'estat i es va movent d'un lloc a l'altre segons les condicions de l'ambient." },
+      { q: "On es troba principalment l'aigua salada de la Terra?", opts: ["Als rius i llacs","Als núvols i l'atmosfera","Als mars i als oceans","Als casquets polars"], answer: 2, explanation: "L'aigua salada és als mars i als oceans i suposa un 97% del total de l'aigua del planeta." },
+      { q: "Com es diu l'aigua amb poques sals?", opts: ["Aigua mineral","Aigua salada","Aigua dolça","Aigua destil·lada"], answer: 2, explanation: "L'aigua de la Terra pot ser salada (amb moltes sals) i dolça (amb poques sals)." },
+      { q: "Quines etapes inclou el cicle de l'aigua?", opts: ["Evaporació, precipitació i filtració","Evaporació, condensació, solidificació i fusió","Condensació, precipitació i absorció","Evaporació, rosada i neu"], answer: 1, explanation: "El cicle de l'aigua té diferents etapes: l'evaporació, la condensació, la solidificació i la fusió." },
+      { q: "Durant la condensació, com queda el vapor d'aigua a l'atmosfera?", opts: ["Es dispersa com a gas","Es converteix en petites gotes d'aigua que formen núvols","Se solidifica directament en gel","Cau en forma de pluja immediatament"], answer: 1, explanation: "La condensació: quan el vapor d'aigua s'eleva a l'atmosfera, es refreda i es condensa, tornant a l'estat líquid i convertint-se en petites gotes d'aigua, que formen els núvols." },
+      { q: "Quin és el motor principal que fa funcionar el cicle de l'aigua?", opts: ["El vent","La lluna","L'escalfor del sol","La força de la gravetat"], answer: 2, explanation: "L'evaporació es produeix a causa de l'escalfor del sol, que és el motor principal del cicle de l'aigua." },
+      { q: "Durant l'evaporació, on queda dispers el vapor d'aigua?", opts: ["Als rius i mars","A les muntanyes","A l'aire, barrejat amb altres gasos","Dins les roques"], answer: 2, explanation: "L'evaporació: l'aigua líquida es converteix en vapor d'aigua a causa de l'escalfor del sol. El vapor d'aigua queda dispers en l'aire, barrejat amb altres gasos." },
+      { q: "A quin curs d'un riu el pendent és molt fort i el riu té molta força?", opts: ["Curs baix","Curs mitjà","Curs alt","A tot el recorregut per igual"], answer: 2, explanation: "Al curs alt, el riu porta poca aigua, però com que el pendent és molt fort, té molta força, arrenca materials i erosiona el terreny." },
+      { q: "On s'acumulen els sediments en el curs baix d'un riu?", opts: ["A les ribes del riu","Al llit del riu","A la desembocadura únicament","En el curs alt"], answer: 1, explanation: "Al curs baix, el riu ja no té força per arrossegar els materials que transportava i els diposita al seu llit, on s'acumulen els sediments." },
+      { q: "L'aigua amb moltes sals, com es denomina?", opts: ["Aigua dolça","Aigua mineral","Aigua salada","Aigua potable"], answer: 2, explanation: "L'aigua de la Terra pot ser salada (amb moltes sals) i dolça (amb poques sals). L'aigua salada és als mars i als oceans." },
+      { q: "Al curs baix, com discorren les aigües d'un riu respecte a la velocitat?", opts: ["A molta velocitat perquè baixen de la muntanya","A poca velocitat perquè sovint travessen zones força planes","A velocitat variable depenent de les pluges","Sempre a la mateixa velocitat que al curs alt"], answer: 1, explanation: "Al curs baix, el riu és el més cabalós, però les seves aigües discorren a poca velocitat perquè sovint travessen zones força planes." },
+      { q: "On podem trobar l'aigua en estat líquid a la Terra?", opts: ["Només als oceans","Als rius, llacs, corrents subterranis, mars i oceans","Únicament als rius i llacs","Només als mars i oceans"], answer: 1, explanation: "En estat líquid trobem l'aigua als rius, als llacs, als corrents subterranis i als mars i els oceans." },
+      { q: "Quin fenomen natural demostra que els núvols poden precipitar en forma de pluja?", opts: ["La fusió","La condensació forma petites gotes que s'uneixen i poden donar pluja","L'evaporació","La solidificació"], answer: 1, explanation: "La condensació: quan el vapor d'aigua s'eleva a l'atmosfera, es refreda i es condensa, tornant a l'estat líquid i convertint-se en petites gotes d'aigua, que formen els núvols, que poden donar pluja." },
+      { q: "Quina diferència principal hi ha entre una riera i un torrent?", opts: ["La riera té més cabal que el torrent","Tots dos són iguals","La riera es forma quan plou; el torrent també es forma quan plou però baixa amb molta força","El torrent és permanent i la riera no"], answer: 2, explanation: "Una riera és un corrent d'aigua que només es forma quan plou. Un torrent és un corrent d'aigua que es forma quan plou i que baixa amb molta força." }
+    ]
+  },
+
+  relleu: {
+    name: "El Relleu",
+    icon: "⛰️",
+    color: "relleu",
+    questions: [
+      { q: "Com s'anomenen els agents geològics que tenen el seu origen a l'interior de la Terra?", opts: ["Agents geològics externs","Agents geològics interns","Agents atmosfèrics","Agents hidrològics"], answer: 1, explanation: "Els agents geològics interns tenen el seu origen a l'interior de la Terra i poden modificar el relleu en poc temps." },
+      { q: "Quin fenomen geològic es produeix quan els materials sotmesos a pressió són prou flexibles i es dobleguen?", opts: ["Una falla","Un terratremol","Un plegament","Un volcà"], answer: 2, explanation: "Un plegament es produeix quan els materials sotmesos a pressió són prou flexibles i es dobleguen, com ho fa un full de paper si l'empenyem pels dos extrems." },
+      { q: "Quin fenomen geològic es produeix quan els materials sotmesos a pressió no són prou flexibles i es trenquen, formant desnivells?", opts: ["Un plegament","Una falla","Una erupció volcànica","Un terratremol"], answer: 1, explanation: "Una falla es produeix quan els materials sotmesos a pressió no són prou flexibles i es trenquen. Uns blocs es desplacen respecte a uns altres i formen desnivells." },
+      { q: "Quins són els principals agents geològics externs?", opts: ["Els volcans, els terratrèmols i les falles","El vent, l'aigua i els éssers vius","El magma, la lava i les cendres","Els plegaments, les falles i les erupcions"], answer: 1, explanation: "Els principals agents geològics externs són el vent (atmosfera), l'aigua (hidrosfera) i els éssers vius (biosfera)." },
+      { q: "Com s'anomena el procés d'alteració i destrucció de les roques per acció dels agents externs?", opts: ["L'erosió","El transport","La sedimentació","La meteorització"], answer: 3, explanation: "La meteorització és l'alteració i la destrucció de les roques i els minerals per acció dels diferents agents." },
+      { q: "Com s'anomena el procés de deposició dels materials erosionats i transportats?", opts: ["La meteorització","L'erosió","La sedimentació","El transport"], answer: 2, explanation: "La sedimentació és la deposició dels materials que han estat erosionats i transportats." },
+      { q: "Com s'anomenen les roques que es formen per altes pressions i temperatures quan dues plaques litosfèriques es toquen?", opts: ["Roques volcàniques","Roques sedimentàries","Roques metamòrfiques","Roques basàltiques"], answer: 2, explanation: "Les altes pressions, sovint acompanyades d'altes temperatures, poden provocar que les roques es transformin i que se'n creïn de noves, les roques metamòrfiques, com la pissarra o el marbre." },
+      { q: "Quin efecte té l'aigua quan es fica a les escletxes de les roques i es gela?", opts: ["Les escalfa i les dilata","Les dissol completament","Augmenta de volum i pot esberlar la roca","Les cobreix de capes protectores"], answer: 2, explanation: "L'aigua en estat sòlid ocupa més espai que la mateixa quantitat en estat líquid. Per tant, l'aigua, quan es gela, augmenta de volum i pot esberlar la roca." },
+      { q: "Quin efecte provoca el vent sobre les roques?", opts: ["Les refreda","Les humidifica","Les erosiona","Les solidifica"], answer: 2, explanation: "L'impacte de l'aire en moviment sobre les roques, el vent, en provoca l'erosió. El mateix vent transporta les partícules, i quan perd força o troba algun obstacle, les diposita." },
+      { q: "Quin és el procés de desgast i despreniment de materials que després es transporten?", opts: ["La meteorització","La sedimentació","L'erosió","El plegament"], answer: 2, explanation: "L'erosió és el procés de desgast i despreniment de materials, que després es transporten." },
+      { q: "Com afecten les plantes al relleu amb les seves arrels?", opts: ["Erosionen el terra amb el seu pes","Poden fracturar les roques però també fixen el sòl","No tenen cap efecte sobre les roques","Transporten materials cap a un altre lloc"], answer: 1, explanation: "Les plantes, amb les arrels, poden fracturar les roques; d'altra banda, les arrels contribueixen a fixar el sòl." },
+      { q: "Quin tipus de roques es formen quan s'acumulen molts materials sedimentaris?", opts: ["Roques metamòrfiques","Roques volcàniques","Roques sedimentàries","Roques basàltiques"], answer: 2, explanation: "Quan s'acumulen molts materials sedimentaris, el seu propi pes pot provocar la formació d'un nou tipus de roques, les roques sedimentàries, com l'argila, el conglomerat o la calcària." },
+      { q: "Quin d'aquests és un exemple de l'acció dels éssers humans sobre el relleu?", opts: ["La formació de dunes","La construcció de vies de comunicació i embassaments","L'erosió per l'onatge del mar","La formació de meandres"], answer: 1, explanation: "Els éssers humans provoquem transformacions molt importants del relleu amb la construcció de vies de comunicació, embassaments, pedreres, etc." },
+      { q: "On es produeix la major activitat dels agents geològics interns?", opts: ["A les zones polars","A les zones on les plaques litosfèriques entren en contacte","A les zones desèrtiques","Als fons dels oceans"], answer: 1, explanation: "Les zones on les plaques litosfèriques entren en contacte són les que tenen més activitat." },
+      { q: "De quina roca prové la pissarra?", opts: ["De roques calcàries","De roques volcàniques","De roques argiloses","De granit"], answer: 2, explanation: "Les roques metamòrfiques com la pissarra provenen de roques argiloses, mentre que el marbre prové de roques calcàries." },
+      { q: "De quina roca prové el marbre?", opts: ["De roques argiloses","De roques calcàries","De granit","De roques volcàniques"], answer: 1, explanation: "Les roques metamòrfiques com el marbre provenen de roques calcàries, mentre que la pissarra prové de roques argiloses." },
+      { q: "Com modelen les onades del mar el litoral costaner?", opts: ["Construint platges noves sense erosió","Erosionant les roques i formant platges","Solidificant les roques","Dipositant sediments al fons marí"], answer: 1, explanation: "Els mars i els oceans: les onades modelen el perfil del litoral, erosionen les roques i formen les platges. Els corrents marins transporten els materials." },
+      { q: "Quina acció porten a terme les glaceres sobre el relleu?", opts: ["Dipositen sorra i formen dunes","Excaven valls i arrenquen, arrosseguen i desgasten materials","Afegeixen materials nous a les muntanyes","Formen meandres als rius"], answer: 1, explanation: "A les zones fredes es poden formar glaceres, que són grans masses de gel que es desplacen i excaven valls i arrenquen, arrosseguen i desgasten materials." },
+      { q: "Quina estructura forma el vent en transportar sorra?", opts: ["Meandres","Deltes","Dunes","Cascades"], answer: 2, explanation: "El vent transporta la sorra i forma dunes." },
+      { q: "Quan el vent perd força o troba un obstacle, quin procés es produeix?", opts: ["Torna a erosionar les roques","Eleva les partícules cap amunt","Diposita les partícules que transportava","Genera pluja"], answer: 2, explanation: "El vent transporta les partícules, i quan perd força o troba algun obstacle, les diposita." },
+      { q: "Quin efecte provoca l'aigua de la pluja sobre les roques?", opts: ["Les reforça i les endureix","Excava solcs i crea cavitats a les roques","Les cobreix de minerals","Les fa créixer de mida"], answer: 1, explanation: "Les aigües salvatges i els rius: l'aigua de la pluja excava solcs i crea cavitats a les roques." },
+      { q: "Quin dels agents geològics externs actua de forma continuada però modifica el relleu lentament?", opts: ["Els terratremols","Els volcans","Els plegaments","El vent, l'aigua i els éssers vius"], answer: 3, explanation: "Els agents geològics externs actuen de forma continuada sobre la litosfera i modifiquen el relleu lentament." },
+      { q: "Com s'anomena el procés de trasllat dels materials erosionats cap a un indret diferent?", opts: ["La sedimentació","La meteorització","L'erosió","El transport"], answer: 3, explanation: "El transport consisteix en el trasllat dels materials erosionats cap a un indret diferent." },
+      { q: "Quins fenòmens provoquen les altes pressions i l'escalfor de l'interior de la Terra?", opts: ["El vent i l'erosió","Els plegaments, les falles, els terratrèmols i els volcans","Les glaceres i els rius","La pluja i els éssers vius"], answer: 1, explanation: "Les altes pressions i l'escalfor de l'interior de la Terra provoquen els plegaments, les falles, els terratrèmols i els volcans." },
+      { q: "Com podem comparar la velocitat de canvi del relleu entre agents interns i externs?", opts: ["Els dos modifiquen el relleu a la mateixa velocitat","Els agents interns el modifiquen en poc temps; els externs, lentament","Els agents externs el modifiquen ràpidament; els interns, lentament","Cap dels dos modifica el relleu"], answer: 1, explanation: "Els agents geològics interns poden modificar el relleu en poc temps. Els agents geològics externs actuen de forma continuada i modifiquen el relleu lentament." },
+      { q: "Com afecten els animals al relleu?", opts: ["No tenen cap efecte sobre el terreny","Erosionen els terrenys per on passen i faciliten l'erosió d'altres agents menjant-se la vegetació","Construeixen embassaments","Formen glaceres"], answer: 1, explanation: "Els animals erosionen els terrenys per allà on passen i poden facilitar l'erosió per part d'altres agents quan es mengen la vegetació, per exemple." },
+      { q: "Quin procés extern provoca que els corrents marins actuen sobre el relleu?", opts: ["La formació de dunes","L'erosió i el transport de materials","La formació de glaceres","La fusió del gel"], answer: 1, explanation: "Els mars i els oceans: les onades erosionen les roques i els corrents marins transporten els materials." },
+      { q: "El relleu de la Terra que veiem avui...", opts: ["Ha estat sempre igual","S'ha anat formant i modificant al llarg de milers de milions d'anys","Va ser creat fa 500 anys","Canviarà completament en 10 anys"], answer: 1, explanation: "El relleu de la Terra que ara veiem no ha estat sempre així, sinó que s'ha anat formant i modificant al llarg de milers de milions d'anys." },
+      { q: "Quina analogia s'utilitza per explicar com es forma un plegament?", opts: ["Com una roca que cau al mar","Com un full de paper que s'empenyen pels dos extrems i es doblega","Com el gel que es fon al sol","Com l'aigua que excava una cova"], answer: 1, explanation: "Un plegament es produeix quan els materials sotmesos a pressió són prou flexibles i es dobleguen, com ho fa un full de paper si l'empenyem pels dos extrems." },
+      { q: "Quina és la causa principal que origina els plegaments i les falles?", opts: ["L'acció del vent sobre les roques","La pressió produïda quan dues plaques litosfèriques es toquen","Les pluges intenses sobre el terreny","L'erosió dels rius al llarg dels anys"], answer: 1, explanation: "Els plegaments i les falles s'originen quan es produeix una gran pressió perquè dues plaques litosfèriques es toquen." },
+      { q: "On tenen el seu origen els agents geològics externs?", opts: ["A l'interior de la Terra","A les capes externes de la Terra","Al nucli terrestre","Als fons oceànics"], answer: 1, explanation: "Els agents geològics externs, que tenen el seu origen a les capes externes de la Terra, actuen de forma continuada sobre la litosfera i modifiquen el relleu lentament." },
+      { q: "Quin agent geològic extern correspon a l'atmosfera?", opts: ["L'aigua","Els éssers vius","El vent","El volcans"], answer: 2, explanation: "Els principals agents geològics externs són el vent (atmosfera), l'aigua (hidrosfera) i els éssers vius (biosfera)." },
+      { q: "Quin agent geològic extern correspon a la hidrosfera?", opts: ["El vent","L'aigua","Els éssers vius","Les glaceres i el vent"], answer: 1, explanation: "Els principals agents geològics externs són el vent (atmosfera), l'aigua (hidrosfera) i els éssers vius (biosfera)." },
+      { q: "Quin agent geològic extern correspon a la biosfera?", opts: ["El vent","L'aigua","Els éssers vius","Les roques sedimentàries"], answer: 2, explanation: "Els principals agents geològics externs són el vent (atmosfera), l'aigua (hidrosfera) i els éssers vius (biosfera)." },
+      { q: "Quin és el primer dels processos geològics externs en la seqüència?", opts: ["La sedimentació","El transport","L'erosió","La meteorització"], answer: 3, explanation: "La meteorització és el primer procés: l'alteració i destrucció de les roques per acció dels agents. Després ve l'erosió, el transport i la sedimentació." },
+      { q: "Quin és l'ordre correcte dels processos geològics externs?", opts: ["Erosió → meteorització → transport → sedimentació","Meteorització → erosió → transport → sedimentació","Transport → erosió → sedimentació → meteorització","Sedimentació → transport → erosió → meteorització"], answer: 1, explanation: "L'ordre és: meteorització (destrucció de roques), erosió (desgast i despreniment), transport (trasllat) i sedimentació (deposició)." },
+      { q: "Quin fenomen causa que els éssers vius siguin agents geològics externs?", opts: ["Emeten gasos que erosionen les roques","Les plantes fracturin roques amb arrels i animals erosionin terrenys i mengin vegetació","Produeixen volcans","Transporten roques als oceans"], answer: 1, explanation: "L'acció dels éssers vius és molt diversa: les plantes amb les arrels poden fracturar les roques i els animals erosionen els terrenys per allà on passen i faciliten l'erosió d'altres agents quan es mengen la vegetació." },
+      { q: "Quina és la diferència fonamental entre un plegament i una falla?", opts: ["En el plegament les roques es trenquen; en la falla es dobleguen","En el plegament les roques es dobleguen perquè són flexibles; en la falla es trenquen perquè no ho són","En el plegament hi ha volcans; en la falla hi ha terratrèmols","No hi ha cap diferència, és el mateix procés"], answer: 1, explanation: "Un plegament es produeix quan els materials són prou flexibles i es dobleguen. Una falla es produeix quan els materials no són prou flexibles i es trenquen, desplaçant-se uns blocs respecte als altres." },
+      { q: "Per quina raó l'acumulació del pes dels materials sedimentaris forma roques noves?", opts: ["Perquè el pes els escalfa fins a fondre's","Perquè el seu propi pes pot provocar la formació de roques sedimentàries","Perquè l'aigua els cristal·litza","Perquè el vent els compacta"], answer: 1, explanation: "Quan s'acumulen molts materials sedimentaris, el seu propi pes pot provocar la formació d'un nou tipus de roques, les roques sedimentàries, com l'argila, el conglomerat o la calcària." },
+      { q: "Quin d'aquests és un exemple de roca sedimentària?", opts: ["La pissarra","El marbre","L'argila","El granit"], answer: 2, explanation: "Les roques sedimentàries es formen per acumulació de materials. En són exemples l'argila, el conglomerat o la calcària." },
+      { q: "Quin d'aquests és un exemple de roca metamòrfica?", opts: ["L'argila","El conglomerat","La calcària","La pissarra"], answer: 3, explanation: "Les roques metamòrfiques es formen a partir de grans pressions i altes temperatures. En són exemples la pissarra (de roques argiloses) i el marbre (de roques calcàries)." },
+      { q: "Quan l'aigua forma torrents i rius, quina acció exerceix sobre el terreny?", opts: ["Diposita materials i crea dunes","Excava valls, arrenca materials, els desgasta i els transporta","Solidifica les roques i crea noves muntanyes","Únicament humidifica el sòl"], answer: 1, explanation: "Quan l'aigua forma torrents i rius, excava valls, arrenca materials, els desgasta i els transporta fins als trams finals." },
+      { q: "En quines zones es poden formar glaceres?", opts: ["A les zones tropicals càlides","A les zones temperades","A les zones desèrtiques","A les zones fredes"], answer: 3, explanation: "A les zones fredes es poden formar glaceres, que són grans masses de gel que es desplacen i excaven valls i arrenquen, arrosseguen i desgasten materials." },
+      { q: "Per quina raó l'aigua en estat sòlid pot esberlar les roques?", opts: ["Perquè és molt freda i les congela","Perquè l'estat sòlid ocupa més espai que el líquid i augmenta de volum a les escletxes","Perquè és molt pesada i les aplana","Perquè es dissol dins les roques"], answer: 1, explanation: "L'aigua en estat sòlid ocupa més espai que la mateixa quantitat en estat líquid. Per tant, l'aigua, quan es gela, augmenta de volum i pot esberlar la roca." },
+      { q: "Quin dels tres efectes de l'acció humana sobre el relleu s'esmenta al temari?", opts: ["La construcció de cases, ponts i túnels","La construcció de vies de comunicació, embassaments i pedreres","La tala d'arbres, la caça i la pesca","La contaminació del mar, l'aire i el sòl"], answer: 1, explanation: "Els éssers humans provoquem transformacions molt importants del relleu amb la construcció de vies de comunicació, embassaments, pedreres, etc." },
+      { q: "Quins dos tipus de roques es citen com a exemples de roques metamòrfiques en el temari?", opts: ["L'argila i el conglomerat","La calcària i el granit","La pissarra i el marbre","El basalt i l'obsidiana"], answer: 2, explanation: "Les altes pressions, sovint acompanyades d'altes temperatures, poden provocar que les roques es transformin i que se'n creïn de noves, les roques metamòrfiques, com la pissarra o el marbre." },
+      { q: "Quin dels processos següents és l'últim de la seqüència dels processos geològics externs?", opts: ["La meteorització","L'erosió","El transport","La sedimentació"], answer: 3, explanation: "La sedimentació és el darrer procés: la deposició dels materials que han estat erosionats i transportats." },
+      { q: "Quin paisatge canvia constantment per l'acció de l'aigua, el vent i els canvis de temperatura, encara que sovint no ens n'adonem?", opts: ["Únicament el paisatge desèrtic","Únicament el litoral marí","El paisatge que ens envolta en general","Únicament les zones de volcans"], answer: 2, explanation: "Encara que sovint no ens n'adonem, el paisatge que ens envolta pateix canvis constants: els diferents materials es desgasten per l'acció de l'aigua, el vent, els canvis de temperatura..." },
+      { q: "Quins dos processos executen les forces internes de la Terra en la formació del relleu?", opts: ["L'erosió i el transport","La meteorització i la sedimentació","La formació de muntanyes i valls per agents externs","Plegaments, falles, terratrèmols i volcans"], answer: 3, explanation: "Les forces internes de la Terra, causades per les altes pressions i l'escalfor, són responsables de la formació del relleu: provoquen els plegaments, les falles, els terratrèmols i els volcans." },
+      { q: "On actuen principalment els agents geològics externs?", opts: ["A l'interior del mantell terrestre","Sobre la litosfera (superfície de la Terra)","Al nucli de la Terra","A l'atmosfera superior"], answer: 1, explanation: "Els agents geològics externs actuen de forma continuada sobre la litosfera i modifiquen el relleu lentament." }
+    ]
+  },
+
+  biosfera: {
+    name: "La Biosfera",
+    icon: "🌿",
+    color: "biosfera",
+    questions: [
+      { q: "Com s'anomena la zona de la Terra on viuen els éssers vius?", opts: ["La hidrosfera","L'atmosfera","La biosfera","La litosfera"], answer: 2, explanation: "La biosfera és la zona de la Terra on viuen els éssers vius. La biosfera inclou la hidrosfera, part de la litosfera i la part inferior de l'atmosfera." },
+      { q: "Com s'anomena el conjunt que formen els éssers vius i el medi ambient d'un lloc determinat i les relacions que estableixen entre ells?", opts: ["Una espècie","Un ecosistema","Una comunitat","Un hàbitat"], answer: 1, explanation: "Un ecosistema és el conjunt que formen els éssers vius i el medi ambient d'un lloc determinat i les relacions que estableixen entre ells." },
+      { q: "Per quina raó la Terra és l'únic planeta que coneixem on hi ha vida?", opts: ["Perquè és el planeta més gran","Perquè té unes condicions especials que permeten variacions de temperatura, llum i humitat adequades","Perquè és el planeta més pròxim al Sol","Perquè no té satèl·lits"], answer: 1, explanation: "La Terra és l'únic planeta que coneixem on hi ha vida perquè té unes condicions especials (distància del Sol, mida i moviments), que permeten que hi hagi les variacions de temperatura, de llum i d'humitat necessàries." },
+      { q: "Quin dels següents és un exemple d'ecosistema?", opts: ["Una roca","Un núvol","Un alzinar","Un planeta"], answer: 2, explanation: "Un alzinar, una bassa o la sabana són exemples d'ecosistemes." },
+      { q: "Quines condicions té el medi aquàtic comparades amb el medi terrestre?", opts: ["Condicions molt canviants amb grans variacions de temperatura","Condicions força constants, amb poques variacions de temperatura, però menys llum","Condicions molt seques","Temperatures extremadament altes"], answer: 1, explanation: "Les condicions del medi aquàtic són força constants, amb poques variacions de temperatura, encara que hi ha menys llum que al medi terrestre." },
+      { q: "Per quin motiu els animals terrestres tenen pell gruixuda, pèls o plomes?", opts: ["Per volar millor","Per evitar la pèrdua d'aigua del cos i mantenir la temperatura constant","Per defensar-se dels depredadors","Per nedar millor"], answer: 1, explanation: "Les condicions del medi terrestre han fet que els animals tinguin mecanismes per a evitar la pèrdua d'aigua del seu cos i per a mantenir la temperatura constant (pells gruixudes, pèls o plomes, etc.)." },
+      { q: "Quina adaptació han desenvolupat les plantes del medi terrestre per obtenir l'aigua del sòl?", opts: ["Han creat fulles molt grans","Han desenvolupat sistemes d'arrels complexos","Han reduït la seva mida","Han canviat de color"], answer: 1, explanation: "Les condicions del medi terrestre han fet que les plantes hagin desenvolupat sistemes d'arrels complexos per a captar l'aigua del sòl." },
+      { q: "Quina adaptació presenten els organismes que viuen al medi aquàtic?", opts: ["Presenten ales per volar","Presenten adaptacions en la forma del cos per facilitar el desplaçament en l'aigua","Presenten pell molt gruixuda","Presenten molts pèls"], answer: 1, explanation: "Els organismes que viuen al medi aquàtic presenten adaptacions en la forma del seu cos per a facilitar el desplaçament en l'aigua." },
+      { q: "Fins a quina profunditat podem trobar éssers vius al medi aquàtic?", opts: ["Només a la superfície","Fins a 10 metres de profunditat","Grans profunditats","Fins al fons de sorra"], answer: 2, explanation: "El medi aquàtic ocupa la major part de la superfície terrestre i és habitat pels éssers vius des de la superfície fins a grans profunditats." },
+      { q: "Quin efecte té qualsevol canvi en un element d'un ecosistema?", opts: ["Afecta només aquell element","Repercuteix en tots els altres elements","No té cap efecte","Millora l'ecosistema"], answer: 1, explanation: "Tots els éssers vius d'un ecosistema mantenen estretes relacions entre ells. Qualsevol canvi en algun dels elements de l'ecosistema repercuteix en els altres." },
+      { q: "Quins dos grans tipus de medi podem distingir per als éssers vius?", opts: ["Medi fred i medi càlid","Medi aquàtic i medi terrestre","Medi humit i medi sec","Medi interior i medi exterior"], answer: 1, explanation: "El fet que una part de la superfície terrestre és coberta d'aigua i la resta no, delimita dos grans grups de comunitats d'éssers vius: els que viuen en un medi aquàtic i els que viuen en un medi terrestre." },
+      { q: "Quines parts de la Terra inclou la biosfera?", opts: ["Només la hidrosfera","Només l'atmosfera","La hidrosfera, part de la litosfera i la part inferior de l'atmosfera","Tota l'atmosfera i tota la litosfera"], answer: 2, explanation: "La biosfera inclou la hidrosfera, part de la litosfera i la part inferior de l'atmosfera, que són les parts de la Terra on es donen les condicions perquè hi hagi la vida." },
+      { q: "Quines condicions especials de la Terra permeten que hi hagi la vida?", opts: ["La seva mida i el color de la superfície","La distància del Sol, la mida i els moviments de rotació i translació","El nombre de satèl·lits que té","La velocitat a la qual gira"], answer: 1, explanation: "La Terra té unes condicions especials (la seva distància del Sol, la seva mida i els moviments de rotació i translació), que permeten que hi hagi les variacions de temperatura, de llum i d'humitat necessàries." },
+      { q: "Per qué el medi terrestre ha obligat els animals a desenvolupar adaptacions especials?", opts: ["Perquè al medi terrestre no hi ha menjar","Perquè les condicions del medi terrestre són més canviants (temperatura, disponibilitat d'aigua, varietat de sòls)","Perquè el medi terrestre té massa llum","Perquè la gravetat és molt forta al medi terrestre"], answer: 1, explanation: "El medi terrestre té unes condicions més canviants que l'aquàtic, quant a temperatura, disponibilitat d'aigua o varietat de sòls. Aquestes condicions han fet que els éssers vius desenvolupin adaptacions." },
+      { q: "Quin dels següents és un exemple de medi aquàtic d'aigua dolça?", opts: ["El mar Mediterrani","L'oceà Atlàntic","Un riu o un llac","Un corall marí"], answer: 2, explanation: "Podem distingir entre medis aquàtics marins i medis aquàtics d'aigua dolça. Un riu o un llac seria un exemple de medi aquàtic d'aigua dolça." },
+      { q: "Per qué les comunitats d'éssers vius varien d'un lloc a un altre?", opts: ["Perquè els éssers vius es mouen constantment","Perquè les comunitats depenen de les condicions de l'espai on viuen","Perquè cada espècie tria on vol viure sense cap motiu","Perquè la llum del Sol és diferent a cada lloc"], answer: 1, explanation: "En qualsevol lloc de la Terra trobem grups d'éssers vius. Aquests grups són diferents segons les condicions de l'espai on viuen." },
+      { q: "Quin dels elements següents és part de l'ecosistema, a més dels éssers vius?", opts: ["El sistema solar","El medi ambient del lloc","Les roques de l'interior de la Terra","L'atmosfera a gran altura"], answer: 1, explanation: "Un ecosistema és el conjunt que formen els éssers vius i el medi ambient d'un lloc determinat i les relacions que estableixen entre ells." },
+      { q: "Com pot arribar a ser de gran un ecosistema?", opts: ["Màxim com un bosc","Sempre ocupa la mateixa extensió","Pot arribar fins al gran ecosistema que és la Terra sencera","Màxim com un país"], answer: 2, explanation: "Els ecosistemes poden ocupar extensions molt diferents i alhora formar part d'unitats més grans, fins a arribar al gran ecosistema que és la Terra." },
+      { q: "Quina és la principal diferència entre el medi aquàtic i el medi terrestre pel que fa a la llum?", opts: ["Al medi terrestre hi ha menys llum que a l'aquàtic","Al medi aquàtic hi ha menys llum que al medi terrestre","En els dos medis hi ha la mateixa quantitat de llum","La llum no influeix en cap dels dos medis"], answer: 1, explanation: "Les condicions del medi aquàtic són força constants, amb poques variacions de temperatura, encara que hi ha menys llum que al medi terrestre." },
+      { q: "Quina part de la superfície terrestre ocupa el medi aquàtic?", opts: ["Una petita part","Aproximadament la meitat","La major part","Gairebé tot"], answer: 2, explanation: "El medi aquàtic ocupa la major part de la superfície terrestre i és habitat pels éssers vius des de la superfície fins a grans profunditats." },
+      { q: "Quin exemple d'ecosistema del temari es troba a l'Àfrica?", opts: ["Un alzinar","Una bassa","La sabana","Un bosc de pins"], answer: 2, explanation: "Un alzinar, una bassa o la sabana són exemples d'ecosistemes. La sabana és un tipus de paisatge de la biosfera." },
+      { q: "Quins tres factors varien a la Terra gràcies a les seves condicions especials i permeten la vida?", opts: ["La pressió, el vent i la gravetat","La temperatura, la llum i la humitat","L'oxigen, el nitrogen i el diòxid de carboni","La salinitat, la profunditat i la llum"], answer: 1, explanation: "Les condicions especials de la Terra permeten que hi hagi les variacions de temperatura, de llum i d'humitat necessàries perquè s'hi desenvolupi una gran varietat d'éssers vius." },
+      { q: "Podem trobar éssers vius al mar en quines zones?", opts: ["Només a la costa","Únicament a alta mar","A la costa, a alta mar i fins i tot a grans profunditats","Solament a la superfície de l'aigua"], answer: 2, explanation: "El mar és ple de vida: trobem éssers vius a la costa, a alta mar i fins i tot a grans profunditats." },
+      { q: "Per a qué serveix el pèl als animals del medi terrestre?", opts: ["Per nedar millor","Per ajudar a mantenir la temperatura corporal","Per camuflar-se dels depredadors","Per absorbir més llum solar"], answer: 1, explanation: "El pèl ajuda a mantenir la temperatura corporal dels animals del medi terrestre." },
+      { q: "Quina relació mantenen entre si tots els éssers vius d'un ecosistema?", opts: ["Són independents i no es relacionen","Mantenen estretes relacions entre ells","Competeixen sempre els uns contra els altres","Només es relacionen per reproduir-se"], answer: 1, explanation: "Tots els éssers vius d'un ecosistema mantenen estretes relacions entre ells. Qualsevol canvi en algun dels elements de l'ecosistema repercuteix en els altres." },
+      { q: "Quants tipus de medis aquàtics distingeix el temari?", opts: ["Tres: rius, llacs i mars","Dos: marins i d'aigua dolça","Quatre: costaner, oceànic, d'aigua dolça i subterrani","Un de sol, el marí"], answer: 1, explanation: "Podem distingir entre medis aquàtics marins i medis aquàtics d'aigua dolça." },
+      { q: "Quina adaptació especial han de tenir els animals del medi terrestre per no perdre aigua del cos?", opts: ["Viure a prop de l'aigua","Tenir pells gruixudes, pèls o plomes","Tenir cos de forma hidrodinàmica","Alimentar-se únicament de fruites"], answer: 1, explanation: "Les condicions del medi terrestre han fet que els animals tinguin mecanismes per a evitar la pèrdua d'aigua del seu cos i per a mantenir la temperatura constant (pells gruixudes, pèls o plomes, etc.)." },
+      { q: "Quina de les tres parts de la Terra on hi ha vida NO forma part íntegrament de la biosfera?", opts: ["La hidrosfera, que n'és totalment inclosa","L'atmosfera, de la qual només la part inferior en forma part","El nucli de la Terra","La litosfera, que és totalment inclosa"], answer: 1, explanation: "La biosfera inclou la hidrosfera, part de la litosfera i la part inferior de l'atmosfera. L'atmosfera només hi participa en la seva part inferior." },
+      { q: "Per a un ecosistema, quin paper fan les relacions entre els éssers vius que hi habiten?", opts: ["Cap, els éssers vius viuen de manera aïllada","Són fonamentals; si un element canvia, repercuteix en tots els altres","Serveixen únicament per a la reproducció","Només importen les relacions de depredació"], answer: 1, explanation: "Tots els éssers vius d'un ecosistema mantenen estretes relacions entre ells. Qualsevol canvi en algun dels elements de l'ecosistema repercuteix en els altres." },
+      { q: "De quines maneres pot variar el medi terrestre que fan que els éssers vius necessitin adaptacions?", opts: ["Per la llum solar i la pressió atmosfèrica","Per la temperatura, la disponibilitat d'aigua i la varietat de sòls","Per les marees i els corrents","Per l'altitud i la latitud únicament"], answer: 1, explanation: "El medi terrestre té unes condicions més canviants que l'aquàtic, quant a temperatura, disponibilitat d'aigua o varietat de sòls." },
+      { q: "Quin dels tres exemples d'ecosistema del temari és un de molt petit?", opts: ["La sabana","L'alzinar","Una bassa","El mar"], answer: 2, explanation: "Un alzinar, una bassa o la sabana són exemples d'ecosistemes. Una bassa és un exemple d'ecosistema de dimensions reduïdes." },
+      { q: "Com defineix el temari el lloc on viuen els éssers vius en relació a les parts de la Terra?", opts: ["Exclusivament a la superfície terrestre seca","Dins la hidrosfera, part de la litosfera i la part inferior de l'atmosfera","Únicament als fons oceànics","Solament a la part terrestre, no al mar"], answer: 1, explanation: "La biosfera inclou la hidrosfera, part de la litosfera i la part inferior de l'atmosfera, que són les parts de la Terra on es donen les condicions perquè hi hagi la vida." },
+      { q: "Quin moviment de la Terra, juntament amb la rotació, contribueix a les condicions que fan possible la vida?", opts: ["La precessió","La nutació","La translació","La libració"], answer: 2, explanation: "La Terra té unes condicions especials (la seva distància del Sol, la seva mida i els moviments de rotació i translació), que permeten que hi hagi les variacions de temperatura, de llum i d'humitat necessàries." },
+      { q: "Per qué les condicions del medi aquàtic són força constants?", opts: ["Perquè l'aigua sempre té la mateixa temperatura","Perquè l'aigua protegeix dels canvis externs i hi ha poques variacions de temperatura","Perquè hi ha molta llum a totes les profunditats","Perquè els éssers vius la regulen"], answer: 1, explanation: "Les condicions del medi aquàtic són força constants, amb poques variacions de temperatura, encara que hi ha menys llum que al medi terrestre." },
+      { q: "Quina és la relació entre els ecosistemes petits i els grans?", opts: ["No hi ha cap relació entre ells","Els ecosistemes petits formen part d'unitats més grans, fins a la Terra sencera","Els ecosistemes grans destrueixen els petits","Cada ecosistema és totalment independent dels altres"], answer: 1, explanation: "Els ecosistemes poden ocupar extensions molt diferents i alhora formar part d'unitats més grans, fins a arribar al gran ecosistema que és la Terra." },
+      { q: "Quin exemple d'ecosistema del temari és un bosc mediterrani de Catalunya?", opts: ["La sabana","La bassa","L'alzinar","El riu"], answer: 2, explanation: "Un alzinar, una bassa o la sabana són exemples d'ecosistemes. L'alzinar és un bosc mediterrani típic." },
+      { q: "Per quina raó els organismes del medi aquàtic han adaptat la forma del seu cos?", opts: ["Per resistir les baixes temperatures","Per facilitar el desplaçament dins l'aigua","Per protegir-se de la llum solar intensa","Per poder pujar a la superfície"], answer: 1, explanation: "Els organismes que viuen al medi aquàtic presenten adaptacions en la forma del seu cos per a facilitar el desplaçament en l'aigua." },
+      { q: "Les plantes del medi terrestre, per qué necessiten sistemes d'arrels complexos que no necesiten les del medi aquàtic?", opts: ["Perquè al medi terrestre hi ha massa nutrients","Perquè al medi terrestre l'aigua no és disponible directament, cal captar-la del sòl","Perquè les arrels les protegeixen del vent","Perquè el sòl és sempre molt dur"], answer: 1, explanation: "Les condicions del medi terrestre han fet que les plantes hagin desenvolupat sistemes d'arrels complexos per a captar l'aigua del sòl, ja que al medi terrestre no estan envoltades d'aigua com al medi aquàtic." },
+      { q: "Quina condició és necessària perquè a un lloc de la Terra s'hi pugui desenvolupar una gran varietat d'éssers vius?", opts: ["Que hi hagi molt de sol tot l'any","Que hi hagi les variacions de temperatura, llum i humitat adequades","Que estigui a prop del mar","Que sigui una zona de terra ferma"], answer: 1, explanation: "Les condicions especials de la Terra permeten que hi hagi les variacions de temperatura, de llum i d'humitat necessàries perquè s'hi desenvolupi una gran varietat d'éssers vius." },
+      { q: "Un rierol i un desert, quina relació tenen quant a comunitats d'éssers vius?", opts: ["Comparteixen exactament les mateixes comunitats d'éssers vius","Cada un té una comunitat d'éssers vius diferent, ja que les condicions de cada espai són diferents","No hi ha éssers vius ni en un ni en l'altre","Comparteixen les mateixes espècies però en proporcions diferents"], answer: 1, explanation: "En qualsevol lloc de la Terra trobem grups d'éssers vius. Aquests grups són diferents segons les condicions de l'espai on viuen. Així, en un rierol hi ha una comunitat d'éssers vius i en un desert o en un bosc unes altres." },
+      { q: "Quin tipus de medi terrestre o aquàtic té condicions més variables i exigents per als éssers vius?", opts: ["El medi aquàtic marí","El medi aquàtic d'aigua dolça","El medi terrestre","Tots dos igualment"], answer: 2, explanation: "El medi terrestre té unes condicions més canviants que l'aquàtic, quant a temperatura, disponibilitat d'aigua o varietat de sòls. Aquestes condicions han fet que els éssers vius desenvolupin adaptacions." },
+      { q: "Quants exemples d'ecosistemes concrets esmenta el temari?", opts: ["Dos: l'alzinar i la sabana","Tres: un alzinar, una bassa i la sabana","Quatre: un alzinar, un riu, una bassa i la sabana","Cinc exemples"], answer: 1, explanation: "Un alzinar, una bassa o la sabana són exemples d'ecosistemes que s'esmenten al temari." },
+      { q: "Quin és el gran ecosistema que inclou tots els altres?", opts: ["El mar","La selva amazònica","La Terra sencera","L'atmosfera"], answer: 2, explanation: "Els ecosistemes poden ocupar extensions molt diferents i alhora formar part d'unitats més grans, fins a arribar al gran ecosistema que és la Terra." },
+      { q: "On específicament dins del mar podem trobar éssers vius, segons el temari?", opts: ["Únicament a les zones de corall","Únicament a la costa i a alta mar","A la costa, a alta mar i a grans profunditats","Únicament a les platges"], answer: 2, explanation: "El mar és ple de vida: trobem éssers vius a la costa, a alta mar i fins i tot a grans profunditats." },
+      { q: "Quin element determina que una part de la Terra sigui medi aquàtic i l'altra medi terrestre?", opts: ["La temperatura de la superfície","El fet que una part de la superfície terrestre és coberta d'aigua i la resta no","La presència o absència de vegetació","La proximitat als pols o a l'equador"], answer: 1, explanation: "El fet que una part de la superfície terrestre és coberta d'aigua i la resta no, delimita dos grans grups de comunitats d'éssers vius: els que viuen en un medi aquàtic i els que viuen en un medi terrestre." },
+      { q: "La biosfera, és una zona molt reduïda de la Terra o àmplia?", opts: ["Molt reduïda, només la superfície seca","Àmplia, ja que inclou la hidrosfera, part de la litosfera i la part inferior de l'atmosfera","Únicament les zones tropicals","Tan sols els oceans i mars"], answer: 1, explanation: "La biosfera és àmplia: inclou la hidrosfera, part de la litosfera i la part inferior de l'atmosfera, que són les parts de la Terra on es donen les condicions perquè hi hagi la vida." },
+      { q: "Quina característica fa que el medi aquàtic sigui un entorn menys exigent per als éssers vius que el terrestre?", opts: ["Que hi ha més menjar disponible","Que les seves condicions són força constants amb poques variacions de temperatura","Que hi ha molta més llum","Que els depredadors no hi viuen"], answer: 1, explanation: "Les condicions del medi aquàtic són força constants, amb poques variacions de temperatura. Això el fa menys exigent que el medi terrestre, que té condicions més canviants." },
+      { q: "Quins moviments de la Terra contribueixen a crear les condicions necessàries per a la vida?", opts: ["La precesió i la nutació","La rotació i la translació","La rotació i la revolució solar","La traslació i la precessió"], answer: 1, explanation: "La Terra té unes condicions especials (la seva distància del Sol, la seva mida i els moviments de rotació i translació), que permeten que hi hagi les variacions de temperatura, de llum i d'humitat necessàries per a la vida." },
+      { q: "En quin tipus d'ecosistema viuen els éssers vius dels medis aquàtics marins?", opts: ["En rius, llacs i estanys","En mars i oceans","En aiguamolls i basses","En fonts i deus"], answer: 1, explanation: "Podem distingir entre medis aquàtics marins (mars i oceans) i medis aquàtics d'aigua dolça. Els éssers vius del medi aquàtic marí viuen en mars i oceans." },
+      { q: "Per qué els éssers vius necessiten relacionar-se amb el medi ambient del lloc on viuen?", opts: ["Per raons decoratives","Perquè el medi ambient forma part de l'ecosistema juntament amb els éssers vius i les seves relacions","Perquè el medi ambient els proporciona únicament refugi","Perquè sense medi ambient els éssers vius no es poden moure"], answer: 1, explanation: "Un ecosistema és el conjunt que formen els éssers vius i el medi ambient d'un lloc determinat i les relacions que estableixen entre ells. Tots dos elements, éssers vius i medi ambient, formen part del mateix sistema." }
+    ]
+  },
+
+  terra: {
+    name: "La Terra per dins",
+    icon: "🌋",
+    color: "terra",
+    questions: [
+      { q: "Quantes parts principals podem diferenciar a la Terra?", opts: ["Dues: geosfera i atmosfera","Tres: geosfera, hidrosfera i atmosfera","Quatre: nucli, mantell, escorça i atmosfera","Una sola part homogènia"], answer: 1, explanation: "A la Terra hi podem diferenciar tres parts: la geosfera, la hidrosfera i l'atmosfera." },
+      { q: "De què està formada la geosfera?", opts: ["D'aigua i gasos","De roques i minerals","De gasos principalment","D'aigua salada i dolça"], answer: 1, explanation: "La geosfera és la part de la Terra formada per roques i minerals." },
+      { q: "Quin és l'estat dels materials de la part més superficial de la geosfera?", opts: ["Fluid","Gasós","Sòlid","Pastós"], answer: 2, explanation: "Els materials de la part més superficial de la geosfera són sòlids, mentre que a l'interior, on les temperatures són molt altes, estan en estat fluid." },
+      { q: "Què és la hidrosfera?", opts: ["La capa de gasos que envolta la Terra","El conjunt de tota l'aigua que hi ha a la Terra","La capa de roques i minerals","La part central de la Terra"], answer: 1, explanation: "La hidrosfera és el conjunt de tota l'aigua que hi ha a la Terra." },
+      { q: "De qué està formada principalment l'atmosfera?", opts: ["D'aigua en estat gasós","De pols i partícules sòlides","D'una mescla de gasos","De roques molt lleugeres"], answer: 2, explanation: "L'atmosfera és la capa més externa de la Terra, formada principalment per una mescla de gasos." },
+      { q: "Quantes capes principals hi ha a la geosfera?", opts: ["Dues: escorça i nucli","Tres: escorça, mantell i nucli","Quatre: escorça, mantell extern, mantell intern i nucli","Cinc capes"], answer: 1, explanation: "A la geosfera hi trobem tres capes principals: l'escorça, el mantell i el nucli." },
+      { q: "Quina és la capa més externa de la geosfera i on hi ha les formes de relleu?", opts: ["El mantell","El nucli","L'escorça","L'astenosfera"], answer: 2, explanation: "L'escorça és la capa més externa de la geosfera. Té uns 70 km i és on hi ha les formes de relleu." },
+      { q: "Fins a quina profunditat arriba el mantell?", opts: ["Uns 700 km","Uns 1.500 km","Uns 2.900 km","Uns 5.000 km"], answer: 2, explanation: "El mantell és la capa intermèdia de la geosfera i arriba a uns 2.900 km de profunditat." },
+      { q: "Com s'anomena la part superior del mantell i de quin material és?", opts: ["La litosfera, formada per roques sòlides","L'astenosfera, formada per magma de consistència pastosa","El nucli extern, format per ferro líquid","L'escorça inferior, formada per minerals"], answer: 1, explanation: "La part superior del mantell s'anomena astenosfera, i és formada per materials de consistència pastosa a causa de la seva elevada temperatura: el magma." },
+      { q: "Qué és el magma?", opts: ["L'aigua salada de les profunditats oceàniques","Un gas molt dens de l'interior terrestre","El material de consistència pastosa de l'astenosfera","La capa exterior sòlida de la Terra"], answer: 2, explanation: "El magma és el material de consistència pastosa que forma l'astenosfera, la part superior del mantell, a causa de la seva elevada temperatura." },
+      { q: "Quantes parts es distingeixen al nucli de la Terra?", opts: ["Una sola part homogènia","Dues: nucli intern (sòlid) i nucli extern (fluid)","Tres parts amb composicions diferents","Cap, el nucli és buit"], answer: 1, explanation: "Al nucli s'hi distingeix un nucli extern, format per materials en estat fluid, i un nucli intern, format per materials en estat sòlid." },
+      { q: "Quina és la litosfera i quina és la seva gruixària?", opts: ["L'escorça sola, amb uns 70 km","La part sòlida de la Terra que inclou l'escorça i la part superior del mantell, entre 70 i 150 km","El mantell complet, de 2.900 km","El nucli i el mantell junts"], answer: 1, explanation: "La litosfera és la part sòlida de la Terra i té entre 70 i 150 km. Comprèn l'escorça terrestre i la part superior del mantell." },
+      { q: "En quants blocs està fragmentada la litosfera?", opts: ["En un sol bloc continu","En dos blocs: un per a cada hemisferi","En diversos blocs anomenats plaques litosfèriques","En milers de fragments petits sense nom"], answer: 2, explanation: "La litosfera està fragmentada en blocs, com si fos un puzle, anomenats plaques litosfèriques." },
+      { q: "On suren les plaques litosfèriques?", opts: ["Sobre el nucli extern líquid","Sobre l'astenosfera, damunt del magma","Sobre l'escorça oceànica","Sobre el mantell intern sòlid"], answer: 1, explanation: "Les plaques litosfèriques suren sobre l'astenosfera, damunt dels materials que formen el magma, i es desplacen molt lentament." },
+      { q: "Quins fenòmens naturals han originat els moviments de les plaques litosfèriques?", opts: ["Les tempestes i els huracans","Les marees i els tsunamis","Les serralades, els volcans i els terratrèmols","Les corrents oceàniques i els vents"], answer: 2, explanation: "Els moviments de les plaques litosfèriques (separar-se, acostar-se, empènyer-se) han originat les serralades, els volcans o han desencadenat els terratrèmols." }
+    ]
+  }
+};
+
+// ============================================================
+// STATE
+// ============================================================
+let currentTopic = null;
+let questions = [];
+let qIndex = 0;
+let score = 0;
+let answered = false;
+let streak = 0;
+
+function shuffle(arr) {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
+function launchConfetti() {
+  const colors = ['#ffd700','#ff6b6b','#58d68d','#5dade2','#a569bd','#ff8c00'];
+  const container = document.createElement('div');
+  container.className = 'confetti-container';
+  document.body.appendChild(container);
+  for (let i = 0; i < 60; i++) {
+    const p = document.createElement('div');
+    p.className = 'conf-particle';
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.background = colors[Math.floor(Math.random() * colors.length)];
+    p.style.animationDelay = Math.random() * 0.8 + 's';
+    p.style.animationDuration = (1.2 + Math.random() * 1) + 's';
+    p.style.width = p.style.height = (8 + Math.random() * 8) + 'px';
+    container.appendChild(p);
+  }
+  setTimeout(() => container.remove(), 2500);
+}
+
+function startTopic(topicKey) {
+  currentTopic = topicKey;
+  qIndex = 0;
+  score = 0;
+  streak = 0;
+  answered = false;
+
+  // Shuffle and pick 10 questions
+  questions = shuffle(topics[topicKey].questions).slice(0, 10);
+
+  // Nav active state
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`[data-topic="${topicKey}"]`).classList.add('active');
+
+  document.getElementById('welcomeScreen').style.display = 'none';
+  document.getElementById('quizContainer').style.display = 'block';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  if (qIndex >= questions.length) {
+    renderResults();
+    return;
+  }
+
+  const topic = topics[currentTopic];
+  const q = questions[qIndex];
+  answered = false;
+
+  const pct = Math.round((qIndex / questions.length) * 100);
+  const letters = ['A','B','C','D'];
+
+  // Build streak dots
+  const streakDots = Array.from({length: 5}, (_, i) =>
+    `<div class="streak-dot ${i < streak ? 'lit' : ''}">
+      ${i < streak ? '🔥' : ''}
+    </div>`
+  ).join('');
+
+  const streakLabel = streak >= 5 ? '🔥 Racha perfecta!' :
+                      streak >= 3 ? `🔥 Ratxa de ${streak}!` :
+                      streak >= 1 ? `🔥 Ratxa de ${streak}` : '⚡ Encadena encerts!';
+
+  const html = `
+    <div class="quiz-section">
+      <div class="quiz-header">
+        <div class="topic-badge badge-${topic.color}">
+          ${topic.icon} ${topic.name}
+        </div>
+        <div class="score-display">⭐ ${score}/${qIndex}</div>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" style="width:${pct}%"></div>
+      </div>
+      <div class="streak-bar">
+        <span>${streakLabel}</span>
+        <div class="streak-dots" style="margin-left:auto">${streakDots}</div>
+      </div>
+      <div class="question-card">
+        <div class="question-num">Pregunta ${qIndex + 1} de ${questions.length}</div>
+        <div class="question-text">${q.q}</div>
+        <div class="options" id="optionsContainer">
+          ${q.opts.map((opt, i) => `
+            <button class="option-btn" id="opt${i}" onclick="selectAnswer(${i})">
+              <span class="option-letter">${letters[i]}</span>
+              ${opt}
+            </button>
+          `).join('')}
+        </div>
+        <div class="feedback" id="feedbackBox"></div>
+      </div>
+      <button class="next-btn" id="nextBtn" onclick="nextQuestion()">
+        ${qIndex < questions.length - 1 ? 'Següent pregunta →' : 'Veure resultats 🏆'}
+      </button>
+    </div>
+  `;
+
+  document.getElementById('quizContainer').innerHTML = html;
+}
+
+function selectAnswer(selected) {
+  if (answered) return;
+  answered = true;
+
+  const q = questions[qIndex];
+  const opts = document.querySelectorAll('.option-btn');
+  const feedback = document.getElementById('feedbackBox');
+
+  opts.forEach(b => b.disabled = true);
+
+  const correctMessages = [
+    "✅ Genial! Ets una crack! 🎉",
+    "✅ Perfecte! Quina ment més brillant! 🌟",
+    "✅ SÚPER bé! Ho sabies! 🔥",
+    "✅ Exacte! Increïble! 💪",
+    "✅ Sí, sí, sí! Molt bé! ⭐",
+    "✅ Top! Ets una màquina! 🚀",
+  ];
+
+  const streakMessages = {
+    3: "🔥🔥🔥 Tres seguides! Estàs en ratxa!",
+    5: "🏆🔥 CINC SEGUIDES! Imparable!!",
+  };
+
+  const wrongMessages = [
+    "❌ Gairebé! No passa res, seguim! 💪",
+    "❌ Ups! Llegeixes la explicació i al següent l'encertes! 😊",
+    "❌ No passa res, tothom s'equivoca! Endavant! 🌟",
+    "❌ Anem! La propera la claves! ⚡",
+  ];
+
+  if (selected === q.answer) {
+    score++;
+    streak++;
+    opts[selected].classList.add('correct');
+    opts[selected].classList.add('bounce-in');
+
+    let title = correctMessages[Math.floor(Math.random() * correctMessages.length)];
+    if (streakMessages[streak]) {
+      title = streakMessages[streak];
+      launchConfetti();
+    }
+
+    feedback.className = 'feedback correct-fb show';
+    feedback.innerHTML = `
+      <div class="fb-title">${title}</div>
+      <div class="explanation">${q.explanation}</div>
+    `;
+  } else {
+    streak = 0;
+    opts[selected].classList.add('wrong');
+    opts[q.answer].classList.add('correct');
+    opts[q.answer].classList.add('bounce-in');
+
+    const title = wrongMessages[Math.floor(Math.random() * wrongMessages.length)];
+
+    feedback.className = 'feedback wrong-fb show';
+    feedback.innerHTML = `
+      <div class="fb-title">${title} La correcta era la ${['A','B','C','D'][q.answer]}.</div>
+      <div class="explanation">${q.explanation}</div>
+    `;
+    opts[selected].classList.add('shake');
+    setTimeout(() => opts[selected].classList.remove('shake'), 500);
+  }
+
+  document.getElementById('nextBtn').classList.add('show');
+}
+
+function nextQuestion() {
+  qIndex++;
+  renderQuestion();
+}
+
+function renderResults() {
+  const topic = topics[currentTopic];
+  const pct = Math.round((score / questions.length) * 100);
+  let emoji, title, msg;
+
+  if (pct === 100) {
+    emoji = "🏆"; title = "PERFECTE!! Ets INCREÏBLE! 🎉🎉🎉"; msg = "Has encertat TOTES les preguntes! No hi ha qui t'aturi! Ets la millor!! 🚀⭐";
+    launchConfetti();
+    setTimeout(launchConfetti, 600);
+  } else if (pct >= 80) {
+    emoji = "🌟"; title = "Excel·lent, geni! 🔥"; msg = "Quasi perfecte! Estàs molt preparada per a l'examen. Una mica més i no fallaràs cap! 💪";
+  } else if (pct >= 60) {
+    emoji = "😊"; title = "Molt bé! Bon treball! ⭐"; msg = "Bon resultat! Repassa les que has fallat i la propera vegada ho bordaràs. Tu pots! 🌟";
+  } else if (pct >= 40) {
+    emoji = "💪"; title = "Seguim endavant! 🚀"; msg = "Anem bé! Llegeix les explicacions de les respostes i torna a intentar-ho. Millores cada cop! 📚";
+  } else {
+    emoji = "📚"; title = "A estudiar, que tu pots! 💙"; msg = "No et preocupis, tothom comença des de zero. Repassa el tema amb calma i ho faràs molt millor! 💪";
+  }
+
+  const stars = Math.round((score / questions.length) * 5);
+  const starsRow = '⭐'.repeat(stars) + '☆'.repeat(5 - stars);
+
+  document.getElementById('quizContainer').innerHTML = `
+    <div class="results">
+      <span class="result-emoji">${emoji}</span>
+      <div class="result-title">${title}</div>
+      <div class="result-score">
+        Has encertat <strong>${score}</strong> de ${questions.length} preguntes
+        <br><span style="font-size:0.95rem;color:#778">(${pct}%)</span>
+      </div>
+      <div class="stars-row">${starsRow}</div>
+      <p style="color:#ccd;margin-bottom:30px;font-size:1.05rem;line-height:1.6;background:rgba(255,255,255,0.05);border-radius:16px;padding:16px 20px;">${msg}</p>
+      <div class="result-actions">
+        <button class="result-btn btn-retry" onclick="startTopic('${currentTopic}')">
+          🔄 Tornar a intentar-ho
+        </button>
+        <button class="result-btn btn-home" onclick="goHome()">
+          🏠 Triar altre tema
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function goHome() {
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('quizContainer').style.display = 'none';
+  document.getElementById('welcomeScreen').style.display = 'block';
+  currentTopic = null;
+}
+</script>
+</body>
+</html>

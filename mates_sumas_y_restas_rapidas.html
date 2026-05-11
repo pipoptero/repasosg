@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Súper Matemáticas Pro - Tablet</title>
+    <!-- Incluir Tone.js para feedback de sonido -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
+    <style>
+        /* ESTILOS BASE Y FUENTES */
+        body {
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif; /* Fuente más moderna */
+            /* Degradado de fondo más vivo */
+            background: linear-gradient(135deg, #FF7B8C 0%, #FFA8A8 50%, #FFCC99 100%);
+            margin: 0;
+            padding: 10px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Centrar verticalmente */
+            touch-action: manipulation;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 550px;
+            background: rgba(255, 255, 255, 0.95); /* Fondo blanco semitransparente */
+            border-radius: 40px; /* Más redondeado */
+            padding: 25px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3); /* Sombra más pronunciada */
+            border: 8px solid white; /* Borde interior fuerte */
+            text-align: center;
+            position: relative;
+            transform: scale(0.98);
+            transition: transform 0.3s ease-out;
+        }
+
+        /* CRONÓMETRO Y TÍTULO */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        #timer {
+            font-family: 'Monospace', monospace;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #E94057; /* Rojo cereza */
+            background: #fff;
+            padding: 8px 18px;
+            border-radius: 20px;
+            border: 4px solid #E94057;
+            box-shadow: 0 8px 0 #FF9A9E;
+            transition: all 0.2s;
+        }
+
+        h1 { color: #E94057; font-size: 2rem; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.1); }
+
+        /* INDICADOR DE BLOQUE */
+        #block-progress {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+        .progress-dot {
+            width: 10px;
+            height: 10px;
+            background: #ccc;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        .progress-dot.filled {
+            background: #26de81; /* Verde acierto */
+            box-shadow: 0 0 5px #26de81;
+        }
+
+        /* SELECTORES DE MODO Y NIVEL */
+        .selector-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .mode-btn {
+            border: none;
+            padding: 12px 18px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 6px 0 rgba(0,0,0,0.3), inset 0 2px 5px rgba(255,255,255,0.4); /* Efecto burbuja */
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Colores de botones (Modos) - Degradados más vivos */
+        .btn-suma { background: linear-gradient(145deg, #ff6b6b, #ff9a9e); }
+        .btn-resta { background: linear-gradient(145deg, #4ecdc4, #7ae5e1); }
+        .btn-detective { background: linear-gradient(145deg, #f9d423, #ffdd55); color: #333 !important; }
+        .btn-multiplicacion { background: linear-gradient(145deg, #50bda1, #80e0c0); }
+        .btn-lvl { background: linear-gradient(145deg, #a55eea, #c780ff); }
+
+        .mode-btn:hover { filter: brightness(1.1); }
+
+        .mode-btn.active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 rgba(0,0,0,0.3), inset 0 2px 5px rgba(0,0,0,0.2);
+            filter: brightness(1.2);
+            border: 3px solid #fff;
+        }
+
+        /* PANEL DE JUEGO */
+        .game-area {
+            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+            border-radius: 35px;
+            padding: 30px 15px;
+            color: white;
+            margin: 20px 0;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.5), 0 15px 30px rgba(0,0,0,0.3);
+            position: relative;
+            transition: background 0.4s ease-in-out; 
+            overflow: hidden;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .problem-text {
+            font-size: 4rem; 
+            font-weight: 800;
+            text-shadow: 4px 4px 10px rgba(0,0,0,0.6);
+            margin-bottom: 15px;
+            opacity: 0;
+            animation: fadeIn 0.4s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8) translateY(-10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .detective-box {
+            color: #f9d423;
+            border: 4px dashed #f9d423;
+            padding: 5px 15px;
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            transition: all 0.2s;
+        }
+
+        .answer-display {
+            background: white;
+            color: #333;
+            font-size: 3.5rem;
+            width: 220px;
+            height: 90px;
+            margin: 10px auto 0;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.4), inset 0 0 10px rgba(0,0,0,0.1);
+            transition: transform 0.1s, background-color 0.1s; /* Añadir background-color a transition */
+        }
+        /* ESTILO DE ERROR (NUEVO) */
+        .answer-display.error {
+            background-color: #ff9a9e;
+            color: #E94057;
+            animation: shake 0.2s 2;
+        }
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+
+        /* TECLADO */
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px; 
+            margin-top: 25px;
+        }
+
+        .key {
+            background: #ffffff; 
+            border: none;
+            border-radius: 20px;
+            padding: 20px 0;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #333;
+            cursor: pointer;
+            box-shadow: 0 8px 0 #e0e0e0, inset 0 -3px 5px rgba(0,0,0,0.1);
+            transition: all 0.1s;
+            touch-action: manipulation;
+        }
+
+        .key:active { 
+            transform: translateY(5px); 
+            box-shadow: 0 3px 0 #e0e0e0; 
+            background: #f5f5f5;
+        }
+        
+        .key-action {
+            background: linear-gradient(145deg, #ffcdd2, #ffb7c2) !important;
+            color: #E94057 !important; 
+            box-shadow: 0 8px 0 #ff9a9e, inset 0 -3px 5px rgba(0,0,0,0.1);
+        }
+
+        .key-action:active {
+            background: linear-gradient(145deg, #ffb7c2, #ffcdd2) !important;
+            box-shadow: 0 3px 0 #ff9a9e;
+        }
+
+
+        /* EFECTO DE PARTÍCULAS (Confeti simple CSS) */
+        .confetti {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            opacity: 0;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10;
+            animation: explode 0.7s forwards;
+        }
+        @keyframes explode {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; }
+        }
+
+        /* MODAL DE REPORTE */
+        #report-modal {
+            display: none;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 400px;
+            background: white;
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 0 150px rgba(0,0,0,0.9);
+            z-index: 100;
+            border: 8px solid #E94057;
+        }
+
+        .btn-continue {
+            background: linear-gradient(90deg, #26de81, #53ffae);
+            color: white; border: none;
+            padding: 18px; border-radius: 20px;
+            font-weight: bold; font-size: 1.3rem; margin-top: 20px;
+            cursor: pointer; width: 100%;
+            box-shadow: 0 6px 0 #1abc9c;
+            transition: all 0.1s;
+        }
+        .btn-continue:active {
+            transform: translateY(3px);
+            box-shadow: 0 3px 0 #1abc9c;
+        }
+        /* ESTILO PARA EL RÉCORD PERSONAL */
+        #record-time {
+            color: #555;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Súper Mente 🚀</h1>
+        <div id="timer">00:00</div>
+    </header>
+
+    <!-- Selectores de Modo -->
+    <div class="selector-group">
+        <button class="mode-btn btn-suma active" id="m-suma" onclick="setMode('suma')">➕ Sumas</button>
+        <button class="mode-btn btn-resta" id="m-resta" onclick="setMode('resta')">➖ Restas</button>
+        <button class="mode-btn btn-multiplicacion" id="m-multiplicacion" onclick="setMode('multiplicacion')">✖️ Multiplica</button>
+        <button class="mode-btn btn-detective" id="m-detective" onclick="setMode('detective')">🔍 Detective</button>
+    </div>
+    <!-- Selectores de Nivel -->
+    <div class="selector-group">
+        <button class="mode-btn btn-lvl active" id="l-1" onclick="setLevel(1)">🌱 Nivel 1</button>
+        <button class="mode-btn btn-lvl" id="l-2" onclick="setLevel(2)">🚀 Nivel 2</button>
+        <button class="mode-btn btn-lvl" id="l-3" onclick="setLevel(3)">🔥 Nivel 3</button>
+        <button class="mode-btn btn-lvl" id="l-4" onclick="setLevel(4)">✨ Nivel 4</button>
+    </div>
+
+    <div id="block-progress">
+        <div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div>
+        <div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div>
+        <div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+    </div>
+
+    <div class="game-area" id="game-area">
+        <div class="problem-text" id="problem">--</div>
+        <div class="answer-display" id="display">?</div>
+        <!-- Contenedor para los efectos de partículas -->
+        <div id="confetti-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
+    </div>
+
+    <div class="keypad">
+        <button class="key" onclick="press(1)">1</button>
+        <button class="key" onclick="press(2)">2</button>
+        <button class="key" onclick="press(3)">3</button>
+        <button class="key" onclick="press(4)">4</button>
+        <button class="key" onclick="press(5)">5</button>
+        <button class="key" onclick="press(6)">6</button>
+        <button class="key" onclick="press(7)">7</button>
+        <button class="key" onclick="press(8)">8</button>
+        <button class="key" onclick="press(9)">9</button>
+        <button class="key key-action" onclick="press('C')">C</button>
+        <button class="key" onclick="press(0)">0</button>
+        <button class="key key-action" onclick="press('Del')">⌫</button>
+    </div>
+
+    <!-- Informe de Progreso -->
+    <div id="report-modal">
+        <h2 style="color:#E94057; margin-top:0;">🌟 ¡Misión Cumplida!</h2>
+        <p id="rep-txt" style="font-size:1.2rem; color:#444; line-height:1.8;"></p>
+        <div id="record-time"></div>
+        <button class="btn-continue" onclick="closeReport()">¡Siguiente Ronda! 🎯</button>
+    </div>
+</div>
+
+<script>
+    // Inicialización de Tone.js
+    const synth = new Tone.PolySynth(Tone.Synth, {
+        oscillator: { type: "square" },
+        envelope: { attack: 0.005, decay: 0.1, sustain: 0.0, release: 0.1 }
+    }).toDestination();
+
+    // Timbres
+    function playCorrect() {
+        synth.triggerAttackRelease(["C5", "E5", "G5"], "8n");
+    }
+    function playError() {
+        synth.triggerAttackRelease("C4", "16n");
+    }
+
+    let state = {
+        mode: 'suma', level: 1, ans: 0, input: "",
+        bloque: 0, seconds: 0,
+        bloqueStart: Date.now(), interval: null
+    };
+    const confettiColors = ['#FF7B8C', '#4ecdc4', '#f9d423', '#a55eea', '#FFCC99'];
+    const MAX_BLOQUE = 10;
+
+    function init() {
+        startTimer();
+        newProblem();
+        updateProgress();
+        state.bloqueStart = Date.now();
+    }
+
+    function updateProgress() {
+        const dots = document.querySelectorAll('.progress-dot');
+        dots.forEach((dot, index) => {
+            if (index < state.bloque) {
+                dot.classList.add('filled');
+            } else {
+                dot.classList.remove('filled');
+            }
+        });
+    }
+
+    function startTimer() {
+        if (state.interval) clearInterval(state.interval);
+        state.interval = setInterval(() => {
+            state.seconds++;
+            let m = Math.floor(state.seconds / 60).toString().padStart(2,'0');
+            let s = (state.seconds % 60).toString().padStart(2,'0');
+            document.getElementById('timer').textContent = `${m}:${s}`;
+        }, 1000);
+    }
+
+    function setMode(m) {
+        state.mode = m;
+        document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('m-'+m).classList.add('active');
+        newProblem();
+    }
+
+    function setLevel(l) {
+        state.level = l;
+        document.querySelectorAll('.btn-lvl').forEach(b => b.classList.remove('active'));
+        document.getElementById('l-'+l).classList.add('active');
+        newProblem();
+    }
+
+    // Lógica de generación de problemas (se mantiene igual, ya está bien ajustada por niveles)
+    function newProblem() {
+        let n1, n2, txt;
+        
+        const problemElement = document.getElementById('problem');
+        problemElement.style.animation = 'none';
+        problemElement.offsetHeight; 
+        problemElement.style.animation = 'fadeIn 0.4s ease-in forwards';
+
+        if (state.mode === 'suma' || state.mode === 'detective') {
+            if (state.level === 1) {
+                n1 = Math.floor(Math.random() * 9) + 1;
+                n2 = Math.floor(Math.random() * 9) + 1;
+            } else if (state.level === 2) {
+                n1 = Math.floor(Math.random() * 50) + 1;
+                n2 = Math.floor(Math.random() * 50) + 1;
+            } else if (state.level === 3) {
+                n1 = Math.floor(Math.random() * 180) + 1;
+                n2 = Math.floor(Math.random() * 180) + 1;
+            } else if (state.level === 4) {
+                n1 = Math.floor(Math.random() * 500) + 1;
+                n2 = Math.floor(Math.random() * 500) + 1;
+            }
+            
+            state.ans = n1 + n2;
+            if (state.mode === 'suma') {
+                txt = `${n1} + ${n2} = ?`;
+            } else { 
+                let h = Math.random() > 0.5;
+                state.ans = h ? n1 : n2;
+                txt = h ? `<span class="detective-box">?</span> + ${n2} = ${n1 + n2}` : `${n1} + <span class="detective-box">?</span> = ${n1 + n2}`;
+            }
+
+        } else if (state.mode === 'resta') {
+            let max;
+            if (state.level === 1) max = 18;
+            else if (state.level === 2) max = 100;
+            else if (state.level === 3) max = 300;
+            else if (state.level === 4) max = 800;
+            
+            n1 = Math.floor(Math.random() * (max - 5)) + 5;
+            n2 = Math.floor(Math.random() * (n1 - 1)) + 1;
+
+            state.ans = n1 - n2;
+            txt = `${n1} - ${n2} = ?`;
+
+        } else if (state.mode === 'multiplicacion') {
+            let maxBase, maxMultiplier;
+            if (state.level === 1) { maxBase = 8; maxMultiplier = 3; }
+            else if (state.level === 2) { maxBase = 10; maxMultiplier = 6; }
+            else if (state.level === 3) { maxBase = 12; maxMultiplier = 9; }
+            else if (state.level === 4) { maxBase = 15; maxMultiplier = 12; }
+
+            n1 = Math.floor(Math.random() * maxBase) + 2;
+            n2 = Math.floor(Math.random() * maxMultiplier) + 1;
+            
+            state.ans = n1 * n2;
+            txt = `${n1} × ${n2} = ?`;
+        }
+        
+        document.getElementById('problem').innerHTML = txt;
+        state.input = "";
+        document.getElementById('display').textContent = "?";
+        document.getElementById('display').classList.remove('error'); // Limpiar error
+    }
+
+    function createConfetti(num) {
+        const container = document.getElementById('confetti-container');
+        
+        for (let i = 0; i < num; i++) {
+            const c = document.createElement('div');
+            c.className = 'confetti';
+            c.style.backgroundColor = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+            
+            const xOffset = (Math.random() * 100) - 50;
+            const yOffset = (Math.random() * 100) - 50;
+            
+            c.style.left = `calc(50% + ${xOffset}px)`;
+            c.style.top = `calc(50% + ${yOffset}px)`;
+            
+            c.style.setProperty('--x', `${(Math.random() - 0.5) * 450}px`);
+            c.style.setProperty('--y', `${(Math.random() - 1) * 400}px`);
+            
+            container.appendChild(c);
+            
+            setTimeout(() => c.remove(), 700);
+        }
+    }
+
+    function getRecordKey() {
+        return `record_${state.mode}_${state.level}`;
+    }
+
+    function press(k) {
+        if (document.getElementById('report-modal').style.display === "block") return;
+        
+        const display = document.getElementById('display');
+        display.classList.remove('error'); // Limpiar error al ingresar una tecla
+        
+        if (k === 'C') state.input = "";
+        else if (k === 'Del') state.input = state.input.slice(0, -1);
+        else if (state.input.length < 4) state.input += k;
+
+        display.textContent = state.input || "?";
+        display.style.transform = 'scale(1.08)';
+        setTimeout(() => display.style.transform = 'scale(1)', 100);
+
+        // Lógica de verificación
+        if (state.input.length > 0) {
+            const inputVal = parseInt(state.input);
+            const ansStr = state.ans.toString();
+
+            if (inputVal === state.ans) {
+                // ACIERTO TOTAL
+                playCorrect();
+                state.bloque++;
+                updateProgress(); 
+                createConfetti(30); 
+                
+                document.getElementById('game-area').style.background = "#2ecc71"; 
+                setTimeout(() => {
+                    document.getElementById('game-area').style.background = "linear-gradient(135deg, #4b6cb7 0%, #182848 100%)";
+                    if (state.bloque >= MAX_BLOQUE) showReport();
+                    else newProblem();
+                }, 400); 
+            } else if (state.input.length === ansStr.length) {
+                // ERROR (si el número de dígitos coincide pero el valor no)
+                playError();
+                display.classList.add('error');
+                state.input = ""; // Limpiar el input para que el niño intente de nuevo
+            }
+        }
+    }
+
+    function formatTime(totalSeconds) {
+        let m = Math.floor(totalSeconds / 60).toString().padStart(2,'0');
+        let s = (totalSeconds % 60).toString().padStart(2,'0');
+        return `${m} minutos y ${s} segundos`;
+    }
+
+    function showReport() {
+        clearInterval(state.interval);
+        const t = Math.floor((Date.now() - state.bloqueStart) / 1000);
+        const recordKey = getRecordKey();
+        const storedRecord = localStorage.getItem(recordKey);
+        let recordTime = storedRecord ? parseInt(storedRecord) : Infinity;
+
+        let recordMessage = "";
+
+        if (t < recordTime) {
+            // Nuevo Récord Personal
+            localStorage.setItem(recordKey, t);
+            recordMessage = `<p style="color:#E94057; font-weight:bold;">¡NUEVO RÉCORD PERSONAL! 🥇</p>`;
+        } else if (recordTime !== Infinity) {
+            // Mostrar Récord anterior
+            recordMessage = `Tu mejor tiempo para este desafío es: <b>${formatTime(recordTime)}</b>.`;
+        } else {
+            // No hay récord previo
+            recordMessage = `¡Empieza a construir tu historial de récords!`;
+        }
+        
+        let difficultyText = `Modo: **${state.mode.charAt(0).toUpperCase() + state.mode.slice(1)}**, Nivel **${state.level}**`;
+
+        document.getElementById('rep-txt').innerHTML = 
+            `¡Felicidades! Completaste los ${MAX_BLOQUE} ejercicios en <b>${formatTime(t)}</b>.<br>` + 
+            `Tu velocidad media fue de <b>${(t/MAX_BLOQUE).toFixed(1)}s</b> por ejercicio.<br>` +
+            `${difficultyText}`;
+        
+        document.getElementById('record-time').innerHTML = recordMessage;
+        document.getElementById('report-modal').style.display = "block";
+    }
+
+    function closeReport() {
+        state.bloque = 0;
+        state.bloqueStart = Date.now();
+        state.seconds = 0;
+        document.getElementById('report-modal').style.display = "none";
+        startTimer();
+        newProblem();
+        updateProgress();
+    }
+
+    init();
+</script>
+</body>
+</html>

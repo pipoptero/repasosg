@@ -1,0 +1,2247 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Català Divertit - 5è Primària</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap');
+        
+        body {
+            font-family: 'Fredoka', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-attachment: fixed;
+        }
+
+        .opt-btn {
+            transition: all 0.3s ease;
+            transform: scale(1);
+        }
+
+        .opt-btn:hover {
+            transform: scale(1.05) rotate(-1deg);
+        }
+
+        .btn-correct {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+            color: white !important;
+            border-color: #059669 !important;
+            animation: bounce 0.5s ease;
+        }
+        
+        .btn-wrong {
+            background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%) !important;
+            color: white !important;
+            border-color: #e11d48 !important;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section {
+            animation: fadeIn 0.5s ease;
+        }
+
+        .hidden-exercise {
+            display: none;
+        }
+
+        input[type="text"] {
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            transform: scale(1.02);
+            box-shadow: 0 0 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .generate-btn {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            transition: all 0.3s ease;
+        }
+
+        .generate-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(17, 153, 142, 0.4);
+        }
+
+        .generate-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .word-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .word-card:hover {
+            transform: scale(1.1) rotate(-2deg);
+        }
+
+        .word-card.selected-s-sorda {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%) !important;
+            color: white !important;
+            transform: scale(1.05);
+        }
+
+        .word-card.selected-s-sonora {
+            background: linear-gradient(135deg, #4ecdc4 0%, #44a8a0 100%) !important;
+            color: white !important;
+            transform: scale(1.05);
+        }
+
+        .letter-btn {
+            transition: all 0.2s ease;
+        }
+
+        .letter-btn:hover:not(:disabled) {
+            transform: scale(1.15) rotate(-3deg);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <nav class="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600 text-white shadow-2xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col lg:flex-row justify-between items-center py-4 gap-3">
+                <div class="text-3xl font-bold flex items-center gap-3">
+                    <i class="fas fa-book-open text-yellow-300 float-animation"></i>
+                    <span class="hidden lg:inline">Català Super Divertit</span>
+                    <span class="lg:hidden">Català 5è</span>
+                    <i class="fas fa-star text-yellow-300 float-animation" style="animation-delay: 0.5s;"></i>
+                </div>
+                <div class="flex gap-2 overflow-x-auto no-scrollbar py-1 w-full lg:w-auto">
+                    <button onclick="showSection('adjectiu')" class="px-3 py-2 rounded-2xl hover:scale-110 transition font-bold whitespace-nowrap bg-yellow-400 text-purple-900 shadow-lg text-sm">
+                        <i class="fas fa-spell-check mr-1"></i>L'Adjectiu
+                    </button>
+                    <button onclick="showSection('graus')" class="px-3 py-2 rounded-2xl hover:scale-110 transition font-bold whitespace-nowrap bg-orange-400 text-white shadow-lg text-sm">
+                        <i class="fas fa-chart-line mr-1"></i>Graus
+                    </button>
+                    <button onclick="showSection('sufixos')" class="px-3 py-2 rounded-2xl hover:scale-110 transition font-bold whitespace-nowrap bg-purple-400 text-white shadow-lg text-sm">
+                        <i class="fas fa-puzzle-piece mr-1"></i>Sufixos
+                    </button>
+                    <button onclick="showSection('s-sorda-sonora')" class="px-3 py-2 rounded-2xl hover:scale-110 transition font-bold whitespace-nowrap bg-pink-400 text-white shadow-lg text-sm">
+                        <i class="fas fa-volume-up mr-1"></i>S Sorda/Sonora
+                    </button>
+                    <button onclick="showSection('noticia')" class="px-3 py-2 rounded-2xl hover:scale-110 transition font-bold whitespace-nowrap bg-blue-400 text-white shadow-lg text-sm">
+                        <i class="fas fa-newspaper mr-1"></i>La Notícia
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-6xl mx-auto px-4 py-8">
+        
+        <!-- Score Board -->
+        <div class="bg-white rounded-3xl shadow-2xl p-6 mb-8 flex justify-around items-center">
+            <div class="text-center">
+                <div class="text-5xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+                    <span id="correct-count">0</span>
+                </div>
+                <div class="text-lg font-semibold text-gray-600">
+                    <i class="fas fa-check-circle text-green-500"></i> Encerts
+                </div>
+            </div>
+            <div class="text-6xl">🎯</div>
+            <div class="text-center">
+                <div class="text-5xl font-bold bg-gradient-to-r from-red-600 to-rose-600 bg-clip-text text-transparent">
+                    <span id="incorrect-count">0</span>
+                </div>
+                <div class="text-lg font-semibold text-gray-600">
+                    <i class="fas fa-times-circle text-red-500"></i> Errors
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓ 1: L'ADJECTIU -->
+        <div id="adjectiu" class="section">
+            <div class="bg-white rounded-3xl shadow-2xl p-8 mb-6">
+                <h2 class="text-4xl font-bold text-center mb-6 bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">
+                    <i class="fas fa-spell-check mr-3"></i>L'Adjectiu
+                </h2>
+                
+                <div class="bg-gradient-to-br from-yellow-50 to-orange-50 border-l-8 border-yellow-400 rounded-2xl p-6 mb-8">
+                    <h3 class="text-2xl font-bold text-yellow-700 mb-3">
+                        <i class="fas fa-lightbulb mr-2"></i>Què és un adjectiu?
+                    </h3>
+                    <p class="text-lg text-gray-700 leading-relaxed mb-3">
+                        L'adjectiu és una paraula que expressa <strong>qualitats o característiques del nom</strong>. 
+                        Concorden en gènere i nombre amb el nom que acompanya.
+                    </p>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right text-yellow-500 mr-3 mt-1"></i>
+                            <span>Generalment tenen forma masculí/femení: <em>eixut/eixuta, estret/estreta</em></span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right text-yellow-500 mr-3 mt-1"></i>
+                            <span>Altres tenen forma única: <em>alegre/alegre, feliç/feliç</em></span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="adjectiu-exercises">
+                    <!-- Exercici 1 -->
+                    <div class="exercise-item bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-6 border-4 border-yellow-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-yellow-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 1</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Identifica els adjectius en aquesta frase: <br>
+                            <span class="text-2xl text-purple-700 italic">"La casa gran té un jardí bonic i flors vermelles."</span>
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'adj1')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                gran, bonic, vermelles
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'adj1')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                casa, jardí, flors
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'adj1')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                gran, jardí, vermelles
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-adj1"></div>
+                    </div>
+
+                    <!-- Exercici 2 -->
+                    <div class="exercise-item bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-6 border-4 border-yellow-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-yellow-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 2</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Quin adjectiu concorda correctament?<br>
+                            <span class="text-2xl text-purple-700 italic">"Les noies són molt _______"</span>
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'adj2')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                alt
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'adj2')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                alts
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'adj2')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                altes
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-adj2"></div>
+                    </div>
+
+                    <!-- Exercici 3 -->
+                    <div class="exercise-item bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-6 border-4 border-yellow-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-yellow-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 3</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Escriu 3 adjectius que descriguin el teu millor amic/amiga:
+                        </div>
+                        <input type="text" id="adj-input-3" placeholder="Exemple: simpàtic, intel·ligent, divertit..." 
+                            class="w-full px-6 py-4 border-4 border-purple-300 rounded-2xl text-lg font-semibold">
+                        <button onclick="checkOpenAnswer('adj-input-3', 'adj3')" 
+                            class="mt-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-3 px-8 rounded-2xl shadow-lg hover:scale-105 transition">
+                            <i class="fas fa-check mr-2"></i>Comprovar
+                        </button>
+                        <div class="feedback mt-4" id="feedback-adj3"></div>
+                    </div>
+
+                    <!-- Més exercicis ocults -->
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-6 border-4 border-yellow-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-yellow-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 4</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Quin adjectiu descriu millor: <br>
+                            <span class="text-2xl text-purple-700 italic">"Un gos petit i juganer"</span>
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'adj4')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                petit, juganer
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'adj4')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                gos, petit
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'adj4')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                un, juganer
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-adj4"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-6 border-4 border-yellow-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-yellow-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 5</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Tria l'adjectiu que concorda: <br>
+                            <span class="text-2xl text-purple-700 italic">"El cotxe és _______"</span>
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'adj5')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                ràpida
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'adj5')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                ràpid
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'adj5')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                ràpids
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-adj5"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-6 border-4 border-yellow-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-yellow-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 6</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Identifica TOTS els adjectius: <br>
+                            <span class="text-2xl text-purple-700 italic">"El llibre vell i gruixut està a la prestatgeria alta"</span>
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'adj6')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                vell, gruixut, alta
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'adj6')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                llibre, vell, alta
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'adj6')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                vell, prestatgeria, alta
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-adj6"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-6 border-4 border-yellow-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-yellow-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 7</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Quin és el femení de "fort"?
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'adj7')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                forte
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'adj7')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                forta
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'adj7')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                fort (no canvia)
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-adj7"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-6 border-4 border-yellow-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-yellow-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 8</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Quants adjectius hi ha? <br>
+                            <span class="text-2xl text-purple-700 italic">"La nena feliç porta un vestit blau i uns sabats brillants"</span>
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'adj8')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                2 adjectius
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'adj8')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                3 adjectius (feliç, blau, brillants)
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'adj8')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                4 adjectius
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-adj8"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-6 border-4 border-yellow-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-yellow-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 9</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Completa amb un adjectiu adequat: <br>
+                            <span class="text-2xl text-purple-700 italic">"Els estudiants _______ van aprovar l'examen"</span>
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'adj9')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                intel·ligents / estudiosos / treballadors
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'adj9')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                van estudiar (és un verb)
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'adj9')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                l'escola (és un nom)
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-adj9"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-6 border-4 border-yellow-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-yellow-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 10</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            L'adjectiu "feliç" té forma diferent per masculí i femení?
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'adj10')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Sí, feliç / feliça
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'adj10')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                No, la forma és única per als dos gèneres
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'adj10')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                Sí, feliç / felicesa
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-adj10"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-6 border-4 border-yellow-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-yellow-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 11</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Quina frase té MÉS adjectius?
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'adj11')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                El gat dorm al llit
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'adj11')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                El gat negre i pelut dorm tranquil
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'adj11')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                El gat juga amb la pilota
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-adj11"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-6 border-4 border-yellow-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-yellow-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 12</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Tria el plural correcte de "blau":
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'adj12')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                blaus
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'adj12')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                blaus (masculí) / blaves (femení)
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'adj12')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                blaues
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-adj12"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-6 border-4 border-yellow-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-yellow-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 13</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Quin NO és un adjectiu?<br>
+                            <span class="text-2xl text-purple-700 italic">"La porta verda està oberta"</span>
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'adj13')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                verda
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'adj13')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                oberta
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'adj13')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                porta (és un nom)
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-adj13"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-6 border-4 border-yellow-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-yellow-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 14</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Completa correctament:<br>
+                            <span class="text-2xl text-purple-700 italic">"Unes sabates _______"</span>
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'adj14')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                negre
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'adj14')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                negres (masculí)
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'adj14')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                negres (femení plural)
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-adj14"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-6 border-4 border-yellow-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-yellow-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 15</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Quin adjectiu descriu una característica física?
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'adj15')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                simpàtic
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'adj15')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                ros
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'adj15')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                alegre
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-adj15"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-6 border-4 border-yellow-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-yellow-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 16</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Troba l'error:<br>
+                            <span class="text-2xl text-purple-700 italic">"Els cotxes ràpides corren molt"</span>
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'adj16')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Ha de ser "ràpids" (masculí)
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'adj16')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                No hi ha cap error
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'adj16')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                Ha de ser "ràpida"
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-adj16"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-6 border-4 border-yellow-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-yellow-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 17</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Quin adjectiu expressa una qualitat NO física?
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'adj17')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                alt
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'adj17')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                generós
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'adj17')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                prim
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-adj17"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-6 border-4 border-yellow-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-yellow-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 18</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Identifica els adjectius:<br>
+                            <span class="text-2xl text-purple-700 italic">"Els ocells petits canten melodies boniques al bosc verd"</span>
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'adj18')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                petits, boniques
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'adj18')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                petits, boniques, verd
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'adj18')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                ocells, melodies, bosc
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-adj18"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-6 border-4 border-yellow-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-yellow-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 19</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Quin és el femení de "ample"?
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'adj19')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                amplesa
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'adj19')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                ampla
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'adj19')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                ampli
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-adj19"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-6 border-4 border-yellow-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-yellow-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 20</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Completa amb l'adjectiu correcte:<br>
+                            <span class="text-2xl text-purple-700 italic">"Una nina _______"</span>
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'adj20')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                bufó
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'adj20')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                bufona
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'adj20')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                bufóns
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-adj20"></div>
+                    </div>
+                </div>
+                
+                <button onclick="showMoreExercises('adjectiu')" id="btn-more-adjectiu" class="generate-btn text-white font-bold py-4 px-8 rounded-2xl shadow-lg mx-auto block text-xl mt-6">
+                    <i class="fas fa-plus-circle mr-2"></i>Mostrar més exercicis (quedan <span id="remaining-adjectiu">17</span>)
+                </button>
+            </div>
+        </div>
+
+        <!-- SECCIÓ 2: GRAUS DE L'ADJECTIU -->
+        <div id="graus" class="section hidden">
+            <div class="bg-white rounded-3xl shadow-2xl p-8 mb-6">
+                <h2 class="text-4xl font-bold text-center mb-6 bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
+                    <i class="fas fa-chart-line mr-3"></i>Graus de l'Adjectiu
+                </h2>
+                
+                <div class="bg-gradient-to-br from-orange-50 to-red-50 border-l-8 border-orange-400 rounded-2xl p-6 mb-8">
+                    <h3 class="text-2xl font-bold text-orange-700 mb-3">
+                        <i class="fas fa-lightbulb mr-2"></i>Graus de l'adjectiu
+                    </h3>
+                    <div class="space-y-3 text-lg text-gray-700">
+                        <div class="bg-white p-4 rounded-xl border-2 border-orange-200">
+                            <strong class="text-orange-600">Positiu:</strong> Indica la qualitat: <em>alt</em>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border-2 border-orange-200">
+                            <strong class="text-orange-600">Comparatiu:</strong> Compara la intensitat:
+                            <ul class="ml-6 mt-2 space-y-1">
+                                <li>• <strong>Superioritat:</strong> més alt que...</li>
+                                <li>• <strong>Igualtat:</strong> tan alt com...</li>
+                                <li>• <strong>Inferioritat:</strong> menys alt que...</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border-2 border-orange-200">
+                            <strong class="text-orange-600">Superlatiu:</strong> Grau màxim: <em>altíssim / el més alt</em>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="graus-exercises">
+                    <!-- Exercici 1 -->
+                    <div class="exercise-item bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-6 mb-6 border-4 border-orange-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-orange-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 1</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Identifica el grau: <br>
+                            <span class="text-2xl text-orange-700 italic">"La Maria és més intel·ligent que en Pere"</span>
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'grau1')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Positiu
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'grau1')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Comparatiu de superioritat
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'grau1')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                Superlatiu
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-grau1"></div>
+                    </div>
+
+                    <!-- Exercici 2 -->
+                    <div class="exercise-item bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-6 mb-6 border-4 border-orange-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-orange-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 2</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Completa amb el comparatiu d'igualtat:<br>
+                            <span class="text-2xl text-orange-700 italic">"En Joan és ___ alt ___ el seu germà"</span>
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'grau2')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                més... que
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'grau2')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                tan... com
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'grau2')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                menys... que
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-grau2"></div>
+                    </div>
+
+                    <!-- Exercici 3 -->
+                    <div class="exercise-item bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-6 mb-6 border-4 border-orange-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-orange-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 3</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Quin és el superlatiu de "ràpid"?
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'grau3')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                més ràpid
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'grau3')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                rapidíssim
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'grau3')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                tan ràpid
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-grau3"></div>
+                    </div>
+
+                    <!-- Més exercicis ocults -->
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-6 mb-6 border-4 border-orange-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-orange-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 4</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Quin grau expressa: <br>
+                            <span class="text-2xl text-orange-700 italic">"Aquest examen és facilíssim"</span>
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'grau4')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Positiu
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'grau4')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                Comparatiu
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'grau4')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Superlatiu
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-grau4"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-6 mb-6 border-4 border-orange-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-orange-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 5</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Tria el comparatiu d'inferioritat: <br>
+                            <span class="text-2xl text-orange-700 italic">"Aquest problema és ___ difícil ___ l'altre"</span>
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'grau5')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                més... que
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'grau5')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                menys... que
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'grau5')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                tan... com
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-grau5"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-6 mb-6 border-4 border-orange-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-orange-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 6</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Forma el superlatiu de "gran":
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'grau6')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                grandíssim
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'grau6')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                graníssim
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'grau6')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                granot
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-grau6"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-6 mb-6 border-4 border-orange-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-orange-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 7</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Identifica el tipus de comparatiu: <br>
+                            <span class="text-2xl text-orange-700 italic">"La Marta és tan esportista com la Júlia"</span>
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'grau7')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Comparatiu de superioritat
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'grau7')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Comparatiu d'igualtat
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'grau7')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                Comparatiu d'inferioritat
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-grau7"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-6 mb-6 border-4 border-orange-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-orange-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 8</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Quin és el grau positiu de "bellíssim"?
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'grau8')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                més bell
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'grau8')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                bell
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'grau8')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                bello
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-grau8"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-6 mb-6 border-4 border-orange-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-orange-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 9</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Completa: "Aquest llibre és el ___ interessant de tots"
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'grau9')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                tan
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'grau9')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                més
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'grau9')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                menys
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-grau9"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-6 mb-6 border-4 border-orange-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-orange-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 10</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Quin grau té "alt" en aquesta frase: <br>
+                            <span class="text-2xl text-orange-700 italic">"En Pau és alt"</span>
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'grau10')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Positiu
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'grau10')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Comparatiu
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'grau10')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                Superlatiu
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-grau10"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-6 mb-6 border-4 border-orange-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-orange-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 11</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Crea el comparatiu de superioritat de "fort":
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'grau11')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                més fort que
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'grau11')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                fortíssim
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'grau11')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                tan fort com
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-grau11"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-6 mb-6 border-4 border-orange-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-orange-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 12</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Quin superlatiu és correcte per "dolç"?
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'grau12')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                dolcet
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'grau12')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                dolcíssim
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'grau12')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                dolços
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-grau12"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-6 mb-6 border-4 border-orange-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-orange-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 13</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Identifica el grau:<br>
+                            <span class="text-2xl text-orange-700 italic">"Aquest film és menys interessant que l'altre"</span>
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'grau13')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Comparatiu de superioritat
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'grau13')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Comparatiu d'inferioritat
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'grau13')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                Superlatiu
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-grau13"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-6 mb-6 border-4 border-orange-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-orange-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 14</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Completa amb el comparatiu correcte:<br>
+                            <span class="text-2xl text-orange-700 italic">"La meva habitació és ___ gran ___ la teva"</span>
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'grau14')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                grandíssima
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'grau14')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                més... que / tan... com / menys... que
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'grau14')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                gran
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-grau14"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-6 mb-6 border-4 border-orange-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-orange-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 15</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Quin és el superlatiu de "petit"?
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'grau15')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-10-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                petitíssim
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'grau15')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                petitíssim / el més petit
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'grau15')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                petitot
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-grau15"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-6 mb-6 border-4 border-orange-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-orange-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 16</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Troba l'error:<br>
+                            <span class="text-2xl text-orange-700 italic">"La Paula és tan intel·ligent que la Laura"</span>
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'grau16')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Ha de ser "tan... com" (no "que")
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'grau16')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                No hi ha cap error
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'grau16')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                Ha de ser "més... que"
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-grau16"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-6 mb-6 border-4 border-orange-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-orange-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 17</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Quina frase està en grau superlatiu?
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'grau17')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Aquest pastís és més dolç
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'grau17')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Aquest pastís és dolcíssim
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'grau17')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                Aquest pastís és tan dolç com l'altre
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-grau17"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-6 mb-6 border-4 border-orange-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-orange-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 18</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Quin grau no existeix per als adjectius?
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'grau18')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Positiu
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'grau18')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                Superlatiu
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'grau18')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Diminutiu (això és un sufix)
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-grau18"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-6 mb-6 border-4 border-orange-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-orange-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 19</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Completa correctament:<br>
+                            <span class="text-2xl text-orange-700 italic">"Aquest problema és el ___ fàcil de tots"</span>
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'grau19')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                més
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'grau19')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                menys
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'grau19')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                tan
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-grau19"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-6 mb-6 border-4 border-orange-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-orange-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 20</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Quin adjectiu està en grau positiu?<br>
+                            <span class="text-2xl text-orange-700 italic">"La nena és alegre i té un gos molt gros"</span>
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'grau20')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                alegre i gros
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'grau20')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                només alegre
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'grau20')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                només gros
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-grau20"></div>
+                    </div>
+                </div>
+                
+                <button onclick="showMoreExercises('graus')" id="btn-more-graus" class="generate-btn text-white font-bold py-4 px-8 rounded-2xl shadow-lg mx-auto block text-xl mt-6">
+                    <i class="fas fa-plus-circle mr-2"></i>Mostrar més exercicis (quedan <span id="remaining-graus">17</span>)
+                </button>
+            </div>
+        </div>
+
+        <!-- SECCIÓ 3: SUFIXOS -->
+        <div id="sufixos" class="section hidden">
+            <div class="bg-white rounded-3xl shadow-2xl p-8 mb-6">
+                <h2 class="text-4xl font-bold text-center mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                    <i class="fas fa-puzzle-piece mr-3"></i>Sufixos de l'Adjectiu
+                </h2>
+                
+                <div class="bg-gradient-to-br from-purple-50 to-pink-50 border-l-8 border-purple-400 rounded-2xl p-6 mb-8">
+                    <h3 class="text-2xl font-bold text-purple-700 mb-3">
+                        <i class="fas fa-lightbulb mr-2"></i>Tipus de sufixos
+                    </h3>
+                    <div class="space-y-3 text-lg">
+                        <div class="bg-white p-4 rounded-xl border-2 border-blue-200">
+                            <strong class="text-blue-600">Diminutiu</strong> 
+                            <span class="text-gray-600">(-et/-eta, -ol/-ola, -ó/-ona, -í/-ina):</span> 
+                            <em class="text-purple-600">vellet, petitó</em>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border-2 border-green-200">
+                            <strong class="text-green-600">Augmentatiu</strong> 
+                            <span class="text-gray-600">(-às/-assa, -arró/-arrona):</span> 
+                            <em class="text-purple-600">grossàs, brutarro</em>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border-2 border-red-200">
+                            <strong class="text-red-600">Despectiu</strong> 
+                            <span class="text-gray-600">(-ot/-ota, -astre/-astra):</span> 
+                            <em class="text-purple-600">baixota, poetastre</em>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="sufixos-exercises">
+                    <!-- Exercicis Sufixos 1-3 visibles, 4-20 ocults -->
+                    <div class="exercise-item bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 mb-6 border-4 border-purple-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-purple-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 1</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Quin tipus de sufix té "grossàs"?
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'suf1')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Diminutiu
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'suf1')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Augmentatiu
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'suf1')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                Despectiu
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-suf1"></div>
+                    </div>
+
+                    <div class="exercise-item bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 mb-6 border-4 border-purple-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-purple-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 2</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Transforma "poeta" en despectiu:
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'suf2')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                poetet
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'suf2')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                poetastre
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'suf2')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                poetàs
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-suf2"></div>
+                    </div>
+
+                    <div class="exercise-item bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 mb-6 border-4 border-purple-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-purple-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 3</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            "Baixota" conté un sufix:
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'suf3')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Diminutiu
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'suf3')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                Augmentatiu
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'suf3')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Despectiu
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-suf3"></div>
+                    </div>
+
+                    <!-- Exercicis 4-20 ocults -->
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 mb-6 border-4 border-purple-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-purple-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 4</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Quin sufix té "vellet"?
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'suf4')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Diminutiu
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'suf4')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Augmentatiu
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'suf4')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                Despectiu
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-suf4"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 mb-6 border-4 border-purple-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-purple-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 5</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Forma l'augmentatiu de "brut":
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'suf5')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                brutet
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'suf5')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                brutarro
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'suf5')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                brutastre
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-suf5"></div>
+                    </div>
+
+                    <!-- Continuar amb més exercicis ocults fins al 20 -->
+                </div>
+                
+                <button onclick="showMoreExercises('sufixos')" id="btn-more-sufixos" class="generate-btn text-white font-bold py-4 px-8 rounded-2xl shadow-lg mx-auto block text-xl mt-6">
+                    <i class="fas fa-plus-circle mr-2"></i>Mostrar més exercicis (quedan <span id="remaining-sufixos">17</span>)
+                </button>
+            </div>
+        </div>
+
+        <!-- SECCIÓ 4: S SORDA I SONORA -->
+        <div id="s-sorda-sonora" class="section hidden">
+            <div class="bg-white rounded-3xl shadow-2xl p-8 mb-6">
+                <h2 class="text-4xl font-bold text-center mb-6 bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent">
+                    <i class="fas fa-volume-up mr-3"></i>S Sorda i S Sonora
+                </h2>
+                
+                <div class="bg-gradient-to-br from-pink-50 to-rose-50 border-l-8 border-pink-400 rounded-2xl p-6 mb-8">
+                    <h3 class="text-2xl font-bold text-pink-700 mb-4">
+                        <i class="fas fa-lightbulb mr-2"></i>Regles S Sorda i Sonora
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-red-100 p-4 rounded-xl border-3 border-red-300">
+                            <h4 class="font-bold text-red-700 text-xl mb-2">🔴 S SORDA (so fort)</h4>
+                            <ul class="space-y-1 text-gray-700">
+                                <li><strong>S:</strong> inici/final, vocal+consonant</li>
+                                <li><strong>SS:</strong> entre vocals (passer)</li>
+                                <li><strong>C+E/I:</strong> cercle, cirera</li>
+                                <li><strong>Ç+A/O/U:</strong> caça, camió</li>
+                                <li><strong>SC:</strong> entre vocals (piscina)</li>
+                            </ul>
+                        </div>
+                        <div class="bg-blue-100 p-4 rounded-xl border-3 border-blue-300">
+                            <h4 class="font-bold text-blue-700 text-xl mb-2">🔵 S SONORA (so suau)</h4>
+                            <ul class="space-y-1 text-gray-700">
+                                <li><strong>S:</strong> entre vocals (casa)</li>
+                                <li><strong>Z:</strong> inici (zebra)</li>
+                                <li><strong>Z:</strong> després consonant (marxar)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="s-sorda-sonora-exercises">
+                    <!-- Exercicis S Sorda/Sonora primers 3 visibles -->
+                    <div class="exercise-item bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-6 mb-6 border-4 border-pink-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-pink-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 1</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            La paraula "CASA" té S sorda o sonora?
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'ss1')" class="opt-btn w-full px-6 py-4 border-4 border-red-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-red-50 to-red-100 text-red-800 shadow-lg">
+                                S sorda
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'ss1')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                S sonora (s entre vocals)
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-ss1"></div>
+                    </div>
+
+                    <div class="exercise-item bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-6 mb-6 border-4 border-pink-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-pink-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 2</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            La paraula "PASSER" té S sorda o sonora?
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'ss2')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                S sorda (ss entre vocals)
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'ss2')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                S sonora
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-ss2"></div>
+                    </div>
+
+                    <div class="exercise-item bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-6 mb-6 border-4 border-pink-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-pink-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 3</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Completa: PI_CINA
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'ss3')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                S
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'ss3')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                SC
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'ss3')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                SS
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-ss3"></div>
+                    </div>
+
+                    <!-- Exercicis 4-20 ocults -->
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-6 mb-6 border-4 border-pink-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-pink-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 4</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Completa: _EBRA
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'ss4')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                S
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'ss4')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Z (inici de paraula)
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-ss4"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-6 mb-6 border-4 border-pink-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-pink-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 5</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            La paraula "MÚSICA" té:
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'ss5')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                S sorda
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'ss5')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                S sonora (s entre vocals)
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-ss5"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-6 mb-6 border-4 border-pink-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-pink-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 6</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Completa: CA_A (llar)
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'ss6')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                S (entre vocals = sonora)
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'ss6')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                SS
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-ss6"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-6 mb-6 border-4 border-pink-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-pink-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 7</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            "CIRERA" té S:
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'ss7')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Sorda (C + I)
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'ss7')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Sonora
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-ss7"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-6 mb-6 border-4 border-pink-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-pink-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 8</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Completa: _OL (astro)
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'ss8')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                S (inici)
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'ss8')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Z
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-ss8"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-6 mb-6 border-4 border-pink-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-pink-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 9</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            "CANÇÓ" té S:
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'ss9')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Sorda (Ç + O)
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'ss9')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Sonora
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-ss9"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-6 mb-6 border-4 border-pink-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-pink-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 10</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Completa: ME_A (taula)
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'ss10')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                S (entre vocals)
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'ss10')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                SS
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-ss10"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-6 mb-6 border-4 border-pink-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-pink-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 11</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            "ROSA" té S:
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'ss11')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Sorda
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'ss11')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Sonora (entre vocals)
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-ss11"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-6 mb-6 border-4 border-pink-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-pink-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 12</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Completa: CERCLE_ (plural)
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'ss12')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                S (final)
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'ss12')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                SS
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-ss12"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-6 mb-6 border-4 border-pink-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-pink-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 13</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            "CAÇA" té S:
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'ss13')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Sorda (Ç + A)
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'ss13')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Sonora
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-ss13"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-6 mb-6 border-4 border-pink-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-pink-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 14</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Completa: DE_IG
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'ss14')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                S (entre vocals)
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'ss14')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                SS
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-ss14"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-6 mb-6 border-4 border-pink-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-pink-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 15</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            "PASSAR" té S:
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'ss15')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Sorda (SS)
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'ss15')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Sonora
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-ss15"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-6 mb-6 border-4 border-pink-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-pink-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 16</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Completa: ESMO_AR
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'ss16')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                S
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'ss16')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                RZ (Z després R)
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-ss16"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-6 mb-6 border-4 border-pink-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-pink-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 17</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            "MASSA" té S:
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'ss17')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Sorda (SS)
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'ss17')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Sonora
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-ss17"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-6 mb-6 border-4 border-pink-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-pink-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 18</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Completa: CE_ER (llapis)
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'ss18')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                S
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'ss18')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                D (no és S/Z)
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-ss18"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-6 mb-6 border-4 border-pink-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-pink-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 19</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Completa: PEI_
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'ss19')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                X (no és S/Z)
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'ss19')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                S
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-ss19"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-6 mb-6 border-4 border-pink-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-pink-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 20</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            "PO_A" (dipòsit) es completa amb:
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'ss20')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                S (entre vocals = sonora)
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'ss20')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                SS
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-ss20"></div>
+                    </div>
+                </div>
+                
+                <button onclick="showMoreExercises('s-sorda-sonora')" id="btn-more-s-sorda-sonora" class="generate-btn text-white font-bold py-4 px-8 rounded-2xl shadow-lg mx-auto block text-xl mt-6">
+                    <i class="fas fa-plus-circle mr-2"></i>Mostrar més exercicis (quedan <span id="remaining-s-sorda-sonora">17</span>)
+                </button>
+            </div>
+        </div>
+
+        <!-- SECCIÓ 5: LA NOTÍCIA -->
+        <div id="noticia" class="section hidden">
+            <div class="bg-white rounded-3xl shadow-2xl p-8 mb-6">
+                <h2 class="text-4xl font-bold text-center mb-6 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                    <i class="fas fa-newspaper mr-3"></i>La Notícia
+                </h2>
+                
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 border-l-8 border-blue-400 rounded-2xl p-6 mb-8">
+                    <h3 class="text-2xl font-bold text-blue-700 mb-3">
+                        <i class="fas fa-lightbulb mr-2"></i>Parts de la notícia
+                    </h3>
+                    <div class="space-y-3 text-lg">
+                        <div class="bg-white p-4 rounded-xl border-2 border-yellow-200">
+                            <strong class="text-yellow-700">TITULAR/CAPÇALERA:</strong> 
+                            <span class="text-gray-700">Informació essencial i impactant</span>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border-2 border-green-200">
+                            <strong class="text-green-700">ENTRADA:</strong> 
+                            <span class="text-gray-700">Resum breu de la notícia</span>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border-2 border-purple-200">
+                            <strong class="text-purple-700">COS:</strong> 
+                            <span class="text-gray-700">Respon: què, qui, quan, on, com, per què</span>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border-2 border-pink-200">
+                            <strong class="text-pink-700">IMATGES:</strong> 
+                            <span class="text-gray-700">Faciliten la comprensió</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="noticia-exercises">
+                    <!-- Exercicis La Notícia primers 3 visibles -->
+                    <div class="exercise-item bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 mb-6 border-4 border-blue-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-blue-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 1</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            "Incendi a Barcelona" és:
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'not1')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Titular
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'not1')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Entrada
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'not1')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                Cos
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-not1"></div>
+                    </div>
+
+                    <div class="exercise-item bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 mb-6 border-4 border-blue-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-blue-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 2</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            "Ahir a la tarda" respon a la pregunta:
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'not2')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Què?
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'not2')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Quan?
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'not2')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                On?
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-not2"></div>
+                    </div>
+
+                    <div class="exercise-item bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 mb-6 border-4 border-blue-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-blue-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 3</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Quina part desenvolupa tots els detalls?
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'not3')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Titular
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'not3')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                Entrada
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'not3')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Cos de la notícia
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-not3"></div>
+                    </div>
+
+                    <!-- Exercicis 4-20 ocults -->
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 mb-6 border-4 border-blue-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-blue-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 4</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            "Els bombers" respon a:
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'not4')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Què?
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'not4')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Qui?
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'not4')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                On?
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-not4"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 mb-6 border-4 border-blue-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-blue-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 5</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Quina part resumeix breument?
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'not5')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Titular
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'not5')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Entrada
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'not5')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                Cos
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-not5"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 mb-6 border-4 border-blue-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-blue-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 6</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            "Per l'accident" respon a:
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'not6')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Com?
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'not6')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Per què?
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'not6')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                Què?
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-not6"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 mb-6 border-4 border-blue-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-blue-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 7</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Les imatges serveixen per:
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'not7')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Facilitar la comprensió
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'not7')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Omplir espai
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'not7')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                Decorar
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-not7"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 mb-6 border-4 border-blue-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-blue-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 8</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            "Al centre de Barcelona" respon a:
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'not8')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Quan?
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'not8')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                On?
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'not8')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                Com?
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-not8"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 mb-6 border-4 border-blue-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-blue-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 9</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            El cos de la notícia ha de respondre:
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'not9')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                4 preguntes
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'not9')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                5 preguntes
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'not9')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                6 preguntes
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-not9"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 mb-6 border-4 border-blue-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-blue-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 10</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            "Amb una escala" respon a:
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'not10')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Com?
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'not10')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Què?
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'not10')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                Per què?
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-not10"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 mb-6 border-4 border-blue-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-blue-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 11</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            La part més important és:
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'not11')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                El titular
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'not11')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                L'entrada
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'not11')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                Les imatges
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-not11"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 mb-6 border-4 border-blue-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-blue-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 12</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            "L'alcalde va anunciar" respon a:
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'not12')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Qui?
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'not12')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Qui? i Què?
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'not12')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                On?
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-not12"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 mb-6 border-4 border-blue-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-blue-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 13</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Quina NO és part de la notícia?
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'not13')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Entrada
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'not13')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Conclusió
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'not13')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                Cos
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-not13"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 mb-6 border-4 border-blue-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-blue-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 14</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            "Dimarts passat" respon a:
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'not14')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Quan?
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'not14')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                On?
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'not14')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                Com?
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-not14"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 mb-6 border-4 border-blue-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-blue-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 15</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            El titular ha de ser:
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'not15')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Llarg i detallat
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'not15')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Curt i impactant
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'not15')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                Amb opinions
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-not15"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 mb-6 border-4 border-blue-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-blue-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 16</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            "Un incendi" respon a:
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'not16')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Què?
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'not16')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Qui?
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'not16')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                Com?
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-not16"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 mb-6 border-4 border-blue-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-blue-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 17</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            Una notícia sempre és:
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'not17')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Una opinió
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'not17')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Un fet objectiu
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'not17')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                Un conte
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-not17"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 mb-6 border-4 border-blue-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-blue-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 18</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            El peu de foto explica:
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, true, 'not18')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Què surt a la imatge
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'not18')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                El titular
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'not18')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                L'entrada
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-not18"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 mb-6 border-4 border-blue-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-blue-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 19</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            "Pel fort vent" respon a:
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'not19')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Com?
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'not19')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Per què?
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'not19')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                Què?
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-not19"></div>
+                    </div>
+
+                    <div class="exercise-item hidden-exercise bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 mb-6 border-4 border-blue-300">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-blue-500 text-white px-4 py-2 rounded-full font-bold text-lg">Exercici 20</span>
+                        </div>
+                        <div class="text-xl font-semibold text-gray-800 mb-4">
+                            La informació més detallada està:
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="checkAnswer(this, false, 'not20')" class="opt-btn w-full px-6 py-4 border-4 border-blue-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-blue-50 to-blue-100 text-blue-800 shadow-lg">
+                                Al titular
+                            </button>
+                            <button onclick="checkAnswer(this, false, 'not20')" class="opt-btn w-full px-6 py-4 border-4 border-purple-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-purple-50 to-purple-100 text-purple-800 shadow-lg">
+                                A l'entrada
+                            </button>
+                            <button onclick="checkAnswer(this, true, 'not20')" class="opt-btn w-full px-6 py-4 border-4 border-green-300 rounded-2xl font-bold text-lg bg-gradient-to-br from-green-50 to-green-100 text-green-800 shadow-lg">
+                                Al cos
+                            </button>
+                        </div>
+                        <div class="feedback mt-4" id="feedback-not20"></div>
+                    </div>
+                </div>
+                
+                <button onclick="showMoreExercises('noticia')" id="btn-more-noticia" class="generate-btn text-white font-bold py-4 px-8 rounded-2xl shadow-lg mx-auto block text-xl mt-6">
+                    <i class="fas fa-plus-circle mr-2"></i>Mostrar més exercicis (quedan <span id="remaining-noticia">17</span>)
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let correctCount = 0;
+        let incorrectCount = 0;
+        let currentSection = 'adjectiu';
+        let visibleExercises = {
+            'adjectiu': 3,
+            'graus': 3,
+            'sufixos': 3,
+            's-sorda-sonora': 3,
+            'noticia': 3
+        };
+
+        function showSection(sectionId) {
+            currentSection = sectionId;
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(sectionId).classList.remove('hidden');
+        }
+
+        function checkAnswer(button, isCorrect, feedbackId) {
+            const options = button.parentElement.querySelectorAll('.opt-btn');
+            const feedback = document.getElementById('feedback-' + feedbackId);
+            
+            options.forEach(opt => {
+                opt.disabled = true;
+            });
+            
+            if (isCorrect) {
+                button.classList.add('btn-correct');
+                feedback.className = 'feedback mt-4 p-6 rounded-2xl bg-gradient-to-r from-green-100 to-emerald-100 border-l-8 border-green-500 flex items-center gap-3';
+                feedback.innerHTML = '<i class="fas fa-trophy text-4xl text-yellow-500"></i> <div class="text-green-800 font-bold text-xl">Molt bé! Resposta correcta!</div>';
+                correctCount++;
+            } else {
+                button.classList.add('btn-wrong');
+                feedback.className = 'feedback mt-4 p-6 rounded-2xl bg-gradient-to-r from-rose-100 to-pink-100 border-l-8 border-rose-500 flex items-center gap-3';
+                feedback.innerHTML = '<i class="fas fa-lightbulb text-4xl text-yellow-400"></i> <div class="text-rose-800 font-bold text-xl">No és correcte. Torna-ho a intentar en el proper!</div>';
+                incorrectCount++;
+            }
+            
+            updateScore();
+        }
+
+        function checkOpenAnswer(inputId, feedbackId) {
+            const input = document.getElementById(inputId);
+            const feedback = document.getElementById('feedback-' + feedbackId);
+            const value = input.value.trim();
+            
+            if (value.length > 0) {
+                feedback.className = 'feedback mt-4 p-6 rounded-2xl bg-gradient-to-r from-green-100 to-emerald-100 border-l-8 border-green-500 flex items-center gap-3';
+                feedback.innerHTML = '<i class="fas fa-trophy text-4xl text-yellow-500"></i> <div class="text-green-800 font-bold text-xl">Molt bé! Has escrit: "' + value + '"</div>';
+                correctCount++;
+                updateScore();
+            } else {
+                feedback.className = 'feedback mt-4 p-6 rounded-2xl bg-gradient-to-r from-rose-100 to-pink-100 border-l-8 border-rose-500 flex items-center gap-3';
+                feedback.innerHTML = '<i class="fas fa-exclamation-circle text-4xl text-rose-500"></i> <div class="text-rose-800 font-bold text-xl">Escriu almenys un adjectiu</div>';
+            }
+        }
+
+        function updateScore() {
+            document.getElementById('correct-count').textContent = correctCount;
+            document.getElementById('incorrect-count').textContent = incorrectCount;
+        }
+
+        function showMoreExercises(section) {
+            const container = document.getElementById(section + '-exercises');
+            const hiddenExercises = container.querySelectorAll('.hidden-exercise');
+            const button = document.getElementById('btn-more-' + section);
+            const remainingSpan = document.getElementById('remaining-' + section);
+            
+            let shown = 0;
+            const toShow = 3; // Mostrar 3 ejercicios cada vez
+            
+            for (let i = 0; i < hiddenExercises.length && shown < toShow; i++) {
+                if (hiddenExercises[i].classList.contains('hidden-exercise')) {
+                    hiddenExercises[i].classList.remove('hidden-exercise');
+                    shown++;
+                    visibleExercises[section]++;
+                }
+            }
+            
+            // Actualizar contador
+            const remaining = container.querySelectorAll('.hidden-exercise').length;
+            if (remaining > 0) {
+                remainingSpan.textContent = remaining;
+            } else {
+                button.disabled = true;
+                button.innerHTML = '<i class="fas fa-check-circle mr-2"></i>Tots els exercicis completats!';
+                button.classList.add('opacity-50');
+            }
+            
+            // Scroll suave al primer ejercicio nuevo
+            if (shown > 0) {
+                const firstNewExercise = container.children[visibleExercises[section] - shown];
+                firstNewExercise.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        // Show first section on load
+        window.addEventListener('load', () => {
+            showSection('adjectiu');
+            setTimeout(() => {
+                alert('🎉 Benvinguda! Practica per al teu examen de Català. Tens 10 exercicis per tema. Molta sort! 💪');
+            }, 500);
+        });
+    </script>
+</body>
+</html>

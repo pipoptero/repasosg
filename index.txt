@@ -1,0 +1,12 @@
+castellano_invitaciones_sinonimos_laH_tecnicismo_adjetivos
+catalan_determinantes_V_B_comic
+catalan_plural_singular_tipusnoms_concret_abstracte_indivudual_article
+catalan_verbs
+ingles_presentsimple_continuos
+mates_decimales_sumas_conversiones_multiplicaciones_divisiones
+mates_diciembre
+Mates_primer_examen_segundo_trimestre
+sumas_y_restas_rapidas
+repas_ciencies (sistema solar, el Agua, El relieve, la biosfera y los astros)
+mates_fracciones_media_rango (sumas y restas de fracciones con denominador diferentes, problemas de calcular media, moda, rango)
+medi_activitat_politica_recursos (activitat economica, recursos naturals, medi ambient, organitzacio politica)
