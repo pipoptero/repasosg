@@ -259,11 +259,12 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
 
   <section class="banner">
     <div class="banner-content">
-      <div class="banner-pill">🔔 Proper examen · Missió principal</div>
-      <h2>Català — P/B, T/D, C/G i polisèmia</h2>
-      <p class="banner-sub">Lletres finals · Paraules primitives · Famílies de paraules · Paraules polisèmiques · Text descriptiu</p>
+      <div class="banner-pill" id="properExamPill">🔔 Proper examen · Missió principal</div>
+      <h2 id="properExamTitle">Català — P/B, T/D, C/G i polisèmia</h2>
+      <p class="banner-sub" id="properExamTopics">Lletres finals · Paraules primitives · Famílies de paraules · Paraules polisèmiques · Text descriptiu</p>
       <div class="banner-actions">
-        <a href="catala_pb_td_cg_polisemia_descriptius.html" class="banner-btn">Començar missió ✨</a>
+        <a href="catala_pb_td_cg_polisemia_descriptius.html" class="banner-btn" id="properExamStart">Començar missió ✨</a>
+        <a href="catala_pb_td_cg_polisemia_descriptius.html?review=errors#repas-errors" class="soft-btn" id="properExamReview">Repassar errors ðŸ§©</a>
         <a href="#missions" class="soft-btn">Veure totes les proves 🗺️</a>
       </div>
     </div>
@@ -279,6 +280,7 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
       <p class="banner-sub">Exercicis curts i barrejats de català, castellà, matemàtiques, medi i anglès. Perfecte per practicar 10 minuts al dia.</p>
       <div class="banner-actions">
         <a href="mode_vacances_estiu.html" class="banner-btn">Entrar al mode vacances 🎲</a>
+        <a href="catala_pb_td_cg_polisemia_descriptius.html?review=errors#repas-errors" class="soft-btn" id="properExamReview">Repassar errors ðŸ§©</a>
         <a href="#missions" class="soft-btn">Continuar per assignatures 🗺️</a>
       </div>
     </div>
@@ -351,7 +353,7 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
         <div><div class="card-title">Català</div><div class="card-meta">5 missions disponibles</div></div>
       </div>
       <div class="card-body">
-        <a href="catala_pb_td_cg_polisemia_descriptius.html" class="lbtn featured">⭐ Proper examen <span class="badge-mini">nou</span><br>P/B, T/D, C/G, polisèmia i text descriptiu</a>
+        <a href="catala_pb_td_cg_polisemia_descriptius.html" class="lbtn featured" id="properExamMissionLink">⭐ Proper examen <span class="badge-mini">nou</span><br>P/B, T/D, C/G, polisèmia i text descriptiu</a>
         <a href="catalan_determinantes_V_B_comic.html" class="lbtn">Determinants, V/B i còmic</a>
         <a href="catalan_plural_singular_tipusnoms_concret_abstracte_indivudual_article.html" class="lbtn">Plural, singular i tipus de noms</a>
         <a href="catalan_verbs.html" class="lbtn">Els verbs</a>
@@ -408,6 +410,15 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
 </div>
 
 <script>
+const properExam={
+  subject:"CatalÃ ",
+  title:"P/B, T/D, C/G i polisÃ¨mia",
+  shortName:"P/B, T/D, C/G, polisÃ¨mia i text descriptiu",
+  url:"catala_pb_td_cg_polisemia_descriptius.html",
+  reviewUrl:"catala_pb_td_cg_polisemia_descriptius.html?review=errors#repas-errors",
+  topics:["Lletres finals","Paraules primitives","FamÃ­lies de paraules","Paraules polisÃ¨miques","Text descriptiu"],
+  keywords:["p","b","t","d","c","g","polisÃ¨mia","descriptiu","primitiva","famÃ­lia","catalÃ "]
+};
 const db={
   vacances:[{name:'Ruleta de missions d\'estiu',url:'mode_vacances_estiu.html',kw:['vacances','estiu','aleatori','ruleta','repàs ràpid','barrejat','random']}],
   castella:[
@@ -434,6 +445,26 @@ const db={
     {name:"1r examen 2n trimestre · Medi",url:"repas_ciencies.html",kw:["medi","ciències","naturalesa","natura"]}
   ]
 };
+function applyProperExam(){
+  const title=`${properExam.subject} â€” ${properExam.title}`;
+  const topics=properExam.topics.join(' Â· ');
+  const pill=document.getElementById('properExamPill');
+  if(pill) pill.textContent='ðŸ”” Proper examen Â· MissiÃ³ principal';
+  const titleEl=document.getElementById('properExamTitle');
+  if(titleEl) titleEl.textContent=title;
+  const topicsEl=document.getElementById('properExamTopics');
+  if(topicsEl) topicsEl.textContent=topics;
+  const start=document.getElementById('properExamStart');
+  if(start){start.href=properExam.url;start.textContent='ComenÃ§ar missiÃ³ âœ¨'}
+  const review=document.getElementById('properExamReview');
+  if(review){const n=readProperExamErrors();review.href=properExam.reviewUrl;review.textContent=n?`Repassar ${n} errors ðŸ§©`:'Repassar errors ðŸ§©'}
+  const mission=document.getElementById('properExamMissionLink');
+  if(mission){mission.href=properExam.url;mission.innerHTML=`â­ Proper examen <span class="badge-mini">nou</span><br>${properExam.shortName}`}
+  if(db.catala&&db.catala[0]) db.catala[0]={name:properExam.shortName,url:properExam.url,kw:properExam.keywords};
+}
+function readProperExamErrors(){
+  try{return JSON.parse(localStorage.getItem('catala_pb_td_cg_errors')||'[]').length}catch(e){return 0}
+}
 function toggleChat(){const b=document.getElementById('chatBox');b.classList.toggle('open');if(b.classList.contains('open'))document.getElementById('chatIn').focus()}
 function sendQ(m){document.getElementById('chatIn').value=m;sendMsg()}
 function addMsg(html,isUser){const d=document.createElement('div');d.className='msg '+(isUser?'user':'bot');d.innerHTML=isUser?`<div class="msg-bubble">${html}</div>`:`<div class="avatar">🤖</div><div class="msg-bubble">${html}</div>`;const ms=document.getElementById('chatMsgs');ms.appendChild(d);ms.scrollTop=ms.scrollHeight}
@@ -485,8 +516,10 @@ function resetGlobalProgress(){
   if(!confirm('Vols reiniciar el progrés local del Portal de Repàs en aquest navegador?')) return;
   localStorage.removeItem('catala_pb_td_cg_trofeus');
   localStorage.removeItem('portal_estiu_stats');
+  applyProperExam();
   refreshGlobalProgress();
 }
+applyProperExam();
 refreshGlobalProgress();
 
 </script>
