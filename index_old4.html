@@ -234,21 +234,6 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
 @keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 @keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-8px)}}
 @media(max-width:760px){.page{padding:18px 14px 58px}.hero{padding:22px 18px;border-radius:28px}.hero-top{align-items:flex-start}.hero-mascot{width:86px;height:86px;border-radius:24px;font-size:2.8rem}.chip{font-size:.9rem}.banner{grid-template-columns:1fr;padding:24px 20px;border-radius:28px}.banner-emoji{position:absolute;right:18px;top:18px;font-size:3.4rem;opacity:.55}.banner-actions a{width:100%}.section-head{align-items:flex-start;flex-direction:column}.legend{justify-content:flex-start}.grid{grid-template-columns:1fr}.chat-box{width:calc(100vw - 32px);right:16px;height:min(540px,calc(100vh - 120px))}.chat-btn{right:16px;bottom:16px}}
-
-.review-btn{
-  background:rgba(255,255,255,.10)!important;
-  border:2px solid rgba(255,255,255,.18)!important;
-  color:#5b556e!important;
-  font-weight:800!important;
-  opacity:1!important;
-  -webkit-text-fill-color:#5b556e!important;
-}
-
-.review-btn:hover{
-  background:rgba(255,255,255,.18)!important;
-  transform:translateY(-2px);
-}
-
 </style>
 </head>
 <body>
@@ -271,23 +256,75 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
       <div class="hero-mascot">🦊📚</div>
     </div>
   </section>
+
+  
+
+
+  
+
+
+  
+
+  
   <section class="progress-panel" style="margin-top:0;margin-bottom:28px;padding:24px">
     <div class="section-head" style="margin:0 0 18px">
       <div>
-        <h2>ðŸŽ‰ Sense exÃ mens!</h2>
-        <p>La pissarra estÃ  neta: cap missiÃ³ urgent aquesta setmana.</p>
+        <h2>🔥 Pròxims exàmens</h2>
+        <p>Accés ràpid als exàmens actius d’aquesta setmana.</p>
       </div>
     </div>
-    <div class="progress-card" style="text-align:center;min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px">
-      <div style="font-size:3.2rem;line-height:1">ðŸ›‹ï¸ðŸ“š</div>
-      <strong style="font-size:1.35rem">El monstre dels exÃ mens estÃ  de vacances.</strong>
-      <p style="color:var(--dim);font-weight:800;max-width:620px">Pots aprofitar per fer una ruleta curta de repÃ s, caÃ§ar errors pendents o simplement respirar una mica. Ben merescut.</p>
-      <div class="banner-actions" style="justify-content:center;margin-top:8px">
-        <a href="mode_vacances_estiu.html" class="banner-btn">Fer una ruleta suau ðŸŽ²</a>
-        <a href="#missions" class="soft-btn">Veure totes les missions ðŸ—ºï¸</a>
+
+    <div class="grid" style="gap:18px">
+
+      <div class="card" data-s="mates">
+        <div class="card-header">
+          <div class="card-icon">📐</div>
+          <div>
+            <div class="card-title">Matemàtiques</div>
+            <div class="card-meta">Nombres mixtos i àrees</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <a href="mates_mixtos_arees.html" class="lbtn featured">
+            ⭐ Començar missió
+          </a>
+        </div>
       </div>
+
+      <div class="card" data-s="english">
+        <div class="card-header">
+          <div class="card-icon">🇬🇧</div>
+          <div>
+            <div class="card-title">Anglès</div>
+            <div class="card-meta">Past Simple Adventure!</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <a href="ingles_pasado_verbos.html" class="lbtn featured">
+            ⭐ Començar missió
+          </a>
+        </div>
+      </div>
+
+      <div class="card" data-s="medi">
+        <div class="card-header">
+          <div class="card-icon">🧬</div>
+          <div>
+            <div class="card-title">Medi</div>
+            <div class="card-meta">Reproducció i nutrició</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <a href="medi_reproduccion_sexual_asexual_nuticion.html" class="lbtn featured">
+            ⭐ Començar missió
+          </a>
+        </div>
+      </div>
+
     </div>
   </section>
+
+
 <section class="banner" style="background:linear-gradient(135deg,#20C997,#4D96FF,#8B5CF6);box-shadow:0 18px 48px rgba(77,150,255,.25)">
     <div class="banner-content">
       <div class="banner-pill">🏖️ Repàs de vacances · Aleatori</div>
@@ -301,6 +338,11 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
     </div>
     <div class="banner-emoji">🏖️</div>
   </section>
+
+
+
+  
+  
 
 
 <section class="progress-panel" id="progres">
@@ -353,7 +395,7 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
     <div class="card" data-s="castella">
       <div class="card-header">
         <div class="card-icon">🇪🇸</div>
-        <div><div class="card-title">Castellà</div><div class="card-meta">2 missions disponibles</div></div>
+        <div><div class="card-title">Castellà</div><div class="card-meta">3 missions disponibles</div></div>
       </div>
       <div class="card-body">
         <a href="castellano_invitaciones_sinonimos_laH_tecnicismo_adjetivos.html" class="lbtn">Invitacions, sinònims i més</a>
@@ -389,7 +431,7 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
     <div class="card" data-s="mates">
       <div class="card-header">
         <div class="card-icon">🔢</div>
-        <div><div class="card-title">Matemàtiques</div><div class="card-meta">6 missions disponibles</div></div>
+        <div><div class="card-title">Matemàtiques</div><div class="card-meta">5 missions disponibles</div></div>
       </div>
       <div class="card-body">
         <a href="mates_mixtos_arees.html" class="lbtn featured">⭐ Proper examen <span class="badge-mini">nou</span><br>Nombres mixtos i àrees</a>
@@ -415,7 +457,7 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
     </div></div>
   </div>
 
-  <footer><p>© 2025 - 2026 Portal de Repàs 5è de Primària · Fet amb 💜 per estudiar millor</p></footer>
+  <footer><p>© 2025 Portal de Repàs 5è de Primària · Fet amb 💜 per estudiar millor</p></footer>
 </div>
 
 <button class="chat-btn" onclick="toggleChat()" title="Assistent d'estudi">🤖</button>
@@ -428,6 +470,15 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
 </div>
 
 <script>
+const properExam={
+  subject:"Matemàtiques",
+  title:"Nombres mixtos i àrees",
+  shortName:"Nombres mixtos i àrees",
+  url:"mates_mixtos_arees.html",
+  reviewUrl:"mates_mixtos_arees.html#app-content",
+  topics:["Nombres mixtos","Convex i còncau","Àrees de figures"],
+  keywords:["mates","matemàtiques","nombres mixtos","àrees","convex","còncau","figures"]
+};
 const db={
   vacances:[{name:'Ruleta de missions d\'estiu',url:'mode_vacances_estiu.html',kw:['vacances','estiu','aleatori','ruleta','repàs ràpid','barrejat','random']}],
   castella:[
@@ -455,6 +506,26 @@ const db={
     {name:"1r examen 2n trimestre · Medi",url:"repas_ciencies.html",kw:["medi","ciències","naturalesa","natura"]}
   ]
 };
+function applyProperExam(){
+  const title=`${properExam.subject} — ${properExam.title}`;
+  const topics=properExam.topics.join(' · ');
+  const pill=document.getElementById('properExamPill');
+  if(pill) pill.textContent='🔔 Proper examen · Missió principal';
+  const titleEl=document.getElementById('properExamTitle');
+  if(titleEl) titleEl.textContent=title;
+  const topicsEl=document.getElementById('properExamTopics');
+  if(topicsEl) topicsEl.textContent=topics;
+  const start=document.getElementById('properExamStart');
+  if(start){start.href=properExam.url;start.textContent='Començar missió ✨'}
+  const review=document.getElementById('properExamReview');
+  if(review){const n=readProperExamErrors();review.href=properExam.reviewUrl;review.textContent=n?`Repassar ${n} errors 🧩`:'Repassar errors 🧩'}
+  const mission=document.getElementById('properExamMissionLink');
+  if(mission){mission.href=properExam.url;mission.innerHTML=`⭐ Proper examen <span class="badge-mini">nou</span><br>${properExam.shortName}`}
+  if(db.catala&&db.catala[0]) db.catala[0]={name:properExam.shortName,url:properExam.url,kw:properExam.keywords};
+}
+function readProperExamErrors(){
+  try{return JSON.parse(localStorage.getItem('catala_pb_td_cg_errors')||'[]').length}catch(e){return 0}
+}
 function toggleChat(){const b=document.getElementById('chatBox');b.classList.toggle('open');if(b.classList.contains('open'))document.getElementById('chatIn').focus()}
 function sendQ(m){document.getElementById('chatIn').value=m;sendMsg()}
 function addMsg(html,isUser){const d=document.createElement('div');d.className='msg '+(isUser?'user':'bot');d.innerHTML=isUser?`<div class="msg-bubble">${html}</div>`:`<div class="avatar">🤖</div><div class="msg-bubble">${html}</div>`;const ms=document.getElementById('chatMsgs');ms.appendChild(d);ms.scrollTop=ms.scrollHeight}
@@ -506,8 +577,10 @@ function resetGlobalProgress(){
   if(!confirm('Vols reiniciar el progrés local del Portal de Repàs en aquest navegador?')) return;
   localStorage.removeItem('catala_pb_td_cg_trofeus');
   localStorage.removeItem('portal_estiu_stats');
+  applyProperExam();
   refreshGlobalProgress();
 }
+applyProperExam();
 refreshGlobalProgress();
 
 </script>

@@ -313,6 +313,14 @@ main{
       <button onclick="startFlash('salut')">Flash cards</button>
     </div>
 
+<div class="card">
+  <div style="font-size:3rem;">🎥</div>
+  <h3>Vídeo explicatiu</h3>
+  <p>Aprèn el temari amb un vídeo resum visual i divertit.</p>
+  <button onclick="showVideo()">Veure vídeo</button>
+</div>
+
+
   </div>
 
 </div>
@@ -362,7 +370,52 @@ Següent pregunta ➜
 
 </div>
 
+
+
+<div id="videoContainer" style="display:none;">
+
+  <div class="hero" style="margin-bottom:30px;">
+    <div class="hero-icon">🎬</div>
+    <h2>Vídeos explicatius</h2>
+    <p>
+      Mira els vídeos resum del temari abans de fer els tests i les flash cards.
+    </p>
+  </div>
+
+  <div class="sections">
+
+    <div class="card">
+      <div style="font-size:3rem;">🫀</div>
+      <h3>El cos humà</h3>
+      <p>Vídeo resum sobre el cos humà i la salut.</p>
+
+      <video controls preload="metadata"
+      style="width:100%;border-radius:18px;background:black;margin-top:15px;">
+        <source src="./El_cuerpo_humano(1).mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="card">
+      <div style="font-size:3rem;">🧬</div>
+      <h3>El plànol de la vida</h3>
+      <p>Descobreix el funcionament i els conceptes principals.</p>
+
+      <video controls preload="metadata"
+      style="width:100%;border-radius:18px;background:black;margin-top:15px;">
+        <source src="./El_plànol_de_la_vida.mp4" type="video/mp4">
+      </video>
+    </div>
+
+  </div>
+
+  <button class="back-home" onclick="goHome()">
+    ⬅ Tornar al menú
+  </button>
+
+</div>
+
 </main>
+
 
 <script>
 
@@ -851,6 +904,15 @@ flashIndex = currentFlash.length -1;
 showFlash();
 
 }
+
+
+function showVideo(){
+
+document.getElementById('home').style.display='none';
+document.getElementById('videoContainer').style.display='block';
+
+}
+
 
 function goHome(){
 

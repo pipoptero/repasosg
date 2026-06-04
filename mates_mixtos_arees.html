@@ -113,6 +113,83 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--white);min
 .btn-restart:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(255,211,61,.45)}
 .medal{font-size:4rem;margin-bottom:10px;display:block;animation:medalPop .6s .3s both cubic-bezier(.36,1.8,.5,1)}
 @keyframes medalPop{from{transform:scale(0) rotate(-20deg)}to{transform:scale(1) rotate(0)}}
+
+.fraccions-theory{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:24px;
+  padding:24px;
+  backdrop-filter:blur(12px);
+  margin-top:10px;
+  color:white;
+}
+
+.fraccions-theory .card{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  margin-bottom:20px;
+}
+
+.fraccions-theory h1,
+.fraccions-theory h2{
+  color:white;
+}
+
+.fraccions-theory .step{
+  background:rgba(255,255,255,.05);
+}
+
+.fraccions-theory .remember{
+  background:rgba(255,217,61,.12);
+}
+
+.fraccions-theory .fraction .top{
+  border-bottom:2px solid white;
+}
+
+.fraccions-theory .fraction{
+  display:inline-block;
+  vertical-align:middle;
+  text-align:center;
+  margin:0 3px;
+  font-size:1.1em;
+}
+
+.fraccions-theory .fraction .top{
+  display:block;
+  border-bottom:2px solid white;
+  padding:0 6px;
+  line-height:1.1;
+}
+
+.fraccions-theory .fraction .bottom{
+  display:block;
+  padding:0 6px;
+  line-height:1.1;
+}
+
+.fraccions-theory .mixed{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  font-weight:bold;
+}
+
+.fraccions-theory .center{
+  text-align:center;
+  font-size:1.5rem;
+  margin:25px 0;
+}
+
+.fraccions-theory .exercise{
+  background:rgba(107,255,184,.08);
+  border:1px solid rgba(107,255,184,.2);
+  padding:15px;
+  border-radius:10px;
+  margin-top:15px;
+}
+
+
 </style>
 </head>
 <body>
@@ -124,6 +201,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--white);min
   </div>
   <div class="tabs">
     <button class="tab active" id="tab-mixtos"  onclick="switchMode('mixtos',this)">🔢 Nombres Mixtos</button>
+    <button class="tab"        id="tab-fraccions" onclick="switchMode('fraccions',this)">📚 Teoria Fraccions</button>
     <button class="tab"        id="tab-figures" onclick="switchMode('figures',this)">🔷 Convex / Còncau</button>
     <button class="tab"        id="tab-arees"   onclick="switchMode('arees',this)">📐 Àrees</button>
   </div>
@@ -154,56 +232,214 @@ function createStars(){
 }
 
 // ── SECTION 1: NOMBRES MIXTOS ─────────────────────────────────────────────────
-const DENOMS=[2,3,4,5,6,8,10];
+const DENOMS=[1,2,3,4,5];
 
 function genMixed(){
-  let d1=DENOMS[randInt(0,DENOMS.length-1)],d2;
-  do{d2=DENOMS[randInt(0,DENOMS.length-1)]}while(d2===d1);
-  let w1=randInt(1,5),n1=randInt(1,d1-1);
-  let w2=randInt(1,5),n2=randInt(1,d2-1);
-  let op=Math.random()<.5?'+':'-';
-  if(op==='-'){
-    // ensure left > right
-    const lv=w1*d1*d2+n1*d2, rv=w2*d1*d2+n2*d1;
-    if(lv<rv){[w1,n1,d1,w2,n2,d2]=[w2,n2,d2,w1,n1,d1]}
-    if(lv===rv)return genMixed();
+  // Exercicis adaptats a 5è de primària:
+  // - Sense fraccions impròpies al resultat
+  // - Sense haver de transformar el resultat final
+  // - Restes sense préstecs
+
+  while(true){
+
+    let d1=DENOMS[randInt(0,DENOMS.length-1)],d2;
+    do{d2=DENOMS[randInt(0,DENOMS.length-1)]}while(d2===d1);
+
+    // Evitem denominador 1 a la fracció visible
+    if(d1===1) d1=2;
+    if(d2===1) d2=2;
+
+    let w1=randInt(1,5),n1=randInt(1,d1-1);
+    let w2=randInt(1,5),n2=randInt(1,d2-1);
+
+    let op=Math.random()<.5?'+':'-';
+
+    const L=lcm(d1,d2);
+
+    const f1=n1*(L/d1);
+    const f2=n2*(L/d2);
+
+    if(op==='+'){
+      // Evitem fraccions impròpies
+      if(f1+f2 >= L) continue;
+
+      return{type:'mixed',w1,n1,d1,w2,n2,d2,op};
+    }
+
+    // RESTES
+    const left = w1 + (n1/d1);
+    const right = w2 + (n2/d2);
+
+    if(left <= right){
+      [w1,n1,d1,w2,n2,d2]=[w2,n2,d2,w1,n1,d1];
+    }
+
+    const nf1=n1*(L/d1);
+    const nf2=n2*(L/d2);
+
+    // Evitem haver de demanar préstec
+    if(nf1 < nf2) continue;
+
+    return{type:'mixed',w1,n1,d1,w2,n2,d2,op};
   }
-  return{type:'mixed',w1,n1,d1,w2,n2,d2,op};
 }
 
 function solveMixed(ex){
   const{w1,n1,d1,w2,n2,d2,op}=ex;
-  const num1=w1*d1+n1, num2=w2*d2+n2;
+
   const L=lcm(d1,d2);
-  const rn=op==='+'?num1*(L/d1)+num2*(L/d2):num1*(L/d1)-num2*(L/d2);
-  const whole=Math.floor(rn/L);
-  const rem=rn%L;
-  const s=simplify(rem,L);
-  return{whole,num:s.n,den:s.d};
+
+  const f1=n1*(L/d1);
+  const f2=n2*(L/d2);
+
+  const whole = op==='+' ? w1+w2 : w1-w2;
+  const fracNum = op==='+' ? f1+f2 : f1-f2;
+
+  // IMPORTANT:
+  // NO simplifiquem automàticament.
+  // És el mètode escolar de 5è.
+
+  return{
+    whole,
+    num:fracNum,
+    den:L
+  };
 }
+
 
 function explainMixed(ex){
   const{w1,n1,d1,w2,n2,d2,op}=ex;
-  const imp1=w1*d1+n1, imp2=w2*d2+n2;
+
   const L=lcm(d1,d2);
-  const m1=L/d1,m2=L/d2;
-  const rn=op==='+'?imp1*m1+imp2*m2:imp1*m1-imp2*m2;
-  const whole=Math.floor(rn/L),rem=rn%L;
-  const s=simplify(rem,L);
-  const verb=op==='+'?'sumar':'restar';
-  return[
-    `<div class="step"><span class="step-num">Pas 1 🔄</span> Convertim cada nombre mixt en fracció impropia:<br>
-      ${w1} ${frac(n1,d1)} = ${frac(imp1,d1)} &nbsp;&nbsp; (${w1}×${d1}+${n1}=${imp1})<br>
-      ${w2} ${frac(n2,d2)} = ${frac(imp2,d2)} &nbsp;&nbsp; (${w2}×${d2}+${n2}=${imp2})</div>`,
-    `<div class="step"><span class="step-num">Pas 2 🔍</span> Per poder ${verb}-les necessitem el mcm de ${d1} i ${d2}:<br>mcm(${d1},${d2}) = <strong>${L}</strong></div>`,
-    `<div class="step"><span class="step-num">Pas 3 ${op==='+'?'➕':'➖'}</span> Convertim al denominador comú i ${op==='+'?'sumem':'restem'}:<br>
-      ${frac(imp1,d1)} = ${frac(imp1*m1,L)} &nbsp;·&nbsp; ${frac(imp2,d2)} = ${frac(imp2*m2,L)}<br>
-      ${frac(imp1*m1,L)} ${op} ${frac(imp2*m2,L)} = ${frac(rn,L)}</div>`,
-    rem>0
-      ?`<div class="step"><span class="step-num">Pas 4 🔙</span> Convertim el resultat en nombre mixt:<br>${frac(rn,L)} → ${Math.floor(rn/L)} enters i ${rn%L} de ${L} → <strong>${whole} ${frac(s.n,s.d)}</strong></div>`
-      :`<div class="step"><span class="step-num">Pas 4 ✅</span> El resultat ${frac(rn,L)} = <strong>${whole}</strong> (nombre enter exacte)</div>`
+
+  const imp1_num = (w1*d1)+n1;
+  const imp2_num = (w2*d2)+n2;
+
+  const conv1 = imp1_num*(L/d1);
+  const conv2 = imp2_num*(L/d2);
+
+  const resultNum = op==='+' ? conv1+conv2 : conv1-conv2;
+
+  const whole = Math.floor(resultNum/L);
+  const remain = resultNum % L;
+
+  // SUMAS
+  if(op==='+'){
+    return [
+
+      `<div class="step">
+        <span class="step-num">Pas 1 🔄</span>
+        Busquem el MCM de ${d1} i ${d2}.<br><br>
+
+        <strong>MCM(${d1},${d2}) = ${L}</strong>
+      </div>`,
+
+      `<div class="step">
+        <span class="step-num">Pas 2 ✏️</span>
+        Convertim les fraccions.<br><br>
+
+        ${frac(n1,d1)} = ${frac(n1*(L/d1),L)}<br><br>
+
+        ${frac(n2,d2)} = ${frac(n2*(L/d2),L)}
+      </div>`,
+
+      `<div class="step">
+        <span class="step-num">Pas 3 ➕</span>
+
+        Sumem enters i fraccions.<br><br>
+
+        ${w1} + ${w2} = ${w1+w2}<br><br>
+
+        ${frac(n1*(L/d1),L)} + ${frac(n2*(L/d2),L)}
+        =
+        ${frac((n1*(L/d1))+(n2*(L/d2)),L)}
+      </div>`,
+
+      `<div class="step">
+        <span class="step-num">Pas final ✅</span>
+
+        Resultat:<br><br>
+
+        <strong>${w1+w2} ${frac((n1*(L/d1))+(n2*(L/d2)),L)}</strong>
+      </div>`
+
+    ].join('');
+  }
+
+  // RESTAS
+  return [
+
+    `<div class="step">
+      <span class="step-num">Pas 1 🍰</span>
+      Convertim els nombres mixtes en fraccions impròpies.<br><br>
+
+      ${w1} ${frac(n1,d1)}
+      →
+      (${w1} × ${d1}) + ${n1} = ${imp1_num}<br><br>
+
+      Resultat:
+      ${frac(imp1_num,d1)}
+      <br><br>
+
+      ${w2} ${frac(n2,d2)}
+      →
+      (${w2} × ${d2}) + ${n2} = ${imp2_num}<br><br>
+
+      Resultat:
+      ${frac(imp2_num,d2)}
+    </div>`,
+
+    `<div class="step">
+      <span class="step-num">Pas 2 🔄</span>
+      Busquem el MCM de ${d1} i ${d2}.<br><br>
+
+      <strong>MCM(${d1},${d2}) = ${L}</strong>
+    </div>`,
+
+    `<div class="step">
+      <span class="step-num">Pas 3 ✏️</span>
+      Convertim les fraccions perquè tinguin el mateix denominador.<br><br>
+
+      ${frac(imp1_num,d1)}
+      =
+      ${frac(conv1,L)}
+      <br><br>
+
+      ${frac(imp2_num,d2)}
+      =
+      ${frac(conv2,L)}
+    </div>`,
+
+    `<div class="step">
+      <span class="step-num">Pas 4 ➖</span>
+      Restem els numeradors.<br><br>
+
+      ${frac(conv1,L)}
+      -
+      ${frac(conv2,L)}
+      =
+      ${frac(resultNum,L)}
+    </div>`,
+
+    `<div class="step">
+      <span class="step-num">Pas 5 🔢</span>
+      Convertim el resultat a nombre mixt.<br><br>
+
+      ${resultNum} ÷ ${L} = ${whole}
+      i sobra ${remain}
+    </div>`,
+
+    `<div class="step">
+      <span class="step-num">Pas final ✅</span>
+
+      Resultat:<br><br>
+
+      <strong>${whole} ${frac(remain,L)}</strong>
+    </div>`
+
   ].join('');
 }
+
 
 function mixedHTML(ex){
   const{w1,n1,d1,w2,n2,d2,op}=ex;
@@ -224,7 +460,7 @@ function mixedHTML(ex){
         <div class="mn-frac"><div class="q-sym">?</div><div class="fb"></div><div class="q-sym">?</div></div>
       </div>
     </div>
-    <p style="color:var(--dim);font-size:.88rem;text-align:center;margin-bottom:4px">Escriu el resultat com a nombre mixt (enter + fracció simplificada)</p>
+    <p style="color:var(--dim);font-size:.88rem;text-align:center;margin-bottom:4px">Escriu el resultat com a nombre mixt (NO cal simplificar la fracció)</p>
     <div class="answer-section">
       <div class="mixed-input-row">
         <div class="mn-int-input"><input type="number" id="ans-w" placeholder="?" min="0" max="99" autocomplete="off"></div>
@@ -591,30 +827,87 @@ function areaSVG(ex){
     </svg>`;
   }
 
-  // parallelogram: offset top-left corner to the right by 'skew'
+  // parallelogram corrected height
   if(ex.shape==='parallelogram'){
     const sc=Math.min(170/ex.b, 110/ex.h);
     const W=Math.round(ex.b*sc), H=Math.round(ex.h*sc);
-    const skew=Math.round(H*0.55);
-    const ox=20, oy=30;
-    // BL, BR, TR, TL
-    const BL=[ox+skew, oy+H], BR=[ox+skew+W, oy+H];
-    const TL=[ox, oy],         TR=[ox+W, oy];
+
+    // inclinació del paral·lelogram
+    const skew=40;
+
+    const ox=40, oy=35;
+
+    // punts
+    const BL=[ox+skew, oy+H];
+    const BR=[ox+skew+W, oy+H];
+    const TL=[ox, oy];
+    const TR=[ox+W, oy];
+
     const pts=`${TL[0]},${TL[1]} ${TR[0]},${TR[1]} ${BR[0]},${BR[1]} ${BL[0]},${BL[1]}`;
-    // foot of height: from TL drop perpendicular to base
-    const footX=TL[0]+skew, footY=BL[1];
-    return`<svg viewBox="0 0 260 210" width="280" height="226" xmlns="http://www.w3.org/2000/svg">
-      <polygon points="${pts}" fill="${CP}22" stroke="${CP}" stroke-width="2.5" stroke-linejoin="round"/>
-      <!-- height dashed -->
-      <line x1="${TL[0]}" y1="${TL[1]}" x2="${footX}" y2="${footY}"
-        stroke="${HA}" stroke-width="2" stroke-dasharray="5,4"/>
-      <!-- right angle -->
-      <rect x="${footX}" y="${footY-10}" width="10" height="10" fill="none" stroke="${HA}" stroke-width="1.5"/>
-      <!-- altura label -->
-      <text x="${TL[0]-8}" y="${TL[1]+H/2+5}" text-anchor="end" font-family="Fredoka One,cursive" font-size="14" fill="${HA}">h=${ex.h}</text>
-      <!-- base arrow -->
-      <line x1="${BL[0]}" y1="${BL[1]+18}" x2="${BR[0]}" y2="${BR[1]+18}" stroke="${DL}" stroke-width="1.5"/>
-      <text x="${BL[0]+W/2}" y="${BL[1]+34}" text-anchor="middle" font-family="Fredoka One,cursive" font-size="15" fill="${DL}">b = ${ex.b} cm</text>
+
+    // altura vertical REAL
+    const heightX = TL[0];
+    const heightTopY = TL[1];
+    const heightBottomY = BL[1];
+
+    return`<svg viewBox="0 0 300 230" width="300" height="230" xmlns="http://www.w3.org/2000/svg">
+
+      <polygon points="${pts}"
+        fill="${CP}22"
+        stroke="${CP}"
+        stroke-width="2.5"
+        stroke-linejoin="round"/>
+
+      <!-- altura REAL -->
+      <line
+        x1="${heightX}"
+        y1="${heightTopY}"
+        x2="${heightX}"
+        y2="${heightBottomY}"
+        stroke="${HA}"
+        stroke-width="2.5"
+        stroke-dasharray="5,4"/>
+
+      <!-- angle recte -->
+      <rect
+        x="${heightX}"
+        y="${heightBottomY-10}"
+        width="10"
+        height="10"
+        fill="none"
+        stroke="${HA}"
+        stroke-width="1.5"/>
+
+      <!-- text altura dins figura -->
+      <text
+        x="${TL[0]+28}"
+        y="${(heightTopY+heightBottomY)/2}"
+        text-anchor="start"
+        font-family="Fredoka One,cursive"
+        font-size="14"
+        fill="${HA}">
+        h = ${ex.h} cm
+      </text>
+
+      <!-- base -->
+      <line
+        x1="${BL[0]}"
+        y1="${BL[1]+20}"
+        x2="${BR[0]}"
+        y2="${BR[1]+20}"
+        stroke="${DL}"
+        stroke-width="2"/>
+
+      <text
+        x="${BL[0]+W/2}"
+        y="${BL[1]+38}"
+        text-anchor="middle"
+        font-family="Fredoka One,cursive"
+        font-size="15"
+        fill="${DL}">
+        b = ${ex.b} cm
+      </text>
+
     </svg>`;
   }
 }
@@ -636,6 +929,330 @@ function areaHTML(ex){
       </div>
       ${hint?`<p style="color:var(--dim);font-size:.78rem;margin-top:6px">${hint}</p>`:''}
     </div>`;
+}
+
+
+
+
+function renderFraccionsTheory(){
+  document.getElementById('app-content').innerHTML = `
+  <div class="fraccions-theory">
+
+  <div class="card">
+    <h1>📚 Teoria d'operacions amb fraccions</h1>
+
+    <div class="step">
+      <strong>🔢 Numerador i denominador</strong><br><br>
+
+      En la fracció:
+
+      <span class="fraction">
+        <span class="top">3</span>
+        <span class="bottom">4</span>
+      </span>
+
+      <br><br>
+
+      El <strong>3</strong> és el numerador (parts que tenim).<br>
+      El <strong>4</strong> és el denominador (parts totals).
+    </div>
+
+    <div class="step">
+      <strong>🍕 Fracció mixta</strong><br><br>
+
+      Un nombre mixt té una part entera i una fracció.<br><br>
+
+      Exemple:<br><br>
+
+      <span class="mixed">
+        2
+        <span class="fraction">
+          <span class="top">1</span>
+          <span class="bottom">3</span>
+        </span>
+      </span>
+    </div>
+
+    <div class="step">
+      <strong>🍰 Fracció impròpia</strong><br><br>
+
+      És una fracció on el numerador és més gran que el denominador.<br><br>
+
+      Exemple:<br><br>
+
+      <span class="fraction">
+        <span class="top">7</span>
+        <span class="bottom">4</span>
+      </span>
+    </div>
+
+    <div class="step">
+      <strong>🔄 Què és el MCM?</strong><br><br>
+
+      El MCM és el <strong>Mínim Comú Múltiple</strong>.<br><br>
+
+      Serveix per trobar un denominador igual quan les fraccions tenen denominadors diferents.
+    </div>
+
+    <div class="step">
+      <strong>📝 Exemple de MCM</strong><br><br>
+
+      Volem trobar el MCM de 3 i 6.<br><br>
+
+      Múltiples de 3 → 3, 6, 9, 12...<br>
+      Múltiples de 6 → 6, 12, 18...<br><br>
+
+      El primer número que es repeteix és el <strong>6</strong>.<br><br>
+
+      Per tant:<br>
+      <strong>MCM(3,6) = 6</strong>
+    </div>
+
+  </div>
+
+
+  <div class="card">
+    <h2>➕ Suma de fraccions mixtes</h2>
+
+    <div class="center">
+
+      <span class="mixed">
+        2
+        <span class="fraction">
+          <span class="top">1</span>
+          <span class="bottom">2</span>
+        </span>
+      </span>
+
+      +
+
+      <span class="mixed">
+        1
+        <span class="fraction">
+          <span class="top">1</span>
+          <span class="bottom">4</span>
+        </span>
+      </span>
+
+    </div>
+
+    <div class="step">
+      <strong>Pas 1:</strong> Busquem el MCM de 2 i 4.<br><br>
+
+      MCM(2,4) = 4
+    </div>
+
+    <div class="step">
+      <strong>Pas 2:</strong> Convertim les fraccions perquè tinguin denominador 4.<br><br>
+
+      <span class="fraction">
+        <span class="top">1</span>
+        <span class="bottom">2</span>
+      </span>
+
+      =
+
+      <span class="fraction">
+        <span class="top">2</span>
+        <span class="bottom">4</span>
+      </span>
+    </div>
+
+    <div class="step">
+      Ara l'operació queda:<br><br>
+
+      <span class="mixed">
+        2
+        <span class="fraction">
+          <span class="top">2</span>
+          <span class="bottom">4</span>
+        </span>
+      </span>
+
+      +
+
+      <span class="mixed">
+        1
+        <span class="fraction">
+          <span class="top">1</span>
+          <span class="bottom">4</span>
+        </span>
+      </span>
+    </div>
+
+    <div class="step">
+      <strong>Pas 3:</strong> Sumem enters i fraccions.<br><br>
+
+      2 + 1 = 3<br><br>
+
+      <span class="fraction">
+        <span class="top">2</span>
+        <span class="bottom">4</span>
+      </span>
+
+      +
+
+      <span class="fraction">
+        <span class="top">1</span>
+        <span class="bottom">4</span>
+      </span>
+
+      =
+
+      <span class="fraction">
+        <span class="top">3</span>
+        <span class="bottom">4</span>
+      </span>
+    </div>
+
+    <div class="step result">
+      ✅ Resultat final:<br><br>
+
+      <span class="mixed">
+        3
+        <span class="fraction">
+          <span class="top">3</span>
+          <span class="bottom">4</span>
+        </span>
+      </span>
+    </div>
+
+  </div>
+
+
+  <div class="card">
+    <h2>➖ Resta de fraccions mixtes</h2>
+
+    <div class="center">
+
+      <span class="mixed">
+        3
+        <span class="fraction">
+          <span class="top">2</span>
+          <span class="bottom">3</span>
+        </span>
+      </span>
+
+      -
+
+      <span class="mixed">
+        1
+        <span class="fraction">
+          <span class="top">1</span>
+          <span class="bottom">6</span>
+        </span>
+      </span>
+
+    </div>
+
+    <div class="step">
+      <strong>Pas 1:</strong> Passem els nombres mixtes a fraccions impròpies.
+    </div>
+
+    <div class="step">
+
+      3
+
+      <span class="fraction">
+        <span class="top">2</span>
+        <span class="bottom">3</span>
+      </span>
+
+      → (3 × 3) + 2 = 11<br><br>
+
+      Resultat:
+
+      <span class="fraction">
+        <span class="top">11</span>
+        <span class="bottom">3</span>
+      </span>
+    </div>
+
+    <div class="step">
+
+      1
+
+      <span class="fraction">
+        <span class="top">1</span>
+        <span class="bottom">6</span>
+      </span>
+
+      → (1 × 6) + 1 = 7<br><br>
+
+      Resultat:
+
+      <span class="fraction">
+        <span class="top">7</span>
+        <span class="bottom">6</span>
+      </span>
+    </div>
+
+    <div class="step">
+      <strong>Pas 2:</strong> Busquem el MCM de 3 i 6.<br><br>
+
+      MCM(3,6) = 6
+    </div>
+
+    <div class="step">
+      <strong>Pas 3:</strong> Convertim les fraccions.<br><br>
+
+      <span class="fraction">
+        <span class="top">11</span>
+        <span class="bottom">3</span>
+      </span>
+
+      =
+
+      <span class="fraction">
+        <span class="top">22</span>
+        <span class="bottom">6</span>
+      </span>
+    </div>
+
+    <div class="step">
+      <strong>Pas 4:</strong> Restem les fraccions.<br><br>
+
+      <span class="fraction">
+        <span class="top">22</span>
+        <span class="bottom">6</span>
+      </span>
+
+      -
+
+      <span class="fraction">
+        <span class="top">7</span>
+        <span class="bottom">6</span>
+      </span>
+
+      =
+
+      <span class="fraction">
+        <span class="top">15</span>
+        <span class="bottom">6</span>
+      </span>
+    </div>
+
+    <div class="step">
+      <strong>Pas 5:</strong> Convertim el resultat a nombre mixt.<br><br>
+
+      15 ÷ 6 = 2 i sobra 3
+    </div>
+
+    <div class="step result">
+      ✅ Resultat final:<br><br>
+
+      <span class="mixed">
+        2
+        <span class="fraction">
+          <span class="top">3</span>
+          <span class="bottom">6</span>
+        </span>
+      </span>
+    </div>
+
+  </div>
+
+  </div>`;
 }
 
 
@@ -692,9 +1309,16 @@ function checkAns(){
     const ud=ud_raw===''?1:parseInt(ud_raw);
     if(isNaN(uw)||isNaN(un)||isNaN(ud)||ud<=0){alert('Omple tots els camps 😊');return}
     const res=solveMixed(ex);
-    // normalise: user might enter 2+0/x which equals 2+0 = just 2
-    const us=simplify(un,ud);
-    ok=uw===res.whole&&us.n===res.num&&us.d===res.den;
+
+    // Acceptem tant simplificat com no simplificat
+    // comparem el valor matemàtic
+
+    const correctValue = res.den===0 ? 0 : res.num/res.den;
+    const userValue = ud===0 ? -999 : un/ud;
+
+    ok =
+      uw===res.whole &&
+      Math.abs(correctValue-userValue)<0.0001;
   } else {
     const v=parseFloat(document.getElementById('ans-area').value);
     if(isNaN(v)){alert('Escriu un número 😊');return}
@@ -763,6 +1387,12 @@ function switchMode(mode,btn){
   buildShapeQueue();
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
+
+  if(mode==='fraccions'){
+    renderFraccionsTheory();
+    return;
+  }
+
   render();
 }
 
