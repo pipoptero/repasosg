@@ -97,7 +97,7 @@ h1{
   box-shadow:0 4px 12px rgba(39,35,58,.06);
 }
 
-/* BANNER PROPER EXAMEN */
+/* BANNER ESTAT ACTUAL */
 .banner{
   position:relative;overflow:hidden;
   display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;
@@ -274,17 +274,17 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
   <section class="progress-panel" style="margin-top:0;margin-bottom:28px;padding:24px">
     <div class="section-head" style="margin:0 0 18px">
       <div>
-        <h2>ðŸŽ‰ Sense exÃ mens!</h2>
-        <p>La pissarra estÃ  neta: cap missiÃ³ urgent aquesta setmana.</p>
+        <h2>🎉 Sense exàmens!</h2>
+        <p>La pissarra està neta: cap missió urgent aquesta setmana.</p>
       </div>
     </div>
     <div class="progress-card" style="text-align:center;min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px">
-      <div style="font-size:3.2rem;line-height:1">ðŸ›‹ï¸ðŸ“š</div>
-      <strong style="font-size:1.35rem">El monstre dels exÃ mens estÃ  de vacances.</strong>
-      <p style="color:var(--dim);font-weight:800;max-width:620px">Pots aprofitar per fer una ruleta curta de repÃ s, caÃ§ar errors pendents o simplement respirar una mica. Ben merescut.</p>
+      <div style="font-size:3.2rem;line-height:1">🛋️📚</div>
+      <strong style="font-size:1.35rem">El monstre dels exàmens està de vacances.</strong>
+      <p style="color:var(--dim);font-weight:800;max-width:620px">Pots aprofitar per fer una ruleta curta de repàs, caçar errors pendents o simplement respirar una mica. Ben merescut.</p>
       <div class="banner-actions" style="justify-content:center;margin-top:8px">
-        <a href="mode_vacances_estiu.html" class="banner-btn">Fer una ruleta suau ðŸŽ²</a>
-        <a href="#missions" class="soft-btn">Veure totes les missions ðŸ—ºï¸</a>
+        <a href="mode_vacances_estiu.html" class="banner-btn">Fer una ruleta suau 🎲</a>
+        <a href="#missions" class="soft-btn">Veure totes les missions 🗺️</a>
       </div>
     </div>
   </section>
@@ -295,7 +295,7 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
       <p class="banner-sub">Exercicis curts i barrejats de català, castellà, matemàtiques, medi i anglès. Perfecte per practicar 10 minuts al dia.</p>
       <div class="banner-actions">
         <a href="mode_vacances_estiu.html" class="banner-btn">Entrar al mode vacances 🎲</a>
-        <a href="catala_pb_td_cg_polisemia_descriptius.html?review=errors#repas-errors" class="soft-btn" id="properExamReview">Repassar errors 🧩</a>
+        <a href="#missions" class="soft-btn">Triar missió curta 🧩</a>
         <a href="#missions" class="soft-btn">Continuar per assignatures 🗺️</a>
       </div>
     </div>
@@ -381,7 +381,7 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
         <div><div class="card-title">Anglès</div><div class="card-meta">2 missions available</div></div>
       </div>
       <div class="card-body">
-        <a href="ingles_pasado_verbos.html" class="lbtn featured">⭐ Nou examen <span class="badge-mini">nou</span><br>Past Simple Adventure!</a>
+        <a href="ingles_pasado_verbos.html" class="lbtn">Past Simple Adventure!</a>
         <a href="ingles_presentsimple_continuos.html" class="lbtn">Present simple &amp; continuous</a>
       </div>
     </div>
@@ -392,7 +392,7 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
         <div><div class="card-title">Matemàtiques</div><div class="card-meta">6 missions disponibles</div></div>
       </div>
       <div class="card-body">
-        <a href="mates_mixtos_arees.html" class="lbtn featured">⭐ Proper examen <span class="badge-mini">nou</span><br>Nombres mixtos i àrees</a>
+        <a href="mates_mixtos_arees.html" class="lbtn">Nombres mixtos i &agrave;rees</a>
         <a href="mates_decimales_sumas_conversiones_multiplicaciones_divisiones.html" class="lbtn">Decimals i operacions</a>
         <a href="mates_diciembre.html" class="lbtn">Exercicis de desembre</a>
         <a href="mates_sumas_y_restas_rapidas.html" class="lbtn">Sumes i restes ràpides ⚡</a>
@@ -491,7 +491,7 @@ function refreshGlobalProgress(){
   const advice=document.getElementById('progressAdvice');
   if(headline)headline.textContent=p.total===0?'Encara no hi ha trofeus guardats':('Has guanyat '+p.total+' de '+p.max+' trofeus globals');
   if(advice){
-    if(p.total===0) advice.textContent='Comença pel proper examen o pel mode vacances per encendre els primers trofeus.';
+    if(p.total===0) advice.textContent='Comença pel mode vacances o tria una missió curta per encendre els primers trofeus.';
     else if(p.percent<50) advice.textContent='Bon inici! Una partida curta de vacances o un exercici de català ja farà pujar el marcador.';
     else if(p.percent<100) advice.textContent='Molt bé! Ja hi ha una bona col·lecció. Objectiu: completar els trofeus que falten.';
     else advice.textContent='Portal dominat! Tots els trofeus principals estan aconseguits.';
