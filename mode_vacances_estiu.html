@@ -98,6 +98,7 @@ const reviewSources = [
  {s:'catala', file:'catalan_adjectiu_noticia_s_sorda_sonora.html', label:'Català · Notícia i adjectiu'},
  {s:'castella', file:'castellano_invitaciones_sinonimos_laH_tecnicismo_adjetivos.html', label:'Castellà · Invitacions i sinònims'},
  {s:'castella', file:'castellano_z_s_CC_texto_instructivo.html', label:'Castellà · Z, S, CC'},
+ {s:'castella', file:'castellano_tilde_bv_.html', label:'Castella - Tildes, B/V, G/J'},
  {s:'mates', file:'mates_mixtos_arees.html', label:'Mates · Mixtos i àrees'},
  {s:'mates', file:'mates_decimales_sumas_conversiones_multiplicaciones_divisiones.html', label:'Mates · Decimals'},
  {s:'mates', file:'mates_diciembre.html', label:'Mates · Desembre'},
@@ -123,6 +124,12 @@ const fallbackQuestions = {
  'castellano_z_s_CC_texto_instructivo.html':[
   {s:'castella',l:'easy',type:'choice',q:'Cual esta bien escrita?',opts:['zapato','sapato','capato','zappato'],a:'zapato',h:'Zapato se escribe con z.'},
   {s:'castella',l:'medium',type:'choice',q:'Un texto instructivo suele usar...',opts:['pasos ordenados','rimas largas','personajes fantasticos','versos'],a:'pasos ordenados',h:'Sirve para explicar como hacer algo.'}
+ ],
+ 'castellano_tilde_bv_.html':[
+  {s:'castella',l:'easy',type:'choice',q:'La palabra arbol es...',opts:['Aguda','Llana','Esdrujula','Sobresdrujula'],a:'Llana',h:'Arbol es llana y lleva tilde porque no acaba en vocal, n o s.'},
+  {s:'castella',l:'easy',type:'choice',q:'Elige el plural de pez.',opts:['peces','pezes','peces','peces'],a:'peces',h:'Las palabras terminadas en z cambian z por c en plural.'},
+  {s:'castella',l:'medium',type:'choice',q:'Que letra falta en viaje?',opts:['g','j','b','v'],a:'j',h:'Viaje se escribe con j.'},
+  {s:'castella',l:'medium',type:'choice',q:'Que palabra significa borde de un rio, lago o mar?',opts:['orilla','llave','silla','pastilla'],a:'orilla',h:'Orilla se escribe con ll.'}
  ],
  'mates_mixtos_arees.html':[
   {s:'mates',l:'easy',type:'choice',q:'Un numero mixto tiene...',opts:['parte entera y fraccion','solo decimales','solo numerador','solo denominador'],a:'parte entera y fraccion',h:'Ejemplo: 2 1/3.'},
@@ -270,6 +277,51 @@ function extractAcademyDomQuestions(doc,source,seen,out){
   }
 }
 
+function promptFromBox(box,source){
+  if(!box)return source.label;
+  const p=box.querySelector('p,.question-text,.qtext,.prompt,h3,h2');
+  if(p)return clean(p.textContent);
+  return promptForField(box,source);
+}
+function optionTextForValue(container,value){
+  const opt=container.querySelector('option[value="'+CSS.escape(value)+'"]');
+  if(opt)return clean(opt.textContent);
+  const input=container.querySelector('input[value="'+CSS.escape(value)+'"]');
+  if(input){const label=input.closest('label');return label?clean(label.textContent):clean(input.value)}
+  return clean(value);
+}
+function extractMarkedDomQuestions(doc,source,seen,out){
+  doc.querySelectorAll('[data-ans]').forEach(field=>{
+    const style=(field.getAttribute('style')||'').toLowerCase();
+    if(style.includes('display:none'))return;
+    const answer=field.getAttribute('data-ans');
+    if(!answer)return;
+    const q=fieldSentence(field)||promptForField(field,source);
+    addUnique(out,{s:source.s,l:levelFromQuestion(q),type:'input',q,a:answer,h:'Pregunta importada de '+source.label+'.'},seen);
+  });
+  doc.querySelectorAll('[data-correct]').forEach(box=>{
+    const answer=box.getAttribute('data-correct');
+    if(!answer)return;
+    const select=box.querySelector('select');
+    const radios=[...box.querySelectorAll('input[type="radio"]')];
+    const q=promptFromBox(box,source);
+    if(select){
+      const opts=[...select.querySelectorAll('option')].map(o=>clean(o.textContent)).filter(o=>o&&!o.startsWith('--')&&o!=='?');
+      const a=optionTextForValue(box,answer);
+      if(opts.length>=2)addUnique(out,{s:source.s,l:levelFromQuestion(q),type:'choice',q,opts:shuffle(opts).slice(0,4),a,h:'Pregunta importada de '+source.label+'.'},seen);
+    }else if(radios.length>=2){
+      const opts=radios.map(r=>clean(r.closest('label')?.textContent||r.value)).filter(Boolean);
+      const a=optionTextForValue(box,answer);
+      addUnique(out,{s:source.s,l:levelFromQuestion(q),type:'choice',q,opts:shuffle(opts).slice(0,4),a,h:'Pregunta importada de '+source.label+'.'},seen);
+    }
+  });
+  doc.querySelectorAll('[data-gap]').forEach(row=>{
+    const answer=row.getAttribute('data-gap');
+    const word=row.getAttribute('data-word')||clean(row.textContent);
+    if(answer&&word)addUnique(out,{s:source.s,l:'easy',type:'input',q:'Completa la palabra: '+word,a:answer,h:'Pregunta importada de '+source.label+'.'},seen);
+  });
+}
+
 function extractDomQuestions(doc,source,seen){
   const out=[];
   doc.querySelectorAll('[data-answer]').forEach(field=>{
@@ -284,6 +336,7 @@ function extractDomQuestions(doc,source,seen){
       addUnique(out,{s:source.s,l:levelFromQuestion(prompt),type:'input',q:prompt,a:answer,h:'Pregunta importada de '+source.label+'.'},seen);
     }
   });
+  extractMarkedDomQuestions(doc,source,seen,out);
   if(source.file==='examen_final_academia.html')extractAcademyDomQuestions(doc,source,seen,out);
   return out;
 }
