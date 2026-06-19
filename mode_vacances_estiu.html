@@ -247,7 +247,7 @@ function paintSubjectBars(s){
 function paintStats(){
   const s=load();
   bestStat.textContent='🏅 Millor: '+s.best+'%'; playedStat.textContent='📚 Partides: '+s.played; streakStat.textContent='🔥 Ratxa: '+streakDays(s.daily);
-  setText('bankCount',fullBank?fullBank.length:baseBank.length);
+  setText('bankCount',fullBank?fullBank.length:'...');
   setText('todayDone',s.daily[todayKey()]&&s.daily[todayKey()].done?'fet':'pendent');
   setText('dailyStreak',streakDays(s.daily));
   setText('errorCount',s.errors.length);
@@ -427,7 +427,7 @@ function parseStringList(raw){
 function scriptString(v){return clean(String(v||'').replace(/\\n/g,' ').replace(/\\'/g,"'").replace(/\\"/g,'"').replace(/\\u([0-9a-fA-F]{4})/g,(_,h)=>String.fromCharCode(parseInt(h,16))))}
 function parseScriptOptions(raw){return parseCallStrings(raw).map(scriptString).filter(Boolean)}
 function addScriptQuestion(out,seen,source,q,opts,answer,h){
-  q=scriptString(q); opts=(opts||[]).map(scriptString).filter(Boolean); answer=scriptString(answer); h=scriptString(h||'Practica el concepte i torna-ho a provar.');
+  q=scriptString(q); opts=(opts||[]).map(scriptString).filter(Boolean); answer=scriptString(answer); h=scriptString(h||('La resposta correcta es "'+answer+'". Repassa el tema: '+source.label+'.'));
   if(!q||opts.length<2||!answer)return;
   addUnique(out,{s:source.s,l:'medium',type:'choice',q,opts,a:answer,h},seen);
 }
@@ -438,7 +438,9 @@ function extractScriptQuestions(html,source,seen){
   while((m=objectRe.exec(html))){
     const opts=parseScriptOptions(m[3]);
     const answer=m[6]!=null?(opts[parseInt(m[6],10)]||m[6]):m[5];
-    addScriptQuestion(out,seen,source,m[2],opts,answer,'');
+    const tail=html.slice(m.index,Math.min(html.length,objectRe.lastIndex+900));
+    const ex=tail.match(/(?:explanation|e|h)\s*:\s*(['"\x60])((?:\\.|(?!\1)[\s\S])*?)\1/);
+    addScriptQuestion(out,seen,source,m[2],opts,answer,ex?ex[2]:'');
   }
   const quizRe=/\{[\s\S]{0,1800}?q\s*:\s*(['"\x60])((?:\\.|(?!\1)[\s\S])*?)\1[\s\S]{0,1800}?a\s*:\s*\[([\s\S]*?)\][\s\S]{0,700}?c\s*:\s*(\d+)[\s\S]{0,700}?(?:e|explanation|h)?\s*:?\s*(?:(['"\x60])((?:\\.|(?!\5)[\s\S])*?)\5)?/g;
   while((m=quizRe.exec(html))){
@@ -532,6 +534,7 @@ async function startErrors(){
 let currentPlan='free';
 let sessionMistakes=[];
 async function startGame(){
+  if(!fullBank){setText('bankCount','...');say('Acabant de carregar el banc gran de preguntes...')}
   const all=await loadExternalBank();
   let sub=subject.value, lev=level.value, n=parseInt(count.value,10);
   currentPlan=plan?plan.value:'free';
@@ -581,19 +584,25 @@ function answerInput(){
   let v=document.getElementById('freeAns').value;let q=game[idx];let ok=norm(v)===norm(q.a);
   answered=true;document.getElementById('freeAns').style.borderColor=ok?'#16a34a':'#dc2626';afterAnswer(ok);
 }
+function answerHelp(q){return q.h||'Mira la resposta correcta i torna-la a provar quan repassis errors.'}
+function nextQuestion(){idx++;showQ()}
 function afterAnswer(ok){
   let q=game[idx];
+  const feedback=document.getElementById('fb');
+  const hintBox=document.getElementById('hint');
   if(ok){
     score++; removeError(q);
-    fb.innerHTML='<span class="ok">Correcte! ⭐</span>';beep();burst();say('Punt aconseguit!')
+    feedback.innerHTML='<span class="ok">Correcte! ⭐</span>';beep();burst();say('Punt aconseguit!');
+    bar.style.width=((idx+1)/game.length*100)+'%';
+    setTimeout(()=>{idx++;showQ()},850);
   }else{
     sessionMistakes.push(q); addError(q);
-    fb.innerHTML='<span class="bad">Quasi! Resposta: '+esc(q.a)+'</span>';
-    hint.style.display='block'; hint.textContent='Pista: '+(q.h||'Torna-la a provar al repassar errors.');
-    say('Aquesta queda guardada per repassar-la despres.')
+    feedback.innerHTML='<span class="bad">Quasi! La resposta correcta és: <strong>'+esc(q.a)+'</strong></span>';
+    hintBox.style.display='block';
+    hintBox.innerHTML='<strong>Explicació:</strong> '+esc(answerHelp(q))+'<div class="btns"><button class="green" onclick="nextQuestion()">Següent pregunta</button><button class="gold" onclick="startErrors()">Repassar errors</button></div>';
+    bar.style.width=((idx+1)/game.length*100)+'%';
+    say('Aquesta queda guardada. Llegim la resposta i després continuem.')
   }
-  bar.style.width=((idx+1)/game.length*100)+'%';
-  setTimeout(()=>{idx++;showQ()}, ok?850:1900);
 }
 function finish(){
   let pct=Math.round(score/game.length*100);
@@ -617,8 +626,9 @@ function finish(){
 }
 
 
-paintStats();
-loadExternalBank().then(()=>paintStats()).catch(()=>say('Mode vacances preparat amb preguntes base.'));
+setText('bankCount','...');
+say('Carregant preguntes de totes les pàgines de repàs...');
+loadExternalBank().then(()=>paintStats()).catch(()=>{paintStats();say('Mode vacances preparat amb preguntes base.')});
 </script>
 </body>
 </html>
