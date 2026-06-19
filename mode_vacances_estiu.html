@@ -423,32 +423,32 @@ function parseStringList(raw){
   return values.map(clean).filter(Boolean);
 }
 
+
+function scriptString(v){return clean(String(v||'').replace(/\\n/g,' ').replace(/\\'/g,"'").replace(/\\"/g,'"').replace(/\\u([0-9a-fA-F]{4})/g,(_,h)=>String.fromCharCode(parseInt(h,16))))}
+function parseScriptOptions(raw){return parseCallStrings(raw).map(scriptString).filter(Boolean)}
+function addScriptQuestion(out,seen,source,q,opts,answer,h){
+  q=scriptString(q); opts=(opts||[]).map(scriptString).filter(Boolean); answer=scriptString(answer); h=scriptString(h||'Practica el concepte i torna-ho a provar.');
+  if(!q||opts.length<2||!answer)return;
+  addUnique(out,{s:source.s,l:'medium',type:'choice',q,opts,a:answer,h},seen);
+}
 function extractScriptQuestions(html,source,seen){
   const out=[];
-  const objectRe=/\{[\s\S]{0,900}?(?:q|question)\s*:\s*(['"`])((?:\\.|(?!\1)[\s\S])*?)\1[\s\S]{0,900}?(?:opts|options)\s*:\s*\[([\s\S]*?)\][\s\S]{0,400}?(?:a|answer|correct)\s*:\s*(?:(['"`])((?:\\.|(?!\4)[\s\S])*?)\4|(\d+))/g;
   let m;
+  const objectRe=/\{[\s\S]{0,2200}?(?:q|question)\s*:\s*(['"\x60])((?:\\.|(?!\1)[\s\S])*?)\1[\s\S]{0,2200}?(?:opts|options)\s*:\s*\[([\s\S]*?)\][\s\S]{0,900}?(?:a|answer|correct|correctAnswer|correctIndex)\s*:\s*(?:(['"\x60])((?:\\.|(?!\4)[\s\S])*?)\4|(\d+))/g;
   while((m=objectRe.exec(html))){
-    const q=clean(m[2]);
-    const opts=parseStringList(m[3]).slice(0,6);
-    let a=m[5]!==undefined?clean(m[5]):opts[Number(m[6])];
-    if(q&&a&&opts.length>=2){
-      if(!opts.some(o=>norm(o)===norm(a)))opts.push(a);
-      addUnique(out,{s:source.s,l:levelFromQuestion(q),type:'choice',q,opts:shuffle(opts).slice(0,4),a,h:'Pregunta importada de '+source.label+'.'},seen);
-    }
+    const opts=parseScriptOptions(m[3]);
+    const answer=m[6]!=null?(opts[parseInt(m[6],10)]||m[6]):m[5];
+    addScriptQuestion(out,seen,source,m[2],opts,answer,'');
   }
-  const inputRe=/\{[\s\S]{0,500}?(?:q|question)\s*:\s*(['"`])((?:\\.|(?!\1)[\s\S])*?)\1[\s\S]{0,500}?(?:a|answer|correctAnswer)\s*:\s*(['"`])((?:\\.|(?!\3)[\s\S])*?)\3/g;
-  while((m=inputRe.exec(html))){
-    const q=clean(m[2]), a=clean(m[4]);
-    if(q&&a)addUnique(out,{s:source.s,l:levelFromQuestion(q),type:'input',q,a,h:'Pregunta importada de '+source.label+'.'},seen);
-  }
-  const quizRe=/\{[\s\S]{0,600}?q\s*:\s*(['"`])((?:\\.|(?!\1)[\s\S])*?)\1[\s\S]{0,600}?a\s*:\s*\[([\s\S]*?)\][\s\S]{0,250}?c\s*:\s*(\d+)/g;
+  const quizRe=/\{[\s\S]{0,1800}?q\s*:\s*(['"\x60])((?:\\.|(?!\1)[\s\S])*?)\1[\s\S]{0,1800}?a\s*:\s*\[([\s\S]*?)\][\s\S]{0,700}?c\s*:\s*(\d+)[\s\S]{0,700}?(?:e|explanation|h)?\s*:?\s*(?:(['"\x60])((?:\\.|(?!\5)[\s\S])*?)\5)?/g;
   while((m=quizRe.exec(html))){
-    const q=clean(m[2]), opts=parseStringList(m[3]).slice(0,6), a=opts[Number(m[4])];
-    if(q&&a&&opts.length>=2)addUnique(out,{s:source.s,l:levelFromQuestion(q),type:'choice',q,opts:shuffle(opts).slice(0,4),a,h:'Pregunta importada de '+source.label+'.'},seen);
+    const opts=parseScriptOptions(m[3]);
+    addScriptQuestion(out,seen,source,m[2],opts,opts[parseInt(m[4],10)],m[6]||'');
   }
-  const wordRe=/\{\s*word\s*:\s*(['"`])((?:\\.|(?!\1)[\s\S])*?)\1\s*,\s*correct\s*:\s*(['"`])((?:\\.|(?!\3)[\s\S])*?)\3/g;
-  while((m=wordRe.exec(html))){
-    addUnique(out,{s:source.s,l:'easy',type:'input',q:'Completa: '+clean(m[2]),a:clean(m[4]),h:'Pregunta importada de '+source.label+'.'},seen);
+  const correctTextRe=/\{[\s\S]{0,1800}?(?:q|question)\s*:\s*(['"\x60])((?:\\.|(?!\1)[\s\S])*?)\1[\s\S]{0,1800}?(?:answers|options|opts)\s*:\s*\[([\s\S]*?)\][\s\S]{0,900}?(?:correctText|correct|answer)\s*:\s*(['"\x60])((?:\\.|(?!\4)[\s\S])*?)\4/g;
+  while((m=correctTextRe.exec(html))){
+    const opts=parseScriptOptions(m[3]);
+    addScriptQuestion(out,seen,source,m[2],opts,m[5],'');
   }
   return out;
 }
@@ -466,8 +466,9 @@ async function loadExternalBank(){
       const html=await res.text();
       const doc=new DOMParser().parseFromString(html,'text/html');
       const before=all.length;
-      extractDomQuestions(doc,source,seen).forEach(q=>addUnique(all,q,seen));
-      extractScriptQuestions(html,source,seen).forEach(q=>addUnique(all,q,seen));
+      try{extractDomQuestions(doc,source,seen).forEach(q=>all.push(q));}catch(ex){console.warn('Extractor DOM fallit',source.file,ex)}
+      try{extractScriptQuestions(html,source,seen).forEach(q=>all.push(q));}catch(ex){console.warn('Extractor JS fallit',source.file,ex)}
+      try{if(source.file==='examen_final_academia.html')extractAcademyDomQuestions(doc,source,seen,all);}catch(ex){console.warn('Extractor academia fallit',source.file,ex)}
       if(all.length>before)loaded++; else (fallbackQuestions[source.file]||[]).forEach(q=>addUnique(all,{...q},seen));
     }catch(e){
       console.warn('No s’ha pogut carregar',source.file,e);
