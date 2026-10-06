@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portal de Repàs 6è de Primària</title>
+<title>Portal de Repàs 5è i 6è de Primària</title>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -251,6 +251,25 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
   transform:translateY(-2px);
 }
 
+.course-switch{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;
+  margin:0 0 24px;
+}
+.course-btn{
+  border:0;cursor:pointer;text-align:left;
+  background:#fff;border:3px solid #f0e9ff;border-radius:24px;
+  padding:18px;box-shadow:0 8px 24px rgba(39,35,58,.09);
+  font-family:'Nunito',sans-serif;color:var(--ink);
+  transition:transform .22s,box-shadow .22s,border-color .22s;
+}
+.course-btn:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(39,35,58,.13)}
+.course-btn.active{border-color:#8B5CF6;box-shadow:0 0 0 5px rgba(139,92,246,.12),0 14px 34px rgba(39,35,58,.13)}
+.course-btn strong{display:block;font-family:'Fredoka One',cursive;font-size:1.35rem;margin-bottom:4px}
+.course-btn span{display:block;color:var(--dim);font-weight:900;line-height:1.35}
+.course-hidden{display:none!important}
+.course-note{background:#fff;border:2px solid #ede9fe;border-radius:20px;padding:14px 16px;font-weight:900;color:var(--dim);margin:-6px 0 18px}
+@media(max-width:760px){.course-switch{grid-template-columns:1fr}.course-btn{padding:16px}}
+
 </style>
 </head>
 <body>
@@ -259,9 +278,9 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
   <section class="hero">
     <div class="hero-top">
       <div>
-        <div class="kicker">🎒 6è de Primària · Sala de missions</div>
+        <div class="kicker">🎒 5è i 6è de Primària · Sala de missions</div>
         <h1>Portal de Repàs</h1>
-        <p>Nou curs, noves missions: tria un repàs, entra als exercicis i suma punts d’estudi. Aquí cada examen és una aventura curta, clara i una mica més divertida 🚀</p>
+        <p>Tria curs, entra al repàs que toca i suma punts d’estudi. El 6è queda al davant per al curs actual, i el 5è queda guardat com a arxiu de consulta.</p>
         <div class="hero-chips">
           <span class="chip">🧠 Entrena</span>
           <span class="chip">✅ Corregeix</span>
@@ -273,7 +292,17 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
       <div class="hero-mascot">🦊📚</div>
     </div>
   </section>
-  <section class="progress-panel" style="margin-top:0;margin-bottom:28px;padding:24px">
+  <section class="course-switch" aria-label="Selector de curs">
+    <button class="course-btn active" type="button" data-course-btn="6" onclick="selectCourse('6')">
+      <strong>6è · Curs actual</strong>
+      <span>Exàmens i entrenaments nous d'aquest curs.</span>
+    </button>
+    <button class="course-btn" type="button" data-course-btn="5" onclick="selectCourse('5')">
+      <strong>5è · Arxiu</strong>
+      <span>Tot el material antic, separat per no barrejar missions.</span>
+    </button>
+  </section>
+  <section class="progress-panel" data-course-panel="6" style="margin-top:0;margin-bottom:28px;padding:24px">
     <div class="section-head" style="margin:0 0 18px">
       <div>
         <h2>🎯 Pròxim examen</h2>
@@ -351,8 +380,20 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
     </div>
   </div>
 
+  <div class="course-note" id="courseNote">Mostrant el curs actual de 6è. Canvia a 5è per veure l'arxiu dels repassos anteriors.</div>
+
   <div class="grid">
-    <div class="card" data-s="castella">
+    <div class="card" data-s="mates" data-course="6">
+      <div class="card-header">
+        <div class="card-icon">🔢</div>
+        <div><div class="card-title">Matemàtiques 6è</div><div class="card-meta">1 missió disponible</div></div>
+      </div>
+      <div class="card-body">
+        <a href="mates_6e_primer_examen.html" class="lbtn">🎯 Primer examen: numeració, potències, arrels, operacions i angles</a>
+      </div>
+    </div>
+
+    <div class="card" data-s="castella" data-course="5">
       <div class="card-header">
         <div class="card-icon">🇪🇸</div>
         <div><div class="card-title">Castellà</div><div class="card-meta">3 missions disponibles</div></div>
@@ -364,7 +405,7 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
       </div>
     </div>
 
-    <div class="card" data-s="catala">
+    <div class="card" data-s="catala" data-course="5">
       <div class="card-header">
         <div class="card-icon">🏴</div>
         <div><div class="card-title">Català</div><div class="card-meta">5 missions disponibles</div></div>
@@ -378,7 +419,7 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
       </div>
     </div>
 
-    <div class="card" data-s="english">
+    <div class="card" data-s="english" data-course="5">
       <div class="card-header">
         <div class="card-icon">🇬🇧</div>
         <div><div class="card-title">Anglès</div><div class="card-meta">3 missions available</div></div>
@@ -390,13 +431,12 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
       </div>
     </div>
 
-    <div class="card" data-s="mates">
+    <div class="card" data-s="mates" data-course="5">
       <div class="card-header">
         <div class="card-icon">🔢</div>
-        <div><div class="card-title">Matemàtiques</div><div class="card-meta">7 missions disponibles</div></div>
+        <div><div class="card-title">Matemàtiques</div><div class="card-meta">6 missions disponibles</div></div>
       </div>
       <div class="card-body">
-        <a href="mates_6e_primer_examen.html" class="lbtn">🎯 6è · Primer examen: numeració, potències, arrels, operacions i angles</a>
         <a href="mates_mixtos_arees.html" class="lbtn">Nombres mixtos i &agrave;rees</a>
         <a href="mates_decimales_sumas_conversiones_multiplicaciones_divisiones.html" class="lbtn">Decimals i operacions</a>
         <a href="mates_diciembre.html" class="lbtn">Exercicis de desembre</a>
@@ -407,7 +447,7 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
     </div>
 
     
-<div class="card" data-s="medi">
+<div class="card" data-s="medi" data-course="5">
       <div class="card-header">
         <div class="card-icon">🌍</div>
         <div><div class="card-title">Medi</div><div class="card-meta">3 missions disponibles</div></div>
@@ -420,7 +460,7 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
     </div></div>
   </div>
 
-  <footer><p>© 2025 - 2026 Portal de Repàs 6è de Primària · Fet amb 💜 per estudiar millor</p></footer>
+  <footer><p>© 2025 - 2026 Portal de Repàs 5è i 6è de Primària · Fet amb 💜 per estudiar millor</p></footer>
 </div>
 
 <button class="chat-btn" onclick="toggleChat()" title="Assistent d'estudi">🤖</button>
@@ -503,6 +543,16 @@ function showTyping(){const ms=document.getElementById('chatMsgs');const d=docum
 function removeTyping(){const t=document.getElementById('typing');if(t)t.remove()}
 function sendMsg(){const inp=document.getElementById('chatIn');const msg=inp.value.trim();if(!msg)return;addMsg(msg,true);inp.value='';document.getElementById('chatSend').disabled=true;showTyping();setTimeout(()=>{removeTyping();addMsg(getReply(msg),false);document.getElementById('chatSend').disabled=false;document.getElementById('chatIn').focus()},350+Math.random()*350)}
 
+function selectCourse(course){
+  document.querySelectorAll('[data-course-btn]').forEach(btn=>btn.classList.toggle('active',btn.dataset.courseBtn===course));
+  document.querySelectorAll('[data-course]').forEach(card=>card.classList.toggle('course-hidden',card.dataset.course!==course));
+  document.querySelectorAll('[data-course-panel]').forEach(panel=>panel.classList.toggle('course-hidden',panel.dataset.coursePanel!==course));
+  const note=document.getElementById('courseNote');
+  if(note)note.textContent=course==='6'
+    ? "Mostrant el curs actual de 6è. Canvia a 5è per veure l'arxiu dels repassos anteriors."
+    : "Mostrant l'arxiu de 5è. Aquests repassos queden guardats per consultar-los quan calgui.";
+}
+
 function safeJSON(key, fallback){
   try{return JSON.parse(localStorage.getItem(key)||fallback)}catch(e){return JSON.parse(fallback)}
 }
@@ -546,7 +596,9 @@ function resetGlobalProgress(){
   localStorage.removeItem('portal_estiu_stats');
   refreshGlobalProgress();
 }
+Object.assign(window,{toggleChat,sendQ,sendMsg,refreshGlobalProgress,resetGlobalProgress,selectCourse});
 refreshGlobalProgress();
+selectCourse('6');
 
 </script>
 </body>

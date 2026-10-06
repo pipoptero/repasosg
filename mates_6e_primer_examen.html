@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mates 6e - Primer examen</title>
+<title>Mates 6è - Primer examen</title>
 <style>
 :root{--ink:#27233a;--dim:#756d8d;--bg:#fff8ec;--card:#fff;--line:#ece7ff;--gold:#ffb347;--pink:#ff4d8d;--blue:#4d96ff;--green:#20c997;--purple:#8b5cf6;--red:#ff6b6b;--shadow:0 16px 42px rgba(39,35,58,.13)}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -12,13 +12,17 @@ body:before{content:"";position:fixed;inset:0;background-image:radial-gradient(c
 .page{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:22px 16px 70px}
 a{color:inherit}.top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:16px}.back{display:inline-flex;align-items:center;gap:8px;text-decoration:none;background:#fff;border:2px solid var(--line);border-radius:999px;padding:10px 14px;font-weight:900;box-shadow:0 6px 18px rgba(39,35,58,.08)}
 .hero{position:relative;overflow:hidden;background:rgba(255,255,255,.84);border:3px solid rgba(255,255,255,.96);border-radius:30px;padding:26px;box-shadow:var(--shadow);margin-bottom:18px}
-.hero:after{content:"6e";position:absolute;right:28px;top:18px;font-size:6.4rem;font-weight:900;color:rgba(255,179,71,.25);transform:rotate(8deg)}
+.hero:after{content:"6è";position:absolute;right:28px;top:18px;font-size:6.4rem;font-weight:900;color:rgba(255,179,71,.25);transform:rotate(8deg)}
 .pill{display:inline-flex;align-items:center;gap:8px;background:#27233a;color:#fff;border-radius:999px;padding:8px 14px;font-weight:900;text-transform:uppercase;font-size:.82rem;letter-spacing:.8px;margin-bottom:12px}
 h1{font-size:clamp(2rem,6vw,4rem);line-height:1.04;margin-bottom:10px;background:linear-gradient(135deg,#ff416c,#ffb347,#4d96ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
 .hero p{font-size:1.08rem;font-weight:800;color:var(--dim);max-width:760px}.chips{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}.chip{background:#fff;border:2px solid #f0e9ff;border-radius:999px;padding:9px 12px;font-weight:900}
 .panel{background:#fff;border:2px solid #fff;border-radius:26px;padding:18px;box-shadow:var(--shadow);margin:18px 0}.panel h2{font-size:1.6rem;margin-bottom:8px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}.mini{background:#f8f7ff;border:2px solid #ede9fe;border-radius:18px;padding:14px;font-weight:800}.mini strong{display:block;font-size:1.05rem;margin-bottom:6px}.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.tab{border:0;border-radius:999px;padding:11px 14px;font-weight:900;background:#ececf8;color:#27233a;cursor:pointer}.tab.active{background:#27233a;color:#fff}.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:12px}.control{background:#f8f7ff;border:2px solid #ede9fe;border-radius:18px;padding:12px}.control label{display:block;font-weight:900;margin-bottom:8px}.control select{width:100%;min-height:46px;border:2px solid #d8d0ff;border-radius:14px;padding:8px 10px;font-size:17px;background:#fff}
 .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}button,.btn{border:0;border-radius:999px;padding:12px 18px;min-height:50px;font-weight:900;font-size:16px;cursor:pointer;background:#27233a;color:#fff;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 5px 0 rgba(39,35,58,.18)}button.gold{background:var(--gold);color:#27233a}button.green{background:var(--green)}button.secondary{background:#ececf8;color:#27233a}.quiz{border:2px dashed #c4b5fd;border-radius:22px;padding:16px;margin-top:14px;background:linear-gradient(180deg,#fff,#fbfaff)}.qhead{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:10px}.tag{background:#fff5e6;color:#8a5200;border:2px solid #ffe1ad;border-radius:999px;padding:6px 10px;font-weight:900;font-size:.86rem}.qtext{font-size:1.18rem;font-weight:900;margin:8px 0}.options{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}.opt{text-align:left;background:#fff;color:#27233a;border:2px solid #ede9fe;box-shadow:none;border-radius:16px;min-height:54px}.opt.correct{background:#ecfdf5;border-color:#86efac}.opt.wrong{background:#fef2f2;border-color:#fca5a5}.feedback{margin-top:12px;font-weight:900}.ok{color:#168a4a}.bad{color:#dc2626}.hint{margin-top:10px;background:#fff7ed;border-left:6px solid #f59e0b;border-radius:16px;padding:12px;font-weight:800}.progress{height:16px;background:#e5e7eb;border-radius:999px;overflow:hidden;border:2px solid #fff;margin-top:12px}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--gold),var(--green));transition:.3s}
-.worksheet{display:grid;gap:12px}.row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;background:#fbfaff;border:2px solid #ede9fe;border-radius:16px;padding:12px;font-weight:900}.row input{width:180px;max-width:38vw;min-height:42px;border:2px solid #d8d0ff;border-radius:12px;padding:8px;font-size:17px}.row small{display:block;color:var(--dim);font-weight:800}.final{background:linear-gradient(135deg,#fff7ed,#eef2ff);border:3px solid #fde68a;border-radius:24px;padding:18px;text-align:center;margin-top:14px}.muted{color:var(--dim);font-weight:800}.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}@media(min-width:760px){.options{grid-template-columns:1fr 1fr}.panel{padding:22px}}
+.worksheet{display:grid;gap:12px}.row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;background:#fbfaff;border:2px solid #ede9fe;border-radius:16px;padding:12px;font-weight:900}.row input{width:180px;max-width:38vw;min-height:42px;border:2px solid #d8d0ff;border-radius:12px;padding:8px;font-size:17px}.row small{display:block;color:var(--dim);font-weight:800}.final{background:linear-gradient(135deg,#fff7ed,#eef2ff);border:3px solid #fde68a;border-radius:24px;padding:18px;text-align:center;margin-top:14px}.muted{color:var(--dim);font-weight:800}.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.study-nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.study-nav a{background:#fff;border:2px solid #ede9fe;border-radius:999px;padding:9px 12px;text-decoration:none;font-weight:900;color:#3b3358}
+.theory{display:grid;gap:14px}.theory-card{background:#fbfaff;border:2px solid #ede9fe;border-radius:20px;padding:16px}.theory-card h3{font-size:1.25rem;margin-bottom:8px}.theory-card p{font-weight:800;color:var(--dim);margin-bottom:8px}.theory-card ul{padding-left:22px;font-weight:800}.theory-card li{margin:5px 0}.example{background:#fff7ed;border-left:6px solid #f59e0b;border-radius:16px;padding:12px;margin-top:10px;font-weight:900}.steps{counter-reset:step;display:grid;gap:8px;margin-top:10px}.steps div{background:#fff;border:2px solid #ede9fe;border-radius:16px;padding:10px 12px;font-weight:900}.steps div:before{counter-increment:step;content:counter(step) ". ";color:#8b5cf6}
+.exercise-map{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:12px}.exercise-card{background:#fff;border:2px solid #ede9fe;border-radius:18px;padding:14px;font-weight:900}.exercise-card strong{display:block;margin-bottom:6px}.exercise-card p{color:var(--dim);font-size:.95rem;margin-bottom:10px}.exercise-card button{width:100%;min-height:46px}
+@media(min-width:760px){.options{grid-template-columns:1fr 1fr}.panel{padding:22px}}
 </style>
 </head>
 <body>
@@ -29,20 +33,86 @@ h1{font-size:clamp(2rem,6vw,4rem);line-height:1.04;margin-bottom:10px;background
     <h1>Mates 6è: primera missió</h1>
     <p>Repàs autocorregible inspirat en el llibre: numeració decimal, potències de base 10, arrels quadrades, operacions combinades i angles.</p>
     <div class="chips"><span class="chip">🧮 Operacions combinades</span><span class="chip">🔟 Potències</span><span class="chip">√ Arrels</span><span class="chip">📐 Angles</span></div>
+    <nav class="study-nav" aria-label="Apartats de la pàgina">
+      <a href="#teoria">Teoria</a>
+      <a href="#apartats">Exercicis per apartats</a>
+      <a href="#entrenament">Entrenament</a>
+      <a href="#fitxa">Fitxa ràpida</a>
+    </nav>
   </section>
 
-  <section class="panel">
-    <h2>Recordatori ràpid</h2>
-    <div class="grid">
-      <div class="mini"><strong>Ordre decimal</strong>Cada ordre val 10 vegades l'ordre de la dreta: U, D, C, UM, DM, CM, U. de milió...</div>
-      <div class="mini"><strong>Potències de base 10</strong>10<sup>4</sup> = 10.000. L'exponent indica el nombre de zeros.</div>
-      <div class="mini"><strong>Arrel quadrada</strong>√49 = 7 perquè 7 × 7 = 49. Si no és exacta, queda entre dos nombres consecutius.</div>
-      <div class="mini"><strong>Operacions combinades</strong>1r parèntesis, 2n multiplicacions/divisions, 3r sumes/restes.</div>
-      <div class="mini"><strong>Angles</strong>Complementaris sumen 90°. Suplementaris sumen 180°. Adjacents són consecutius i formen una recta.</div>
+  <section class="panel" id="teoria">
+    <h2>Teoria abans de practicar</h2>
+    <p class="muted">Cada apartat té la idea clau, un exemple i el error típic que convé vigilar.</p>
+    <div class="theory">
+      <article class="theory-card" id="teoria-numeracio">
+        <h3>1. Numeració decimal</h3>
+        <p>El nostre sistema és decimal: cada posició val 10 vegades més que la posició de la dreta. Per llegir nombres grans, separa'ls en grups de tres xifres.</p>
+        <ul>
+          <li>U, D, C: unitats, desenes i centenes.</li>
+          <li>UM, DM, CM: unitats, desenes i centenes de miler.</li>
+          <li>U. de milió, D. de milió, C. de milió: grup dels milions.</li>
+        </ul>
+        <div class="example">Exemple: 802.150.063 = 800.000.000 + 2.000.000 + 100.000 + 50.000 + 60 + 3.</div>
+      </article>
+      <article class="theory-card" id="teoria-potencies">
+        <h3>2. Potències de base 10</h3>
+        <p>Una potència de base 10 és una manera ràpida d'escriure 1 seguit de zeros. L'exponent diu quants zeros hi ha.</p>
+        <ul>
+          <li>10<sup>3</sup> = 1.000</li>
+          <li>10<sup>6</sup> = 1.000.000</li>
+          <li>35.268 = 3 × 10<sup>4</sup> + 5 × 10<sup>3</sup> + 2 × 10<sup>2</sup> + 6 × 10 + 8</li>
+        </ul>
+        <div class="example">Vigila: 10<sup>4</sup> no és 40. És 10.000.</div>
+      </article>
+      <article class="theory-card" id="teoria-arrels">
+        <h3>3. Arrels quadrades</h3>
+        <p>L'arrel quadrada busca quin nombre multiplicat per ell mateix dona el resultat.</p>
+        <ul>
+          <li>√49 = 7 perquè 7 × 7 = 49.</li>
+          <li>√81 = 9 perquè 9 × 9 = 81.</li>
+          <li>Si no és exacta, queda entre dos quadrats perfectes.</li>
+        </ul>
+        <div class="example">Exemple: √67 està entre 8 i 9, perquè 8<sup>2</sup> = 64 i 9<sup>2</sup> = 81.</div>
+      </article>
+      <article class="theory-card" id="teoria-operacions">
+        <h3>4. Operacions combinades</h3>
+        <p>Perquè el resultat sigui correcte, sempre cal seguir l'ordre d'operacions.</p>
+        <div class="steps">
+          <div>Primer resol els parèntesis.</div>
+          <div>Després multiplicacions i divisions, d'esquerra a dreta.</div>
+          <div>Finalment sumes i restes, d'esquerra a dreta.</div>
+        </div>
+        <div class="example">Exemple: 15 - 5 × 3 = 15 - 15 = 0. La multiplicació va abans que la resta.</div>
+      </article>
+      <article class="theory-card" id="teoria-angles">
+        <h3>5. Angles</h3>
+        <p>Els exercicis d'angles solen demanar completar fins a 90°, 180° o reconèixer relacions entre angles.</p>
+        <ul>
+          <li>Complementaris: sumen 90°.</li>
+          <li>Suplementaris: sumen 180°.</li>
+          <li>Consecutius: comparteixen vèrtex i un costat.</li>
+          <li>Adjacents: són consecutius i els costats no comuns formen una recta.</li>
+        </ul>
+        <div class="example">Exemple: el suplementari de 120° és 60°, perquè 180 - 120 = 60.</div>
+      </article>
     </div>
   </section>
 
-  <section class="panel">
+  <section class="panel" id="apartats">
+    <h2>Exercicis per apartats</h2>
+    <p class="muted">Comença per un bloc concret o fes la barreja completa quan ja ho tingui més segur.</p>
+    <div class="exercise-map">
+      <div class="exercise-card"><strong>Numeració</strong><p>Valor de xifres, anterior/posterior i descomposició.</p><button class="green" onclick="trainTopic('numeracio')">Practicar numeració</button></div>
+      <div class="exercise-card"><strong>Potències</strong><p>Base 10, zeros i expressió polinòmica.</p><button class="green" onclick="trainTopic('potencies')">Practicar potències</button></div>
+      <div class="exercise-card"><strong>Arrels</strong><p>Quadrats perfectes i arrels entre dos nombres.</p><button class="green" onclick="trainTopic('arrels')">Practicar arrels</button></div>
+      <div class="exercise-card"><strong>Operacions</strong><p>Parèntesis, multiplicacions, divisions, sumes i restes.</p><button class="green" onclick="trainTopic('operacions')">Practicar operacions</button></div>
+      <div class="exercise-card"><strong>Angles</strong><p>Complementaris, suplementaris, consecutius i adjacents.</p><button class="green" onclick="trainTopic('angles')">Practicar angles</button></div>
+      <div class="exercise-card"><strong>Problemes</strong><p>Enunciats tipus excursió, puntuacions i càlcul mental.</p><button class="green" onclick="trainTopic('problemes')">Practicar problemes</button></div>
+    </div>
+  </section>
+
+  <section class="panel" id="entrenament">
     <h2>Entrenament per blocs</h2>
     <p class="muted">Tria tema i fes una tanda curta. Si falla, es queda la resposta correcta i una explicació.</p>
     <div class="tabs" id="tabs"></div>
@@ -55,7 +125,7 @@ h1{font-size:clamp(2rem,6vw,4rem);line-height:1.04;margin-bottom:10px;background
     <div id="game"><p class="muted">Prem començar per veure preguntes tipus examen.</p></div>
   </section>
 
-  <section class="panel">
+  <section class="panel" id="fitxa">
     <h2>Fitxa ràpida autocorregible</h2>
     <p class="muted">Sis exercicis curts per escalfar abans de fer la tanda.</p>
     <div class="worksheet" id="worksheet"></div>
@@ -140,9 +210,11 @@ function norm(x){return String(x||'').trim().toLowerCase().normalize('NFD').repl
 function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
 function buildTabs(){const box=document.getElementById('tabs');box.innerHTML='<button class="tab active" data-topic="all" onclick="setTopic(this.dataset.topic)">Tot</button>'+Object.entries(topics).map(([k,v])=>'<button class="tab" data-topic="'+k+'" onclick="setTopic(this.dataset.topic)">'+v+'</button>').join('')}
 function setTopic(t){activeTopic=t;document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.topic===t))}
+function trainTopic(t){setTopic(t);document.getElementById('entrenament').scrollIntoView({behavior:'smooth',block:'start'});startQuiz(t)}
 function startQuiz(forceTopic){const topic=forceTopic||activeTopic,lev=document.getElementById('level').value,n=parseInt(document.getElementById('num').value,10);let pool=questionBank.filter(q=>(topic==='all'||q.topic===topic)&&(lev==='all'||q.level===lev));if(!pool.length)pool=questionBank.filter(q=>topic==='all'||q.topic===topic);game=shuffle(pool).slice(0,Math.min(n,pool.length));idx=0;score=0;answered=false;showQuestion()}
 function showQuestion(){answered=false;document.getElementById('bar').style.width=game.length?(idx/game.length*100)+'%':'0%';if(idx>=game.length){finish();return}const q=game[idx];let html='<div class="quiz"><div class="qhead"><span class="tag">'+topics[q.topic]+'</span><strong>Pregunta '+(idx+1)+'/'+game.length+'</strong></div><div class="qtext">'+esc(q.q)+'</div><div class="options">'+shuffle(q.opts).map(o=>'<button class="opt" data-val="'+esc(o)+'" onclick="answer(this,this.dataset.val)">'+esc(o)+'</button>').join('')+'</div><div class="feedback" id="fb"></div><div class="hint" id="hint" style="display:none"></div></div>';document.getElementById('game').innerHTML=html}
-function answer(btn,val){if(answered)return;answered=true;const q=game[idx],ok=norm(val)===norm(q.answer);document.querySelectorAll('.opt').forEach(b=>{if(norm(b.textContent)===norm(q.answer))b.classList.add('correct')});if(!ok)btn.classList.add('wrong');const fb=document.getElementById('fb'),hint=document.getElementById('hint');if(ok){score++;fb.innerHTML='<span class="ok">Correcte!</span>';setTimeout(()=>{idx++;showQuestion()},800)}else{fb.innerHTML='<span class="bad">Quasi. Resposta correcta: <strong>'+esc(q.answer)+'</strong></span>';hint.style.display='block';hint.innerHTML='<strong>Explicació:</strong> '+esc(q.explanation)+'<div class="btns"><button class="green" onclick="idx++;showQuestion()">Següent pregunta</button></div>'}document.getElementById('bar').style.width=((idx+1)/game.length*100)+'%'}
+function nextQuestion(){idx++;showQuestion()}
+function answer(btn,val){if(answered)return;answered=true;const q=game[idx],ok=norm(val)===norm(q.answer);document.querySelectorAll('.opt').forEach(b=>{if(norm(b.textContent)===norm(q.answer))b.classList.add('correct')});if(!ok)btn.classList.add('wrong');const fb=document.getElementById('fb'),hint=document.getElementById('hint');if(ok){score++;fb.innerHTML='<span class="ok">Correcte!</span>';setTimeout(nextQuestion,800)}else{fb.innerHTML='<span class="bad">Quasi. Resposta correcta: <strong>'+esc(q.answer)+'</strong></span>';hint.style.display='block';hint.innerHTML='<strong>Explicació:</strong> '+esc(q.explanation)+'<div class="btns"><button class="green" onclick="nextQuestion()">Següent pregunta</button></div>'}document.getElementById('bar').style.width=((idx+1)/game.length*100)+'%'}
 function finish(){const pct=Math.round(score/game.length*100);document.getElementById('game').innerHTML='<div class="final"><h2>'+(pct>=80?'Missió molt ben resolta!':'Entrenament completat')+'</h2><p>Has fet <strong>'+score+'/'+game.length+'</strong> encerts ('+pct+'%).</p><div class="btns" style="justify-content:center"><button class="green" onclick="startQuiz()">Nova tanda</button><button class="gold" onclick="startQuiz(&quot;all&quot;)">Barreja examen</button></div></div>'}
 const sheetItems=[
   {q:'Anterior de 201.000.000',a:'200.999.999',h:'Resta una unitat.'},
@@ -158,6 +230,7 @@ const sheetItems=[
 ];
 function renderWorksheet(){const items=shuffle(sheetItems).slice(0,6);document.getElementById('worksheet').innerHTML=items.map((it,i)=>'<div class="row"><div>'+esc(it.q)+'<small>'+esc(it.h)+'</small></div><input data-a="'+esc(it.a)+'" placeholder="Resposta"></div>').join('');document.getElementById('sheetFb').textContent=''}
 function checkWorksheet(){let ok=0,total=0;document.querySelectorAll('#worksheet input').forEach(inp=>{total++;const good=norm(inp.value)===norm(inp.dataset.a);if(good)ok++;inp.style.borderColor=good?'#16a34a':'#dc2626';if(!good)inp.value=inp.value+'  → '+inp.dataset.a});document.getElementById('sheetFb').innerHTML='Resultat fitxa: <strong>'+ok+'/'+total+'</strong>'}
+Object.assign(window,{setTopic,trainTopic,startQuiz,answer,nextQuestion,renderWorksheet,checkWorksheet});
 buildTabs();renderWorksheet();
 </script>
 </body>
