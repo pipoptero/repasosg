@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portal de Repàs 5è de Primària</title>
+<title>Portal de Repàs 6è de Primària</title>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -259,9 +259,9 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
   <section class="hero">
     <div class="hero-top">
       <div>
-        <div class="kicker">🎒 5è de Primària · Sala de missions</div>
+        <div class="kicker">🎒 6è de Primària · Sala de missions</div>
         <h1>Portal de Repàs</h1>
-        <p>Tria una missió, entra als exercicis i suma punts d’estudi. Aquí cada examen és una aventura curta, clara i una mica més divertida 🚀</p>
+        <p>Nou curs, noves missions: tria un repàs, entra als exercicis i suma punts d’estudi. Aquí cada examen és una aventura curta, clara i una mica més divertida 🚀</p>
         <div class="hero-chips">
           <span class="chip">🧠 Entrena</span>
           <span class="chip">✅ Corregeix</span>
@@ -276,17 +276,17 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
   <section class="progress-panel" style="margin-top:0;margin-bottom:28px;padding:24px">
     <div class="section-head" style="margin:0 0 18px">
       <div>
-        <h2>🎉 Sense exàmens!</h2>
-        <p>La pissarra està neta: cap missió urgent aquesta setmana.</p>
+        <h2>🎯 Pròxim examen</h2>
+        <p>Primer repte de 6è: matemàtiques amb numeració, potències, arrels, operacions i angles.</p>
       </div>
     </div>
     <div class="progress-card" style="text-align:center;min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px">
-      <div style="font-size:3.2rem;line-height:1">🛋️📚</div>
-      <strong style="font-size:1.35rem">El monstre dels exàmens està de vacances.</strong>
-      <p style="color:var(--dim);font-weight:800;max-width:620px">Pots aprofitar per fer una ruleta curta de repàs, caçar errors pendents o simplement respirar una mica. Ben merescut.</p>
+      <div style="font-size:3.2rem;line-height:1">🔢📐</div>
+      <strong style="font-size:1.35rem">Mates 6è · Primer examen del curs</strong>
+      <p style="color:var(--dim);font-weight:800;max-width:680px">Exercicis tipus llibre: sistema decimal, potències de base 10, arrel quadrada, operacions combinades, problemes i angles.</p>
       <div class="banner-actions exam-empty-actions" style="justify-content:center;margin-top:8px">
-        <a href="mode_vacances_estiu.html" class="banner-btn">Fer una ruleta suau 🎲</a>
-        <a href="#missions" class="soft-btn">Veure totes les missions 🗺️</a>
+        <a href="mates_6e_primer_examen.html" class="banner-btn">Preparar examen de mates 🎯</a>
+        <a href="mode_vacances_estiu.html" class="soft-btn">Fer una ruleta suau 🎲</a>
       </div>
     </div>
   </section>
@@ -393,9 +393,10 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
     <div class="card" data-s="mates">
       <div class="card-header">
         <div class="card-icon">🔢</div>
-        <div><div class="card-title">Matemàtiques</div><div class="card-meta">6 missions disponibles</div></div>
+        <div><div class="card-title">Matemàtiques</div><div class="card-meta">7 missions disponibles</div></div>
       </div>
       <div class="card-body">
+        <a href="mates_6e_primer_examen.html" class="lbtn">🎯 6è · Primer examen: numeració, potències, arrels, operacions i angles</a>
         <a href="mates_mixtos_arees.html" class="lbtn">Nombres mixtos i &agrave;rees</a>
         <a href="mates_decimales_sumas_conversiones_multiplicaciones_divisiones.html" class="lbtn">Decimals i operacions</a>
         <a href="mates_diciembre.html" class="lbtn">Exercicis de desembre</a>
@@ -419,7 +420,7 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
     </div></div>
   </div>
 
-  <footer><p>© 2025 - 2026 Portal de Repàs 5è de Primària · Fet amb 💜 per estudiar millor</p></footer>
+  <footer><p>© 2025 - 2026 Portal de Repàs 6è de Primària · Fet amb 💜 per estudiar millor</p></footer>
 </div>
 
 <button class="chat-btn" onclick="toggleChat()" title="Assistent d'estudi">🤖</button>
@@ -452,9 +453,11 @@ const db={
     {name:"Present simple & continuous",url:"ingles_presentsimple_continuos.html",kw:["present","simple","continuous","angles","english"]}
   ],
   mates:[
+    {name:"6è · Primer examen de mates",url:"mates_6e_primer_examen.html",kw:["6e","6è","sexto","primer examen","mates","matematiques","matematicas","numeracio","numeracion","potencies","potencias","base 10","arrels","raices","arrel quadrada","raiz cuadrada","operacions combinades","operaciones combinadas","angles","angulos"]},
     {name:"Decimals i operacions",url:"mates_decimales_sumas_conversiones_multiplicaciones_divisiones.html",kw:["decimals","sumes","conversions","multiplicacions","divisions","matemàtiques","mates"]},
     {name:"Exercicis de desembre",url:"mates_diciembre.html",kw:["desembre","matemàtiques","mates","exercicis"]},
     {name:"Sumes i restes ràpides",url:"mates_sumas_y_restas_rapidas.html",kw:["sumes","restes","ràpides","matemàtiques","mates"]},
+    {name:"Nombres mixtos i àrees",url:"mates_mixtos_arees.html",kw:["nombres mixtos","mixtos","arees","areas","superficie","fraccions","matemàtiques","mates"]},
     {name:"Fraccions, divisors, primers…",url:"Mates_primer_examen_segundo_trimestre.html",kw:["fraccions","divisors","primers","múltiples","matemàtiques","mates"]},
     {name:"Fraccions i estadística",url:"mates_fracciones_media_rango.html",kw:["fraccions","estadística","mitjana","moda","mediana","rang","matemàtiques","mates"]}
   ],
@@ -466,9 +469,10 @@ const db={
 };
 const categoryNames={vacances:'Mode vacances',castella:'Castella',catala:'Catala',angles:'Angles',mates:'Matematiques',medi:'Medi'};
 const stopWords=new Set('el la los las un una unos unas de del al a amb con y i o que para per por en es son esta este esto quiero vull necesito necessito practicar repasar repassar ayuda ajuda ejercicios exercicis hacer fer estudiar examen prueba tema me mi mis algo alguna algun sobre hoy ahora'.split(' '));
-const aliases={matematicas:'mates',matematiques:'mates',matematica:'mates',math:'mates',calculo:'mates',calcul:'mates',ingles:'angles',english:'angles',castellano:'castella',lengua:'castella',espanol:'castella',catalan:'catala',catala:'catala',ciencias:'medi',ciencies:'medi',naturales:'medi',sociales:'medi',vacaciones:'vacances',estiu:'vacances',summer:'vacances',fracciones:'fraccions',fraccion:'fraccions',decimales:'decimals',areas:'arees',verbos:'verbs',adjetivos:'adjectius',sinonimos:'sinonims',reproduccion:'reproduccio',nutricion:'nutricio',divisiones:'divisions',division:'divisions',multiplicaciones:'multiplicacions',sumas:'sumes',restas:'restes',rango:'rang',media:'mitjana',rapidas:'rapides',rapida:'rapides'};
+const aliases={matematicas:'mates',matematiques:'mates',matematica:'mates',math:'mates',calculo:'mates',calcul:'mates',sexto:'6e',sise:'6e',potencias:'potencies',raices:'arrels',raiz:'arrel',angulos:'angles',operaciones:'operacions',combinadas:'combinades',numeracion:'numeracio',ingles:'angles',english:'angles',castellano:'castella',lengua:'castella',espanol:'castella',catalan:'catala',catala:'catala',ciencias:'medi',ciencies:'medi',naturales:'medi',sociales:'medi',vacaciones:'vacances',estiu:'vacances',summer:'vacances',fracciones:'fraccions',fraccion:'fraccions',decimales:'decimals',areas:'arees',verbos:'verbs',adjetivos:'adjectius',sinonimos:'sinonims',reproduccion:'reproduccio',nutricion:'nutricio',divisiones:'divisions',division:'divisions',multiplicaciones:'multiplicacions',sumas:'sumes',restas:'restes',rango:'rang',media:'mitjana',rapidas:'rapides',rapida:'rapides'};
 const resourceNotes={
   'mode_vacances_estiu.html':'Preguntes barrejades de totes les assignatures. Ideal si vols practicar una estona curta.',
+  'mates_6e_primer_examen.html':'Primer examen de matematiques de 6e: numeracio decimal, potencies de base 10, arrels quadrades, operacions combinades, problemes i angles.',
   'examen_final_academia.html':'Preparacio del final d\'angles de l\'academia: sports, food, time, prepositions, there is/are, present simple, can, years, adjectives and present continuous.',
   'ingles_pasado_verbos.html':'Practica de past simple i verbs en angles.',
   'ingles_presentsimple_continuos.html':'Diferencia entre present simple i present continuous.',
@@ -490,7 +494,7 @@ function scoreResource(r,q,tks){const hay=resourceHaystack(r),n=normalizeText(q)
 function findRes(q){const tks=queryTokens(q),cat=categoryFromQuery(q,tks);let res=allResources().map(r=>scoreResource(r,q,tks));if(cat&&tks.length<=1)res=res.map(r=>({...r,score:r.cat===cat?r.score+4:r.score}));return res.filter(r=>r.score>0).sort((a,b)=>b.score-a.score||a.name.localeCompare(b.name)).slice(0,5)}
 function chatLink(r){return '<a href="'+r.url+'" class="chat-link" target="_blank">'+r.name+'</a>'}
 function linkList(items){return items.map(chatLink).join('')}
-function getReply(q){const n=normalizeText(q),tks=queryTokens(q);if(!n)return 'Digues-me una assignatura o un tema: <strong>angles academia</strong>, <strong>fraccions</strong>, <strong>s sorda</strong> o <strong>medi reproduccio</strong>.';if(/^(hola|bones|buenas|hello|hi)\b/.test(n))return 'Hola! Puc buscar missions per assignatura o per tema. Prova amb <strong>examen angles academia</strong>, <strong>decimals</strong>, <strong>verbs catala</strong> o <strong>mode vacances</strong>.';if(n.includes('sense examens')||n.includes('proxim')||n.includes('proximo')||n.includes('proper'))return 'Ara mateix no hi ha cap examen marcat com a proper. Per mantenir ritme, et recomano:<br>'+linkList(db.vacances.map(r=>({...r,cat:'vacances'})));if(n.includes('llista')||n.includes('todo')||n.includes('tots')||n.includes('todas')){const cat=categoryFromQuery(q,tks);const list=cat?allResources().filter(r=>r.cat===cat):allResources();return (cat?'Aquestes son les missions de '+categoryNames[cat]+':':'Aquestes son algunes missions disponibles:')+'<br>'+linkList(list.slice(0,8));}const found=findRes(q);if(found.length){const top=found[0];let h='Et recomano:<br><strong>'+top.name+'</strong><br><span style="color:#6b5f88;font-weight:800">'+top.desc+'</span><br>'+chatLink(top);if(top.reasons.length)h+='<br><small>Ho he triat per: '+top.reasons.join(', ')+'</small>';const more=found.slice(1).filter(r=>r.cat===top.cat&&r.score>=Math.max(3,top.score*.25)).slice(0,3);if(more.length)h+='<br><br>Altres opcions que tambe encaixen:<br>'+more.map(r=>'- <a href="'+r.url+'" target="_blank">'+r.name+'</a>').join('<br>');return h}return 'No he trobat una coincidencia clara. Prova amb una paraula mes concreta, com <strong>fraccions</strong>, <strong>present continuous</strong>, <strong>there is</strong>, <strong>polisemia</strong>, <strong>reproduccio</strong> o <strong>decimals</strong>.'}
+function getReply(q){const n=normalizeText(q),tks=queryTokens(q);if(!n)return 'Digues-me una assignatura o un tema: <strong>angles academia</strong>, <strong>fraccions</strong>, <strong>s sorda</strong> o <strong>medi reproduccio</strong>.';if(/^(hola|bones|buenas|hello|hi)\b/.test(n))return 'Hola! Puc buscar missions per assignatura o per tema. Prova amb <strong>examen angles academia</strong>, <strong>decimals</strong>, <strong>verbs catala</strong> o <strong>mode vacances</strong>.';if(n.includes('sense examens')||n.includes('proxim')||n.includes('proximo')||n.includes('proper'))return 'El proper examen marcat és <strong>Matemàtiques 6è · Primer examen</strong>: numeració, potències, arrels, operacions combinades i angles.<br>'+chatLink({...db.mates[0],cat:'mates'});if(n.includes('llista')||n.includes('todo')||n.includes('tots')||n.includes('todas')){const cat=categoryFromQuery(q,tks);const list=cat?allResources().filter(r=>r.cat===cat):allResources();return (cat?'Aquestes son les missions de '+categoryNames[cat]+':':'Aquestes son algunes missions disponibles:')+'<br>'+linkList(list.slice(0,8));}const found=findRes(q);if(found.length){const top=found[0];let h='Et recomano:<br><strong>'+top.name+'</strong><br><span style="color:#6b5f88;font-weight:800">'+top.desc+'</span><br>'+chatLink(top);if(top.reasons.length)h+='<br><small>Ho he triat per: '+top.reasons.join(', ')+'</small>';const more=found.slice(1).filter(r=>r.cat===top.cat&&r.score>=Math.max(3,top.score*.25)).slice(0,3);if(more.length)h+='<br><br>Altres opcions que tambe encaixen:<br>'+more.map(r=>'- <a href="'+r.url+'" target="_blank">'+r.name+'</a>').join('<br>');return h}return 'No he trobat una coincidencia clara. Prova amb una paraula mes concreta, com <strong>fraccions</strong>, <strong>present continuous</strong>, <strong>there is</strong>, <strong>polisemia</strong>, <strong>reproduccio</strong> o <strong>decimals</strong>.'}
 function toggleChat(){const b=document.getElementById('chatBox');b.classList.toggle('open');if(b.classList.contains('open'))document.getElementById('chatIn').focus()}
 function sendQ(m){document.getElementById('chatIn').value=m;sendMsg()}
 function safeChatText(text){return String(text).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}

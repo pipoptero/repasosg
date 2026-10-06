@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mates 6e - Primer examen</title>
+<style>
+:root{--ink:#27233a;--dim:#756d8d;--bg:#fff8ec;--card:#fff;--line:#ece7ff;--gold:#ffb347;--pink:#ff4d8d;--blue:#4d96ff;--green:#20c997;--purple:#8b5cf6;--red:#ff6b6b;--shadow:0 16px 42px rgba(39,35,58,.13)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;background:radial-gradient(circle at 12% 8%,rgba(255,179,71,.26),transparent 28%),radial-gradient(circle at 88% 12%,rgba(77,150,255,.20),transparent 30%),var(--bg);color:var(--ink);min-height:100vh;font-size:18px;line-height:1.5}
+body:before{content:"";position:fixed;inset:0;background-image:radial-gradient(circle,#d6cef5 1.1px,transparent 1.1px);background-size:28px 28px;opacity:.28;pointer-events:none}
+.page{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:22px 16px 70px}
+a{color:inherit}.top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:16px}.back{display:inline-flex;align-items:center;gap:8px;text-decoration:none;background:#fff;border:2px solid var(--line);border-radius:999px;padding:10px 14px;font-weight:900;box-shadow:0 6px 18px rgba(39,35,58,.08)}
+.hero{position:relative;overflow:hidden;background:rgba(255,255,255,.84);border:3px solid rgba(255,255,255,.96);border-radius:30px;padding:26px;box-shadow:var(--shadow);margin-bottom:18px}
+.hero:after{content:"6e";position:absolute;right:28px;top:18px;font-size:6.4rem;font-weight:900;color:rgba(255,179,71,.25);transform:rotate(8deg)}
+.pill{display:inline-flex;align-items:center;gap:8px;background:#27233a;color:#fff;border-radius:999px;padding:8px 14px;font-weight:900;text-transform:uppercase;font-size:.82rem;letter-spacing:.8px;margin-bottom:12px}
+h1{font-size:clamp(2rem,6vw,4rem);line-height:1.04;margin-bottom:10px;background:linear-gradient(135deg,#ff416c,#ffb347,#4d96ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
+.hero p{font-size:1.08rem;font-weight:800;color:var(--dim);max-width:760px}.chips{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}.chip{background:#fff;border:2px solid #f0e9ff;border-radius:999px;padding:9px 12px;font-weight:900}
+.panel{background:#fff;border:2px solid #fff;border-radius:26px;padding:18px;box-shadow:var(--shadow);margin:18px 0}.panel h2{font-size:1.6rem;margin-bottom:8px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}.mini{background:#f8f7ff;border:2px solid #ede9fe;border-radius:18px;padding:14px;font-weight:800}.mini strong{display:block;font-size:1.05rem;margin-bottom:6px}.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.tab{border:0;border-radius:999px;padding:11px 14px;font-weight:900;background:#ececf8;color:#27233a;cursor:pointer}.tab.active{background:#27233a;color:#fff}.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:12px}.control{background:#f8f7ff;border:2px solid #ede9fe;border-radius:18px;padding:12px}.control label{display:block;font-weight:900;margin-bottom:8px}.control select{width:100%;min-height:46px;border:2px solid #d8d0ff;border-radius:14px;padding:8px 10px;font-size:17px;background:#fff}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}button,.btn{border:0;border-radius:999px;padding:12px 18px;min-height:50px;font-weight:900;font-size:16px;cursor:pointer;background:#27233a;color:#fff;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 5px 0 rgba(39,35,58,.18)}button.gold{background:var(--gold);color:#27233a}button.green{background:var(--green)}button.secondary{background:#ececf8;color:#27233a}.quiz{border:2px dashed #c4b5fd;border-radius:22px;padding:16px;margin-top:14px;background:linear-gradient(180deg,#fff,#fbfaff)}.qhead{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:10px}.tag{background:#fff5e6;color:#8a5200;border:2px solid #ffe1ad;border-radius:999px;padding:6px 10px;font-weight:900;font-size:.86rem}.qtext{font-size:1.18rem;font-weight:900;margin:8px 0}.options{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}.opt{text-align:left;background:#fff;color:#27233a;border:2px solid #ede9fe;box-shadow:none;border-radius:16px;min-height:54px}.opt.correct{background:#ecfdf5;border-color:#86efac}.opt.wrong{background:#fef2f2;border-color:#fca5a5}.feedback{margin-top:12px;font-weight:900}.ok{color:#168a4a}.bad{color:#dc2626}.hint{margin-top:10px;background:#fff7ed;border-left:6px solid #f59e0b;border-radius:16px;padding:12px;font-weight:800}.progress{height:16px;background:#e5e7eb;border-radius:999px;overflow:hidden;border:2px solid #fff;margin-top:12px}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--gold),var(--green));transition:.3s}
+.worksheet{display:grid;gap:12px}.row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;background:#fbfaff;border:2px solid #ede9fe;border-radius:16px;padding:12px;font-weight:900}.row input{width:180px;max-width:38vw;min-height:42px;border:2px solid #d8d0ff;border-radius:12px;padding:8px;font-size:17px}.row small{display:block;color:var(--dim);font-weight:800}.final{background:linear-gradient(135deg,#fff7ed,#eef2ff);border:3px solid #fde68a;border-radius:24px;padding:18px;text-align:center;margin-top:14px}.muted{color:var(--dim);font-weight:800}.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}@media(min-width:760px){.options{grid-template-columns:1fr 1fr}.panel{padding:22px}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="top"><a class="back" href="index.html">← Tornar al portal</a><span class="chip">🔢 Matemàtiques · 6è</span></div>
+  <section class="hero">
+    <div class="pill">🎯 Primer examen · nou curs</div>
+    <h1>Mates 6è: primera missió</h1>
+    <p>Repàs autocorregible inspirat en el llibre: numeració decimal, potències de base 10, arrels quadrades, operacions combinades i angles.</p>
+    <div class="chips"><span class="chip">🧮 Operacions combinades</span><span class="chip">🔟 Potències</span><span class="chip">√ Arrels</span><span class="chip">📐 Angles</span></div>
+  </section>
+
+  <section class="panel">
+    <h2>Recordatori ràpid</h2>
+    <div class="grid">
+      <div class="mini"><strong>Ordre decimal</strong>Cada ordre val 10 vegades l'ordre de la dreta: U, D, C, UM, DM, CM, U. de milió...</div>
+      <div class="mini"><strong>Potències de base 10</strong>10<sup>4</sup> = 10.000. L'exponent indica el nombre de zeros.</div>
+      <div class="mini"><strong>Arrel quadrada</strong>√49 = 7 perquè 7 × 7 = 49. Si no és exacta, queda entre dos nombres consecutius.</div>
+      <div class="mini"><strong>Operacions combinades</strong>1r parèntesis, 2n multiplicacions/divisions, 3r sumes/restes.</div>
+      <div class="mini"><strong>Angles</strong>Complementaris sumen 90°. Suplementaris sumen 180°. Adjacents són consecutius i formen una recta.</div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Entrenament per blocs</h2>
+    <p class="muted">Tria tema i fes una tanda curta. Si falla, es queda la resposta correcta i una explicació.</p>
+    <div class="tabs" id="tabs"></div>
+    <div class="controls">
+      <div class="control"><label>Nombre de preguntes</label><select id="num"><option>8</option><option selected>12</option><option>18</option><option>25</option></select></div>
+      <div class="control"><label>Dificultat</label><select id="level"><option value="all">Totes</option><option value="easy">Fàcil</option><option value="medium">Mitjà</option><option value="hard">Repte</option></select></div>
+    </div>
+    <div class="btns"><button class="green" onclick="startQuiz()">Començar tanda</button><button class="gold" onclick="startQuiz('all')">Barreja d'examen</button><button class="secondary" onclick="renderWorksheet()">Fitxa ràpida</button></div>
+    <div class="progress"><span id="bar"></span></div>
+    <div id="game"><p class="muted">Prem començar per veure preguntes tipus examen.</p></div>
+  </section>
+
+  <section class="panel">
+    <h2>Fitxa ràpida autocorregible</h2>
+    <p class="muted">Sis exercicis curts per escalfar abans de fer la tanda.</p>
+    <div class="worksheet" id="worksheet"></div>
+    <div class="btns"><button onclick="checkWorksheet()">Corregir fitxa</button><button class="secondary" onclick="renderWorksheet()">Nova fitxa</button></div>
+    <div id="sheetFb" class="feedback"></div>
+  </section>
+</div>
+
+<script>
+const topics={
+  numeracio:'Numeració',
+  potencies:'Potències',
+  arrels:'Arrels',
+  operacions:'Operacions',
+  angles:'Angles',
+  problemes:'Problemes'
+};
+const questionBank=[
+{topic:'numeracio',level:'easy',q:'Quin és el nombre anterior a 99.000.000?',opts:['98.999.999','99.000.001','98.000.000','99.999.999'],answer:'98.999.999',explanation:'El nombre anterior és una unitat menys.'},
+{topic:'numeracio',level:'easy',q:'Quin és el nombre posterior a 399.999.999?',opts:['400.000.000','399.999.998','400.999.999','399.000.000'],answer:'400.000.000',explanation:'Sumem 1 i canvien tots els 9.'},
+{topic:'numeracio',level:'easy',q:'Quin valor té la xifra 7 a 101.720.562?',opts:['700.000','70.000','7.000.000','700'],answer:'700.000',explanation:'El 7 és a les centenes de miler.'},
+{topic:'numeracio',level:'medium',q:'Quin valor té la xifra 7 a 782.170.456?',opts:['700.000.000','70.000.000','7.000.000','700.000'],answer:'700.000.000',explanation:'El 7 és a les centenes de milió.'},
+{topic:'numeracio',level:'medium',q:'Quina descomposició correspon a 89.504.320?',opts:['80.000.000 + 9.000.000 + 500.000 + 4.000 + 300 + 20','8.000.000 + 900.000 + 50.000 + 4.000 + 320','80.000.000 + 9.000.000 + 50.000 + 4.000 + 320','89.000.000 + 504.000 + 32'],answer:'80.000.000 + 9.000.000 + 500.000 + 4.000 + 300 + 20',explanation:'Cal respectar cada ordre decimal.'},
+{topic:'numeracio',level:'medium',q:'502.003.477 té...',opts:['5 centenes de milió i 2 unitats de milió','5 desenes de milió i 2 unitats de milió','502 unitats','5 unitats de milió'],answer:'5 centenes de milió i 2 unitats de milió',explanation:'502 milions = 5 C. de milió + 2 U. de milió.'},
+{topic:'numeracio',level:'hard',q:'Quin nombre és: 3 C. de milió + 2 D. de milió + 7 CM + 5 UM + 8 U?',opts:['320.705.008','32.705.008','302.705.008','327.005.008'],answer:'320.705.008',explanation:'300.000.000 + 20.000.000 + 700.000 + 5.000 + 8.'},
+{topic:'numeracio',level:'hard',q:'Quin nombre és: 5 C. de milió + 8 U. de milió + 7 DM + 5 C + 2 D + 3 U?',opts:['508.070.523','58.070.523','508.700.523','508.075.023'],answer:'508.070.523',explanation:'500.000.000 + 8.000.000 + 70.000 + 500 + 20 + 3.'},
+
+{topic:'potencies',level:'easy',q:'Quin valor té 10^4?',opts:['10.000','1.000','100.000','40'],answer:'10.000',explanation:'10^4 és 1 seguit de 4 zeros.'},
+{topic:'potencies',level:'easy',q:'Quin valor té 10^7?',opts:['10.000.000','1.000.000','100.000.000','70'],answer:'10.000.000',explanation:'L exponent 7 indica set zeros.'},
+{topic:'potencies',level:'easy',q:'Escriu 1.000 com a potència de base 10.',opts:['10^3','10^2','10^4','3^10'],answer:'10^3',explanation:'1.000 té tres zeros.'},
+{topic:'potencies',level:'easy',q:'Escriu 100.000 com a potència de base 10.',opts:['10^5','10^4','10^6','5^10'],answer:'10^5',explanation:'100.000 té cinc zeros.'},
+{topic:'potencies',level:'medium',q:'Quina expressió polinòmica correspon a 25.600?',opts:['2 × 10^4 + 5 × 10^3 + 6 × 10^2','2 × 10^5 + 5 × 10^4 + 6 × 10','25 × 10^2 + 600','2 × 10^3 + 5 × 10^2 + 6'],answer:'2 × 10^4 + 5 × 10^3 + 6 × 10^2',explanation:'25.600 = 20.000 + 5.000 + 600.'},
+{topic:'potencies',level:'medium',q:'Quina expressió polinòmica correspon a 45.009.087?',opts:['4 × 10^7 + 5 × 10^6 + 9 × 10^3 + 8 × 10 + 7','4 × 10^6 + 5 × 10^5 + 9 × 10^3 + 87','45 × 10^6 + 9 × 10^2 + 87','4 × 10^8 + 5 × 10^7 + 9 × 10^3 + 87'],answer:'4 × 10^7 + 5 × 10^6 + 9 × 10^3 + 8 × 10 + 7',explanation:'Cada xifra no nul·la ocupa el seu ordre.'},
+{topic:'potencies',level:'medium',q:'Quin nombre representa 7 × 10^9 + 5 × 10^6 + 2 × 10^4?',opts:['7.005.020.000','705.020.000','7.500.020.000','7.050.002.000'],answer:'7.005.020.000',explanation:'7.000.000.000 + 5.000.000 + 20.000.'},
+{topic:'potencies',level:'hard',q:'Ordena de més gran a més petit: 87 × 10^4, 19 × 10^5, 19 × 10^7, 35 × 10^4.',opts:['19 × 10^7, 19 × 10^5, 87 × 10^4, 35 × 10^4','87 × 10^4, 35 × 10^4, 19 × 10^5, 19 × 10^7','19 × 10^5, 19 × 10^7, 87 × 10^4, 35 × 10^4','35 × 10^4, 87 × 10^4, 19 × 10^5, 19 × 10^7'],answer:'19 × 10^7, 19 × 10^5, 87 × 10^4, 35 × 10^4',explanation:'Calcula mentalment: 190.000.000; 1.900.000; 870.000; 350.000.'},
+
+{topic:'arrels',level:'easy',q:'√49 = ?',opts:['7','6','8','9'],answer:'7',explanation:'7 × 7 = 49.'},
+{topic:'arrels',level:'easy',q:'√64 = ?',opts:['8','7','6','9'],answer:'8',explanation:'8 × 8 = 64.'},
+{topic:'arrels',level:'easy',q:'√25 = ?',opts:['5','4','6','7'],answer:'5',explanation:'5 × 5 = 25.'},
+{topic:'arrels',level:'easy',q:'√100 = ?',opts:['10','20','50','5'],answer:'10',explanation:'10 × 10 = 100.'},
+{topic:'arrels',level:'medium',q:'Entre quins dos nombres consecutius està √28?',opts:['5 i 6','4 i 5','6 i 7','7 i 8'],answer:'5 i 6',explanation:'5^2 = 25 i 6^2 = 36; 28 queda entremig.'},
+{topic:'arrels',level:'medium',q:'Entre quins dos nombres consecutius està √67?',opts:['8 i 9','7 i 8','6 i 7','9 i 10'],answer:'8 i 9',explanation:'8^2 = 64 i 9^2 = 81.'},
+{topic:'arrels',level:'medium',q:'Entre quins dos nombres consecutius està √120?',opts:['10 i 11','11 i 12','9 i 10','12 i 13'],answer:'10 i 11',explanation:'10^2 = 100 i 11^2 = 121.'},
+{topic:'arrels',level:'hard',q:'La sala quadrada té 81 m². Quant mesura cada costat?',opts:['9 m','8 m','40,5 m','18 m'],answer:'9 m',explanation:'El costat és √81 = 9.'},
+{topic:'arrels',level:'hard',q:'Quin nombre té arrel quadrada exacta entre 10 i 11?',opts:['121','120','101','99'],answer:'121',explanation:'11^2 = 121.'},
+
+{topic:'operacions',level:'easy',q:'14 + 2 - 11 = ?',opts:['5','3','27','1'],answer:'5',explanation:'Només sumes i restes: 16 - 11 = 5.'},
+{topic:'operacions',level:'easy',q:'15 - 5 × 3 = ?',opts:['0','30','10','5'],answer:'0',explanation:'Primer multiplicació: 5 × 3 = 15; 15 - 15 = 0.'},
+{topic:'operacions',level:'easy',q:'4 + (3 - 2) × 7 = ?',opts:['11','35','5','8'],answer:'11',explanation:'Parèntesi: 1. Després 1 × 7 = 7 i 4 + 7 = 11.'},
+{topic:'operacions',level:'medium',q:'16 : 4 - (9 - 6) = ?',opts:['1','3','7','12'],answer:'1',explanation:'16 : 4 = 4 i (9 - 6) = 3; 4 - 3 = 1.'},
+{topic:'operacions',level:'medium',q:'25 : 5 - 2 × 2 = ?',opts:['1','6','3','12'],answer:'1',explanation:'25 : 5 = 5 i 2 × 2 = 4; 5 - 4 = 1.'},
+{topic:'operacions',level:'medium',q:'(52 + 14) : 6 - 5 × 2 = ?',opts:['1','11','6','22'],answer:'1',explanation:'66 : 6 = 11; 5 × 2 = 10; 11 - 10 = 1.'},
+{topic:'operacions',level:'medium',q:'20 : 10 × 5 : 5 = ?',opts:['2','10','1','20'],answer:'2',explanation:'Multiplicacions i divisions d esquerra a dreta: 2 × 5 : 5 = 2.'},
+{topic:'operacions',level:'medium',q:'4 × 6 : 8 - 3 = ?',opts:['0','3','6','-1'],answer:'0',explanation:'4 × 6 = 24; 24 : 8 = 3; 3 - 3 = 0.'},
+{topic:'operacions',level:'hard',q:'42 : 2 : 7 + (15 - 4) × 2 - 1 + 5 = ?',opts:['29','23','34','18'],answer:'29',explanation:'42:2:7=3; (15-4)×2=22; 3+22-1+5=29.'},
+{topic:'operacions',level:'hard',q:'(18 + 3) - (7 + 5) : 12 + (12 - 9) × 8 = ?',opts:['44','21','24','35'],answer:'44',explanation:'21 - 1 + 24 = 44.'},
+{topic:'operacions',level:'hard',q:'Quins parèntesis fan certa: 7 - 4 + 3 + 2 × 6 = 12?',opts:['7 - (4 + 3) + 2 × 6','(7 - 4 + 3 + 2) × 6','7 - 4 + (3 + 2) × 6','7 - (4 + 3 + 2) × 6'],answer:'7 - (4 + 3) + 2 × 6',explanation:'Primer 4 + 3 = 7; després 7 - 7 + 12 = 12.'},
+{topic:'operacions',level:'hard',q:'Quina expressió val 42?',opts:['10 - 2 × (5 + 2) + 46','10 - 2 × 5 + 2','(10 - 2) × 5 + 2','10 - (2 × 5 + 2)'],answer:'(10 - 2) × 5 + 2',explanation:'8 × 5 + 2 = 42.'},
+
+{topic:'angles',level:'easy',q:'Quants graus falten a 36° perquè sigui un angle recte?',opts:['54°','144°','64°','90°'],answer:'54°',explanation:'Un angle recte fa 90°; 90 - 36 = 54.'},
+{topic:'angles',level:'easy',q:'Quants graus falten a 36° perquè sigui un angle pla?',opts:['144°','54°','180°','36°'],answer:'144°',explanation:'Un angle pla fa 180°; 180 - 36 = 144.'},
+{topic:'angles',level:'easy',q:'Dos angles complementaris sumen...',opts:['90°','180°','360°','100°'],answer:'90°',explanation:'Complementaris = 90°.'},
+{topic:'angles',level:'easy',q:'Dos angles suplementaris sumen...',opts:['180°','90°','360°','45°'],answer:'180°',explanation:'Suplementaris = 180°.'},
+{topic:'angles',level:'medium',q:'El complementari de 30° és...',opts:['60°','150°','30°','90°'],answer:'60°',explanation:'90 - 30 = 60.'},
+{topic:'angles',level:'medium',q:'El complementari de 70° és...',opts:['20°','110°','30°','70°'],answer:'20°',explanation:'90 - 70 = 20.'},
+{topic:'angles',level:'medium',q:'El suplementari de 80° és...',opts:['100°','10°','80°','180°'],answer:'100°',explanation:'180 - 80 = 100.'},
+{topic:'angles',level:'medium',q:'El suplementari de 120° és...',opts:['60°','30°','90°','120°'],answer:'60°',explanation:'180 - 120 = 60.'},
+{topic:'angles',level:'hard',q:'Dos angles són consecutius si...',opts:['tenen el vèrtex i un costat comuns','sumen 90°','sumen 180°','no es toquen'],answer:'tenen el vèrtex i un costat comuns',explanation:'Consecutius comparteixen vèrtex i un costat.'},
+{topic:'angles',level:'hard',q:'Dos angles adjacents són...',opts:['consecutius i els costats no comuns són a la mateixa recta','angles que sumen 90°','angles separats','sempre iguals'],answer:'consecutius i els costats no comuns són a la mateixa recta',explanation:'Adjacents formen una recta amb els costats no comuns.'},
+
+{topic:'problemes',level:'medium',q:'En un joc, cada encert suma 3 punts. Has encertat 6 preguntes. Quants punts sumes?',opts:['18','12','9','21'],answer:'18',explanation:'6 × 3 = 18.'},
+{topic:'problemes',level:'medium',q:'En un joc, cada error resta 2 punts. Has fallat 4 preguntes. Quants punts perds?',opts:['8','6','4','2'],answer:'8',explanation:'4 × 2 = 8 punts perduts.'},
+{topic:'problemes',level:'medium',q:'Has encertat 6 preguntes (+3) i fallat 4 (-2). Quin total tens?',opts:['10','18','8','26'],answer:'10',explanation:'6 × 3 - 4 × 2 = 18 - 8 = 10.'},
+{topic:'problemes',level:'hard',q:'21 alumnes van d excursió. L AFA aporta 45 €. Cada alumne paga 6 € d autocar i 3 € de menjar. Quant costa en total?',opts:['234 €','189 €','144 €','198 €'],answer:'234 €',explanation:'45 + 21 × (6 + 3) = 45 + 189 = 234.'},
+{topic:'problemes',level:'hard',q:'Punts marcianets: blau 125. Si la Lola fa 320 punts amb 2 blaus, quin altre marcià pot haver aconseguit?',opts:['groc de 70','verd de 70','vermell de 150','cap'],answer:'groc de 70',explanation:'2 × 125 = 250; falten 70 punts.'},
+{topic:'problemes',level:'hard',q:'Punts marcianets: groc 95 i vermell 150. 1 groc + 4 del mateix color fan 375. Quin color són els altres?',opts:['verds de 70','blaus de 125','vermells de 150','grocs de 95'],answer:'verds de 70',explanation:'375 - 95 = 280; 280 : 4 = 70.'}
+];
+
+let activeTopic='all',game=[],idx=0,score=0,answered=false;
+function esc(x){return String(x||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function norm(x){return String(x||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ')}
+function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
+function buildTabs(){const box=document.getElementById('tabs');box.innerHTML='<button class="tab active" data-topic="all" onclick="setTopic(this.dataset.topic)">Tot</button>'+Object.entries(topics).map(([k,v])=>'<button class="tab" data-topic="'+k+'" onclick="setTopic(this.dataset.topic)">'+v+'</button>').join('')}
+function setTopic(t){activeTopic=t;document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.topic===t))}
+function startQuiz(forceTopic){const topic=forceTopic||activeTopic,lev=document.getElementById('level').value,n=parseInt(document.getElementById('num').value,10);let pool=questionBank.filter(q=>(topic==='all'||q.topic===topic)&&(lev==='all'||q.level===lev));if(!pool.length)pool=questionBank.filter(q=>topic==='all'||q.topic===topic);game=shuffle(pool).slice(0,Math.min(n,pool.length));idx=0;score=0;answered=false;showQuestion()}
+function showQuestion(){answered=false;document.getElementById('bar').style.width=game.length?(idx/game.length*100)+'%':'0%';if(idx>=game.length){finish();return}const q=game[idx];let html='<div class="quiz"><div class="qhead"><span class="tag">'+topics[q.topic]+'</span><strong>Pregunta '+(idx+1)+'/'+game.length+'</strong></div><div class="qtext">'+esc(q.q)+'</div><div class="options">'+shuffle(q.opts).map(o=>'<button class="opt" data-val="'+esc(o)+'" onclick="answer(this,this.dataset.val)">'+esc(o)+'</button>').join('')+'</div><div class="feedback" id="fb"></div><div class="hint" id="hint" style="display:none"></div></div>';document.getElementById('game').innerHTML=html}
+function answer(btn,val){if(answered)return;answered=true;const q=game[idx],ok=norm(val)===norm(q.answer);document.querySelectorAll('.opt').forEach(b=>{if(norm(b.textContent)===norm(q.answer))b.classList.add('correct')});if(!ok)btn.classList.add('wrong');const fb=document.getElementById('fb'),hint=document.getElementById('hint');if(ok){score++;fb.innerHTML='<span class="ok">Correcte!</span>';setTimeout(()=>{idx++;showQuestion()},800)}else{fb.innerHTML='<span class="bad">Quasi. Resposta correcta: <strong>'+esc(q.answer)+'</strong></span>';hint.style.display='block';hint.innerHTML='<strong>Explicació:</strong> '+esc(q.explanation)+'<div class="btns"><button class="green" onclick="idx++;showQuestion()">Següent pregunta</button></div>'}document.getElementById('bar').style.width=((idx+1)/game.length*100)+'%'}
+function finish(){const pct=Math.round(score/game.length*100);document.getElementById('game').innerHTML='<div class="final"><h2>'+(pct>=80?'Missió molt ben resolta!':'Entrenament completat')+'</h2><p>Has fet <strong>'+score+'/'+game.length+'</strong> encerts ('+pct+'%).</p><div class="btns" style="justify-content:center"><button class="green" onclick="startQuiz()">Nova tanda</button><button class="gold" onclick="startQuiz(&quot;all&quot;)">Barreja examen</button></div></div>'}
+const sheetItems=[
+  {q:'Anterior de 201.000.000',a:'200.999.999',h:'Resta una unitat.'},
+  {q:'10^6 val',a:'1.000.000',h:'Sis zeros.'},
+  {q:'√36',a:'6',h:'6 × 6 = 36.'},
+  {q:'15 - 5 × 3',a:'0',h:'Primer 5 × 3.'},
+  {q:'Complementari de 45°',a:'45°',h:'90 - 45.'},
+  {q:'Suplementari de 30°',a:'150°',h:'180 - 30.'},
+  {q:'Valor del 7 a 957.007.323',a:'7.000',h:'El 7 és a les unitats de miler.'},
+  {q:'1.000.000 com a potència de 10',a:'10^6',h:'Un milió té sis zeros.'},
+  {q:'√120 està entre',a:'10 i 11',h:'10^2=100 i 11^2=121.'},
+  {q:'(52 + 14) : 6 - 5 × 2',a:'1',h:'66:6=11 i 5×2=10.'}
+];
+function renderWorksheet(){const items=shuffle(sheetItems).slice(0,6);document.getElementById('worksheet').innerHTML=items.map((it,i)=>'<div class="row"><div>'+esc(it.q)+'<small>'+esc(it.h)+'</small></div><input data-a="'+esc(it.a)+'" placeholder="Resposta"></div>').join('');document.getElementById('sheetFb').textContent=''}
+function checkWorksheet(){let ok=0,total=0;document.querySelectorAll('#worksheet input').forEach(inp=>{total++;const good=norm(inp.value)===norm(inp.dataset.a);if(good)ok++;inp.style.borderColor=good?'#16a34a':'#dc2626';if(!good)inp.value=inp.value+'  → '+inp.dataset.a});document.getElementById('sheetFb').innerHTML='Resultat fitxa: <strong>'+ok+'/'+total+'</strong>'}
+buildTabs();renderWorksheet();
+</script>
+</body>
+</html>
