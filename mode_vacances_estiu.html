@@ -122,6 +122,7 @@ const reviewSources = [
  {s:'catala', file:'catalan_plural_singular_tipusnoms_concret_abstracte_indivudual_article.html', label:'Català · Noms i articles'},
  {s:'catala', file:'catalan_verbs.html', label:'Català · Verbs'},
  {s:'catala', file:'catalan_adjectiu_noticia_s_sorda_sonora.html', label:'Català · Notícia i adjectiu'},
+ {s:'catala', file:'missio_catala_6e.html', label:'Català 6è · Sintagma nominal, lèxic i puntuació'},
  {s:'castella', file:'castellano_invitaciones_sinonimos_laH_tecnicismo_adjetivos.html', label:'Castellà · Invitacions i sinònims'},
  {s:'castella', file:'castellano_z_s_CC_texto_instructivo.html', label:'Castellà · Z, S, CC'},
  {s:'castella', file:'castellano_tilde_bv_.html', label:'Castella - Tildes, B/V, G/J'},
@@ -452,6 +453,32 @@ function extractScriptQuestions(html,source,seen){
   while((m=correctTextRe.exec(html))){
     const opts=parseScriptOptions(m[3]);
     addScriptQuestion(out,seen,source,m[2],opts,m[5],'');
+  }
+  if(source.file==='missio_catala_6e.html'){
+    const scriptText=[...new DOMParser().parseFromString(html,'text/html').querySelectorAll('script')].map(s=>s.textContent).join('\n');
+    const callRe=/\b([mw])\s*\(/g;
+    let call;
+    while((call=callRe.exec(scriptText))){
+      const kind=call[1], open=scriptText.indexOf('(',call.index), start=open+1;
+      let depth=1, quote='', escaped=false, end=start;
+      for(;end<scriptText.length&&depth;end++){
+        const ch=scriptText[end];
+        if(quote){if(escaped)escaped=false;else if(ch==='\\')escaped=true;else if(ch===quote)quote='';continue}
+        if(ch==='\''||ch==='"'||ch==='`'){quote=ch;continue}
+        if(ch==='(')depth++;else if(ch===')')depth--;
+      }
+      if(depth)continue;
+      const args=parseCallStrings(scriptText.slice(start,end-1)).map(scriptString);
+      const topicName=({sn:'Sintagma nominal',lex:'Formació de paraules',pun:'Puntuació'})[args[0]];
+      if(!topicName||!args[1])continue;
+      const q=topicName+': '+args[1];
+      if(kind==='m'&&args.length>=6){
+        addScriptQuestion(out,seen,source,q,args.slice(2,5),args[2],args[5]);
+      }else if(kind==='w'&&args.length>=5){
+        addUnique(out,{s:source.s,l:levelFromQuestion(q),type:'input',q,a:args[2],h:args[3]+' Pista: '+args[4]},seen);
+      }
+      callRe.lastIndex=end;
+    }
   }
   return out;
 }
