@@ -122,7 +122,7 @@ const reviewSources = [
  {s:'catala', file:'catalan_plural_singular_tipusnoms_concret_abstracte_indivudual_article.html', label:'Català · Noms i articles'},
  {s:'catala', file:'catalan_verbs.html', label:'Català · Verbs'},
  {s:'catala', file:'catalan_adjectiu_noticia_s_sorda_sonora.html', label:'Català · Notícia i adjectiu'},
- {s:'catala', file:'missio_catala_6e.html', label:'Català 6è · Sintagma nominal, lèxic i puntuació'},
+ {s:'catala', file:'missio_catala_6e.html', label:'Català 6è · Sintagma nominal, lèxic, puntuació i contraccions'},
  {s:'castella', file:'castellano_invitaciones_sinonimos_laH_tecnicismo_adjetivos.html', label:'Castellà · Invitacions i sinònims'},
  {s:'castella', file:'castellano_z_s_CC_texto_instructivo.html', label:'Castellà · Z, S, CC'},
  {s:'castella', file:'castellano_tilde_bv_.html', label:'Castella - Tildes, B/V, G/J'},
@@ -469,7 +469,7 @@ function extractScriptQuestions(html,source,seen){
       }
       if(depth)continue;
       const args=parseCallStrings(scriptText.slice(start,end-1)).map(scriptString);
-      const topicName=({sn:'Sintagma nominal',lex:'Formació de paraules',pun:'Puntuació'})[args[0]];
+      const topicName=({sn:'Sintagma nominal',lex:'Formació de paraules',pun:'Puntuació',contr:'Contraccions'})[args[0]];
       if(!topicName||!args[1])continue;
       const q=topicName+': '+args[1];
       if(kind==='m'&&args.length>=6){
