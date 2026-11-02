@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#171634">
+<meta name="description" content="Academia de Palabras: teoría, juegos y simulacros de Lengua Castellana de 6.º de primaria, basados en los apuntes de clase.">
+<title>Academia de Palabras · Misión Castellano</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Ir al contenido</a>
+<div class="starsbg" aria-hidden="true"></div>
+<header class="topbar">
+  <a href="#inicio" class="brand" data-nav="inicio" aria-label="Academia de Palabras, inicio"><span class="brand-icon" aria-hidden="true">✦</span><span>ACADEMIA <b>DE PALABRAS</b><small>Misión Castellano · 6.º de primaria</small></span></a>
+  <nav id="nav" class="nav" aria-label="Navegación principal">
+    <button type="button" data-page="inicio" class="nav-btn active">🏠 <span>Inicio</span></button>
+    <button type="button" data-page="aprender" class="nav-btn">📚 <span>Aprender</span></button>
+    <button type="button" data-page="practicar" class="nav-btn">🎮 <span>Practicar</span></button>
+    <button type="button" data-page="examen" class="nav-btn">📝 <span>Examen</span></button>
+    <button type="button" data-page="progreso" class="nav-btn">🏅 <span>Progreso</span></button>
+  </nav>
+  <div class="xp-pill" aria-label="Puntos de experiencia"><span aria-hidden="true">⚡</span> <strong id="topXP">0</strong><span>XP</span></div>
+</header>
+<main id="main" tabindex="-1">
+<section class="page active" id="page-inicio" aria-labelledby="home-title">
+ <div class="hero">
+  <div class="hero-copy"><div class="eyebrow">🚀 TU MISIÓN DE LENGUA CASTELLANA</div><h1 id="home-title">¡Desbloquea tus <em>superpoderes</em> con las palabras!</h1><p>Aprende un poquito, juega, descubre por qué fallas y prepárate para el examen de 6.º de primaria.</p><div class="hero-actions"><button class="btn primary" id="homePractice">🎯 ¡Empezar a jugar!</button><button class="btn ghost" id="homeLearn">📖 Ver la teoría</button></div><div class="hero-sub">✨ Sin prisas · 💡 Explicaciones paso a paso · 💾 Progreso guardado en este dispositivo</div></div>
+  <div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="big-planet">Aa<span>✦</span></div><div class="floating-planet fp1">¿?</div><div class="floating-planet fp2">B/V</div><div class="floating-planet fp3">¡!</div><div class="spark s1">✶</div><div class="spark s2">✦</div><div class="spark s3">✧</div></div>
+ </div>
+ <div class="dashboard-stats" id="homeStats"></div>
+ <div class="section-head"><div><div class="eyebrow">EL MAPA DE LA AVENTURA</div><h2>5 mundos por conquistar</h2><p>Todos están abiertos. Elige por dónde quieres comenzar.</p></div><span class="small-label">BASADO EN TUS FICHAS DE CLASE</span></div>
+ <div class="world-grid" id="worldGrid"></div>
+ <div class="home-bottom"><div class="notice"><span class="notice-icon">🧠</span><div><b>Un truco para estudiar mejor</b><p>Primero repasa la teoría, después practica y lee siempre la explicación, aunque hayas acertado.</p></div></div><button class="btn outline" id="homeExam">📝 Hacer simulacro de examen <span aria-hidden="true">→</span></button></div>
+</section>
+<section class="page" id="page-aprender" aria-labelledby="learn-title"><div class="section-hero"><span class="eyebrow">📚 LA BIBLIOTECA ESPACIAL</span><h1 id="learn-title">La teoría, sin rollos</h1><p>Las mismas ideas que aparecen en los apuntes, con ejemplos y trucos para recordarlas.</p></div><div class="topic-tabs" id="lessonTabs" role="tablist" aria-label="Tema de teoría"></div><div id="lessonContent"></div></section>
+<section class="page" id="page-practicar" aria-labelledby="practice-title"><div class="section-hero"><span class="eyebrow">🎮 CENTRO DE ENTRENAMIENTO</span><h1 id="practice-title">¡A jugar con las palabras!</h1><p>Responde y recibe una corrección explicada. Los fallos son pistas para aprender.</p></div><div id="practiceContent"></div></section>
+<section class="page" id="page-examen" aria-labelledby="exam-title"><div class="section-hero"><span class="eyebrow">📝 SIMULACRO DE EXAMEN</span><h1 id="exam-title">Demuestra lo que sabes</h1><p>15 preguntas: 3 de cada tema. Al terminar verás tu nota y la explicación de todas tus respuestas.</p></div><div id="examContent"></div></section>
+<section class="page" id="page-progreso" aria-labelledby="progress-title"><div class="section-hero"><span class="eyebrow">🏅 TU CUADERNO DE LOGROS</span><h1 id="progress-title">Cada intento te hace mejorar</h1><p>Descubre tus avances, tus insignias y qué tema te conviene repasar.</p></div><div id="progressContent"></div></section>
+</main>
+<footer><div>✦ <strong>ACADEMIA DE PALABRAS</strong> · Preparación de Lengua Castellana, 6.º de primaria.</div><div>Contenido adaptado de los dos PDF de apuntes y ejercicios del primer trimestre. Los ejercicios nuevos siguen los mismos conceptos.</div><div>Privacidad: sin cuentas, sin anuncios ni envío de respuestas; el progreso se guarda solo en este navegador.</div></footer>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="app.js" defer></script>
+</body></html>

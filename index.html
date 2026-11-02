@@ -306,15 +306,15 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
     <div class="section-head" style="margin:0 0 18px">
       <div>
         <h2>🎯 Pròxim examen</h2>
-        <p>Nou repte de 6è: llengua catalana, formació de paraules i signes de puntuació.</p>
+        <p>Nou repte de 6è: el primer examen del trimestre de llengua castellana.</p>
       </div>
     </div>
     <div class="progress-card" style="text-align:center;min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px">
-      <div style="font-size:3.2rem;line-height:1">🏴📚</div>
-      <strong style="font-size:1.35rem">Català 6è · Primer examen de Català del curs</strong>
-      <p style="color:var(--dim);font-weight:800;max-width:680px">Practica sintagma nominal i concordança, paraules primitives i derivades, compostes, prefixos, sufixos i signes de puntuació.</p>
+      <div style="font-size:3.2rem;line-height:1">🇪🇸✍️</div>
+      <strong style="font-size:1.35rem">Castellano 6.º · Primer examen del trimestre</strong>
+      <p style="color:var(--dim);font-weight:800;max-width:680px">Practica la descripción de paisajes, la oración, sus tipos, los signos de puntuación y las reglas de la B y la V.</p>
       <div class="banner-actions exam-empty-actions" style="justify-content:center;margin-top:8px">
-        <a href="missio_catala_6e.html" class="banner-btn">Preparar examen de català 📚</a>
+        <a href="Academia_de_Palabras/index.html" class="banner-btn">Preparar examen de Castellano ✍️</a>
         <a href="mode_vacances_estiu.html" class="soft-btn">Fer una ruleta suau 🎲</a>
       </div>
     </div>
@@ -403,6 +403,16 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
       </div>
     </div>
 
+    <div class="card" data-s="castella" data-course="6">
+      <div class="card-header">
+        <div class="card-icon">🇪🇸</div>
+        <div><div class="card-title">Castellà 6è</div><div class="card-meta">1 missió disponible</div></div>
+      </div>
+      <div class="card-body">
+        <a href="Academia_de_Palabras/index.html" class="lbtn">🎯 Primer examen del trimestre · Academia de Palabras</a>
+      </div>
+    </div>
+
     <div class="card" data-s="castella" data-course="5">
       <div class="card-header">
         <div class="card-icon">🇪🇸</div>
@@ -486,6 +496,7 @@ footer{text-align:center;color:var(--dim);font-size:.9rem;font-weight:800;margin
 const db={
   vacances:[{name:'Ruleta de missions d\'estiu',url:'mode_vacances_estiu.html',kw:['vacances','estiu','aleatori','ruleta','repàs ràpid','barrejat','random']}],
   castella:[
+    {name:"Castellano 6.º · Primer examen del trimestre",url:"Academia_de_Palabras/index.html",kw:["castellano","castellà","castellano 6","6e","6è","primer examen","examen castellano","texto descriptivo","descripción","paisajes","sujeto","predicado","sintagma nominal","tipos de oraciones","puntuación","signos","b y v","b/v","redacción"]},
     {name:"Ortografia: tildes, B/V, G/J, Z/D/LL",url:"castellano_tilde_bv_.html",kw:["castella","castellano","ortografia","ortograf?a","tilde","tildes","b","v","bv","g","j","gj","z","d","ll","plural","plurales","comprension","comprensi?n","lectura","expresion escrita"]},
     {name:"Invitacions, sinònims i més",url:"castellano_invitaciones_sinonimos_laH_tecnicismo_adjetivos.html",kw:["invitacions","sinònims","h","tecnicisme","adjectius","castellà"]},
     {name:"1r examen 2n trim. · Z, S, CC",url:"castellano_z_s_CC_texto_instructivo.html",kw:["z","s","cc","text instructiu","castellà"]}
@@ -524,6 +535,7 @@ const aliases={matematicas:'mates',matematiques:'mates',matematica:'mates',math:
 const resourceNotes={
   'mode_vacances_estiu.html':'Preguntes barrejades de totes les assignatures. Ideal si vols practicar una estona curta.',
   'missio_catala_6e.html':'Examen de catala de 6e: sintagma nominal, concordanca, formacio de paraules i signes de puntuacio.',
+  'Academia_de_Palabras/index.html':'Primer examen del trimestre de castellano de 6.º: texto descriptivo, oración, tipos de oraciones, puntuación y B/V.',
   'mates_6e_primer_examen.html':'Primer examen de matematiques de 6e: numeracio decimal, potencies de base 10, arrels quadrades, operacions combinades, problemes i angles.',
   'examen_final_academia.html':'Preparacio del final d\'angles de l\'academia: sports, food, time, prepositions, there is/are, present simple, can, years, adjectives and present continuous.',
   'ingles_pasado_verbos.html':'Practica de past simple i verbs en angles.',
@@ -546,7 +558,7 @@ function scoreResource(r,q,tks){const hay=resourceHaystack(r),n=normalizeText(q)
 function findRes(q){const tks=queryTokens(q),cat=categoryFromQuery(q,tks);let res=allResources().map(r=>scoreResource(r,q,tks));if(cat&&tks.length<=1)res=res.map(r=>({...r,score:r.cat===cat?r.score+4:r.score}));return res.filter(r=>r.score>0).sort((a,b)=>b.score-a.score||a.name.localeCompare(b.name)).slice(0,5)}
 function chatLink(r){return '<a href="'+r.url+'" class="chat-link" target="_blank">'+r.name+'</a>'}
 function linkList(items){return items.map(chatLink).join('')}
-function getReply(q){const n=normalizeText(q),tks=queryTokens(q);if(!n)return 'Digues-me una assignatura o un tema: <strong>angles academia</strong>, <strong>fraccions</strong>, <strong>s sorda</strong> o <strong>medi reproduccio</strong>.';if(/^(hola|bones|buenas|hello|hi)\b/.test(n))return 'Hola! Puc buscar missions per assignatura o per tema. Prova amb <strong>examen angles academia</strong>, <strong>decimals</strong>, <strong>verbs catala</strong> o <strong>mode vacances</strong>.';if(n.includes('sense examens')||n.includes('proxim')||n.includes('proximo')||n.includes('proper'))return 'El proper examen marcat és <strong>Matemàtiques 6è · Primer examen</strong>: numeració, potències, arrels, operacions combinades i angles.<br>'+chatLink({...db.mates[0],cat:'mates'});if(n.includes('llista')||n.includes('todo')||n.includes('tots')||n.includes('todas')){const cat=categoryFromQuery(q,tks);const list=cat?allResources().filter(r=>r.cat===cat):allResources();return (cat?'Aquestes son les missions de '+categoryNames[cat]+':':'Aquestes son algunes missions disponibles:')+'<br>'+linkList(list.slice(0,8));}const found=findRes(q);if(found.length){const top=found[0];let h='Et recomano:<br><strong>'+top.name+'</strong><br><span style="color:#6b5f88;font-weight:800">'+top.desc+'</span><br>'+chatLink(top);if(top.reasons.length)h+='<br><small>Ho he triat per: '+top.reasons.join(', ')+'</small>';const more=found.slice(1).filter(r=>r.cat===top.cat&&r.score>=Math.max(3,top.score*.25)).slice(0,3);if(more.length)h+='<br><br>Altres opcions que tambe encaixen:<br>'+more.map(r=>'- <a href="'+r.url+'" target="_blank">'+r.name+'</a>').join('<br>');return h}return 'No he trobat una coincidencia clara. Prova amb una paraula mes concreta, com <strong>fraccions</strong>, <strong>present continuous</strong>, <strong>there is</strong>, <strong>polisemia</strong>, <strong>reproduccio</strong> o <strong>decimals</strong>.'}
+function getReply(q){const n=normalizeText(q),tks=queryTokens(q);if(!n)return 'Digues-me una assignatura o un tema: <strong>angles academia</strong>, <strong>fraccions</strong>, <strong>s sorda</strong> o <strong>medi reproduccio</strong>.';if(/^(hola|bones|buenas|hello|hi)\b/.test(n))return 'Hola! Puc buscar missions per assignatura o per tema. Prova amb <strong>examen castellano</strong>, <strong>fraccions</strong>, <strong>verbs catala</strong> o <strong>mode vacances</strong>.';if(n.includes('sense examens')||n.includes('proxim')||n.includes('proximo')||n.includes('proper'))return 'El proper examen marcat és <strong>Castellano 6.º · Primer examen del trimestre</strong>: descripción, oración, tipos, puntuación y B/V.<br>'+chatLink({...db.castella[0],cat:'castella'});if(n.includes('llista')||n.includes('todo')||n.includes('tots')||n.includes('todas')){const cat=categoryFromQuery(q,tks);const list=cat?allResources().filter(r=>r.cat===cat):allResources();return (cat?'Aquestes son les missions de '+categoryNames[cat]+':':'Aquestes son algunes missions disponibles:')+'<br>'+linkList(list.slice(0,8));}const found=findRes(q);if(found.length){const top=found[0];let h='Et recomano:<br><strong>'+top.name+'</strong><br><span style="color:#6b5f88;font-weight:800">'+top.desc+'</span><br>'+chatLink(top);if(top.reasons.length)h+='<br><small>Ho he triat per: '+top.reasons.join(', ')+'</small>';const more=found.slice(1).filter(r=>r.cat===top.cat&&r.score>=Math.max(3,top.score*.25)).slice(0,3);if(more.length)h+='<br><br>Altres opcions que tambe encaixen:<br>'+more.map(r=>'- <a href="'+r.url+'" target="_blank">'+r.name+'</a>').join('<br>');return h}return 'No he trobat una coincidencia clara. Prova amb una paraula mes concreta, com <strong>fraccions</strong>, <strong>present continuous</strong>, <strong>there is</strong>, <strong>polisemia</strong>, <strong>reproduccio</strong> o <strong>decimals</strong>.'}
 function toggleChat(){const b=document.getElementById('chatBox');b.classList.toggle('open');if(b.classList.contains('open'))document.getElementById('chatIn').focus()}
 function sendQ(m){document.getElementById('chatIn').value=m;sendMsg()}
 function safeChatText(text){return String(text).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
