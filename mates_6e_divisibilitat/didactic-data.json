@@ -1,0 +1,631 @@
+{
+  "criteria": [
+    {
+      "d": 2,
+      "rule": "Mira si l’última xifra és 0, 2, 4, 6 o 8.",
+      "look": "Només l’última xifra.",
+      "yes": 126,
+      "no": [
+        127
+      ],
+      "remember": "Parell vol dir que es pot repartir en grups de 2 sense sobrants.",
+      "question": 138
+    },
+    {
+      "d": 3,
+      "rule": "Suma TOTES les xifres. La suma ha de ser múltiple de 3.",
+      "look": "Totes les xifres, també els zeros.",
+      "yes": 123,
+      "no": [
+        124
+      ],
+      "remember": "No n’hi ha prou d’acabar en 3. El nombre 13 no passa la prova.",
+      "question": 125
+    },
+    {
+      "d": 4,
+      "rule": "Les dues últimes xifres han de formar un nombre divisible per 4.",
+      "look": "Les dues últimes xifres juntes, no la suma de les xifres.",
+      "yes": 2028,
+      "no": [
+        2026
+      ],
+      "remember": "Una centena són 25 grups de 4. Les centenes ja encaixen: només falta revisar les dues últimes xifres.",
+      "question": 1316
+    },
+    {
+      "d": 5,
+      "rule": "L’última xifra ha de ser 0 o 5.",
+      "look": "Només l’última xifra.",
+      "yes": 145,
+      "no": [
+        142
+      ],
+      "remember": "Acabar en 5 serveix per a 5, però no per a 10.",
+      "question": 203
+    },
+    {
+      "d": 6,
+      "rule": "Ha de passar la prova del 2 I la del 3 alhora.",
+      "look": "Última xifra per al 2; suma de totes les xifres per al 3.",
+      "yes": 42,
+      "no": [
+        44,
+        45
+      ],
+      "remember": "Parell no basta. Suma múltiple de 3 tampoc no basta. Necessitem les DUES condicions.",
+      "question": 54
+    },
+    {
+      "d": 9,
+      "rule": "Suma TOTES les xifres. La suma ha de ser múltiple de 9.",
+      "look": "Totes les xifres; la mateixa suma que per a 3, però amb una exigència diferent.",
+      "yes": 729,
+      "no": [
+        732
+      ],
+      "remember": "Ser divisible per 9 implica ser-ho per 3; ser-ho per 3 no garanteix ser-ho per 9.",
+      "question": 741
+    },
+    {
+      "d": 10,
+      "rule": "L’última xifra ha de ser 0.",
+      "look": "Només l’última xifra.",
+      "yes": 130,
+      "no": [
+        125
+      ],
+      "remember": "Cada desena completa té 10 unitats. Acabar en 5 no forma una desena completa.",
+      "question": 430
+    }
+  ],
+  "models": [
+    {
+      "id": "A",
+      "title": "Dos robots que fan senyals",
+      "story": "Un robot fa un senyal cada 6 minuts i un altre cada 8. Fan un senyal junts ara. Quant falta per a la primera coincidència futura?",
+      "a": 6,
+      "b": 8,
+      "method": "lcm",
+      "mode": "direct",
+      "meaning": "minuts fins a la pròxima coincidència",
+      "unit": "minuts",
+      "expectedBase": 24,
+      "expectedFinal": [
+        24
+      ],
+      "data": [
+        "6 minuts per interval del primer robot",
+        "8 minuts per interval del segon robot"
+      ],
+      "question": "El temps d’espera fins a tornar a coincidir.",
+      "reason": "El temps ha de contenir un nombre enter d’intervals de 6 i un d’intervals de 8. Per això ha de ser múltiple de tots dos.",
+      "finalLabels": [
+        "minuts"
+      ],
+      "visual": "cycles"
+    },
+    {
+      "id": "B",
+      "title": "Capses per comprar: igual quantitat de cada material",
+      "story": "Els llapis es venen en capses de 4 i les gomes en capses de 6. Volem la mateixa quantitat mínima positiva de cada material. Quantes capses de cada material hem de comprar?",
+      "a": 4,
+      "b": 6,
+      "method": "lcm",
+      "mode": "boxes",
+      "meaning": "objectes DE CADA material, abans de comptar capses",
+      "unit": "capses de cada material",
+      "expectedBase": 12,
+      "expectedFinal": [
+        3,
+        2
+      ],
+      "data": [
+        "4 llapis per capsa",
+        "6 gomes per capsa"
+      ],
+      "question": "El nombre de capses de llapis i el de gomes.",
+      "reason": "El total de cada material ha de formar capses completes tant de 4 com de 6. Busquem un múltiple comú positiu, el més petit.",
+      "finalLabels": [
+        "capses de llapis",
+        "capses de gomes"
+      ],
+      "visual": "boxes"
+    },
+    {
+      "id": "C",
+      "title": "Lots barrejats: molts lots idèntics",
+      "story": "Tenim 12 fitxes blaves i 18 de taronja. Fem el màxim nombre de lots IDÈNTICS, amb tots dos colors i sense sobrants. Quants lots fem i què hi ha a cada lot?",
+      "a": 12,
+      "b": 18,
+      "method": "gcd",
+      "mode": "mixed",
+      "meaning": "nombre de lots idèntics",
+      "unit": "lots i fitxes per lot",
+      "expectedBase": 6,
+      "expectedFinal": [
+        6,
+        2,
+        3
+      ],
+      "data": [
+        "12 fitxes blaves en total",
+        "18 fitxes taronja en total"
+      ],
+      "question": "Quants lots fem i quantes fitxes de cada color hi ha a cada lot.",
+      "reason": "El nombre de lots ha de dividir exactament els dos totals. Si no, sobraria alguna fitxa. Triem el divisor comú més gran.",
+      "finalLabels": [
+        "lots",
+        "blaves per lot",
+        "taronja per lot"
+      ],
+      "visual": "mixed"
+    },
+    {
+      "id": "D",
+      "title": "Bosses separades: un sol tipus a cada bossa",
+      "story": "Tenim 10 objectes d’un tipus i 15 d’un altre. Cada bossa conté NOMÉS UN tipus. Totes tenen la mateixa quantitat màxima, sense sobrants. Quants objectes posem a cada bossa i quantes bosses surten?",
+      "a": 10,
+      "b": 15,
+      "method": "gcd",
+      "mode": "singleBags",
+      "meaning": "objectes per bossa, NO nombre de bosses",
+      "unit": "objectes per bossa i bosses",
+      "expectedBase": 5,
+      "expectedFinal": [
+        5,
+        2,
+        3
+      ],
+      "data": [
+        "10 objectes del primer tipus",
+        "15 objectes del segon tipus"
+      ],
+      "question": "La mida màxima de cada bossa i quantes bosses hi haurà de cada tipus.",
+      "reason": "Els objectes per bossa han de dividir tots dos totals. Així cada tipus omple bosses senceres sense barrejar-se amb l’altre.",
+      "finalLabels": [
+        "objectes per bossa",
+        "bosses del primer tipus",
+        "bosses del segon tipus"
+      ],
+      "visual": "singleBags"
+    },
+    {
+      "id": "E",
+      "title": "Cintes: de la longitud al nombre de trossos",
+      "story": "Tallem cintes de 24 i 36 cm en trossos iguals de longitud màxima, sense sobrants. Quants centímetres fa cada tros i quants trossos hi ha en total?",
+      "a": 24,
+      "b": 36,
+      "method": "gcd",
+      "mode": "ribbons",
+      "meaning": "centímetres de CADA tros",
+      "unit": "cm per tros i trossos",
+      "expectedBase": 12,
+      "expectedFinal": [
+        12,
+        2,
+        3,
+        5
+      ],
+      "data": [
+        "Una cinta de 24 cm",
+        "Una altra cinta de 36 cm"
+      ],
+      "question": "La longitud de cada tros i el nombre total de trossos.",
+      "reason": "La longitud del tros ha de cabre exactament en les dues cintes. És un divisor comú; volem el més gran.",
+      "finalLabels": [
+        "cm per tros",
+        "trossos de la primera cinta",
+        "trossos de la segona cinta",
+        "trossos en total"
+      ],
+      "visual": "ribbons"
+    },
+    {
+      "id": "F",
+      "title": "Rondes: el temps encara no és la resposta",
+      "story": "Dos robots triguen 10 i 14 minuts a completar una ronda. Surten junts. Quantes rondes fa el de 10 minuts fins que tots dos tornen a coincidir al punt de sortida?",
+      "a": 10,
+      "b": 14,
+      "period": 10,
+      "method": "lcm",
+      "mode": "rounds",
+      "meaning": "minuts fins a coincidir; després cal comptar rondes",
+      "unit": "rondes",
+      "expectedBase": 70,
+      "expectedFinal": [
+        7
+      ],
+      "data": [
+        "10 minuts per ronda del primer robot",
+        "14 minuts per ronda del segon robot"
+      ],
+      "question": "Quantes rondes fa el primer robot, no quants minuts passen.",
+      "reason": "El temps de coincidència ha de contenir rondes completes de tots dos robots. Després dividim aquest temps pels minuts de cada ronda del primer.",
+      "finalLabels": [
+        "rondes del primer robot"
+      ],
+      "visual": "cycles"
+    }
+  ],
+  "cases": [
+    {
+      "id": "ritmes",
+      "level": "Fàcil",
+      "story": "Dos llums fan senyals cada 4 i 7 minuts. Coincideixen ara. Quants minuts falten per a la primera coincidència futura?",
+      "a": 4,
+      "b": 7,
+      "method": "lcm",
+      "mode": "direct",
+      "asked": "minuts d’espera",
+      "unit": "minuts",
+      "expectedBase": 28,
+      "expectedFinal": [
+        28
+      ],
+      "visual": "cycles",
+      "hint1": "Rellegeix només la pregunta final: demana minuts d’espera. La unitat és minuts.",
+      "hint2": "Imagina salts complets de 4 i de 7. El valor comú ha d’aparèixer a les dues llistes de totals. Què representa abans de respondre la pregunta final?",
+      "reason": "El valor intermedi ha de ser un total format per grups complets de 4 i de 7: ha de ser múltiple de tots dos.",
+      "meaning": "minuts fins a la primera coincidència",
+      "data": [
+        "4 minuts entre senyals del primer llum",
+        "7 minuts entre senyals del segon llum"
+      ]
+    },
+    {
+      "id": "cinta",
+      "level": "Fàcil",
+      "story": "Tenim cintes de 18 i 30 cm. Fem trossos iguals tan llargs com sigui possible, sense sobrants. Quants cm fa cada tros?",
+      "a": 18,
+      "b": 30,
+      "method": "gcd",
+      "mode": "direct",
+      "asked": "longitud de cada tros",
+      "unit": "cm per tros",
+      "expectedBase": 6,
+      "expectedFinal": [
+        6
+      ],
+      "visual": "ribbons",
+      "hint1": "Rellegeix només la pregunta final: demana longitud de cada tros. La unitat és cm per tros.",
+      "hint2": "Prova si la quantitat comuna cap exactament dins de 18 i de 30, sense deixar res fora. La pregunta demana la mida, el nombre de grups o què hi ha a cada grup?",
+      "reason": "El valor intermedi ha de dividir exactament 18 i 30, perquè no sobri res en cap dels dos totals.",
+      "meaning": "cm de cada tros",
+      "data": [
+        "Una cinta de 18 cm",
+        "Una cinta de 30 cm"
+      ]
+    },
+    {
+      "id": "punts",
+      "level": "Fàcil",
+      "story": "Dos jocs donen 3 i 8 punts per torn. Quina és la menor puntuació positiva que es pot aconseguir en tots dos?",
+      "a": 3,
+      "b": 8,
+      "method": "lcm",
+      "mode": "direct",
+      "asked": "puntuació comuna mínima",
+      "unit": "punts",
+      "expectedBase": 24,
+      "expectedFinal": [
+        24
+      ],
+      "visual": "cycles",
+      "hint1": "Rellegeix només la pregunta final: demana puntuació comuna mínima. La unitat és punts.",
+      "hint2": "Imagina salts complets de 3 i de 8. El valor comú ha d’aparèixer a les dues llistes de totals. Què representa abans de respondre la pregunta final?",
+      "reason": "El valor intermedi ha de ser un total format per grups complets de 3 i de 8: ha de ser múltiple de tots dos.",
+      "meaning": "punts que podem aconseguir a cadascun dels jocs",
+      "data": [
+        "3 punts per torn del primer joc",
+        "8 punts per torn del segon joc"
+      ]
+    },
+    {
+      "id": "flors",
+      "level": "Fàcil",
+      "story": "Hi ha 16 margarides i 28 tulipes. Fem rams d’un sol tipus amb la mateixa quantitat màxima de flors i sense sobrants. Quantes flors té cada ram?",
+      "a": 16,
+      "b": 28,
+      "method": "gcd",
+      "mode": "direct",
+      "asked": "flors de cada ram",
+      "unit": "flors per ram",
+      "expectedBase": 4,
+      "expectedFinal": [
+        4
+      ],
+      "visual": "singleBags",
+      "hint1": "Rellegeix només la pregunta final: demana flors de cada ram. La unitat és flors per ram.",
+      "hint2": "Prova si la quantitat comuna cap exactament dins de 16 i de 28, sense deixar res fora. La pregunta demana la mida, el nombre de grups o què hi ha a cada grup?",
+      "reason": "El valor intermedi ha de dividir exactament 16 i 28, perquè no sobri res en cap dels dos totals.",
+      "meaning": "flors per ram, no nombre de rams",
+      "data": [
+        "16 margarides en total",
+        "28 tulipes en total"
+      ]
+    },
+    {
+      "id": "compra",
+      "level": "Connecta",
+      "story": "Capses de 5 retoladors i de 6 pinzells. Comprem la mateixa quantitat mínima positiva de cada material. Quantes capses de cada material calen?",
+      "a": 5,
+      "b": 6,
+      "method": "lcm",
+      "mode": "boxes",
+      "asked": "capses de cada material",
+      "unit": "capses de cada material",
+      "expectedBase": 30,
+      "expectedFinal": [
+        6,
+        5
+      ],
+      "visual": "boxes",
+      "hint1": "Rellegeix només la pregunta final: demana capses de cada material. La unitat és capses de cada material.",
+      "hint2": "Imagina salts complets de 5 i de 6. El valor comú ha d’aparèixer a les dues llistes de totals. Què representa abans de respondre la pregunta final?",
+      "reason": "El valor intermedi ha de ser un total format per grups complets de 5 i de 6: ha de ser múltiple de tots dos.",
+      "meaning": "objectes de CADA material, encara no capses",
+      "data": [
+        "5 retoladors per capsa",
+        "6 pinzells per capsa"
+      ],
+      "finalLabels": [
+        "capses de retoladors",
+        "capses de pinzells"
+      ]
+    },
+    {
+      "id": "lots",
+      "level": "Connecta",
+      "story": "Amb 14 fitxes blaves i 21 taronja fem el màxim nombre de lots idèntics, amb els dos colors i sense sobrants. Quants lots fem i quin contingut té cadascun?",
+      "a": 14,
+      "b": 21,
+      "method": "gcd",
+      "mode": "mixed",
+      "asked": "lots i contingut de cada lot",
+      "unit": "lots i fitxes per lot",
+      "expectedBase": 7,
+      "expectedFinal": [
+        7,
+        2,
+        3
+      ],
+      "visual": "mixed",
+      "hint1": "Rellegeix només la pregunta final: demana lots i contingut de cada lot. La unitat és lots i fitxes per lot.",
+      "hint2": "Prova si la quantitat comuna cap exactament dins de 14 i de 21, sense deixar res fora. La pregunta demana la mida, el nombre de grups o què hi ha a cada grup?",
+      "reason": "El valor intermedi ha de dividir exactament 14 i 21, perquè no sobri res en cap dels dos totals.",
+      "meaning": "lots idèntics, cadascun amb els dos colors",
+      "data": [
+        "14 fitxes blaves en total",
+        "21 fitxes taronja en total"
+      ]
+    },
+    {
+      "id": "bosses",
+      "level": "Connecta",
+      "story": "Tenim 18 caramels de menta i 27 de llimona. Fem bosses d’un sol gust, totes amb la mateixa quantitat màxima i sense sobrants. Quants caramels per bossa i quantes bosses de cada gust?",
+      "a": 18,
+      "b": 27,
+      "method": "gcd",
+      "mode": "singleBags",
+      "asked": "contingut per bossa i bosses de cada gust",
+      "unit": "caramels per bossa i bosses",
+      "expectedBase": 9,
+      "expectedFinal": [
+        9,
+        2,
+        3
+      ],
+      "visual": "singleBags",
+      "hint1": "Rellegeix només la pregunta final: demana contingut per bossa i bosses de cada gust. La unitat és caramels per bossa i bosses.",
+      "hint2": "Prova si la quantitat comuna cap exactament dins de 18 i de 27, sense deixar res fora. La pregunta demana la mida, el nombre de grups o què hi ha a cada grup?",
+      "reason": "El valor intermedi ha de dividir exactament 18 i 27, perquè no sobri res en cap dels dos totals.",
+      "meaning": "caramels per bossa, no nombre de bosses",
+      "data": [
+        "18 caramels de menta",
+        "27 caramels de llimona"
+      ],
+      "finalLabels": [
+        "caramels per bossa",
+        "bosses de menta",
+        "bosses de llimona"
+      ]
+    },
+    {
+      "id": "mosaic",
+      "level": "Connecta",
+      "story": "Un mosaic es pot ordenar en files de 8 o en files de 10 peces sense sobrants. Quin és el menor total positiu de peces que ho permet?",
+      "a": 8,
+      "b": 10,
+      "method": "lcm",
+      "mode": "direct",
+      "asked": "total mínim del mosaic",
+      "unit": "peces",
+      "expectedBase": 40,
+      "expectedFinal": [
+        40
+      ],
+      "visual": "cycles",
+      "hint1": "Rellegeix només la pregunta final: demana total mínim del mosaic. La unitat és peces.",
+      "hint2": "Imagina salts complets de 8 i de 10. El valor comú ha d’aparèixer a les dues llistes de totals. Què representa abans de respondre la pregunta final?",
+      "reason": "El valor intermedi ha de ser un total format per grups complets de 8 i de 10: ha de ser múltiple de tots dos.",
+      "meaning": "peces del mosaic",
+      "data": [
+        "Files de 8 peces completes",
+        "Files de 10 peces completes"
+      ]
+    },
+    {
+      "id": "rondes",
+      "level": "Interpreta",
+      "story": "Dos circuits duren 7 i 9 minuts per ronda. Es comencen alhora. Quantes rondes de 7 minuts passen fins a la primera coincidència futura?",
+      "a": 7,
+      "b": 9,
+      "method": "lcm",
+      "mode": "rounds",
+      "asked": "rondes del circuit de 7 minuts",
+      "unit": "rondes",
+      "expectedBase": 63,
+      "expectedFinal": [
+        9
+      ],
+      "visual": "cycles",
+      "period": 7,
+      "hint1": "Rellegeix només la pregunta final: demana rondes del circuit de 7 minuts. La unitat és rondes.",
+      "hint2": "Imagina salts complets de 7 i de 9. El valor comú ha d’aparèixer a les dues llistes de totals. Què representa abans de respondre la pregunta final?",
+      "reason": "El valor intermedi ha de ser un total format per grups complets de 7 i de 9: ha de ser múltiple de tots dos.",
+      "meaning": "minuts fins a coincidir, encara no rondes",
+      "data": [
+        "7 minuts per ronda del primer circuit",
+        "9 minuts per ronda del segon circuit"
+      ]
+    },
+    {
+      "id": "contingut",
+      "level": "Interpreta",
+      "story": "Amb 24 fitxes blaves i 40 taronja fem el màxim nombre de paquets idèntics amb els dos colors, sense sobrants. Quantes fitxes BLAVES hi ha a cada paquet?",
+      "a": 24,
+      "b": 40,
+      "method": "gcd",
+      "mode": "content",
+      "asked": "fitxes blaves de cada paquet",
+      "unit": "fitxes blaves per paquet",
+      "expectedBase": 8,
+      "expectedFinal": [
+        3
+      ],
+      "visual": "mixed",
+      "hint1": "Rellegeix només la pregunta final: demana fitxes blaves de cada paquet. La unitat és fitxes blaves per paquet.",
+      "hint2": "Prova si la quantitat comuna cap exactament dins de 24 i de 40, sense deixar res fora. La pregunta demana la mida, el nombre de grups o què hi ha a cada grup?",
+      "reason": "El valor intermedi ha de dividir exactament 24 i 40, perquè no sobri res en cap dels dos totals.",
+      "meaning": "paquets idèntics, encara no fitxes per paquet",
+      "data": [
+        "24 fitxes blaves en total",
+        "40 fitxes taronja en total"
+      ]
+    },
+    {
+      "id": "trossos",
+      "level": "Interpreta",
+      "story": "Tallem cintes de 20 i 32 cm en trossos iguals de longitud màxima, sense sobrants. Quants trossos hi ha en TOTAL?",
+      "a": 20,
+      "b": 32,
+      "method": "gcd",
+      "mode": "pieces",
+      "asked": "nombre total de trossos",
+      "unit": "trossos",
+      "expectedBase": 4,
+      "expectedFinal": [
+        13
+      ],
+      "visual": "ribbons",
+      "hint1": "Rellegeix només la pregunta final: demana nombre total de trossos. La unitat és trossos.",
+      "hint2": "Prova si la quantitat comuna cap exactament dins de 20 i de 32, sense deixar res fora. La pregunta demana la mida, el nombre de grups o què hi ha a cada grup?",
+      "reason": "El valor intermedi ha de dividir exactament 20 i 32, perquè no sobri res en cap dels dos totals.",
+      "meaning": "cm per tros, encara no nombre total de trossos",
+      "data": [
+        "Una cinta de 20 cm",
+        "Una cinta de 32 cm"
+      ]
+    },
+    {
+      "id": "iguals",
+      "level": "Interpreta",
+      "story": "Tenim 9 fitxes blaves i 9 taronja. Fem el màxim nombre de lots idèntics amb tots dos colors, sense sobrants. Quants lots fem i quantes fitxes de cada color hi ha a cada lot?",
+      "a": 9,
+      "b": 9,
+      "method": "gcd",
+      "mode": "mixed",
+      "asked": "lots i contingut per lot",
+      "unit": "lots i fitxes per lot",
+      "expectedBase": 9,
+      "expectedFinal": [
+        9,
+        1,
+        1
+      ],
+      "visual": "mixed",
+      "hint1": "Rellegeix només la pregunta final: demana lots i contingut per lot. La unitat és lots i fitxes per lot.",
+      "hint2": "Prova si la quantitat comuna cap exactament dins de 9 i de 9, sense deixar res fora. La pregunta demana la mida, el nombre de grups o què hi ha a cada grup?",
+      "reason": "El valor intermedi ha de dividir exactament 9 i 9, perquè no sobri res en cap dels dos totals.",
+      "meaning": "lots idèntics, cadascun amb els dos colors",
+      "data": [
+        "9 fitxes blaves en total",
+        "9 fitxes taronja en total"
+      ]
+    }
+  ],
+  "mini": [
+    {
+      "d": 2,
+      "n": 138
+    },
+    {
+      "d": 3,
+      "n": 125
+    },
+    {
+      "d": 4,
+      "n": 1316
+    },
+    {
+      "d": 5,
+      "n": 203
+    },
+    {
+      "d": 6,
+      "n": 54
+    },
+    {
+      "d": 9,
+      "n": 741
+    },
+    {
+      "d": 10,
+      "n": 430
+    },
+    {
+      "ds": [
+        2,
+        3,
+        5
+      ],
+      "find": true,
+      "limit": 100
+    },
+    {
+      "ds": [
+        2,
+        3,
+        4,
+        6
+      ],
+      "n": 2028,
+      "all": true
+    },
+    {
+      "d": 6,
+      "n": 45
+    }
+  ],
+  "edgeCases": [
+    {
+      "a": 4,
+      "b": 12,
+      "lcm": 12,
+      "gcd": 4
+    },
+    {
+      "a": 8,
+      "b": 15,
+      "lcm": 120,
+      "gcd": 1
+    },
+    {
+      "a": 9,
+      "b": 9,
+      "lcm": 9,
+      "gcd": 9
+    }
+  ]
+}

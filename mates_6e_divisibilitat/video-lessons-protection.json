@@ -1,0 +1,31 @@
+{
+  "ids": [
+    "multiples",
+    "divisors",
+    "criteris",
+    "tots-divisors",
+    "primers",
+    "factors",
+    "mcm",
+    "mcd",
+    "metode",
+    "coincidencies",
+    "repartiments",
+    "girs",
+    "simetries"
+  ],
+  "worlds": "29d04dad4c024820030fddf7bd6beed3742fa3d0bbd319e546227d7bff71a849",
+  "lessons": {
+    "multiples": "2f85a48fa3968e269391fba871f0879accc333b0124422a83d405a07f766350d",
+    "divisors": "ccbc00a190120df5c42712a474f3e2890b0e94e290b902ca834d6a54ab25972d",
+    "criteris": "8c55c38e6aff67413c25908b901e48631ebb9671eb96c232ccd177e8a68054e5",
+    "tots-divisors": "e4add25ded7870422ee9b9c807edb2ff400dddd2fc03955840c61c14d9588389",
+    "primers": "85b328eac90815f6d28aace45b5dd6e2ba246890a35d85b8ddbe4975b01ff7e3",
+    "factors": "fd4265e1687a33d1993b55c73854e581699e4c49ee06d9b230c802d2ab3a06c6",
+    "mcm": "d89d74b1456f7313338942747945ad21e6981c676ad3d211b7aad6e3e7383bed",
+    "mcd": "dc5bf4bad4cd02748daed7f3239455687c05c2777acaf0f928807963a3cd9e71",
+    "girs": "d942d9466de188a5cfaf898cebde882ae40a4f6f5163ee48185c1610ae2953c2",
+    "simetries": "803543c8caea51368a51d34cfafe8e568a05bb9f1fe29292121690b28efb90ca"
+  },
+  "criteriaUI": "d8dd57ef1fc0036cca4e7bba38702633779bdad6e24491097febba4e2e351eff"
+}
