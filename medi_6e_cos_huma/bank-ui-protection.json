@@ -1,0 +1,32 @@
+[
+  {
+    "name": "map",
+    "start": "function icon(",
+    "end": "function lessonVisuals(",
+    "hash": "c97029b0c1ab5076fcb58bb8519efe7a374ccf057807b086e313ab1485c76d08"
+  },
+  {
+    "name": "theoryAndActivities",
+    "start": "function lessonVisuals(",
+    "end": "function practice(",
+    "hash": "a9a776bdef66b6d35d5049cdd29a1a4654434f25181861706ecc2f9dddc04dab"
+  },
+  {
+    "name": "practiceAndStart",
+    "start": "function practice(",
+    "end": "function feedback(",
+    "hash": "a30904392d7213c79ab57ee7c31bb013c1cb54607448e4edc4c47c06c21ead2b"
+  },
+  {
+    "name": "quizAndScoring",
+    "start": "function quiz(",
+    "end": "function finish(",
+    "hash": "7f3503f155f07ee9af7cfa8357fbdeab44ece02fca09b8c03760edbab809ebcf"
+  },
+  {
+    "name": "review",
+    "start": "function errors(",
+    "end": "function progress(",
+    "hash": "edb5979690c9699c25e48f306fd724483b82ee7b38af1b88d0abe76e9f21d6b5"
+  }
+]

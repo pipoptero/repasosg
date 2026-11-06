@@ -1,0 +1,16 @@
+{
+  "revision": 2,
+  "retired": {
+    "locomotor-044": "locomotor-061",
+    "locomotor-047": "locomotor-062",
+    "locomotor-048": "locomotor-063",
+    "locomotor-050": "locomotor-064",
+    "nervios-009": "nervios-061",
+    "nervios-028": "nervios-062"
+  },
+  "counts": {
+    "respiratori": 60,
+    "locomotor": 60,
+    "nervios": 60
+  }
+}

@@ -1,0 +1,20 @@
+const {chromium}=require('../tmp/medi-review/node_modules/playwright');
+const fs=require('fs'),path=require('path'),crypto=require('crypto'),assert=require('assert/strict');
+const root=__dirname;
+for(const [name,hash]of Object.entries(JSON.parse(fs.readFileSync(path.join(root,'refinement-integrity.json'),'utf8'))))assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root,name))).digest('hex'),hash,name+' intacte');
+(async()=>{const browser=await chromium.launch({executablePath:'C:/Users/Isaac/AppData/Local/ms-playwright/chromium-1208/chrome-win64/chrome.exe',headless:true});try{
+const p=await browser.newPage(),errors=[];p.on('dialog',d=>d.accept());p.on('pageerror',e=>errors.push(e.message));p.on('response',r=>{if(r.status()>=400)errors.push(r.status()+' '+r.url())});
+const out=path.join(root,'../tmp/medi-review/refinement-qa');fs.mkdirSync(out,{recursive:true});let captures=0;
+async function shot(name,width,locator){assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),name+' desbordament');await p.screenshot({path:path.join(out,name+'-'+width+'.png'),fullPage:true,animations:'disabled'});captures++;if(locator){await p.locator(locator).first().screenshot({path:path.join(out,name+'-detall-'+width+'.png'),animations:'disabled'});captures++}}
+for(const width of [390,768,1280]){await p.setViewportSize({width,height:900});await p.goto('http://127.0.0.1:8765/medi_6e_cos_huma/index.html#mapa');await shot('mapa',width);
+for(const topic of ['respiratori','locomotor','nervios']){
+await p.goto('http://127.0.0.1:8765/medi_6e_cos_huma/index.html#teoria/'+topic);await p.waitForSelector('.lesson h2[data-chapter]');for(const im of await p.locator('.study-image-link img').all()){await im.scrollIntoViewIfNeeded();await im.evaluate(i=>i.decode())}await p.evaluate(()=>scrollTo(0,0));await shot('teoria-'+topic,width,'.lesson');
+assert.equal(await p.locator('.lesson h2[data-chapter]').count(),await p.locator('.lesson').count());
+await p.evaluate(topic=>{state=MediEngine.clean(null,bank);state.session={mode:'practice',ids:bank.filter(q=>q.tema===topic).slice(0,3).map(q=>q.id),index:0,results:[],order:[2,0,3,1]};location.hash='joc';quiz()},topic);await p.waitForSelector('.quiz-world-banner');assert.equal(await p.locator('.quiz-world-banner img').count(),1);assert.equal(await p.locator('.quiz-track progress').getAttribute('value'),'0');
+await shot('pregunta-'+topic,width);await p.locator('.quiz-hint summary').click();assert(await p.locator('.quiz-hint p').isVisible());await shot('pista-'+topic,width);
+await p.locator('[data-choice="0"]').click();await p.waitForSelector('.is-correct');assert((await p.locator('[data-choice="0"]').getAttribute('aria-label')).includes('Resposta correcta'));await shot('encert-'+topic,width);await p.locator('#next').click();await p.locator('[data-choice="1"]').click();await p.waitForSelector('.is-review');assert.equal(await p.locator('.options .correct').count(),1);assert.equal(await p.locator('.options .wrong').count(),1);assert((await p.locator('[data-choice="1"]').getAttribute('aria-label')).includes('La teva resposta'));await shot('error-'+topic,width);
+await p.locator('#feedback a').click();await p.waitForSelector('.lesson');assert((await p.url()).includes('#teoria/'));
+}
+}
+await p.emulateMedia({reducedMotion:'reduce'});await p.goto('http://127.0.0.1:8765/medi_6e_cos_huma/index.html#practica');await p.getByRole('button',{name:'Comença la ronda'}).click();await p.waitForSelector('.quiz-world-banner');assert.equal(await p.locator('.quiz').evaluate(e=>getComputedStyle(e).animationName),'none');await p.locator('[data-choice]').first().focus();assert(await p.locator('[data-choice]').first().evaluate(e=>e===document.activeElement));await p.keyboard.press('Enter');await p.waitForSelector('#next');assert.deepEqual(errors,[]);console.log(`PASS refinament: fitxers protegits SHA-256 intactes; ${captures} captures; 3 mons × 3 amplades; teoria completa, pistes, progrés, encerts/errors inequívocs, retorn a teoria, teclat i moviment reduït; cap error JS/404.`);
+}finally{await browser.close()}})().catch(e=>{console.error(e);process.exitCode=1});

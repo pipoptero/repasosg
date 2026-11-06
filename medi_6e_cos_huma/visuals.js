@@ -1,0 +1,263 @@
+/* Retalls dels originals; procedència i coordenades a assets/teoria/fonts.json. */
+window.MEDI_VISUALS = [
+  {
+    "id": "respiratori-parts",
+    "src": "assets/teoria/respiratori-parts.webp",
+    "width": 678,
+    "height": 441,
+    "bytes": 34454,
+    "font": "APARELL RESPIRATORI.pdf",
+    "pagina": 1,
+    "retall": [
+      292,
+      397,
+      518,
+      544
+    ],
+    "anchor": "r-vies",
+    "title": "El recorregut i les parts",
+    "caption": "Segueix l’aire des de les fosses nasals fins als bronquíols i els alvèols.",
+    "alt": "Dibuix dels apunts amb fosses nasals, faringe, laringe, tràquea, bronquis, bronquíols, pulmons i alvèols.",
+    "tractament": "Retall directe, rasterització i compressió WebP; sense redibuixar ni generar contingut."
+  },
+  {
+    "id": "respiratori-moviments",
+    "src": "assets/teoria/respiratori-moviments.webp",
+    "width": 690,
+    "height": 465,
+    "bytes": 24156,
+    "font": "APARELL RESPIRATORI.pdf",
+    "pagina": 2,
+    "retall": [
+      287,
+      263,
+      517,
+      418
+    ],
+    "anchor": "r-moviments",
+    "title": "Inspiració i expiració",
+    "caption": "A l’esquerra, el diafragma baixa i entra aire. A la dreta, puja i l’aire surt. Compara les fletxes dels apunts.",
+    "alt": "Comparació original dels apunts: inspiració a l’esquerra amb diafragma avall i entrada d’aire; expiració a la dreta amb diafragma amunt i sortida d’aire.",
+    "tractament": "Retall directe, rasterització i compressió WebP; sense redibuixar ni generar contingut."
+  },
+  {
+    "id": "respiratori-alveols",
+    "src": "assets/teoria/respiratori-alveols.webp",
+    "width": 621,
+    "height": 387,
+    "bytes": 23848,
+    "font": "APARELL RESPIRATORI.pdf",
+    "pagina": 2,
+    "retall": [
+      86,
+      571,
+      293,
+      700
+    ],
+    "anchor": "r-gasos",
+    "title": "Els alvèols i la sang",
+    "caption": "L’O₂ passa de l’aire a la sang; el CO₂ passa de la sang als alvèols.",
+    "alt": "Alvèols envoltats de vasos sanguinis i detall ampliat de l’intercanvi d’oxigen i diòxid de carboni.",
+    "tractament": "Retall directe, rasterització i compressió WebP; sense redibuixar ni generar contingut."
+  },
+  {
+    "id": "locomotor-medulla-ossia",
+    "src": "assets/teoria/locomotor-medulla-ossia.webp",
+    "width": 627,
+    "height": 606,
+    "bytes": 20388,
+    "font": "APARELL LOCOMOTOR.pdf",
+    "pagina": 1,
+    "retall": [
+      323,
+      330,
+      532,
+      532
+    ],
+    "anchor": "l-ossos",
+    "title": "A dins dels ossos",
+    "caption": "El dibuix mostra la medul·la òssia, on es formen cèl·lules sanguínies.",
+    "alt": "Il·lustració de la fitxa amb ossos de formes diferents i un tall que assenyala la medul·la òssia.",
+    "tractament": "Retall directe, rasterització i compressió WebP; sense redibuixar ni generar contingut."
+  },
+  {
+    "id": "locomotor-esquelet",
+    "src": "assets/teoria/locomotor-esquelet.webp",
+    "width": 713,
+    "height": 1400,
+    "bytes": 130778,
+    "font": "El_Cuaderno_Secreto_de_Súper_Anatomía.pdf",
+    "pagina": 5,
+    "retall": [
+      510,
+      143,
+      815,
+      742
+    ],
+    "anchor": "l-funcions",
+    "title": "L’esquelet ens sosté",
+    "caption": "Observa el crani, la columna i els ossos de les extremitats. No cal memoritzar noms nous.",
+    "alt": "Retall de l’esquelet humà de la guia, amb crani, tronc, braços i cames.",
+    "tractament": "Retall directe, rasterització i compressió WebP; sense redibuixar ni generar contingut."
+  },
+  {
+    "id": "locomotor-musculatura",
+    "src": "assets/teoria/locomotor-musculatura.webp",
+    "width": 1200,
+    "height": 1213,
+    "bytes": 116544,
+    "font": "El_Cuaderno_Secreto_de_Súper_Anatomía.pdf",
+    "pagina": 11,
+    "retall": [
+      420,
+      164,
+      963,
+      713
+    ],
+    "anchor": "l-musculs",
+    "title": "La musculatura",
+    "caption": "Vista anterior i posterior de la musculatura. Ampliació visual: fixa’t en la distribució, sense memoritzar una llista de músculs.",
+    "alt": "Dues figures de la guia que mostren la musculatura vista de davant i de darrere, sense els rètols originals en castellà.",
+    "tractament": "Retall directe, rasterització i compressió WebP; sense redibuixar ni generar contingut."
+  },
+  {
+    "id": "locomotor-articulacio",
+    "src": "assets/teoria/locomotor-articulacio.webp",
+    "width": 1200,
+    "height": 1049,
+    "bytes": 120758,
+    "font": "El_Cuaderno_Secreto_de_Súper_Anatomía.pdf",
+    "pagina": 8,
+    "retall": [
+      397,
+      145,
+      906,
+      590
+    ],
+    "anchor": "l-articulacions",
+    "title": "Cartílag i lligaments",
+    "caption": "La superfície clara és el cartílag. Les bandes que uneixen els ossos són lligaments.",
+    "alt": "Detall d’una articulació de la guia, amb cartílag als extrems dels ossos i lligaments entre ells.",
+    "tractament": "Retall directe, rasterització i compressió WebP; sense redibuixar ni generar contingut."
+  },
+  {
+    "id": "locomotor-tendo",
+    "src": "assets/teoria/locomotor-tendo.webp",
+    "width": 990,
+    "height": 765,
+    "bytes": 120992,
+    "font": "El_Cuaderno_Secreto_de_Súper_Anatomía.pdf",
+    "pagina": 12,
+    "retall": [
+      180,
+      245,
+      510,
+      500
+    ],
+    "anchor": "l-musculs",
+    "title": "Tendó: múscul amb os",
+    "caption": "Ampliació: la zona fibrosa clara uneix el múscul vermell amb l’os blau.",
+    "alt": "Detall retallat de la guia: inserció del múscul en l’os mitjançant un tendó, sense els rètols en castellà.",
+    "tractament": "Retall directe, rasterització i compressió WebP; sense redibuixar ni generar contingut."
+  },
+  {
+    "id": "nervios-neurona",
+    "src": "assets/teoria/nervios-neurona.webp",
+    "width": 690,
+    "height": 327,
+    "bytes": 23094,
+    "font": "SISTEMA NERVIÓS.pdf",
+    "pagina": 3,
+    "retall": [
+      309,
+      221,
+      539,
+      330
+    ],
+    "anchor": "n-neurones",
+    "title": "Les parts de la neurona",
+    "caption": "Localitza el soma, les dendrites, l’axó i el botó terminal al dibuix dels apunts.",
+    "alt": "Neurona de la fitxa escolar amb els rètols soma, dendrita, axó i botó terminal en català.",
+    "tractament": "Retall directe, rasterització i compressió WebP; sense redibuixar ni generar contingut."
+  },
+  {
+    "id": "nervios-central",
+    "src": "assets/teoria/nervios-central.webp",
+    "width": 684,
+    "height": 507,
+    "bytes": 40596,
+    "font": "SISTEMA NERVIÓS.pdf",
+    "pagina": 3,
+    "retall": [
+      76,
+      578,
+      304,
+      747
+    ],
+    "anchor": "n-central",
+    "title": "Encèfal i medul·la espinal",
+    "caption": "El crani protegeix l’encèfal i la columna protegeix la medul·la. Dins l’encèfal, diferencia cervell, cerebel i bulb raquidi.",
+    "alt": "Dibuix escolar del cervell, cerebel, bulb raquidi, encèfal i medul·la espinal, amb els noms en català.",
+    "tractament": "Retall directe, rasterització i compressió WebP; sense redibuixar ni generar contingut."
+  },
+  {
+    "id": "nervios-nervi",
+    "src": "assets/teoria/nervios-nervi.webp",
+    "width": 699,
+    "height": 933,
+    "bytes": 41624,
+    "font": "SISTEMA NERVIÓS.pdf",
+    "pagina": 4,
+    "retall": [
+      301,
+      123,
+      534,
+      434
+    ],
+    "anchor": "n-periferic",
+    "title": "Els nervis connecten el cos",
+    "caption": "Observa com un nervi conté fibres de diverses neurones i arriba a les fibres musculars.",
+    "alt": "Il·lustració de la fitxa amb un nervi, una neurona i una fibra muscular, etiquetats en català.",
+    "tractament": "Retall directe, rasterització i compressió WebP; sense redibuixar ni generar contingut."
+  },
+  {
+    "id": "nervios-voluntaria",
+    "src": "assets/teoria/nervios-voluntaria.webp",
+    "width": 690,
+    "height": 552,
+    "bytes": 30046,
+    "font": "SISTEMA NERVIÓS.pdf",
+    "pagina": 2,
+    "retall": [
+      312,
+      114,
+      542,
+      298
+    ],
+    "anchor": "n-respostes",
+    "title": "Una resposta voluntària",
+    "caption": "Parlar és una acció que podem decidir conscientment, com mostra la fotografia dels apunts.",
+    "alt": "Fotografies de la fitxa escolar amb exemples de menjar i parlar com a accions voluntàries.",
+    "tractament": "Retall directe, rasterització i compressió WebP; sense redibuixar ni generar contingut."
+  },
+  {
+    "id": "nervios-reflexa",
+    "src": "assets/teoria/nervios-reflexa.webp",
+    "width": 690,
+    "height": 516,
+    "bytes": 29238,
+    "font": "SISTEMA NERVIÓS.pdf",
+    "pagina": 2,
+    "retall": [
+      312,
+      322,
+      542,
+      494
+    ],
+    "anchor": "n-respostes",
+    "title": "Una resposta reflexa",
+    "caption": "Tancar els ulls per evitar que hi entri aigua és el reflex que exemplifica la fitxa.",
+    "alt": "Fotografia dels apunts: una nena tanca els ulls davant l’aigua, exemple de resposta reflexa.",
+    "tractament": "Retall directe, rasterització i compressió WebP; sense redibuixar ni generar contingut."
+  }
+];
