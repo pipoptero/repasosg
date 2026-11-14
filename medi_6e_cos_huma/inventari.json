@@ -149,10 +149,10 @@
     "importància": "imprescindible",
     "font": "APARELL RESPIRATORI_esencial.pdf",
     "pagina": "1",
-    "pregunta": "Quin tram està ben ordenat?",
+    "pregunta": "Quan inspirem, en quin ordre passa l’aire per la faringe, la laringe i la tràquea?",
     "theoryAnchor": "r-vies",
     "bankRevision": 2,
-    "objectiu": "Quin tram està ben ordenat?",
+    "objectiu": "Quan inspirem, en quin ordre passa l’aire per la faringe, la laringe i la tràquea?",
     "theoryTema": "respiratori"
   },
   {
@@ -201,10 +201,10 @@
     "importància": "imprescindible",
     "font": "APARELL RESPIRATORI_esencial.pdf",
     "pagina": "1",
-    "pregunta": "En un esquema falta una peça: tràquea → … → bronquíols. Quina és?",
+    "pregunta": "Completa aquest tram del recorregut de l’aire quan inspirem: tràquea → … → bronquíols.",
     "theoryAnchor": "r-vies",
     "bankRevision": 2,
-    "objectiu": "En un esquema falta una peça: tràquea → … → bronquíols. Quina és?",
+    "objectiu": "Completa aquest tram del recorregut de l’aire quan inspirem: tràquea → … → bronquíols.",
     "theoryTema": "respiratori"
   },
   {
@@ -214,10 +214,10 @@
     "importància": "imprescindible",
     "font": "APARELL RESPIRATORI_esencial.pdf",
     "pagina": "1",
-    "pregunta": "En quin ordre passarà una partícula d'aire per aquests dos conductes en inspirar?",
+    "pregunta": "Quan inspirem, per quins conductes passa primer l’aire: pels bronquis o pels bronquíols?",
     "theoryAnchor": "r-vies",
     "bankRevision": 2,
-    "objectiu": "En quin ordre passarà una partícula d'aire per aquests dos conductes en inspirar?",
+    "objectiu": "Quan inspirem, per quins conductes passa primer l’aire: pels bronquis o pels bronquíols?",
     "theoryTema": "respiratori"
   },
   {
@@ -227,10 +227,10 @@
     "importància": "imprescindible",
     "font": "APARELL RESPIRATORI_esencial.pdf",
     "pagina": "1",
-    "pregunta": "Per sortir des dels bronquis, cap a quin conducte va l'aire?",
+    "pregunta": "Quan expirem, l’aire surt dels bronquis. Per quin conducte passa a continuació?",
     "theoryAnchor": "r-vies",
     "bankRevision": 2,
-    "objectiu": "Per sortir des dels bronquis, cap a quin conducte va l'aire?",
+    "objectiu": "Quan expirem, l’aire surt dels bronquis. Per quin conducte passa a continuació?",
     "theoryTema": "respiratori"
   },
   {
@@ -240,10 +240,10 @@
     "importància": "imprescindible",
     "font": "APARELL RESPIRATORI_esencial.pdf",
     "pagina": "1",
-    "pregunta": "Quina peça uneix la faringe amb la tràquea?",
+    "pregunta": "Quin conducte uneix la faringe amb la tràquea?",
     "theoryAnchor": "r-vies",
     "bankRevision": 2,
-    "objectiu": "Quina peça uneix la faringe amb la tràquea?",
+    "objectiu": "Quin conducte uneix la faringe amb la tràquea?",
     "theoryTema": "respiratori"
   },
   {
@@ -253,10 +253,10 @@
     "importància": "imprescindible",
     "font": "APARELL RESPIRATORI_esencial.pdf",
     "pagina": "1",
-    "pregunta": "Quin recorregut resumeix l'entrada fins a l'intercanvi?",
+    "pregunta": "Quin recorregut segueix l’aire des que entra pel nas fins que arriba al lloc on s’intercanvien gasos amb la sang?",
     "theoryAnchor": "r-vies",
     "bankRevision": 2,
-    "objectiu": "Quin recorregut resumeix l'entrada fins a l'intercanvi?",
+    "objectiu": "Quin recorregut segueix l’aire des que entra pel nas fins que arriba al lloc on s’intercanvien gasos amb la sang?",
     "theoryTema": "respiratori"
   },
   {
@@ -370,10 +370,10 @@
     "importància": "imprescindible",
     "font": "APARELL RESPIRATORI_esencial.pdf",
     "pagina": "1",
-    "pregunta": "Una etiqueta diu «conductes que comuniquen pulmons i exterior». A què correspon?",
+    "pregunta": "Com s’anomena el conjunt de conductes que comuniquen els pulmons amb l’exterior?",
     "theoryAnchor": "r-organs",
     "bankRevision": 2,
-    "objectiu": "Una etiqueta diu «conductes que comuniquen pulmons i exterior». A què correspon?",
+    "objectiu": "Com s’anomena el conjunt de conductes que comuniquen els pulmons amb l’exterior?",
     "theoryTema": "respiratori"
   },
   {
@@ -435,10 +435,10 @@
     "importància": "imprescindible",
     "font": "APARELL RESPIRATORI_esencial.pdf",
     "pagina": "2",
-    "pregunta": "Una fletxa surt dels pulmons cap a l'exterior. Quin moviment representa?",
+    "pregunta": "Deixes sortir l’aire dels pulmons cap a l’exterior. Com s’anomena aquest moviment?",
     "theoryAnchor": "r-moviments",
     "bankRevision": 2,
-    "objectiu": "Una fletxa surt dels pulmons cap a l'exterior. Quin moviment representa?",
+    "objectiu": "Deixes sortir l’aire dels pulmons cap a l’exterior. Com s’anomena aquest moviment?",
     "theoryTema": "respiratori"
   },
   {
@@ -448,10 +448,10 @@
     "importància": "imprescindible",
     "font": "APARELL RESPIRATORI_esencial.pdf",
     "pagina": "2",
-    "pregunta": "Una fletxa entra del nas als pulmons. Quina etiqueta hi poses?",
+    "pregunta": "Agafes aire pel nas i l’aire entra als pulmons. Com s’anomena aquest moviment?",
     "theoryAnchor": "r-moviments",
     "bankRevision": 2,
-    "objectiu": "Una fletxa entra del nas als pulmons. Quina etiqueta hi poses?",
+    "objectiu": "Agafes aire pel nas i l’aire entra als pulmons. Com s’anomena aquest moviment?",
     "theoryTema": "respiratori"
   },
   {
@@ -487,10 +487,10 @@
     "importància": "imprescindible",
     "font": "APARELL RESPIRATORI_esencial.pdf",
     "pagina": "2",
-    "pregunta": "En un dibuix el tòrax es fa més petit i l'aire surt. Com està el diafragma?",
+    "pregunta": "Quan expirem, disminueix l’espai de la cavitat toràcica i l’aire surt. Com està el diafragma?",
     "theoryAnchor": "r-moviments",
     "bankRevision": 2,
-    "objectiu": "En un dibuix el tòrax es fa més petit i l'aire surt. Com està el diafragma?",
+    "objectiu": "Quan expirem, disminueix l’espai de la cavitat toràcica i l’aire surt. Com està el diafragma?",
     "theoryTema": "respiratori"
   },
   {
@@ -500,10 +500,10 @@
     "importància": "imprescindible",
     "font": "APARELL RESPIRATORI_esencial.pdf",
     "pagina": "2",
-    "pregunta": "Quina seqüència explica l'entrada d'aire?",
+    "pregunta": "Quina seqüència explica què passa al diafragma, a l’espai del tòrax i a l’aire quan inspirem?",
     "theoryAnchor": "r-moviments",
     "bankRevision": 2,
-    "objectiu": "Quina seqüència explica l'entrada d'aire?",
+    "objectiu": "Quina seqüència explica què passa al diafragma, a l’espai del tòrax i a l’aire quan inspirem?",
     "theoryTema": "respiratori"
   },
   {
@@ -513,10 +513,10 @@
     "importància": "imprescindible",
     "font": "APARELL RESPIRATORI_esencial.pdf",
     "pagina": "2",
-    "pregunta": "Una companya dibuixa inspiració amb el diafragma pujant. Què ha de corregir?",
+    "pregunta": "Una companya diu: «Quan inspirem, el diafragma puja». Quina explicació la corregeix?",
     "theoryAnchor": "r-moviments",
     "bankRevision": 2,
-    "objectiu": "Una companya dibuixa inspiració amb el diafragma pujant. Què ha de corregir?",
+    "objectiu": "Una companya diu: «Quan inspirem, el diafragma puja». Quina explicació la corregeix?",
     "theoryTema": "respiratori"
   },
   {
@@ -539,10 +539,10 @@
     "importància": "imprescindible",
     "font": "APARELL RESPIRATORI_esencial.pdf",
     "pagina": "2",
-    "pregunta": "Quina fletxa representa el camí de l'oxigen als pulmons?",
+    "pregunta": "Durant l’intercanvi de gasos als alvèols, d’on surt i on va l’oxigen que el cos capta?",
     "theoryAnchor": "r-gasos",
     "bankRevision": 2,
-    "objectiu": "Quina fletxa representa el camí de l'oxigen als pulmons?",
+    "objectiu": "Durant l’intercanvi de gasos als alvèols, d’on surt i on va l’oxigen que el cos capta?",
     "theoryTema": "respiratori"
   },
   {
@@ -552,10 +552,10 @@
     "importància": "imprescindible",
     "font": "APARELL RESPIRATORI_esencial.pdf",
     "pagina": "2",
-    "pregunta": "Quina fletxa representa el camí del CO₂ als pulmons?",
+    "pregunta": "Durant l’intercanvi de gasos als pulmons, d’on surt i on va el diòxid de carboni abans de ser expulsat?",
     "theoryAnchor": "r-gasos",
     "bankRevision": 2,
-    "objectiu": "Quina fletxa representa el camí del CO₂ als pulmons?",
+    "objectiu": "Durant l’intercanvi de gasos als pulmons, d’on surt i on va el diòxid de carboni abans de ser expulsat?",
     "theoryTema": "respiratori"
   },
   {
@@ -604,10 +604,10 @@
     "importància": "imprescindible",
     "font": "APARELL RESPIRATORI_esencial.pdf",
     "pagina": "2",
-    "pregunta": "Quin pas permet que el CO₂ alveolar arribi a l'exterior?",
+    "pregunta": "El diòxid de carboni ja ha passat de la sang a l’aire dels alvèols. Quin moviment el fa sortir del cos?",
     "theoryAnchor": "r-gasos",
     "bankRevision": 2,
-    "objectiu": "Quin pas permet que el CO₂ alveolar arribi a l'exterior?",
+    "objectiu": "El diòxid de carboni ja ha passat de la sang a l’aire dels alvèols. Quin moviment el fa sortir del cos?",
     "theoryTema": "respiratori"
   },
   {
@@ -630,10 +630,10 @@
     "importància": "imprescindible",
     "font": "APARELL RESPIRATORI_esencial.pdf",
     "pagina": "2",
-    "pregunta": "Un esquema posa O₂ anant de la sang a l'alvèol en l'intercanvi estudiat. Què cal fer?",
+    "pregunta": "Una companya diu: «Als pulmons, l’oxigen passa de la sang als alvèols». Com la corregiries?",
     "theoryAnchor": "r-gasos",
     "bankRevision": 2,
-    "objectiu": "Un esquema posa O₂ anant de la sang a l'alvèol en l'intercanvi estudiat. Què cal fer?",
+    "objectiu": "Una companya diu: «Als pulmons, l’oxigen passa de la sang als alvèols». Com la corregiries?",
     "theoryTema": "respiratori"
   },
   {
@@ -721,10 +721,10 @@
     "importància": "imprescindible",
     "font": "APARELL RESPIRATORI_esencial.pdf",
     "pagina": "1–2",
-    "pregunta": "Quina seqüència segueix l'oxigen després d'arribar a l'alvèol?",
+    "pregunta": "L’oxigen arriba a un alvèol. Quin camí segueix després per arribar a les cèl·lules del cos?",
     "theoryAnchor": "r-gasos",
     "bankRevision": 2,
-    "objectiu": "Quina seqüència segueix l'oxigen després d'arribar a l'alvèol?",
+    "objectiu": "L’oxigen arriba a un alvèol. Quin camí segueix després per arribar a les cèl·lules del cos?",
     "theoryTema": "respiratori"
   },
   {
@@ -760,10 +760,10 @@
     "importància": "imprescindible",
     "font": "APARELL RESPIRATORI_esencial.pdf",
     "pagina": "1–2",
-    "pregunta": "Quina part prepara l'aire i quina intercanvia gasos?",
+    "pregunta": "Quina opció relaciona correctament les parts que preparen l’aire i les que intercanvien gasos amb la sang?",
     "theoryAnchor": "r-gasos",
     "bankRevision": 2,
-    "objectiu": "Quina part prepara l'aire i quina intercanvia gasos?",
+    "objectiu": "Quina opció relaciona correctament les parts que preparen l’aire i les que intercanvien gasos amb la sang?",
     "theoryTema": "respiratori"
   },
   {
@@ -825,10 +825,10 @@
     "importància": "imprescindible",
     "font": "APARELL LOCOMOTOR_esencial.pdf",
     "pagina": "1",
-    "pregunta": "Quina funció exemplifica el crani al voltant de l'encèfal?",
+    "pregunta": "El crani envolta l’encèfal. Quina funció de l’esquelet mostra aquest exemple?",
     "theoryAnchor": "l-funcions",
     "bankRevision": 2,
-    "objectiu": "Quina funció exemplifica el crani al voltant de l'encèfal?",
+    "objectiu": "El crani envolta l’encèfal. Quina funció de l’esquelet mostra aquest exemple?",
     "theoryTema": "locomotor"
   },
   {
@@ -929,10 +929,10 @@
     "importància": "imprescindible",
     "font": "APARELL LOCOMOTOR_esencial.pdf",
     "pagina": "1",
-    "pregunta": "Quin tipus d'os exemplifica el crani?",
+    "pregunta": "Segons els apunts, de quin tipus són els ossos del crani?",
     "theoryAnchor": "l-ossos",
     "bankRevision": 2,
-    "objectiu": "Quin tipus d'os exemplifica el crani?",
+    "objectiu": "Segons els apunts, de quin tipus són els ossos del crani?",
     "theoryTema": "locomotor"
   },
   {
@@ -1007,10 +1007,10 @@
     "importància": "imprescindible",
     "font": "APARELL LOCOMOTOR_esencial.pdf",
     "pagina": "1",
-    "pregunta": "Una etiqueta diu «moll de l'os». A què es refereix?",
+    "pregunta": "Als apunts es fa servir el nom «moll de l’os». Quin altre nom té aquest teixit?",
     "theoryAnchor": "l-ossos",
     "bankRevision": 2,
-    "objectiu": "Una etiqueta diu «moll de l'os». A què es refereix?",
+    "objectiu": "Als apunts es fa servir el nom «moll de l’os». Quin altre nom té aquest teixit?",
     "theoryTema": "locomotor"
   },
   {
@@ -1033,10 +1033,10 @@
     "importància": "imprescindible",
     "font": "APARELL LOCOMOTOR_esencial.pdf",
     "pagina": "1",
-    "pregunta": "Una companya confon medul·la òssia i espinal. Quina fa cèl·lules sanguínies?",
+    "pregunta": "La medul·la òssia és dins dels ossos i la medul·la espinal és dins la columna vertebral. Quina de les dues produeix cèl·lules sanguínies?",
     "theoryAnchor": "l-ossos",
     "bankRevision": 2,
-    "objectiu": "Una companya confon medul·la òssia i espinal. Quina fa cèl·lules sanguínies?",
+    "objectiu": "La medul·la òssia és dins dels ossos i la medul·la espinal és dins la columna vertebral. Quina de les dues produeix cèl·lules sanguínies?",
     "theoryTema": "locomotor"
   },
   {
@@ -1137,10 +1137,10 @@
     "importància": "imprescindible",
     "font": "APARELL LOCOMOTOR_esencial.pdf",
     "pagina": "1",
-    "pregunta": "Per què genoll i crani tenen mobilitat diferent?",
+    "pregunta": "Per què l’articulació del genoll permet més moviment que les unions entre els ossos del crani?",
     "theoryAnchor": "l-articulacions",
     "bankRevision": 2,
-    "objectiu": "Per què genoll i crani tenen mobilitat diferent?",
+    "objectiu": "Per què l’articulació del genoll permet més moviment que les unions entre els ossos del crani?",
     "theoryTema": "locomotor"
   },
   {
@@ -1150,10 +1150,10 @@
     "importància": "imprescindible",
     "font": "APARELL LOCOMOTOR_esencial.pdf",
     "pagina": "1",
-    "pregunta": "Si assenyales una banda resistent entre dos ossos, què identifiques?",
+    "pregunta": "Una banda molt resistent uneix dos ossos en una articulació. Com s’anomena aquesta banda?",
     "theoryAnchor": "l-articulacions",
     "bankRevision": 2,
-    "objectiu": "Si assenyales una banda resistent entre dos ossos, què identifiques?",
+    "objectiu": "Una banda molt resistent uneix dos ossos en una articulació. Com s’anomena aquesta banda?",
     "theoryTema": "locomotor"
   },
   {
@@ -1163,10 +1163,10 @@
     "importància": "imprescindible",
     "font": "APARELL LOCOMOTOR_esencial.pdf",
     "pagina": "1",
-    "pregunta": "Quina associació ordena mobilitat decreixent?",
+    "pregunta": "Quina opció ordena les articulacions de les que permeten més moviment a les que en permeten menys?",
     "theoryAnchor": "l-articulacions",
     "bankRevision": 2,
-    "objectiu": "Quina associació ordena mobilitat decreixent?",
+    "objectiu": "Quina opció ordena les articulacions de les que permeten més moviment a les que en permeten menys?",
     "theoryTema": "locomotor"
   },
   {
@@ -1475,10 +1475,10 @@
     "importància": "ampliació",
     "font": "El_Cuaderno_Secreto_de_Súper_Anatomía.pdf",
     "pagina": "12",
-    "pregunta": "En un esquema, una banda uneix el múscul al seu os. Quina etiqueta hi poses?",
+    "pregunta": "Com s’anomena la banda que uneix un múscul amb un os?",
     "theoryAnchor": "l-musculs",
     "bankRevision": 2,
-    "objectiu": "En un esquema, una banda uneix el múscul al seu os. Quina etiqueta hi poses?",
+    "objectiu": "Com s’anomena la banda que uneix un múscul amb un os?",
     "theoryTema": "locomotor"
   },
   {
@@ -1787,10 +1787,10 @@
     "importància": "imprescindible",
     "font": "SISTEMA NERVIÓS_esencial.pdf",
     "pagina": "2–3",
-    "pregunta": "Quina parella diferencia estímul i resposta?",
+    "pregunta": "Notes que un objecte crema i retires la mà. Quina opció posa primer l’estímul i després la resposta?",
     "theoryAnchor": "n-respostes",
     "bankRevision": 2,
-    "objectiu": "Quina parella diferencia estímul i resposta?",
+    "objectiu": "Notes que un objecte crema i retires la mà. Quina opció posa primer l’estímul i després la resposta?",
     "theoryTema": "nervios"
   },
   {
@@ -1917,10 +1917,10 @@
     "importància": "imprescindible",
     "font": "SISTEMA NERVIÓS_esencial.pdf",
     "pagina": "3",
-    "pregunta": "En una neurona assenyales el cos central, entre les dendrites i l’axó. Com s’anomena?",
+    "pregunta": "Com s’anomena el cos central de la neurona, del qual surten les dendrites i l’axó?",
     "theoryAnchor": "n-neurones",
     "bankRevision": 2,
-    "objectiu": "En una neurona assenyales el cos central, entre les dendrites i l’axó. Com s’anomena?",
+    "objectiu": "Com s’anomena el cos central de la neurona, del qual surten les dendrites i l’axó?",
     "theoryTema": "nervios"
   },
   {
@@ -1943,10 +1943,10 @@
     "importància": "imprescindible",
     "font": "SISTEMA NERVIÓS_esencial.pdf",
     "pagina": "3",
-    "pregunta": "Si una fletxa arriba a les dendrites, què representa?",
+    "pregunta": "Les dendrites reben un impuls nerviós. Aquest impuls està entrant a la neurona o en surt?",
     "theoryAnchor": "n-neurones",
     "bankRevision": 2,
-    "objectiu": "Si una fletxa arriba a les dendrites, què representa?",
+    "objectiu": "Les dendrites reben un impuls nerviós. Aquest impuls està entrant a la neurona o en surt?",
     "theoryTema": "nervios"
   },
   {
@@ -2125,10 +2125,10 @@
     "importància": "imprescindible",
     "font": "SISTEMA NERVIÓS_esencial.pdf",
     "pagina": "4",
-    "pregunta": "Veus una amiga. Quin tipus de nervi porta la informació dels ulls cap al SNC?",
+    "pregunta": "Veus una amiga. Quin tipus de nervi porta la informació dels ulls cap al sistema nerviós central?",
     "theoryAnchor": "n-periferic",
     "bankRevision": 2,
-    "objectiu": "Veus una amiga. Quin tipus de nervi porta la informació dels ulls cap al SNC?",
+    "objectiu": "Veus una amiga. Quin tipus de nervi porta la informació dels ulls cap al sistema nerviós central?",
     "theoryTema": "nervios"
   },
   {
@@ -2164,10 +2164,10 @@
     "importància": "imprescindible",
     "font": "SISTEMA NERVIÓS_esencial.pdf",
     "pagina": "4",
-    "pregunta": "Quina seqüència segueix una resposta muscular voluntària?",
+    "pregunta": "Veus una pilota i decideixes agafar-la. Quin recorregut segueix la informació des que la captes fins que es mouen els músculs?",
     "theoryAnchor": "n-periferic",
     "bankRevision": 2,
-    "objectiu": "Quina seqüència segueix una resposta muscular voluntària?",
+    "objectiu": "Veus una pilota i decideixes agafar-la. Quin recorregut segueix la informació des que la captes fins que es mouen els músculs?",
     "theoryTema": "nervios"
   },
   {
@@ -2177,10 +2177,10 @@
     "importància": "imprescindible",
     "font": "SISTEMA NERVIÓS_esencial.pdf",
     "pagina": "4",
-    "pregunta": "Una fletxa va de la pell al SNC. Quina etiqueta hi correspon?",
+    "pregunta": "Toques una superfície rugosa. Quin nervi porta la informació de la pell cap al sistema nerviós central?",
     "theoryAnchor": "n-periferic",
     "bankRevision": 2,
-    "objectiu": "Una fletxa va de la pell al SNC. Quina etiqueta hi correspon?",
+    "objectiu": "Toques una superfície rugosa. Quin nervi porta la informació de la pell cap al sistema nerviós central?",
     "theoryTema": "nervios"
   },
   {
@@ -2190,10 +2190,10 @@
     "importància": "imprescindible",
     "font": "SISTEMA NERVIÓS_esencial.pdf",
     "pagina": "4",
-    "pregunta": "Una fletxa va del SNC a un múscul. Què representa?",
+    "pregunta": "El sistema nerviós central envia un missatge a un múscul perquè es mogui. Quin tipus de missatge és?",
     "theoryAnchor": "n-periferic",
     "bankRevision": 2,
-    "objectiu": "Una fletxa va del SNC a un múscul. Què representa?",
+    "objectiu": "El sistema nerviós central envia un missatge a un múscul perquè es mogui. Quin tipus de missatge és?",
     "theoryTema": "nervios"
   },
   {
@@ -2203,10 +2203,10 @@
     "importància": "imprescindible",
     "font": "SISTEMA NERVIÓS_esencial.pdf",
     "pagina": "4",
-    "pregunta": "Com treballen junts SNC i SNP quan saludem?",
+    "pregunta": "Quan veus una amiga i decideixes saludar-la, com col·laboren el sistema nerviós central i el perifèric?",
     "theoryAnchor": "n-periferic",
     "bankRevision": 2,
-    "objectiu": "Com treballen junts SNC i SNP quan saludem?",
+    "objectiu": "Quan veus una amiga i decideixes saludar-la, com col·laboren el sistema nerviós central i el perifèric?",
     "theoryTema": "nervios"
   },
   {

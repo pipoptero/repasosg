@@ -314,7 +314,7 @@ window.MEDI_QUESTIONS = [
     "subtema": "Recorregut",
     "nivell": "mitjà",
     "importància": "imprescindible",
-    "pregunta": "Quin tram està ben ordenat?",
+    "pregunta": "Quan inspirem, en quin ordre passa l’aire per la faringe, la laringe i la tràquea?",
     "opcions": [
       "Faringe → laringe → tràquea",
       "Laringe → faringe → tràquea",
@@ -426,7 +426,7 @@ window.MEDI_QUESTIONS = [
     "subtema": "Recorregut",
     "nivell": "mitjà",
     "importància": "imprescindible",
-    "pregunta": "En un esquema falta una peça: tràquea → … → bronquíols. Quina és?",
+    "pregunta": "Completa aquest tram del recorregut de l’aire quan inspirem: tràquea → … → bronquíols.",
     "opcions": [
       "Bronquis",
       "Faringe",
@@ -454,7 +454,7 @@ window.MEDI_QUESTIONS = [
     "subtema": "Recorregut",
     "nivell": "mitjà",
     "importància": "imprescindible",
-    "pregunta": "En quin ordre passarà una partícula d'aire per aquests dos conductes en inspirar?",
+    "pregunta": "Quan inspirem, per quins conductes passa primer l’aire: pels bronquis o pels bronquíols?",
     "opcions": [
       "Primer bronquis, després bronquíols",
       "Primer bronquíols, després bronquis",
@@ -482,7 +482,7 @@ window.MEDI_QUESTIONS = [
     "subtema": "Recorregut",
     "nivell": "mitjà",
     "importància": "imprescindible",
-    "pregunta": "Per sortir des dels bronquis, cap a quin conducte va l'aire?",
+    "pregunta": "Quan expirem, l’aire surt dels bronquis. Per quin conducte passa a continuació?",
     "opcions": [
       "Cap a la tràquea",
       "Cap als bronquíols",
@@ -510,7 +510,7 @@ window.MEDI_QUESTIONS = [
     "subtema": "Recorregut",
     "nivell": "fàcil",
     "importància": "imprescindible",
-    "pregunta": "Quina peça uneix la faringe amb la tràquea?",
+    "pregunta": "Quin conducte uneix la faringe amb la tràquea?",
     "opcions": [
       "La laringe",
       "La faringe mateixa",
@@ -538,7 +538,7 @@ window.MEDI_QUESTIONS = [
     "subtema": "Recorregut",
     "nivell": "repte",
     "importància": "imprescindible",
-    "pregunta": "Quin recorregut resumeix l'entrada fins a l'intercanvi?",
+    "pregunta": "Quin recorregut segueix l’aire des que entra pel nas fins que arriba al lloc on s’intercanvien gasos amb la sang?",
     "opcions": [
       "Nas → vies respiratòries → alvèols",
       "Nas → esòfag → alvèols",
@@ -721,7 +721,7 @@ window.MEDI_QUESTIONS = [
       "La fitxa els situa darrere les costelles, dins la cavitat toràcica.",
       "Les vies arriben als pulmons; no són tubs que continguin els dos òrgans sencers."
     ],
-    "pista": "Situa costelles, pulmons i múscul respiratori en el dibuix dels apunts.",
+    "pista": "Els pulmons són al pit. Pensa quins ossos els envolten i els protegeixen.",
     "font": "APARELL RESPIRATORI_esencial.pdf",
     "pagina": "1",
     "theoryAnchor": "r-organs",
@@ -790,7 +790,7 @@ window.MEDI_QUESTIONS = [
     "subtema": "Òrgans",
     "nivell": "fàcil",
     "importància": "imprescindible",
-    "pregunta": "Una etiqueta diu «conductes que comuniquen pulmons i exterior». A què correspon?",
+    "pregunta": "Com s’anomena el conjunt de conductes que comuniquen els pulmons amb l’exterior?",
     "opcions": [
       "A les vies respiratòries",
       "Als vasos sanguinis que envolten els alvèols",
@@ -930,7 +930,7 @@ window.MEDI_QUESTIONS = [
     "subtema": "Moviments",
     "nivell": "mitjà",
     "importància": "imprescindible",
-    "pregunta": "Una fletxa surt dels pulmons cap a l'exterior. Quin moviment representa?",
+    "pregunta": "Deixes sortir l’aire dels pulmons cap a l’exterior. Com s’anomena aquest moviment?",
     "opcions": [
       "Expiració",
       "Inspiració",
@@ -941,11 +941,11 @@ window.MEDI_QUESTIONS = [
     "explicacio": "Expiració. En inspirar, el diafragma es contrau i baixa: augmenta el volum toràcic i entra aire. En expirar es relaxa i puja: disminueix el volum toràcic i surt aire.",
     "perQueNo": [
       "",
-      "En inspirar la fletxa va de l’exterior als pulmons; aquí surt.",
-      "Aquest intercanvi travessa les parets alveolars, no representa una sortida d’aire del cos.",
-      "Això és un intercanvi intern previ; la fletxa descrita travessa les vies cap a fora."
+      "En inspirar, l’aire entra als pulmons; en el cas plantejat està sortint.",
+      "El pas d’oxigen a la sang es fa a través de les parets dels alvèols; aquí es pregunta per treure aire del cos.",
+      "El diòxid de carboni passa de la sang als alvèols abans de sortir; aquest pas intern no és el moviment de sortida d’aire."
     ],
-    "pista": "Comprova els dos extrems de la fletxa: on comença i on acaba?",
+    "pista": "Pensa en els dos moviments respiratoris: quin fa sortir l’aire del cos?",
     "font": "APARELL RESPIRATORI_esencial.pdf",
     "pagina": "2",
     "theoryAnchor": "r-moviments",
@@ -958,7 +958,7 @@ window.MEDI_QUESTIONS = [
     "subtema": "Moviments",
     "nivell": "mitjà",
     "importància": "imprescindible",
-    "pregunta": "Una fletxa entra del nas als pulmons. Quina etiqueta hi poses?",
+    "pregunta": "Agafes aire pel nas i l’aire entra als pulmons. Com s’anomena aquest moviment?",
     "opcions": [
       "Inspiració",
       "Expiració",
@@ -969,11 +969,11 @@ window.MEDI_QUESTIONS = [
     "explicacio": "Inspiració. En inspirar, el diafragma es contrau i baixa: augmenta el volum toràcic i entra aire. En expirar es relaxa i puja: disminueix el volum toràcic i surt aire.",
     "perQueNo": [
       "",
-      "Expirar és treure aire cap a fora; la fletxa descrita entra als pulmons.",
-      "Per passar a la sang, l’oxigen ha d’haver arribat abans als alvèols.",
-      "Aquesta fletxa connectaria sang i alvèol, no nas i pulmons."
+      "Expirar vol dir fer sortir aire; en aquest cas, l’aire entra als pulmons.",
+      "L’oxigen passa a la sang als alvèols, després d’haver recorregut les vies respiratòries.",
+      "El pas de diòxid de carboni va de la sang als alvèols; no descriu l’entrada d’aire pel nas."
     ],
-    "pista": "Diferencia una fletxa d’aire per les vies d’una fletxa de gas entre parets.",
+    "pista": "Distingeix fer entrar aire als pulmons de fer passar oxigen dels alvèols a la sang.",
     "font": "APARELL RESPIRATORI_esencial.pdf",
     "pagina": "2",
     "theoryAnchor": "r-moviments",
@@ -1001,7 +1001,7 @@ window.MEDI_QUESTIONS = [
       "Els bronquíols són conductes d’aire; el diafragma no és una peça dins seu.",
       "Aquesta posició és al tram superior de les vies; el diafragma actua sota els pulmons."
     ],
-    "pista": "Localitza la base de la cavitat toràcica al dibuix comparatiu.",
+    "pista": "Pensa en el múscul que forma la base de l’espai del pit on hi ha els pulmons.",
     "font": "APARELL RESPIRATORI_esencial.pdf",
     "pagina": "2",
     "theoryAnchor": "r-moviments",
@@ -1042,7 +1042,7 @@ window.MEDI_QUESTIONS = [
     "subtema": "Moviments",
     "nivell": "mitjà",
     "importància": "imprescindible",
-    "pregunta": "En un dibuix el tòrax es fa més petit i l'aire surt. Com està el diafragma?",
+    "pregunta": "Quan expirem, disminueix l’espai de la cavitat toràcica i l’aire surt. Com està el diafragma?",
     "opcions": [
       "Relaxat i més amunt",
       "Contret i més avall",
@@ -1070,12 +1070,12 @@ window.MEDI_QUESTIONS = [
     "subtema": "Moviments",
     "nivell": "mitjà",
     "importància": "imprescindible",
-    "pregunta": "Quina seqüència explica l'entrada d'aire?",
+    "pregunta": "Quina seqüència explica què passa al diafragma, a l’espai del tòrax i a l’aire quan inspirem?",
     "opcions": [
-      "Diafragma baixa → augmenta volum → entra aire",
-      "Diafragma puja → augmenta volum → entra aire",
-      "Diafragma baixa → disminueix volum → surt aire",
-      "Diafragma puja → disminueix volum → entra aire"
+      "El diafragma baixa → augmenta l’espai del tòrax → entra aire",
+      "El diafragma puja → augmenta l’espai del tòrax → entra aire",
+      "El diafragma baixa → disminueix l’espai del tòrax → surt aire",
+      "El diafragma puja → disminueix l’espai del tòrax → entra aire"
     ],
     "correcta": 0,
     "explicacio": "Diafragma baixa → augmenta volum → entra aire. En inspirar, el diafragma es contrau i baixa: augmenta el volum toràcic i entra aire. En expirar es relaxa i puja: disminueix el volum toràcic i surt aire.",
@@ -1098,22 +1098,22 @@ window.MEDI_QUESTIONS = [
     "subtema": "Moviments",
     "nivell": "repte",
     "importància": "imprescindible",
-    "pregunta": "Una companya dibuixa inspiració amb el diafragma pujant. Què ha de corregir?",
+    "pregunta": "Una companya diu: «Quan inspirem, el diafragma puja». Quina explicació la corregeix?",
     "opcions": [
-      "Ha de dibuixar-lo baixant en contreure's",
-      "Mantenir la pujada i escriure «es contrau»",
-      "Dibuixar menys espai toràcic i mantenir l’entrada d’aire",
-      "Canviar la fletxa perquè surti aire i mantenir el títol «inspiració»"
+      "Quan inspirem, el diafragma es contrau i baixa",
+      "Quan inspirem, el diafragma es contrau i puja",
+      "Quan inspirem, el diafragma es relaxa i puja",
+      "Quan inspirem, el diafragma es queda quiet"
     ],
     "correcta": 0,
-    "explicacio": "Ha de dibuixar-lo baixant en contreure's. En inspirar, el diafragma es contrau i baixa: augmenta el volum toràcic i entra aire. En expirar es relaxa i puja: disminueix el volum toràcic i surt aire.",
+    "explicacio": "Quan inspirem, el diafragma es contrau i baixa. Això deixa més espai a la cavitat toràcica i permet que entri aire. En canvi, quan expirem es relaxa i puja.",
     "perQueNo": [
       "",
-      "Canviar només l’etiqueta no resol el moviment invertit: en inspirar el múscul baixa.",
-      "Menys espai correspon a la sortida; també s’invertiria el canvi de volum.",
-      "Això representaria expiració amb un títol inadequat."
+      "La contracció és correcta, però en inspirar fa baixar el diafragma, no pujar-lo.",
+      "Relaxar-se i pujar correspon a l’expiració, quan l’aire surt dels pulmons.",
+      "El diafragma canvia de posició en els moviments respiratoris; en inspirar baixa."
     ],
-    "pista": "Revisa si posició, volum i direcció d’aire concorden amb el títol.",
+    "pista": "Relaciona l’entrada d’aire amb l’augment de l’espai del tòrax: què ha de fer el diafragma?",
     "font": "APARELL RESPIRATORI_esencial.pdf",
     "pagina": "2",
     "theoryAnchor": "r-moviments",
@@ -1154,7 +1154,7 @@ window.MEDI_QUESTIONS = [
     "subtema": "Intercanvi",
     "nivell": "mitjà",
     "importància": "imprescindible",
-    "pregunta": "Quina fletxa representa el camí de l'oxigen als pulmons?",
+    "pregunta": "Durant l’intercanvi de gasos als alvèols, d’on surt i on va l’oxigen que el cos capta?",
     "opcions": [
       "Alvèol → sang",
       "Sang → alvèol",
@@ -1182,7 +1182,7 @@ window.MEDI_QUESTIONS = [
     "subtema": "Intercanvi",
     "nivell": "mitjà",
     "importància": "imprescindible",
-    "pregunta": "Quina fletxa representa el camí del CO₂ als pulmons?",
+    "pregunta": "Durant l’intercanvi de gasos als pulmons, d’on surt i on va el diòxid de carboni abans de ser expulsat?",
     "opcions": [
       "Sang → alvèol",
       "Alvèol → sang",
@@ -1294,7 +1294,7 @@ window.MEDI_QUESTIONS = [
     "subtema": "Intercanvi",
     "nivell": "fàcil",
     "importància": "imprescindible",
-    "pregunta": "Quin pas permet que el CO₂ alveolar arribi a l'exterior?",
+    "pregunta": "El diòxid de carboni ja ha passat de la sang a l’aire dels alvèols. Quin moviment el fa sortir del cos?",
     "opcions": [
       "L'expiració",
       "La inspiració",
@@ -1309,7 +1309,7 @@ window.MEDI_QUESTIONS = [
       "Aquest pas és l’altre sentit de l’intercanvi, però no mou l’aire a l’exterior.",
       "Aquest transport porta oxigen al cos, no expulsa l’aire amb CO₂."
     ],
-    "pista": "El residu ja és a l’aire alveolar: quin moviment el farà sortir?",
+    "pista": "El residu ja és dins l’aire dels pulmons. Quin moviment fa sortir aquest aire?",
     "font": "APARELL RESPIRATORI_esencial.pdf",
     "pagina": "2",
     "theoryAnchor": "r-gasos",
@@ -1337,7 +1337,7 @@ window.MEDI_QUESTIONS = [
       "La fitxa situa l’intercanvi a les parets dels alvèols i dels seus vasos, no als bronquis.",
       "L’esòfag és digestiu i no és la superfície d’intercanvi pulmonar."
     ],
-    "pista": "Observa les dues superfícies que separen aire alveolar i sang.",
+    "pista": "Entre l’aire d’un alvèol i la sang hi ha les parets del sac i del vas. Com les travessen els gasos?",
     "font": "APARELL RESPIRATORI_esencial.pdf",
     "pagina": "2",
     "theoryAnchor": "r-gasos",
@@ -1350,20 +1350,20 @@ window.MEDI_QUESTIONS = [
     "subtema": "Intercanvi",
     "nivell": "mitjà",
     "importància": "imprescindible",
-    "pregunta": "Un esquema posa O₂ anant de la sang a l'alvèol en l'intercanvi estudiat. Què cal fer?",
+    "pregunta": "Una companya diu: «Als pulmons, l’oxigen passa de la sang als alvèols». Com la corregiries?",
     "opcions": [
-      "Invertir la fletxa d'O₂",
-      "Mantenir la fletxa perquè els dos gasos van igual",
-      "Treure la sang del dibuix",
-      "Canviar el títol a «inspiració» i deixar igual la fletxa"
+      "L’oxigen passa dels alvèols a la sang",
+      "L’oxigen i el diòxid de carboni passen tots dos de la sang als alvèols",
+      "L’oxigen es queda als alvèols i no passa mai a la sang",
+      "L’oxigen només passa a la sang quan l’aire arriba al nas"
     ],
     "correcta": 0,
-    "explicacio": "Invertir la fletxa d'O₂. Als alvèols l'oxigen passa de l'aire a la sang, que el distribueix pel cos. El diòxid de carboni passa de la sang als alvèols i surt amb l'expiració.",
+    "explicacio": "Als pulmons, l’oxigen de l’aire dels alvèols passa a la sang, que el transporta pel cos. El diòxid de carboni fa el pas contrari: de la sang als alvèols, abans de ser expulsat.",
     "perQueNo": [
       "",
-      "En l’intercanvi pulmonar O₂ i CO₂ travessen les parets en sentits oposats.",
-      "La sang és necessària per recollir oxigen i deixar CO₂; eliminar-la amagaria l’intercanvi.",
-      "Inspirar mou aire per les vies i no justifica invertir el pas d’O₂ entre alvèol i sang."
+      "Els dos gasos travessen les parets en sentits contraris: l’oxigen entra a la sang i el diòxid de carboni en surt.",
+      "L’oxigen ha de passar a la sang perquè aquesta el pugui portar fins a les cèl·lules.",
+      "El nas prepara l’aire; l’intercanvi amb la sang es produeix més endavant, als alvèols."
     ],
     "pista": "Segueix l’oxigen des de l’aire inspirat fins al seu transport pel cos.",
     "font": "APARELL RESPIRATORI_esencial.pdf",
@@ -1546,7 +1546,7 @@ window.MEDI_QUESTIONS = [
     "subtema": "Connexions",
     "nivell": "mitjà",
     "importància": "imprescindible",
-    "pregunta": "Quina seqüència segueix l'oxigen després d'arribar a l'alvèol?",
+    "pregunta": "L’oxigen arriba a un alvèol. Quin camí segueix després per arribar a les cèl·lules del cos?",
     "opcions": [
       "Sang → cèl·lules",
       "Alvèol → exterior → cèl·lules",
@@ -1630,12 +1630,12 @@ window.MEDI_QUESTIONS = [
     "subtema": "Connexions",
     "nivell": "mitjà",
     "importància": "imprescindible",
-    "pregunta": "Quina part prepara l'aire i quina intercanvia gasos?",
+    "pregunta": "Quina opció relaciona correctament les parts que preparen l’aire i les que intercanvien gasos amb la sang?",
     "opcions": [
-      "Fosses nasals i alvèols, respectivament",
-      "Alvèols i fosses nasals, respectivament",
-      "Laringe i tràquea, respectivament",
-      "Bronquis i diafragma, respectivament"
+      "Les fosses nasals preparen l’aire; els alvèols intercanvien gasos",
+      "Els alvèols preparen l’aire; les fosses nasals intercanvien gasos",
+      "La laringe prepara l’aire; la tràquea intercanvia gasos",
+      "Els bronquis preparen l’aire; el diafragma intercanvia gasos"
     ],
     "correcta": 0,
     "explicacio": "Fosses nasals i alvèols, respectivament. Ventilar és fer entrar i sortir aire dels pulmons; intercanviar gasos és fer-los passar entre alvèols i sang. Són processos relacionats que permeten aportar oxigen i eliminar CO₂.",
@@ -1770,7 +1770,7 @@ window.MEDI_QUESTIONS = [
     "subtema": "Funcions",
     "nivell": "mitjà",
     "importància": "imprescindible",
-    "pregunta": "Quina funció exemplifica el crani al voltant de l'encèfal?",
+    "pregunta": "El crani envolta l’encèfal. Quina funció de l’esquelet mostra aquest exemple?",
     "opcions": [
       "Protecció d'òrgans interns",
       "Producció de la resposta voluntària dins de l’os",
@@ -1994,7 +1994,7 @@ window.MEDI_QUESTIONS = [
     "subtema": "Ossos",
     "nivell": "fàcil",
     "importància": "imprescindible",
-    "pregunta": "Quin tipus d'os exemplifica el crani?",
+    "pregunta": "Segons els apunts, de quin tipus són els ossos del crani?",
     "opcions": [
       "Pla",
       "Llarg, com els ossos dels braços",
@@ -2162,7 +2162,7 @@ window.MEDI_QUESTIONS = [
     "subtema": "Ossos",
     "nivell": "fàcil",
     "importància": "imprescindible",
-    "pregunta": "Una etiqueta diu «moll de l'os». A què es refereix?",
+    "pregunta": "Als apunts es fa servir el nom «moll de l’os». Quin altre nom té aquest teixit?",
     "opcions": [
       "A la medul·la òssia",
       "A la medul·la espinal",
@@ -2218,22 +2218,22 @@ window.MEDI_QUESTIONS = [
     "subtema": "Ossos",
     "nivell": "repte",
     "importància": "imprescindible",
-    "pregunta": "Una companya confon medul·la òssia i espinal. Quina fa cèl·lules sanguínies?",
+    "pregunta": "La medul·la òssia és dins dels ossos i la medul·la espinal és dins la columna vertebral. Quina de les dues produeix cèl·lules sanguínies?",
     "opcions": [
-      "L'òssia, situada dins els ossos",
-      "L’espinal, perquè passa per la columna",
-      "Totes dues tenen la mateixa funció",
-      "Els lligaments, perquè uneixen ossos"
+      "La medul·la òssia",
+      "La medul·la espinal",
+      "Totes dues medul·les",
+      "Cap de les dues medul·les"
     ],
     "correcta": 0,
-    "explicacio": "L'òssia, situada dins els ossos. Els ossos són durs i rígids; poden ser plans, curts o llargs. A l'interior hi ha medul·la òssia, on es formen cèl·lules sanguínies, mentre que el cartílag és més flexible.",
+    "explicacio": "La medul·la òssia, també anomenada moll de l’os, produeix les cèl·lules de la sang. La medul·la espinal és una estructura del sistema nerviós que transmet informació i participa en els reflexos. Tenen noms semblants, però funcions diferents.",
     "perQueNo": [
       "",
-      "La columna protegeix teixit nerviós; aquesta medul·la no és la que forma les cèl·lules de la sang.",
-      "Compartir «medul·la» no implica la mateixa funció: òssia i espinal pertanyen a estructures diferents.",
-      "La unió entre ossos no és el lloc de producció sanguínia."
+      "La medul·la espinal és teixit nerviós i participa en la transmissió d’informació i els reflexos; no produeix cèl·lules sanguínies.",
+      "Només la medul·la òssia fa aquesta funció. Compartir la paraula «medul·la» no vol dir que facin la mateixa feina.",
+      "La medul·la òssia sí que produeix cèl·lules sanguínies; per tant, no es poden descartar totes dues."
     ],
-    "pista": "Separa «interior d’un os» de «continuació de l’encèfal».",
+    "pista": "No et guiïs només pel nom «medul·la»: compara la funció del teixit de l’os amb la del teixit nerviós.",
     "font": "APARELL LOCOMOTOR_esencial.pdf",
     "pagina": "1",
     "theoryAnchor": "l-ossos",
@@ -2442,7 +2442,7 @@ window.MEDI_QUESTIONS = [
     "subtema": "Articulacions",
     "nivell": "mitjà",
     "importància": "imprescindible",
-    "pregunta": "Per què genoll i crani tenen mobilitat diferent?",
+    "pregunta": "Per què l’articulació del genoll permet més moviment que les unions entre els ossos del crani?",
     "opcions": [
       "Tenen tipus d'articulacions diferents",
       "Perquè el crani no té articulacions",
@@ -2470,7 +2470,7 @@ window.MEDI_QUESTIONS = [
     "subtema": "Articulacions",
     "nivell": "mitjà",
     "importància": "imprescindible",
-    "pregunta": "Si assenyales una banda resistent entre dos ossos, què identifiques?",
+    "pregunta": "Una banda molt resistent uneix dos ossos en una articulació. Com s’anomena aquesta banda?",
     "opcions": [
       "Un lligament",
       "El cartílag que cobreix la superfície",
@@ -2498,15 +2498,15 @@ window.MEDI_QUESTIONS = [
     "subtema": "Articulacions",
     "nivell": "repte",
     "importància": "imprescindible",
-    "pregunta": "Quina associació ordena mobilitat decreixent?",
+    "pregunta": "Quina opció ordena les articulacions de les que permeten més moviment a les que en permeten menys?",
     "opcions": [
-      "Genoll → columna → unions del crani",
-      "Crani → genoll → columna",
-      "Columna → crani → genoll",
-      "Genoll → crani → columna"
+      "Genoll → columna vertebral → unions dels ossos del crani",
+      "Unions dels ossos del crani → genoll → columna vertebral",
+      "Columna vertebral → unions dels ossos del crani → genoll",
+      "Genoll → unions dels ossos del crani → columna vertebral"
     ],
     "correcta": 0,
-    "explicacio": "Genoll → columna → unions del crani. Les articulacions són zones de contacte entre ossos i poden ser mòbils, semimòbils o fixes. Els lligaments uneixen ossos entre si i el cartílag protegeix les superfícies articulars.",
+    "explicacio": "El genoll és una articulació mòbil; les articulacions de la columna vertebral són semimòbils; les unions entre els ossos del crani són fixes. Per això aquest és l’ordre de més moviment a menys moviment.",
     "perQueNo": [
       "",
       "Començar amb unions fixes no és ordenar de més mobilitat a menys.",
@@ -2585,9 +2585,9 @@ window.MEDI_QUESTIONS = [
     "pregunta": "Quins aliments esmenta la fitxa com a font destacada de calci?",
     "opcions": [
       "Llet i derivats",
-      "Fruita i cereals com a exemples destacats en aquesta fitxa",
-      "Oli i pa com a exemples de calci que cita el text",
-      "Verdures i pasta com a única font que indiquen els apunts"
+      "Fruita i cereals",
+      "Oli i pa",
+      "Verdures i pasta"
     ],
     "correcta": 0,
     "explicacio": "La fitxa destaca la llet i els seus derivats com a fonts de calci. No proposa substituir-hi tota l'alimentació: recomana una dieta equilibrada.",
@@ -3174,7 +3174,7 @@ window.MEDI_QUESTIONS = [
     "subtema": "Músculs i unions",
     "nivell": "mitjà",
     "importància": "ampliació",
-    "pregunta": "En un esquema, una banda uneix el múscul al seu os. Quina etiqueta hi poses?",
+    "pregunta": "Com s’anomena la banda que uneix un múscul amb un os?",
     "opcions": [
       "Tendó",
       "Lligament",
@@ -3551,7 +3551,7 @@ window.MEDI_QUESTIONS = [
     "explicacio": "Informació visual de l'entorn. Els sentits capten estímuls de l'entorn i el sistema nerviós interpreta la informació. Vista, oïda, tacte, olfacte i gust tenen òrgans i estímuls diferents.",
     "perQueNo": [
       "",
-      "Els ulls capten informació; l’ordre de moviment la coordina el SNC.",
+      "Els ulls capten informació; l’ordre de moviment la coordina el sistema nerviós central.",
       "La resposta és posterior a captar i interpretar; encara es pregunta pel primer pas.",
       "El cas diu que la veus: la informació captada és visual, no una olor."
     ],
@@ -3849,7 +3849,7 @@ window.MEDI_QUESTIONS = [
     "subtema": "Respostes",
     "nivell": "mitjà",
     "importància": "imprescindible",
-    "pregunta": "Quina parella diferencia estímul i resposta?",
+    "pregunta": "Notes que un objecte crema i retires la mà. Quina opció posa primer l’estímul i després la resposta?",
     "opcions": [
       "Calor percebuda i retirada de la mà",
       "Retirada de la mà i calor percebuda",
@@ -4112,11 +4112,11 @@ window.MEDI_QUESTIONS = [
     "explicacio": "Dendrites. Les neurones transmeten informació mitjançant impulsos nerviosos. Les dendrites reben impulsos, el soma és el cos central i l'axó llarg els condueix fins als botons terminals, per on surten.",
     "perQueNo": [
       "",
-      "El dibuix descriu branques curtes d’entrada, no la prolongació llarga de conducció.",
+      "L’axó és la prolongació llarga que condueix l’impuls; aquí es descriuen branques curtes que reben informació.",
       "Els terminals són a la sortida de l’axó; no són les branques que reben informació.",
       "El soma és la part central de la cèl·lula, no les seves ramificacions."
     ],
-    "pista": "Combina les dues pistes del dibuix: longitud curta i entrada d’informació.",
+    "pista": "Relaciona la longitud curta i la funció de rebre informació amb una de les parts de la neurona.",
     "font": "SISTEMA NERVIÓS_esencial.pdf",
     "pagina": "3",
     "theoryAnchor": "n-neurones",
@@ -4129,7 +4129,7 @@ window.MEDI_QUESTIONS = [
     "subtema": "Neurones",
     "nivell": "mitjà",
     "importància": "imprescindible",
-    "pregunta": "En una neurona assenyales el cos central, entre les dendrites i l’axó. Com s’anomena?",
+    "pregunta": "Com s’anomena el cos central de la neurona, del qual surten les dendrites i l’axó?",
     "opcions": [
       "Soma",
       "Axó",
@@ -4140,11 +4140,11 @@ window.MEDI_QUESTIONS = [
     "explicacio": "El soma, també anomenat cos, és la part central de la neurona. Les dendrites són ramificacions curtes i l’axó és la ramificació llarga, no el cos central.",
     "perQueNo": [
       "",
-      "L’axó surt del cos com a ramificació llarga; no és el cos central assenyalat.",
+      "L’axó és la ramificació llarga que surt del cos de la neurona; no és el cos central.",
       "Les dendrites són branques curtes al voltant del cos, no el cos mateix.",
-      "Aquest botó és al final de l’axó, lluny de la part central del dibuix."
+      "El botó terminal és a l’extrem de l’axó; no és la part central de la neurona."
     ],
-    "pista": "Observa el lloc d’on surten les ramificacions: descarta una branca i també el seu extrem.",
+    "pista": "Busca el nom del cos de la cèl·lula, no el d’una de les seves ramificacions.",
     "font": "SISTEMA NERVIÓS_esencial.pdf",
     "pagina": "3",
     "theoryAnchor": "n-neurones",
@@ -4162,7 +4162,7 @@ window.MEDI_QUESTIONS = [
     "opcions": [
       "Impulsos nerviosos",
       "Només ordres per a moviments voluntaris",
-      "Només informació dels sentits cap al SNC",
+      "Només informació dels sentits cap al sistema nerviós central",
       "Només senyals dels actes reflexos"
     ],
     "correcta": 0,
@@ -4186,7 +4186,7 @@ window.MEDI_QUESTIONS = [
     "subtema": "Neurones",
     "nivell": "repte",
     "importància": "imprescindible",
-    "pregunta": "Si una fletxa arriba a les dendrites, què representa?",
+    "pregunta": "Les dendrites reben un impuls nerviós. Aquest impuls està entrant a la neurona o en surt?",
     "opcions": [
       "L'entrada d'informació a la neurona",
       "La sortida final cap a una altra cèl·lula",
@@ -4197,11 +4197,11 @@ window.MEDI_QUESTIONS = [
     "explicacio": "L'entrada d'informació a la neurona. Les neurones transmeten informació mitjançant impulsos nerviosos. Les dendrites reben impulsos, el soma és el cos central i l'axó llarg els condueix fins als botons terminals, per on surten.",
     "perQueNo": [
       "",
-      "La sortida es representa als botons terminals; la fletxa descrita arriba a una zona receptora.",
+      "La sortida final de l’impuls es produeix als botons terminals; les dendrites reben informació.",
       "El sentit general estudiat va de les dendrites cap al terminal, no a l’inrevés.",
-      "Un nervi conté fibres de diverses neurones; la fletxa és un senyal, no formació de teixit."
+      "Rebre un impuls és transmetre informació; no vol dir que es formi un nervi nou."
     ],
-    "pista": "Interpreta la fletxa segons la funció de la part on arriba.",
+    "pista": "Recorda la funció de les dendrites i compara-la amb la dels botons terminals.",
     "font": "SISTEMA NERVIÓS_esencial.pdf",
     "pagina": "3",
     "theoryAnchor": "n-neurones",
@@ -4222,11 +4222,11 @@ window.MEDI_QUESTIONS = [
       "Encèfal i medul·la òssia"
     ],
     "correcta": 0,
-    "explicacio": "Encèfal i medul·la espinal. El SNC està format per encèfal i medul·la espinal, protegits pel crani i la columna. El cervell coordina respostes voluntàries, el cerebel coordinació i equilibri, i el bulb raquidi funcions involuntàries.",
+    "explicacio": "Encèfal i medul·la espinal. El sistema nerviós central està format per encèfal i medul·la espinal, protegits pel crani i la columna. El cervell coordina respostes voluntàries, el cerebel coordinació i equilibri, i el bulb raquidi funcions involuntàries.",
     "perQueNo": [
       "",
-      "Tots dos són parts de l’encèfal, però el SNC també inclou la medul·la espinal.",
-      "Aquests nervis són perifèrics; el SNC és el conjunt encèfal-medul·la espinal.",
+      "Tots dos són parts de l’encèfal, però el sistema nerviós central també inclou la medul·la espinal.",
+      "Aquests nervis són perifèrics; el sistema nerviós central és el conjunt encèfal-medul·la espinal.",
       "S’ha confós la medul·la espinal amb el teixit de l’interior dels ossos."
     ],
     "pista": "Busca les dues estructures protegides pel crani i la columna.",
@@ -4250,7 +4250,7 @@ window.MEDI_QUESTIONS = [
       "La medul·la òssia"
     ],
     "correcta": 0,
-    "explicacio": "El crani protegeix l'encèfal, situat al seu interior. La columna vertebral protegeix la medul·la espinal, que és una altra estructura del SNC.",
+    "explicacio": "El crani protegeix l'encèfal, situat al seu interior. La columna vertebral protegeix la medul·la espinal, que és una altra estructura del sistema nerviós central.",
     "perQueNo": [
       "",
       "La columna protegeix la medul·la espinal; l’encèfal és dins el crani.",
@@ -4366,7 +4366,7 @@ window.MEDI_QUESTIONS = [
     "perQueNo": [
       "",
       "El cerebel destaca per coordinació i equilibri, no per la regulació del batec descrita.",
-      "Els nervis sensitius porten informació al SNC; no són una part de l’encèfal reguladora.",
+      "Els nervis sensitius porten informació al sistema nerviós central; no són una part de l’encèfal reguladora.",
       "La medul·la òssia produeix cèl·lules sanguínies, no regula batecs."
     ],
     "pista": "Busca la part encarregada de funcions que no decidim a cada moment.",
@@ -4393,9 +4393,9 @@ window.MEDI_QUESTIONS = [
     "explicacio": "L'encèfal inclou cervell, cerebel i bulb raquidi. Per això encèfal i cervell no són paraules intercanviables.",
     "perQueNo": [
       "",
-      "Els nervis perifèrics connecten amb el SNC, però no són parts de l’encèfal.",
-      "La medul·la espinal és SNC però no encèfal; l’òssia ni tan sols és teixit nerviós central.",
-      "Aquest és un intent de descriure el SNC; l’encèfal inclou altres parts i no la medul·la espinal."
+      "Els nervis perifèrics connecten amb el sistema nerviós central, però no són parts de l’encèfal.",
+      "La medul·la espinal és sistema nerviós central però no encèfal; l’òssia ni tan sols és teixit nerviós central.",
+      "Aquest és un intent de descriure el sistema nerviós central; l’encèfal inclou altres parts i no la medul·la espinal."
     ],
     "pista": "Diferencia el conjunt dins del crani del conjunt del sistema central.",
     "font": "SISTEMA NERVIÓS_esencial.pdf",
@@ -4418,7 +4418,7 @@ window.MEDI_QUESTIONS = [
       "Els lligaments com a centre que interpreta l’equilibri"
     ],
     "correcta": 0,
-    "explicacio": "El cerebel. El SNC està format per encèfal i medul·la espinal, protegits pel crani i la columna. El cervell coordina respostes voluntàries, el cerebel coordinació i equilibri, i el bulb raquidi funcions involuntàries.",
+    "explicacio": "El cerebel. El sistema nerviós central està format per encèfal i medul·la espinal, protegits pel crani i la columna. El cervell coordina respostes voluntàries, el cerebel coordinació i equilibri, i el bulb raquidi funcions involuntàries.",
     "perQueNo": [
       "",
       "El bulb regula funcions involuntàries com les cardíaques; l’equilibri destaca al cerebel.",
@@ -4442,7 +4442,7 @@ window.MEDI_QUESTIONS = [
     "opcions": [
       "La medul·la espinal",
       "La medul·la òssia",
-      "Un únic nervi motor que substitueix tot el SNC",
+      "Un únic nervi motor que substitueix tot el sistema nerviós central",
       "El cerebel"
     ],
     "correcta": 0,
@@ -4474,7 +4474,7 @@ window.MEDI_QUESTIONS = [
       "Reflex: medul·la òssia"
     ],
     "correcta": 0,
-    "explicacio": "Resposta voluntària: cervell. El SNC està format per encèfal i medul·la espinal, protegits pel crani i la columna. El cervell coordina respostes voluntàries, el cerebel coordinació i equilibri, i el bulb raquidi funcions involuntàries.",
+    "explicacio": "Resposta voluntària: cervell. El sistema nerviós central està format per encèfal i medul·la espinal, protegits pel crani i la columna. El cervell coordina respostes voluntàries, el cerebel coordinació i equilibri, i el bulb raquidi funcions involuntàries.",
     "perQueNo": [
       "",
       "El paper d’equilibri es destaca al cerebel; el bulb regula funcions involuntàries.",
@@ -4496,18 +4496,18 @@ window.MEDI_QUESTIONS = [
     "importància": "imprescindible",
     "pregunta": "Què forma el sistema nerviós perifèric?",
     "opcions": [
-      "El conjunt de nervis connectats amb el SNC",
+      "El conjunt de nervis connectats amb el sistema nerviós central",
       "Només el cervell",
       "Encèfal i medul·la espinal",
       "La medul·la òssia i els lligaments"
     ],
     "correcta": 0,
-    "explicacio": "El conjunt de nervis connectats amb el SNC. El SNP és el conjunt de nervis que connecten el SNC amb el cos. Els nervis sensitius duen informació cap al SNC i els motors duen ordres del SNC als òrgans que fan la resposta.",
+    "explicacio": "El conjunt de nervis connectats amb el sistema nerviós central. El sistema nerviós perifèric és el conjunt de nervis que connecten el sistema nerviós central amb el cos. Els nervis sensitius duen informació cap al sistema nerviós central i els motors duen ordres del sistema nerviós central als òrgans que fan la resposta.",
     "perQueNo": [
       "",
-      "El cervell és una part de l’encèfal del SNC, no tot el sistema perifèric.",
+      "El cervell és una part de l’encèfal del sistema nerviós central, no tot el sistema perifèric.",
       "Aquest conjunt defineix el sistema nerviós central.",
-      "Aquests elements no són la xarxa nerviosa que connecta el SNC amb el cos."
+      "Aquests elements no són la xarxa nerviosa que connecta el sistema nerviós central amb el cos."
     ],
     "pista": "La paraula «perifèric» apunta als camins de connexió amb la resta del cos.",
     "font": "SISTEMA NERVIÓS_esencial.pdf",
@@ -4524,13 +4524,13 @@ window.MEDI_QUESTIONS = [
     "importància": "imprescindible",
     "pregunta": "En quin sentit circula la informació d'un nervi sensitiu?",
     "opcions": [
-      "Dels receptors cap al SNC",
-      "Del SNC cap al múscul",
-      "Del SNC cap als receptors dels sentits",
-      "Del receptor al múscul sense passar pel SNC"
+      "Dels receptors cap al sistema nerviós central",
+      "Del sistema nerviós central cap al múscul",
+      "Del sistema nerviós central cap als receptors dels sentits",
+      "Del receptor al múscul sense passar pel sistema nerviós central"
     ],
     "correcta": 0,
-    "explicacio": "Dels receptors cap al SNC. El SNP és el conjunt de nervis que connecten el SNC amb el cos. Els nervis sensitius duen informació cap al SNC i els motors duen ordres del SNC als òrgans que fan la resposta.",
+    "explicacio": "Dels receptors cap al sistema nerviós central. El sistema nerviós perifèric és el conjunt de nervis que connecten el sistema nerviós central amb el cos. Els nervis sensitius duen informació cap al sistema nerviós central i els motors duen ordres del sistema nerviós central als òrgans que fan la resposta.",
     "perQueNo": [
       "",
       "Aquesta és la direcció de l’ordre motora, no la de recepció sensitiva.",
@@ -4552,18 +4552,18 @@ window.MEDI_QUESTIONS = [
     "importància": "imprescindible",
     "pregunta": "En quin sentit circula una ordre d'un nervi motor?",
     "opcions": [
-      "Del SNC a l'òrgan que respon",
-      "De la pell cap al SNC",
-      "D’un receptor a un múscul sense intervenció del SNC",
-      "Del múscul cap al SNC com a ordre de moviment"
+      "Del sistema nerviós central a l'òrgan que respon",
+      "De la pell cap al sistema nerviós central",
+      "D’un receptor a un múscul sense intervenció del sistema nerviós central",
+      "Del múscul cap al sistema nerviós central com a ordre de moviment"
     ],
     "correcta": 0,
-    "explicacio": "Del SNC a l'òrgan que respon. El SNP és el conjunt de nervis que connecten el SNC amb el cos. Els nervis sensitius duen informació cap al SNC i els motors duen ordres del SNC als òrgans que fan la resposta.",
+    "explicacio": "Del sistema nerviós central a l'òrgan que respon. El sistema nerviós perifèric és el conjunt de nervis que connecten el sistema nerviós central amb el cos. Els nervis sensitius duen informació cap al sistema nerviós central i els motors duen ordres del sistema nerviós central als òrgans que fan la resposta.",
     "perQueNo": [
       "",
       "Això és una entrada sensitiva, no una ordre motora de sortida.",
-      "L’ordre motora estudiada surt del SNC; aquesta ruta salta la interpretació i l’enviament de la resposta.",
-      "La pregunta tracta una ordre que surt del SNC per fer executar la resposta."
+      "L’ordre motora estudiada surt del sistema nerviós central; aquesta ruta salta la interpretació i l’enviament de la resposta.",
+      "La pregunta tracta una ordre que surt del sistema nerviós central per fer executar la resposta."
     ],
     "pista": "L’ordre ja està elaborada: segueix-la fins a qui ha d’actuar.",
     "font": "SISTEMA NERVIÓS_esencial.pdf",
@@ -4578,15 +4578,15 @@ window.MEDI_QUESTIONS = [
     "subtema": "Nervis",
     "nivell": "mitjà",
     "importància": "imprescindible",
-    "pregunta": "Veus una amiga. Quin tipus de nervi porta la informació dels ulls cap al SNC?",
+    "pregunta": "Veus una amiga. Quin tipus de nervi porta la informació dels ulls cap al sistema nerviós central?",
     "opcions": [
       "Sensitiu",
       "Motor, perquè després saludaràs",
-      "Una part del SNC en lloc d’un nervi de connexió",
+      "Una part del sistema nerviós central en lloc d’un nervi de connexió",
       "Un lligament que uneix l’ull i el cervell"
     ],
     "correcta": 0,
-    "explicacio": "Sensitiu. El SNP és el conjunt de nervis que connecten el SNC amb el cos. Els nervis sensitius duen informació cap al SNC i els motors duen ordres del SNC als òrgans que fan la resposta.",
+    "explicacio": "Sensitiu. El sistema nerviós perifèric és el conjunt de nervis que connecten el sistema nerviós central amb el cos. Els nervis sensitius duen informació cap al sistema nerviós central i els motors duen ordres del sistema nerviós central als òrgans que fan la resposta.",
     "perQueNo": [
       "",
       "Encara es parla de l’entrada d’informació visual; el motor actuarà a la sortida.",
@@ -4614,10 +4614,10 @@ window.MEDI_QUESTIONS = [
       "Vasos sanguinis"
     ],
     "correcta": 0,
-    "explicacio": "Motors. El SNP és el conjunt de nervis que connecten el SNC amb el cos. Els nervis sensitius duen informació cap al SNC i els motors duen ordres del SNC als òrgans que fan la resposta.",
+    "explicacio": "Motors. El sistema nerviós perifèric és el conjunt de nervis que connecten el sistema nerviós central amb el cos. Els nervis sensitius duen informació cap al sistema nerviós central i els motors duen ordres del sistema nerviós central als òrgans que fan la resposta.",
     "perQueNo": [
       "",
-      "Els sensitius porten informació cap al SNC; aquesta ordre en surt cap als músculs.",
+      "Els sensitius porten informació cap al sistema nerviós central; aquesta ordre en surt cap als músculs.",
       "Les dendrites són parts d’una neurona; el tram de connexió de l’ordre és un nervi.",
       "La sang transporta substàncies, però l’ordre de saludar és un impuls nerviós."
     ],
@@ -4662,15 +4662,15 @@ window.MEDI_QUESTIONS = [
     "subtema": "Nervis",
     "nivell": "mitjà",
     "importància": "imprescindible",
-    "pregunta": "Quina seqüència segueix una resposta muscular voluntària?",
+    "pregunta": "Veus una pilota i decideixes agafar-la. Quin recorregut segueix la informació des que la captes fins que es mouen els músculs?",
     "opcions": [
-      "Receptor → sensitiu → SNC → motor → múscul",
-      "Receptor → motor → SNC → sensitiu → múscul",
-      "SNC → receptor → múscul → sensitiu",
-      "Receptor → múscul → SNC → motor"
+      "Receptor → nervi sensitiu → sistema nerviós central → nervi motor → múscul",
+      "Receptor → nervi motor → sistema nerviós central → nervi sensitiu → múscul",
+      "Sistema nerviós central → receptor → múscul → nervi sensitiu",
+      "Receptor → múscul → sistema nerviós central → nervi motor"
     ],
     "correcta": 0,
-    "explicacio": "Receptor → sensitiu → SNC → motor → múscul. El SNP és el conjunt de nervis que connecten el SNC amb el cos. Els nervis sensitius duen informació cap al SNC i els motors duen ordres del SNC als òrgans que fan la resposta.",
+    "explicacio": "El receptor capta l’estímul i el nervi sensitiu porta la informació al sistema nerviós central. Allí s’interpreta i s’elabora una resposta. El nervi motor porta l’ordre als músculs perquè actuïn.",
     "perQueNo": [
       "",
       "Els tipus de nervi s’han intercanviat: recepció sensitiva i sortida motora.",
@@ -4690,22 +4690,22 @@ window.MEDI_QUESTIONS = [
     "subtema": "Nervis",
     "nivell": "mitjà",
     "importància": "imprescindible",
-    "pregunta": "Una fletxa va de la pell al SNC. Quina etiqueta hi correspon?",
+    "pregunta": "Toques una superfície rugosa. Quin nervi porta la informació de la pell cap al sistema nerviós central?",
     "opcions": [
-      "Nervi sensitiu",
-      "Nervi motor",
-      "Ordre ja enviada del SNC al múscul",
-      "Lligament articular"
+      "Un nervi sensitiu: porta informació de la pell al centre nerviós",
+      "Un nervi motor: porta ordres del centre nerviós als músculs",
+      "Un nervi motor: porta informació de la pell al centre nerviós",
+      "Un nervi sensitiu: porta ordres del centre nerviós als músculs"
     ],
     "correcta": 0,
-    "explicacio": "Nervi sensitiu. El SNP és el conjunt de nervis que connecten el SNC amb el cos. Els nervis sensitius duen informació cap al SNC i els motors duen ordres del SNC als òrgans que fan la resposta.",
+    "explicacio": "Un nervi sensitiu porta la informació captada per la pell cap al sistema nerviós central, format per l’encèfal i la medul·la espinal. Un nervi motor fa una altra feina: porta ordres del centre nerviós als músculs perquè responguin.",
     "perQueNo": [
       "",
-      "Un motor representa l’ordre que surt del SNC; la fletxa descrita hi entra.",
-      "El cas parteix de la pell i arriba al centre; encara és recepció d’informació.",
-      "Un lligament uneix ossos i no porta informació de la pell al SNC."
+      "Aquesta és la funció d’un nervi motor, però el cas pregunta pel missatge que va de la pell al centre nerviós.",
+      "La direcció és la del cas, però el nom està canviat: els missatges que arriben des dels sentits viatgen per nervis sensitius.",
+      "Aquí es descriu una ordre de sortida cap als músculs. Aquesta feina correspon als nervis motors, no als sensitius."
     ],
-    "pista": "Identifica el destí de la fletxa abans de posar nom al nervi.",
+    "pista": "En aquest cas s’informa el centre nerviós d’allò que notes; encara no s’envia cap ordre de moviment.",
     "font": "SISTEMA NERVIÓS_esencial.pdf",
     "pagina": "4",
     "theoryAnchor": "n-periferic",
@@ -4718,7 +4718,7 @@ window.MEDI_QUESTIONS = [
     "subtema": "Nervis",
     "nivell": "mitjà",
     "importància": "imprescindible",
-    "pregunta": "Una fletxa va del SNC a un múscul. Què representa?",
+    "pregunta": "El sistema nerviós central envia un missatge a un múscul perquè es mogui. Quin tipus de missatge és?",
     "opcions": [
       "Una ordre motora",
       "Una entrada sensitiva",
@@ -4726,14 +4726,14 @@ window.MEDI_QUESTIONS = [
       "La decisió presa pel lligament"
     ],
     "correcta": 0,
-    "explicacio": "Una ordre motora. El SNP és el conjunt de nervis que connecten el SNC amb el cos. Els nervis sensitius duen informació cap al SNC i els motors duen ordres del SNC als òrgans que fan la resposta.",
+    "explicacio": "Una ordre motora. El sistema nerviós perifèric és el conjunt de nervis que connecten el sistema nerviós central amb el cos. Els nervis sensitius duen informació cap al sistema nerviós central i els motors duen ordres del sistema nerviós central als òrgans que fan la resposta.",
     "perQueNo": [
       "",
-      "L’entrada sensitiva va cap al SNC; la fletxa descrita en surt.",
-      "Aquesta captació és anterior i passa al receptor, no entre SNC i múscul.",
-      "Els lligaments no decideixen respostes; uneixen ossos a les articulacions."
+      "La informació sensitiva arriba al centre nerviós; el missatge d’aquest cas en surt cap al múscul.",
+      "La pell capta l’estímul abans que s’elabori la resposta; aquí ja s’envia una ordre al múscul.",
+      "Els lligaments uneixen ossos a les articulacions; no decideixen ni envien ordres de moviment."
     ],
-    "pista": "Mira l’origen i el destí: el missatge va del centre a qui executa.",
+    "pista": "El missatge surt del centre nerviós i arriba al múscul que ha d’executar el moviment.",
     "font": "SISTEMA NERVIÓS_esencial.pdf",
     "pagina": "4",
     "theoryAnchor": "n-periferic",
@@ -4746,18 +4746,18 @@ window.MEDI_QUESTIONS = [
     "subtema": "Nervis",
     "nivell": "repte",
     "importància": "imprescindible",
-    "pregunta": "Com treballen junts SNC i SNP quan saludem?",
+    "pregunta": "Quan veus una amiga i decideixes saludar-la, com col·laboren el sistema nerviós central i el perifèric?",
     "opcions": [
-      "El SNP porta informació i ordres, i el SNC les interpreta i coordina",
-      "El SNP interpreta tot i el SNC només transporta",
-      "El SNC actua sense cap connexió amb ulls i músculs",
+      "El sistema nerviós perifèric porta informació i ordres, i el sistema nerviós central les interpreta i coordina",
+      "El sistema nerviós perifèric interpreta tot i el sistema nerviós central només transporta",
+      "El sistema nerviós central actua sense cap connexió amb ulls i músculs",
       "Els nervis porten només sang fins a la mà"
     ],
     "correcta": 0,
-    "explicacio": "El SNP porta informació i ordres, i el SNC les interpreta i coordina. El SNP és el conjunt de nervis que connecten el SNC amb el cos. Els nervis sensitius duen informació cap al SNC i els motors duen ordres del SNC als òrgans que fan la resposta.",
+    "explicacio": "El sistema nerviós perifèric porta informació i ordres, i el sistema nerviós central les interpreta i coordina. El sistema nerviós perifèric és el conjunt de nervis que connecten el sistema nerviós central amb el cos. Els nervis sensitius duen informació cap al sistema nerviós central i els motors duen ordres del sistema nerviós central als òrgans que fan la resposta.",
     "perQueNo": [
       "",
-      "S’han intercanviat papers: el SNC interpreta i coordina; els nervis connecten i transmeten.",
+      "S’han intercanviat papers: el sistema nerviós central interpreta i coordina; els nervis connecten i transmeten.",
       "Sense els nervis de connexió, la informació i les ordres del cas no seguirien la ruta descrita.",
       "Els nervis transmeten impulsos; el transport de sang correspon als vasos."
     ],
