@@ -1,0 +1,57 @@
+[
+  {
+    "file": "APARELL CIRCULATORI.pdf",
+    "sha256": "4c1682fa1c4b60403a8ca7390199c5bb613e79d51859d5f966da5a4f234b1678",
+    "bytes": 574288
+  },
+  {
+    "file": "Aparell-digestiu.pdf",
+    "sha256": "cf2f6d4e7aacd2de2b4af8bb17206223ed18c4562a26b01e382a81e4e3a9c7b1",
+    "bytes": 357850
+  },
+  {
+    "file": "SISTEMA EXCRETOR.pdf",
+    "sha256": "7e7e07ba232143149fc8fd955a559d69bb44598b926be1354a7dbf36c32dd97f",
+    "bytes": 347629
+  },
+  {
+    "file": "aparell digestiu.png",
+    "sha256": "a539843274bc7cf4b9bf2e065b121141d065953b28287251807cdaf1bd6f1040",
+    "bytes": 1801337
+  },
+  {
+    "file": "sistema excretor.png",
+    "sha256": "b3b439789ed3d161c38955171683fdce85f2bd4c15e2e235a248f59e1c8d43cb",
+    "bytes": 1938823
+  },
+  {
+    "file": "aparell circulatori.png",
+    "sha256": "2250cc410f6c08e2470578ff7e325b86a34330c651b8014bd7ba03783fe0be46",
+    "bytes": 2039257
+  },
+  {
+    "file": "completar_excretor.JPG",
+    "sha256": "406f23fba9da7eda9275db8e0e9cc8b359e12f0bd9ea8a9f324d35f95a190865",
+    "bytes": 27488
+  },
+  {
+    "file": "completar_excretor_recurregut_de_lorina.JPG",
+    "sha256": "75c8934f056bd32ffd75d5a4314c802a417a26dc802040f8d440c22c44364352",
+    "bytes": 20693
+  },
+  {
+    "file": "completar_aparell_digestiu.JPG",
+    "sha256": "8b5cda37ebc8b8dc751a35614e6bb408c8c9270306bd6df6f3f3fe9d588c1685",
+    "bytes": 27010
+  },
+  {
+    "file": "completar_recurregut_dels_alimentsJPG.JPG",
+    "sha256": "f626dafa96cf240ca9f43745679bacbf3c8e4346a349ee6185ba99a8fe61ba2f",
+    "bytes": 27918
+  },
+  {
+    "file": "completar_aparell_circulatori_la_sang.JPG",
+    "sha256": "0d87fa3f90faf5b83f44c854d719ff877d813e313fc8e5694379329a8af82f54",
+    "bytes": 41371
+  }
+]
